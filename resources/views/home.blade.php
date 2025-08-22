@@ -31,7 +31,7 @@
         <!-- Bottom Header (Navigation) -->
         <div class="bg-[#004D60]">
             <nav
-                class="max-w-7xl mx-auto px-6 py-2 flex flex-wrap gap-x-6 font-medium text-white text-md justify-center">
+                class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-xl justify-center">
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Home</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">About Us</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Panel Lawyers</a>
@@ -293,6 +293,24 @@
             </div>
         </div>
     </section>
+
+    <!-- Footer Column-->
+    <footer class="bg-[#0F0E0E] text-gray-300 sticky top-[100vh] min-h-[250px]">
+        <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        </div>
+        <div class="flex flex-col items-center justify-center space-y-4">
+            <img src="/images/logo2.png" alt="hclsc logo" class="w-16 h-16">
+            <p
+                class="bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text text-transparent font-bold text-center text-xl">
+                High Court Legal Services Committee
+            </p>
+        </div>
+        <!-- Bottom Bar -->
+        <div class="border-t border-gray-700 text-center py-3 text-md text-gray-400">
+            @ Developed by High Court Legal Services Committee. All Rights Reserved.
+        </div>
+    </footer>
+
     <script>
         feather.replace()
     </script>
