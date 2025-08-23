@@ -46,23 +46,71 @@
         </div>
     </header>
 
-    <section class="relative w-full h-screen overflow-hidden">
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
-            <source src="">
-            Your browser does not support the vide tag
-        </video>
+    <section class="relative w-full h-[560px] bg-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch h-full">
 
-        <div class="absolute inset-0 bg-black/40"></div>
+            <!-- Left Section -->
+            <div class="w-full md:w-1/2 flex flex-col justify-center px-10 md:px-16 py-12">
+                <h2 class="text-4xl font-bold text-[#1E3A5F] leading-snug">
+                    Mediation for the Nation
+                </h2>
+                <p class="mt-4 text-lg text-[#1E3A5F]/80 max-w-md">
+                    Because every dispute deserves a fair, timely, and peaceful solution.
+                </p>
+                <button class="mt-6 bg-[#A52A2A] text-white text-sm font-semibold px-5 py-2 rounded-full shadow hover:bg-[#8B0000] transition">
+                    Read More
+                </button>
+            </div>
 
-        <div class="relative z-10 flex items-center justify-center h-full text-center text-white">
-            <div>
-                <!--<h1 class="text-4xl md:text-6xl font-bold"> Welome to HCLSC </h1>-->
+            <!-- Right Section (Announcements) -->
+            <div class="w-full md:w-1/2 flex items-center justify-end">
+                <div class="bg-white px-8 py-8 w-full md:w-[90%] lg:w-[75%] shadow-lg rounded-lg">
+                    <h3 class="text-xl font-bold text-[#1E3A5F] mb-6">Announcements</h3>
+
+                    <div class="relative announcement-wrapper">
+                        <!-- Vertical Line (fixed inside the wrapper) -->
+                        <div class="absolute left-4 top-0 bottom-0 w-[2px] bg-gray-300"></div>
+
+                        <!-- Scrolling list (NOTE: class name corrected) -->
+                        <ul class="announcement-list">
+                            <!-- Item -->
+                            <li class="relative pl-12 pb-6 border-b border-gray-200">
+                                <span class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
+                                <p class="text-[#A52A2A] font-semibold">Practice Direction</p>
+                                <p class="text-gray-700">Launch of Mediation Campaign – Notice (ENGLISH)</p>
+                                <span class="text-sm text-gray-500">23-08-2025</span>
+                            </li>
+
+                            <li class="relative pl-12 pb-6 border-b border-gray-200">
+                                <span class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
+                                <p class="text-[#A52A2A] font-semibold">Practice Direction</p>
+                                <p class="text-gray-700">Launch of Mediation Campaign – Notice (MANIPURI)</p>
+                                <span class="text-sm text-gray-500">23-08-2025</span>
+                            </li>
+
+                            <li class="relative pl-12 pb-6 border-b border-gray-200">
+                                <span class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
+                                <p class="text-[#A52A2A] font-semibold">Notice</p>
+                                <p class="text-gray-700">Notice on Daily Sittings – 25.08.2025</p>
+                                <span class="text-sm text-gray-500">23-08-2025</span>
+                            </li>
+
+                            <li class="relative pl-12 pb-6 border-b border-gray-200">
+                                <span class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
+                                <p class="text-[#A52A2A] font-semibold">Update</p>
+                                <p class="text-gray-700">Mediation Awareness Drive – Q4 2025</p>
+                                <span class="text-sm text-gray-500">22-08-2025</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+
     <!-- Help Section -->
-    <section class="relative bg-[#154B52] text-white py-16">
+    <section class="relative bg-[#004D60] text-white py-16">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-bold mb-10 text-center">How We Can Help</h2>
 
@@ -329,6 +377,12 @@
                 behavior: 'smooth'
             });
         });
+
+        // Duplicate announcements for seamless infinite scroll
+        const list = document.querySelector('.announcement-list');
+        if (list) {
+            list.innerHTML = list.innerHTML + list.innerHTML;
+        }
     </script>
 
     <!-- Tailwind helper to hide scrollbar -->
@@ -340,6 +394,65 @@
         .scrollbar-hide {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+
+        .announcement-wrapper {
+            position: relative;
+            height: 420px;
+            /* matches your design */
+            overflow: hidden;
+            /* clip the scrolling list */
+        }
+
+        /* Optional: soft fade masks top/bottom for a cleaner loop look */
+        .announcement-wrapper::before,
+        .announcement-wrapper::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 32px;
+            /* adjust to taste */
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .announcement-wrapper::before {
+            top: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+        }
+
+        .announcement-wrapper::after {
+            bottom: 0;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+        }
+
+        /* Keyframes for bottom-to-top loop */
+        @keyframes scroll-up {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+
+            /* move up by half after duplicating */
+        }
+
+        /* The animated list */
+        .announcement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            /* equals your space-y-6 */
+            will-change: transform;
+            animation: scroll-up 20s linear infinite;
+        }
+
+        /* Pause on hover so users can read */
+        .announcement-wrapper:hover .announcement-list {
+            animation-play-state: paused;
         }
     </style>
 
