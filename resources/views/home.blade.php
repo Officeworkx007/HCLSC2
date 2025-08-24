@@ -12,15 +12,15 @@
 
 </head>
 
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-gray-50">
 
     <!-- Header -->
     <header class="shadow">
 
         <!-- Top Header (Logo + Title) -->
         <div class="bg-white text-black">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center space-x-4">
-                <img src="/images/logo2.png" alt="hclsc logo" class="h-20 w-auto">
+            <div class="max-w-7xl mx-auto px-6 py-6 flex items-center space-x-4">
+                <img src="/images/logo2.png" alt="hclsc logo" class="h-24 w-auto">
                 <div>
                     <h1 class="text-2xl font-bold">High Court Legal Services Committee</h1>
                     <p class="text-sm text-gray-600">High Court of Manipur, Mantripukhri</p>
@@ -31,7 +31,7 @@
         <!-- Bottom Header (Navigation) -->
         <div class="bg-[#004D60]">
             <nav
-                class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-xl justify-center">
+                class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-md justify-center">
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Home</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">About Us</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Panel Lawyers</a>
@@ -63,9 +63,9 @@
             </div>
 
             <!-- Right Section (Announcements) -->
-            <div class="w-full md:w-1/2 flex items-center justify-end">
-                <div class="bg-white px-8 py-8 w-full md:w-[90%] lg:w-[75%] shadow-lg rounded-lg">
-                    <h3 class="text-xl font-bold text-[#1E3A5F] mb-6">Announcements</h3>
+            <div class="w-full md:w-1/2 flex justify-end">
+                <div class="flex flex-col items-start w-full md:w-[90%] lg:w-[75%] mt-4 pl-32">
+                    <h3 class="text-xl font-bold text-[#1E3A5F] mb-4 ml-24">Announcements</h3>
 
                     <div class="relative announcement-wrapper">
                         <!-- Vertical Line (fixed inside the wrapper) -->
@@ -119,63 +119,93 @@
 
                 <!-- Card 1 -->
                 <div
-                    class="bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 hover:bg-[#0D4A52] transition">
-                    <i data-feather="file-text" class="w-10 h-10 mb-4"></i>
-                    <h3 class="font-semibold text-lg mb-2">Eligibility & Services</h3>
-                    <p class="text-sm text-gray-200 px-4">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    <i data-feather="file-text"
+                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        Eligibility & Services
+                    </h3>
+                    <p
+                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Free legal services including advice, drafting, representation, and court fee coverage.
                     </p>
                 </div>
 
                 <!-- Card 2 -->
                 <div
-                    class="bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 hover:bg-[#0D4A52] transition">
-                    <i data-feather="users" class="w-10 h-10 mb-4"></i>
-                    <h3 class="font-semibold text-lg mb-2">Lok Adalats</h3>
-                    <p class="text-sm text-gray-200 px-4">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    <i data-feather="users"
+                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        Lok Adalats
+                    </h3>
+                    <p
+                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Organizes Lok Adalats for settlement of pending and pre-litigation disputes.
                     </p>
                 </div>
 
                 <!-- Card 3 -->
                 <div
-                    class="bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 hover:bg-[#0D4A52] transition">
-                    <i data-feather="book-open" class="w-10 h-10 mb-4"></i>
-                    <h3 class="font-semibold text-lg mb-2">Legal Awareness</h3>
-                    <p class="text-sm text-gray-200 px-4">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    <i data-feather="book-open"
+                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        Legal Awareness
+                    </h3>
+                    <p
+                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Awareness programs, workshops, and campaigns on legal rights and remedies.
                     </p>
                 </div>
 
                 <!-- Card 4 -->
                 <div
-                    class="bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 hover:bg-[#0D4A52] transition">
-                    <i data-feather="briefcase" class="w-10 h-10 mb-4"></i>
-                    <h3 class="font-semibold text-lg mb-2">Panel of Advocates</h3>
-                    <p class="text-sm text-gray-200 px-4">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    <i data-feather="briefcase"
+                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        Panel of Advocates
+                    </h3>
+                    <p
+                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Maintains a panel of advocates to represent eligible persons before the High Court.
                     </p>
                 </div>
 
                 <!-- Card 5 -->
                 <div
-                    class="bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 hover:bg-[#0D4A52] transition">
-                    <i class="fa-solid fa-handshake text-5xl mb-4"></i>
-                    <h3 class="font-semibold text-lg mb-2">Support for ADR</h3>
-                    <p class="text-sm text-gray-200 px-4">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    <i class="fa-solid fa-handshake text-5xl mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        Support for ADR
+                    </h3>
+                    <p
+                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Encourages mediation and conciliation for quicker, less adversarial resolution.
                     </p>
                 </div>
 
                 <!-- Card 6 -->
                 <div
-                    class="bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 hover:bg-[#0D4A52] transition">
-                    <i data-feather="monitor" class="w-10 h-10 mb-4"></i>
-                    <h3 class="font-semibold text-lg mb-2">Monitoring</h3>
-                    <p class="text-sm text-gray-200 px-4">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    <i data-feather="monitor"
+                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        Monitoring
+                    </h3>
+                    <p
+                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Ensures implementation of legal aid schemes and reports on activities.
                     </p>
                 </div>
+
 
             </div>
         </div>
@@ -341,6 +371,119 @@
             </div>
         </div>
     </section>
+
+    <!-- apply section-->
+    <section class="py-12 mt-5 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-[#1E3A5F] mb-10">
+                How to Apply for Legal Aid
+            </h2>
+
+            <!-- Grid for cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1-->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="/images/section1.png" alt="enter website" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">
+                            Visit the url www.hclscmanipur.in
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Card 2-->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="/images/section2.png" alt="enter website" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">
+                            Fill up the form by going to Apply
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Card 3-->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="/images/section3.png" alt="enter website" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">
+                            Track status of your Form using the id
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Card 4 (Optional, for balance if needed) -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                    <img src="/images/section4.png" alt="verification" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">
+                            HCLSC staff will verify & assign lawyer
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button centered outside the grid -->
+            <div class="flex justify-center mt-10">
+                <button class="px-6 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-gray-800 hover:bg-yellow-500">
+                    Read More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-12 bg-gray-50 mt-5">
+        <div class="container mx-auto px-4">
+            <div class="text-start mb-12">
+                <span class="px-4 py-1 bg-yellow-200 text-gray-800 rounded-full text-sm font-medium">Statistics</span>
+            </div>
+
+            <!-- stats grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <!-- Panel Lawyers -->
+                <div>
+                    <div class="flex justify-center mb-3 space-x-2">
+                        <img src="/images/panel.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">20</p>
+                    <p class="text-blue-700">Panel Lawyers</p>
+                </div>
+                <!-- Mediation done -->
+                <div>
+                    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+                    <div>
+                        <div class="flex justify-center mb-3">
+                            <img src="/images/discussion.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                        </div>
+                        <p class="text-2xl font-bold text-gray-900">300</p>
+                        <p class="text-blue-700">Total Mediations Completed</p>
+                    </div>
+                </div>
+
+
+                <!-- Successful Mediations -->
+                <div>
+                    <div class="flex justify-center mb-3">
+                        <img src="/images/mediator.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">10</p>
+                    <p class="text-green-700">Successful Mediations</p>
+                </div>
+
+                <!-- Lok Adalats -->
+                <div>
+                    <div class="flex justify-center mb-3">
+                        <!-- Scales of Justice Icon -->
+                        <img src="/images/social-justice.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">15</p>
+                    <p class="text-purple-700">Lok Adalat</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 
     <!-- Footer Column-->
     <footer class="bg-[#0F0E0E] text-gray-300 sticky top-[100vh] min-h-[250px]">
