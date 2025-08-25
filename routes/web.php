@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('home');
@@ -21,5 +22,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/admin/register', [AdminAuthController::class, 'registerForm'])->name('admin.register');
 Route::get('/admin/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
 Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin.register');
-Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 require __DIR__.'/auth.php';

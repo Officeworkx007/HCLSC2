@@ -4,7 +4,7 @@
     <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6">
         <h2 class="text-2xl font-bold text-center text-gray-800">Admin Login</h2>
 
-        <form method="POST" action="{{}}" class="space-y-5">
+        <form method="POST" action="{{ route('admin.login', ['key' => request('key')]) }}" class="space-y-5">
             @csrf
 
             <div>

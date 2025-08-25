@@ -13,7 +13,7 @@ class AdminAuthController extends Controller
 {
     private $adminkey;
 
-    public function __costruct()
+    public function __construct()
     {
         //fetching admin key from config (safe for config:cache)
         $this->adminkey = config('app.admin_access_key');
@@ -81,7 +81,7 @@ class AdminAuthController extends Controller
             }
 
             Auth::logout();
-            return redirect()->route('admin.login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('admin.auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         return back()->withErrors(['email' => 'Invalid credentials']);

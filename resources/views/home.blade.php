@@ -37,11 +37,6 @@
           hover:bg-[#FFD700] hover:text-white transition">
                         Login
                     </a>
-                    <a href=""
-                        class="bg-[#1C1C1C] text-white text-sm font-semibold px-5 py-2 rounded shadow
-          hover:bg-[#2E2E2E] transition">
-                        Register
-                    </a>
                 </div>
 
             </div>
@@ -58,6 +53,7 @@
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Services</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Gallery</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">National Lok Adalat</a>
+                <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Mediation</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Notice Board</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Apply</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Guidelines</a>
@@ -277,7 +273,7 @@
                         <h3 class="text-white text-2xl font-semibold drop-shadow">Hon'ble Mr. Justice A. Guneshwar
                             Sharma</h3>
                         <p class="text-gray-100/90 text-sm">Judge, High Court of Manipur</p>
-                        <p class="text-gray-100/90 text-sm">Chairman, High Court State Legal Services Authority</p>
+                        <p class="text-gray-100/90 text-sm">Chairman, High Court Legal Services Committee</p>
                     </div>
                 </article>
 
@@ -473,7 +469,7 @@
                     <div class="flex justify-center mb-3 space-x-2">
                         <img src="/images/panel.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
                     </div>
-                    <p class="text-2xl font-bold text-gray-900">20</p>
+                    <p class="text-2xl font-bold text-gray-900">23</p>
                     <p class="text-blue-700">Panel Lawyers</p>
                 </div>
                 <!-- Mediation done -->
