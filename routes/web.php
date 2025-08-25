@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -17,4 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/admin/register', [AdminAuthController::class, 'registerForm'])->name('admin.register');
+Route::get('/admin/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
+Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin.register');
+Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 require __DIR__.'/auth.php';
