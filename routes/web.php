@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
-    return view('home');
+    return view('/homepage/home');
 });
 
 Route::get('/dashboard', function () {
