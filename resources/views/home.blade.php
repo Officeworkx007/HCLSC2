@@ -41,12 +41,10 @@
 
             </div>
         </div>
-
-
         <!-- Bottom Header (Navigation) -->
-        <div class="bg-[#004D60]">
+        <div class="bg-[#0c1e33] relative z-50"> <!-- Added z-50 -->
             <nav
-                class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-md justify-center">
+                class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-md justify-center relative">
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Home</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">About Us</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Panel Lawyers</a>
@@ -55,11 +53,27 @@
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">National Lok Adalat</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Mediation</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Notice Board</a>
-                <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Apply</a>
+
+                <!-- Apply with Dropdown -->
+                <div class="relative" id="apply-menu">
+                    <button id="apply-btn" class="hover:text-[#FFD700] whitespace-nowrap flex items-center">
+                        Apply ▾
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div id="dropdown"
+                        class="absolute left-0 mt-2 w-48 bg-[#0c1e33] text-white rounded shadow-lg hidden z-50">
+                        <a href="#" class="block px-4 py-2 hover:bg-[#0c1e33] hover:text-[#FFD700]">Legal Aid</a>
+                        <hr class="border-gray-600">
+                        <a href="#" class="block px-4 py-2 hover:bg-[#0c1e33] hover:text-[#FFD700]">Panel Lawyer</a>
+                        <hr class="border-gray-600">
+                        <a href="#" class="block px-4 py-2 hover:bg-[#0c1e33] hover:text-[#FFD700]">Mediation</a>
+                    </div>
+                </div>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Guidelines</a>
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Contact Us</a>
             </nav>
         </div>
+
     </header>
 
     <section class="relative w-full h-[560px] bg-white">
@@ -131,7 +145,7 @@
 
 
     <!-- Help Section -->
-    <section class="relative bg-[#004D60] text-white py-16">
+    <section class="relative bg-[#0c1e33] text-white py-16">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-bold mb-10 text-center">How We Can Help</h2>
 
@@ -140,7 +154,7 @@
 
                 <!-- Card 1 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
                     <i data-feather="file-text"
                         class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
@@ -155,7 +169,7 @@
 
                 <!-- Card 2 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
                     <i data-feather="users"
                         class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
@@ -170,7 +184,7 @@
 
                 <!-- Card 3 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
                     <i data-feather="book-open"
                         class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
@@ -185,7 +199,7 @@
 
                 <!-- Card 4 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
                     <i data-feather="briefcase"
                         class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
@@ -200,7 +214,7 @@
 
                 <!-- Card 5 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
                     <i
                         class="fa-solid fa-handshake text-5xl mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
@@ -215,7 +229,7 @@
 
                 <!-- Card 6 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#004D60]">
+                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
                     <i data-feather="monitor"
                         class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
@@ -626,6 +640,23 @@
         if (list) {
             list.innerHTML = list.innerHTML + list.innerHTML;
         }
+
+        //code for dropdown menu
+        const applyBtn = document.getElementById("apply-btn");
+        const dropdown = document.getElementById("dropdown");
+
+        // Toggle dropdown on button click
+        applyBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle("hidden");
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!document.getElementById("apply-menu").contains(e.target)) {
+                dropdown.classList.add("hidden");
+            }
+        });
     </script>
 
     <!-- Tailwind helper to hide scrollbar -->
