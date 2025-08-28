@@ -47,7 +47,7 @@
                     <!-- Dropdown Menu -->
                     <div id="dropdown"
                         class="absolute left-0 mt-2 w-48 bg-[#0c1e33] text-white rounded shadow-lg hidden z-50">
-                        <a href="#" class="block px-4 py-2 hover:bg-[#0c1e33] hover:text-[#FFD700]">Legal Aid</a>
+                        <a href="{{ route('homepage.legalaid') }}" class="block px-4 py-2 hover:bg-[#0c1e33] hover:text-[#FFD700]">Legal Aid</a>
                         <hr class="border-gray-600">
                         <a href="#" class="block px-4 py-2 hover:bg-[#0c1e33] hover:text-[#FFD700]">Panel
                             Lawyer</a>

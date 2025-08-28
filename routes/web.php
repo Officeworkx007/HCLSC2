@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('/homepage/home');
 });
+
+Route::get('/homepage/legalaid', [HomeController::class, 'legal'])->name('homepage.legalaid');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
