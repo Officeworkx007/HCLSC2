@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LegalAidController;
 
 Route::get('/', function () {
     return view('/homepage/home');
@@ -28,4 +29,8 @@ Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-require __DIR__.'/auth.php';
+
+
+Route::get('/legalaid', [LegalAidController::class, 'index'])
+    ->name('homepage.legalaid');
+require __DIR__ . '/auth.php';
