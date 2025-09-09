@@ -26,36 +26,47 @@
             <div id="formContainer" class="hidden px-6 py-4">
                 <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-medium mb-1">Applicant Name * </label>
+                        <label for="name" class="block text-sm font-medium mb-1">Applicant Name * </label>
                         <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                             placeholder="Enter Name" id="name">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Father Name</label>
+                        <label for="father_name" class="block text-sm font-medium mb-1">Father Name</label>
                         <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                             placeholder="Enter Fathers Name" id="father_name">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Mother Name</label>
+                        <label for="mother_name" class="block text-sm font-medium mb-1">Mother Name</label>
                         <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                             placeholder="Enter Mothers Name" id="mother_name">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Spouse Name</label>
+                        <label for="spouse_name" class="block text-sm font-medium mb-1">Spouse Name</label>
                         <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                             placeholder="Enter Spouse Name" id="spouse_name">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Upload Photograph</label>
+                        <label for="photo" class="block text-sm font-medium mb-1">Upload Photograph</label>
                         <input type="file" accept="image/*"
-                            class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer">
+                            class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer" id="photo">
                     </div>
-                    <select name="gender">
-                        <option value="">-- Select Gender --</option>
-                        @foreach ($genders as $gender)
-                            <option value="{{ $gender->id }}">{{ $gender->name }}</option>
-                        @endforeach
-                    </select>
+                    <div>
+                        <label for="gender" class="block text-sm font-medium mb-1">Gender</label>
+                        <select name="gender" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300" id="gender">
+                            <option value="">-- Select Gender --</option>
+                            @foreach ($genders as $gender)
+                                <option value="{{ $gender->id }}">{{ $gender->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="number" class="block text-sm font-medium mb-1">Phone Number</label>
+                        <input type="number" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300" id="number" placeholder="Enter Phone Number">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                        <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300" id="email" placeholder="Enter Email Address">
+                    </div>
                 </form>
             </div>
         </div>
