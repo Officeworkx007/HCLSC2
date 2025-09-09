@@ -48,11 +48,13 @@
                     <div>
                         <label for="photo" class="block text-sm font-medium mb-1">Upload Photograph</label>
                         <input type="file" accept="image/*"
-                            class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer" id="photo">
+                            class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer"
+                            id="photo">
                     </div>
                     <div>
                         <label for="gender" class="block text-sm font-medium mb-1">Gender</label>
-                        <select name="gender" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300" id="gender">
+                        <select name="gender" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            id="gender">
                             <option value="">-- Select Gender --</option>
                             @foreach ($genders as $gender)
                                 <option value="{{ $gender->id }}">{{ $gender->name }}</option>
@@ -61,12 +63,51 @@
                     </div>
                     <div>
                         <label for="number" class="block text-sm font-medium mb-1">Phone Number</label>
-                        <input type="number" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300" id="number" placeholder="Enter Phone Number">
+                        <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            id="number" placeholder="Enter Phone Number">
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                        <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300" id="email" placeholder="Enter Email Address">
+                        <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            id="email" placeholder="Enter Email Address">
                     </div>
+                    <div>
+                        <label for="religion" class="block text-sm font-medium mb-1">Religion</label>
+                        <select name="religion" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            id="religion">
+                            <option value="">-- Select Religion --</option>
+                            @foreach ($religions as $religion)
+                                <option value="{{ $religion->id }}">{{ $religion->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="caste" class="block text-sm font-medium mb-1">Caste</label>
+                        <select name="caste" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            id="caste">
+                            <option value="">-- Select Caste --</option>
+                            @foreach ($castes as $caste)
+                                <option value="{{ $caste->id }}">{{ $caste->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="certificate_no" class="block text-sm font-medium mb-1">Caste Certificate No</label>
+                        <input type="text" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            id="certificate_no" placeholder="Enter Caste Certificte Number">
+                    </div>
+                    <div>
+                        <label for="occupation" class="block text-sm font-medium mb-1">Occupation</label>
+                        <select name="occupation" class="w-full border rounded px-6 py-2 focu:ring focus:ring-blue-300"
+                            id="occupation" placeholder="Enter Occupation">
+                            <option value="">-- Select Occupation --</option>
+                            @foreach ($occupations as $occupation)
+                                <option value="{{ $occupation->id }}">{{ $occupation->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="employment_details" class="block text-sm font-medium mb-1">Employment
                 </form>
             </div>
         </div>
