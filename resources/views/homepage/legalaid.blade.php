@@ -98,8 +98,8 @@
                     </div>
                     <div>
                         <label for="occupation" class="block text-sm font-medium mb-1">Occupation</label>
-                        <select name="occupation" class="w-full border rounded px-6 py-2 focu:ring focus:ring-blue-300"
-                            id="occupation" placeholder="Enter Occupation">
+                        <select name="occupation" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300"
+                            id="occupation">
                             <option value="">-- Select Occupation --</option>
                             @foreach ($occupations as $occupation)
                                 <option value="{{ $occupation->id }}">{{ $occupation->name }}</option>
@@ -107,10 +107,45 @@
                         </select>
                     </div>
                     <div>
-                        <label for="employment_details" class="block text-sm font-medium mb-1">Employment
+                        <label for="employment_details" class="block text-sm font-medium mb-1">Employment</label>
+                        <input type="text" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300"
+                            id="employment_details" placeholder="Enter Employment Details">
+                    </div>
+                    <div>
+                        <label for="income" class="block text-sm font-medium mb-1">Annual Income</label>
+                        <select name="income" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300"
+                            id="income">
+                            <option value="">-- Select Income --</option>
+                            @foreach ($incomes as $income)
+                                <option value="{{ $income->id }}">{{ $income->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="eligibilty_category" class="block text-sm font-medium mb-1">Eligibility
+                            Category</label>
+                        <select name="eligibility_category"
+                            class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300"
+                            id="eligiblity_category">
+                            <option value="">--Select Eligibility Category --</option>
+                            @foreach ($eligibilities as $eligibility)
+                                <option value="{{ $eligibility->id }}">{{ $eligibility->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </form>
             </div>
         </div>
+    </main>
+
+    <main class="flex-grow flex justify-center py-6">
+        <div class="w-full max-w-4xl bg-white shadow-md rounded-lg mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <label for="photo" class="block text-sm font-medium mb-1">Upload Photograph</label>
+                <input type="file" accept="image/*"
+                    class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer"
+                    id="photo">
+            </div>
     </main>
 
     @include('homepage.footer')

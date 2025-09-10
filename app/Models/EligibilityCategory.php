@@ -9,5 +9,9 @@ class EligibilityCategory extends Model
 {
     use HasFactory;
 
+    protected $table = 'eligibility_category';
+
     protected $fillable = ['name'];
+
+    public $timestamps = false;
 }
