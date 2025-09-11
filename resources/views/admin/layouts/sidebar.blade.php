@@ -11,24 +11,62 @@
         <ul>
             <li>
                 <a href="{{ route('admin.dashboard') }}"
-                   class="flex items-center space-x-3 px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33]">
+                    class="flex items-center space-x-3 px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33]">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="#"
-                   class="flex items-center space-x-3 px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33]">
+                    class="flex items-center space-x-3 px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33]">
                     <i class="fas fa-users"></i>
                     <span class="sidebar-text">Users</span>
                 </a>
             </li>
             <li>
                 <a href="#"
-                   class="flex items-center space-x-3 px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33]">
+                    class="flex items-center space-x-3 px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33]">
                     <i class="fas fa-file-alt"></i>
                     <span class="sidebar-text">Legal Aid Applications</span>
                 </a>
+            </li>
+
+            <!-- Panel Lawyers Dropdown -->
+            <li x-data="{ open: false }" class="relative">
+                <!-- Main Item -->
+                <button @click="open = !open"
+                    class="w-full flex items-center justify-between px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33] focus:outline-none">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-users"></i>
+                        <span class="sidebar-text">Panel Lawyers</span>
+                    </div>
+                    <!-- Arrow -->
+                    <svg :class="open ? 'rotate-90' : ''" class="w-4 h-4 transform transition-transform"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown Items -->
+                <ul x-show="open" x-transition
+                    class="relative ml-10 mt-2 flex flex-col space-y-2 text-sm text-gray-300">
+
+                    <!-- vertical line -->
+                    <span class="absolute left-0 top-0 h-full w-px bg-gray-600"></span>
+
+                    <li>
+                        <a href=""
+                            class="block px-3 py-2 rounded hover:bg-white hover:text-[#0c1e33] transition">
+                            All Panel Lawyers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.panel_lawyers.create') }}"
+                            class="block px-3 py-2 rounded hover:bg-white hover:text-[#0c1e33] transition">
+                            Add New Lawyer
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>
@@ -39,6 +77,7 @@
         width: 250px;
         transition: width 0.3s ease;
     }
+
     .main-sidebar .sidebar-text {
         opacity: 1;
         white-space: nowrap;
@@ -46,9 +85,11 @@
         overflow: hidden;
         transition: opacity 0.3s ease, width 0.3s ease;
     }
+
     .main-sidebar.collapsed {
         width: 80px;
     }
+
     .main-sidebar.collapsed .sidebar-text {
         opacity: 0;
         width: 0;
@@ -58,7 +99,10 @@
 
 <script>
     // Toggle sidebar collapse
-    document.getElementById("toggle-btn").addEventListener("click", function () {
+    document.getElementById("toggle-btn").addEventListener("click", function() {
         document.getElementById("sidebar").classList.toggle("collapsed");
     });
 </script>
+
+<!-- Add Alpine.js -->
+<script src="https://unpkg.com/alpinejs" defer></script>

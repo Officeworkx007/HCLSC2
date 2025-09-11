@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LegalAidController;
+use App\Http\Controllers\Admin\PanelLawyerController;
 
 Route::get('/', function () {
     return view('/homepage/home');
@@ -30,7 +31,10 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+//panel lawyers list
+Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'create'])->name('admin.panel_lawyers.create');
 
 Route::get('/legalaid', [LegalAidController::class, 'index'])->name('homepage.legalaid');
 Route::post('/legalaid/store', [LegalAidController::class, 'store'])->name('homepage.legalaid.store');
+
 require __DIR__ . '/auth.php';
