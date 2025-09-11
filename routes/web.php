@@ -31,6 +31,6 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 
-Route::get('/legalaid', [LegalAidController::class, 'index'])
-    ->name('homepage.legalaid');
+Route::get('/legalaid', [LegalAidController::class, 'index'])->name('homepage.legalaid');
+Route::post('/legalaid/store', [LegalAidController::class, 'store'])->name('homepage.legalaid.store');
 require __DIR__ . '/auth.php';
