@@ -31,8 +31,11 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-//panel lawyers list
-Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'create'])->name('admin.panel_lawyers.create');
+// Panel Lawyers
+Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'index'])->name('admin.panel_lawyers.index'); // list
+Route::get('/admin/panel_lawyers/create', [PanelLawyerController::class, 'create'])->name('admin.panel_lawyers.create'); // form
+Route::post('/admin/panel_lawyers/store', [PanelLawyerController::class, 'store'])->name('admin.panel_lawyers.store');
+
 
 Route::get('/legalaid', [LegalAidController::class, 'index'])->name('homepage.legalaid');
 Route::post('/legalaid/store', [LegalAidController::class, 'store'])->name('homepage.legalaid.store');
