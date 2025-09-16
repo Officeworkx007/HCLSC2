@@ -1,4 +1,4 @@
-<footer class="bg-[#0c1e33] text-slate-300 mt-[5rem]">
+<footer class="bg-blue-900 text-slate-300 mt-[5rem]">
         <div class="container mx-auto px-6 md:px-10 lg:px-16">
             <!-- Top -->
             <div class="py-12 md:py-16 flex flex-wrap items-start gap-10">

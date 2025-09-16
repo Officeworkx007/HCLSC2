@@ -85,7 +85,7 @@
 
 
     <!-- Help Section -->
-    <section class="relative bg-[#0c1e33] text-white py-16">
+    <section class="relative bg-blue-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-bold mb-10 text-center">How We Can Help</h2>
 
@@ -94,90 +94,90 @@
 
                 <!-- Card 1 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
+                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
                     <i data-feather="file-text"
-                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Eligibility & Services
                     </h3>
                     <p
-                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Free legal services including advice, drafting, representation, and court fee coverage.
                     </p>
                 </div>
 
                 <!-- Card 2 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
+                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
                     <i data-feather="users"
-                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Lok Adalats
                     </h3>
                     <p
-                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Organizes Lok Adalats for settlement of pending and pre-litigation disputes.
                     </p>
                 </div>
 
                 <!-- Card 3 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
+                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
                     <i data-feather="book-open"
-                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Legal Awareness
                     </h3>
                     <p
-                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Awareness programs, workshops, and campaigns on legal rights and remedies.
                     </p>
                 </div>
 
                 <!-- Card 4 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
+                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
                     <i data-feather="briefcase"
-                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Panel of Advocates
                     </h3>
                     <p
-                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Maintains a panel of advocates to represent eligible persons before the High Court.
                     </p>
                 </div>
 
                 <!-- Card 5 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
+                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
                     <i
-                        class="fa-solid fa-handshake text-5xl mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="fa-solid fa-handshake text-5xl mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Support for ADR
                     </h3>
                     <p
-                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Encourages mediation and conciliation for quicker, less adversarial resolution.
                     </p>
                 </div>
 
                 <!-- Card 6 -->
                 <div
-                    class="group bg-[#0F5B66] rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-[#0c1e33]">
+                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
                     <i data-feather="monitor"
-                        class="w-10 h-10 mb-4 text-gray-200 transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-gray-200 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Monitoring
                     </h3>
                     <p
-                        class="text-sm text-gray-200 px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
                         Ensures implementation of legal aid schemes and reports on activities.
                     </p>
                 </div>

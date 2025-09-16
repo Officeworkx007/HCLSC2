@@ -48,4 +48,14 @@ class PanelLawyerController extends Controller
             ->route('admin.panel_lawyers.index')
             ->with('success', 'Panel Lawyer added successfully!');
     }
+
+    public function destroy($id)
+    {
+        $lawyer = PanelLawyer::findOrFail($id);
+        $lawyer->delete();
+
+        return redirect()
+            ->route('admin.panel_lawyers.index')
+            ->with('success', 'Panel Lawyer deleted successfully!');
+    }
 }

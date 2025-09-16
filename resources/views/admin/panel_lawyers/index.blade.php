@@ -63,7 +63,7 @@
                                     </a>
 
                                     <!-- Delete -->
-                                    <form action="" method="POST"
+                                    <form action="{{ route('admin.panel_lawyers.destroy', $lawyer->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this lawyer?');">
                                         @csrf
                                         @method('DELETE')

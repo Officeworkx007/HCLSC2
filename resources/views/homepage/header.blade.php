@@ -27,7 +27,7 @@
             </div>
         </div>
         <!-- Bottom Header (Navigation) -->
-        <div class="bg-[#0c1e33] relative z-50"> <!-- Added z-50 -->
+        <div class="bg-blue-900 relative z-50"> <!-- Added z-50 -->
             <nav
                 class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-md justify-center relative">
                 <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Home</a>
