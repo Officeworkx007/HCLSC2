@@ -28,9 +28,6 @@ return new class extends Migration
             $table->foreignId('occupation_id')->nullable()->constrained('occupations')->nullOnDelete();
             $table->foreignId('income_id')->nullable()->constrained('incomes')->nullOnDelete();
             $table->foreignId('eligibility_category_id')->nullable()->constrained('eligibility_category')->nullOnDelete();
-            $table->foreignId('upload_documents_id')->nullable()->constrained('upload_documents')->nullOnDelete();
-            $table->foreignId('applicants_documents_id')->nullable()->constrained('applicants_documents')->nullOnDelete();
-
             $table->string('certificate_no', 50)->nullable();
             $table->string('employment_details', 255)->nullable();
 

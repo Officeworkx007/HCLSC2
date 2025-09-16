@@ -31,13 +31,18 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+//admin viewing legal aid application
+Route::get('/admin/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
+
 // Panel Lawyers
 Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'index'])->name('admin.panel_lawyers.index'); // list
 Route::get('/admin/panel_lawyers/create', [PanelLawyerController::class, 'create'])->name('admin.panel_lawyers.create'); // form
 Route::post('/admin/panel_lawyers/store', [PanelLawyerController::class, 'store'])->name('admin.panel_lawyers.store');
 Route::delete('/admin/panel_lawyers/{id}', [PanelLawyerController::class, 'destroy'])->name('admin.panel_lawyers.destroy');
 
+//legal aid
 Route::get('/legalaid', [LegalAidController::class, 'index'])->name('homepage.legalaid');
 Route::post('/legalaid/store', [LegalAidController::class, 'store'])->name('homepage.legalaid.store');
+
 
 require __DIR__ . '/auth.php';

@@ -239,7 +239,7 @@
     <section class="py-12 bg-gray-50 mt-[5rem]">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Heading -->
-            <h2 class="text-3xl font-bold text-center text-[#1E3A5F] mb-10">Who is entitled to Free Legal Services?
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">Who is entitled to Free Legal Services?
             </h2>
             <!-- Wrapper with arrows -->
             <div class="relative">
@@ -352,7 +352,7 @@
     <!-- apply section-->
     <section class="py-12 mt-5 bg-gray-50 mt-[5rem]">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-[#1E3A5F] mb-10">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">
                 How to Apply for Legal Aid
             </h2>
 
@@ -362,7 +362,7 @@
                 <div class="bg-white rounded-lg overflow-hidden shadow-sm">
                     <img src="/images/section1.png" alt="enter website" class="w-full h-64 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800">
+                        <h3 class="text-lg font-semibold text-blue-900">
                             Visit the url www.hclscmanipur.in
                         </h3>
                     </div>
@@ -372,7 +372,7 @@
                 <div class="bg-white rounded-lg overflow-hidden shadow-sm">
                     <img src="/images/section2.png" alt="enter website" class="w-full h-64 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800">
+                        <h3 class="text-lg font-semibold text-blue-900">
                             Fill up the form by going to Apply
                         </h3>
                     </div>
@@ -382,7 +382,7 @@
                 <div class="bg-white rounded-lg overflow-hidden shadow-sm">
                     <img src="/images/section3.png" alt="enter website" class="w-full h-64 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800">
+                        <h3 class="text-lg font-semibold text-blue-900">
                             Track status of your Form using the id
                         </h3>
                     </div>
@@ -392,7 +392,7 @@
                 <div class="bg-white rounded-lg overflow-hidden shadow-sm">
                     <img src="/images/section4.png" alt="verification" class="w-full h-64 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800">
+                        <h3 class="text-lg font-semibold text-blue-900">
                             HCLSC staff will verify & assign lawyer
                         </h3>
                     </div>

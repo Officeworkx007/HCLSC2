@@ -14,7 +14,7 @@ class PanelLawyerController extends Controller
     public function index()
     {
         // Fetch all lawyers (you can paginate if list grows big)
-        $panelLawyers = PanelLawyer::latest()->paginate(10);
+        $panelLawyers = PanelLawyer::orderBy('created_at', 'asc')->get();
 
         return view('admin.panel_lawyers.index', compact('panelLawyers'));
     }

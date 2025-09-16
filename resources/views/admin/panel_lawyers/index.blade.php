@@ -20,9 +20,10 @@
 
         <!-- Table -->
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table id="panelLawyersTable" class="w-full text-sm text-left text-gray-500">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">#</th>
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Name</th>
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Email</th>
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Phone Number</th>
@@ -33,8 +34,12 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @forelse ($panelLawyers as $lawyer)
+                    @forelse ($panelLawyers as $index => $lawyer)
                         <tr>
+                            <!-- Index Number -->
+                            <td class="px-6 py-4 text-sm font-medium text-gray-700">
+                                {{ $index + 1 }}
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div
@@ -78,7 +83,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">
+                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">
                                 No lawyers added yet.
                             </td>
                         </tr>
@@ -87,4 +92,22 @@
             </table>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#panelLawyersTable').DataTable({
+                    pageLength: 10,
+                    lengthMenu: [5, 10, 25, 50],
+                    ordering: true,
+                    searching: true,
+                    order: [[0, 'asc']], // Order by index column ascending
+                    language: {
+                        search: "Search Lawyers:",
+                        lengthMenu: "Show _MENU_ entries per page",
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection

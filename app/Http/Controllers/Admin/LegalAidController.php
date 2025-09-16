@@ -75,4 +75,11 @@ class LegalAidController extends Controller
 
         return redirect()->route('homepage.legalaid')->with('success', 'Applicant created successfully!');
     }
+
+    public function pageView()
+    {
+        $applicants = Applicant::with('documents')->latest()->get();
+
+        return view('admin.legal_aid.index', compact('applicants'));
+    }
 }
