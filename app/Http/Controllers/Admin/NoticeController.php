@@ -77,7 +77,7 @@ class NoticeController extends Controller
     public function destroy(Notice $notice)
     {
         $notice->delete();
-        return redirect()->route('notices.index')->with('success', 'Notice deleted successfully.');
+        return redirect()->route('admin.notices.index')->with('success', 'Notice deleted successfully.');
     }
 
     /**
@@ -88,7 +88,7 @@ class NoticeController extends Controller
         $notice->status = !$notice->status;
         $notice->save();
 
-        return redirect()->route('notices.index')->with('success', 'Notice status updated.');
+        return redirect()->route('admin.notices.index')->with('success', 'Notice status updated.');
     }
 
     /**
