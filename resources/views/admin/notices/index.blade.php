@@ -43,7 +43,9 @@
                             <td class="px-4 py-3 text-sm text-gray-700">{{ $notice->order_no }}</td>
 
                             {{-- Date --}}
-                            <td class="px-4 py-3 text-sm text-gray-700">{{ $notice->notice_date }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-700">
+                                {{ \Carbon\Carbon::parse($notice->notice_date)->format('d-m-Y') }}
+                            </td>
 
                             {{-- PDF Link --}}
                             <td class="px-4 py-3 text-sm">
@@ -69,8 +71,7 @@
                             {{-- Actions --}}
                             <td class="px-4 py-3 flex items-center gap-3">
                                 {{-- Edit --}}
-                                <a href=""
-                                    class="text-blue-600 hover:text-blue-800">
+                                <a href="" class="text-blue-600 hover:text-blue-800">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 {{-- Delete --}}
