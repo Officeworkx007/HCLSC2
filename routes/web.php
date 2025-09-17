@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LegalAidController;
 use App\Http\Controllers\Admin\PanelLawyerController;
+use App\Http\Controllers\Admin\NoticeController;
 
 Route::get('/', function () {
     return view('/homepage/home');
@@ -39,6 +40,17 @@ Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'index'])->nam
 Route::get('/admin/panel_lawyers/create', [PanelLawyerController::class, 'create'])->name('admin.panel_lawyers.create'); // form
 Route::post('/admin/panel_lawyers/store', [PanelLawyerController::class, 'store'])->name('admin.panel_lawyers.store');
 Route::delete('/admin/panel_lawyers/{id}', [PanelLawyerController::class, 'destroy'])->name('admin.panel_lawyers.destroy');
+
+//Admin creating Notices
+Route::get('notices', [NoticeController::class, 'index'])->name('admin.notices.index');
+Route::get('notices/create', [NoticeController::class, 'create'])->name('admin.notices.create');
+Route::post('notices/store', [NoticeController::class, 'store'])->name('admin.notices.store');
+
+// Toggle status
+Route::get('notices/{notice}/toggle-status', [NoticeController::class, 'toggleStatus'])->name('admin.notices.toggle-status');
+
+// Public Notice Board
+Route::get('/notice-board', [NoticeController::class, 'publicView'])->name('homepage.notices');
 
 //legal aid
 Route::get('/legalaid', [LegalAidController::class, 'index'])->name('homepage.legalaid');

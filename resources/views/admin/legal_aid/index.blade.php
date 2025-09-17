@@ -56,7 +56,7 @@
                             <td class="px-4 py-3">{{ $applicant->certificate_no }}</td>
                             <td class="px-4 py-3">{{ $applicant->occupation?->name ?? 'N/A' }}</td>
                             <td class="px-4 py-3">{{ $applicant->employment_details }}</td>
-                            <td class="px-4 py-3">{{ $applicant->income?->range ?? 'N/A' }}</td>
+                            <td class="px-4 py-3">{{ $applicant->income?->name ?? 'N/A' }}</td>
                             <td class="px-4 py-3">{{ $applicant->eligibilityCategory?->name ?? 'N/A' }}</td>
                             <td class="px-4 py-3">
                                 @if($applicant->documents->count())
