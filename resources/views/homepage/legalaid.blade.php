@@ -9,7 +9,7 @@
 </head>
 
 <body class="min-h-screen bg-gray-100 flex flex-col">
-    @include('homepage.header')
+    @include('homepage.layouts.header')
 
     <!-- Single Form Wrapper -->
     <form action="{{ route('homepage.legalaid.store') }}" method="POST" enctype="multipart/form-data">
@@ -31,22 +31,26 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-medium mb-1">Applicant Name * </label>
-                            <input type="text" name="name" id="name" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            <input type="text" name="name" id="name"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Name">
                         </div>
                         <div>
                             <label for="father_name" class="block text-sm font-medium mb-1">Father Name</label>
-                            <input type="text" name="father_name" id="father_name" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            <input type="text" name="father_name" id="father_name"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Fathers Name">
                         </div>
                         <div>
                             <label for="mother_name" class="block text-sm font-medium mb-1">Mother Name</label>
-                            <input type="text" name="mother_name" id="mother_name" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            <input type="text" name="mother_name" id="mother_name"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Mothers Name">
                         </div>
                         <div>
                             <label for="spouse_name" class="block text-sm font-medium mb-1">Spouse Name</label>
-                            <input type="text" name="spouse_name" id="spouse_name" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            <input type="text" name="spouse_name" id="spouse_name"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Spouse Name">
                         </div>
                         <div>
@@ -56,7 +60,8 @@
                         </div>
                         <div>
                             <label for="gender" class="block text-sm font-medium mb-1">Gender</label>
-                            <select name="gender" id="gender" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300">
+                            <select name="gender" id="gender"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300">
                                 <option value="">-- Select Gender --</option>
                                 @foreach ($genders as $gender)
                                     <option value="{{ $gender->id }}">{{ $gender->name }}</option>
@@ -65,17 +70,20 @@
                         </div>
                         <div>
                             <label for="number" class="block text-sm font-medium mb-1">Phone Number</label>
-                            <input type="text" name="number" id="number" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            <input type="text" name="number" id="number"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Phone Number">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                            <input type="text" name="email" id="email" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            <input type="text" name="email" id="email"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Email Address">
                         </div>
                         <div>
                             <label for="religion" class="block text-sm font-medium mb-1">Religion</label>
-                            <select name="religion" id="religion" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300">
+                            <select name="religion" id="religion"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300">
                                 <option value="">-- Select Religion --</option>
                                 @foreach ($religions as $religion)
                                     <option value="{{ $religion->id }}">{{ $religion->name }}</option>
@@ -84,7 +92,8 @@
                         </div>
                         <div>
                             <label for="caste" class="block text-sm font-medium mb-1">Caste</label>
-                            <select name="caste" id="caste" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300">
+                            <select name="caste" id="caste"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300">
                                 <option value="">-- Select Caste --</option>
                                 @foreach ($castes as $caste)
                                     <option value="{{ $caste->id }}">{{ $caste->name }}</option>
@@ -92,13 +101,16 @@
                             </select>
                         </div>
                         <div>
-                            <label for="certificate_no" class="block text-sm font-medium mb-1">Caste Certificate No</label>
-                            <input type="text" name="certificate_no" id="certificate_no" class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
+                            <label for="certificate_no" class="block text-sm font-medium mb-1">Caste Certificate
+                                No</label>
+                            <input type="text" name="certificate_no" id="certificate_no"
+                                class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Caste Certificate Number">
                         </div>
                         <div>
                             <label for="occupation" class="block text-sm font-medium mb-1">Occupation</label>
-                            <select name="occupation" id="occupation" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
+                            <select name="occupation" id="occupation"
+                                class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
                                 <option value="">-- Select Occupation --</option>
                                 @foreach ($occupations as $occupation)
                                     <option value="{{ $occupation->id }}">{{ $occupation->name }}</option>
@@ -107,12 +119,14 @@
                         </div>
                         <div>
                             <label for="employment_details" class="block text-sm font-medium mb-1">Employment</label>
-                            <input type="text" name="employment_details" id="employment_details" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300"
+                            <input type="text" name="employment_details" id="employment_details"
+                                class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300"
                                 placeholder="Enter Employment Details">
                         </div>
                         <div>
                             <label for="income" class="block text-sm font-medium mb-1">Annual Income</label>
-                            <select name="income" id="income" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
+                            <select name="income" id="income"
+                                class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
                                 <option value="">-- Select Income --</option>
                                 @foreach ($incomes as $income)
                                     <option value="{{ $income->id }}">{{ $income->name }}</option>
@@ -120,8 +134,10 @@
                             </select>
                         </div>
                         <div>
-                            <label for="eligibility_category" class="block text-sm font-medium mb-1">Eligibility Category</label>
-                            <select name="eligibility_category" id="eligibility_category" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
+                            <label for="eligibility_category" class="block text-sm font-medium mb-1">Eligibility
+                                Category</label>
+                            <select name="eligibility_category" id="eligibility_category"
+                                class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
                                 <option value="">--Select Eligibility Category --</option>
                                 @foreach ($eligibilities as $eligibility)
                                     <option value="{{ $eligibility->id }}">{{ $eligibility->name }}</option>
@@ -150,8 +166,10 @@
                         <!-- First Row -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center single-doc-row">
                             <div>
-                                <label for="upload_documents" class="block text-sm font-medium mb-1">Upload Document</label>
-                                <select name="upload_documents[]" class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
+                                <label for="upload_documents" class="block text-sm font-medium mb-1">Upload
+                                    Document</label>
+                                <select name="upload_documents[]"
+                                    class="w-full border rounded px-6 py-2 focus:ring focus:ring-blue-300">
                                     <option value="">--Select File--</option>
                                     @foreach ($documents as $document)
                                         <option value="{{ $document->id }}">{{ $document->name }}</option>
@@ -161,7 +179,8 @@
                             <div class="flex gap-2 items-center">
                                 <input type="file" name="document_files[]" accept="image/*,.pdf"
                                     class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer">
-                                <button type="button" class="delete-row bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700">X</button>
+                                <button type="button"
+                                    class="delete-row bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700">X</button>
                             </div>
                         </div>
                     </div>
@@ -183,7 +202,7 @@
         </div>
     </form>
 
-    @include('homepage.footer')
+    @include('homepage.layouts.footer')
 
     <!-- Script -->
     <script>

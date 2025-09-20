@@ -14,7 +14,7 @@
 
 <body class="font-sans bg-gray-50">
 
-    @include('homepage.header')
+    @include('homepage.layouts.header')
 
     <section class="relative w-full h-[560px] bg-white">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch h-full">
@@ -94,95 +94,93 @@
 
                 <!-- Card 1 -->
                 <div
-                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
+                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
                     <i data-feather="file-text"
-                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Eligibility & Services
                     </h3>
                     <p
-                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Free legal services including advice, drafting, representation, and court fee coverage.
                     </p>
                 </div>
 
                 <!-- Card 2 -->
                 <div
-                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
+                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
                     <i data-feather="users"
-                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Lok Adalats
                     </h3>
                     <p
-                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Organizes Lok Adalats for settlement of pending and pre-litigation disputes.
                     </p>
                 </div>
 
                 <!-- Card 3 -->
                 <div
-                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
+                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
                     <i data-feather="book-open"
-                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Legal Awareness
                     </h3>
                     <p
-                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Awareness programs, workshops, and campaigns on legal rights and remedies.
                     </p>
                 </div>
 
                 <!-- Card 4 -->
                 <div
-                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
+                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
                     <i data-feather="briefcase"
-                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Panel of Advocates
                     </h3>
                     <p
-                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Maintains a panel of advocates to represent eligible persons before the High Court.
                     </p>
                 </div>
 
                 <!-- Card 5 -->
                 <div
-                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
-                    <i
-                        class="fa-solid fa-handshake text-5xl mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
+                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
+                    <i data-feather="user-check"
+                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Support for ADR
                     </h3>
                     <p
-                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Encourages mediation and conciliation for quicker, less adversarial resolution.
                     </p>
                 </div>
 
                 <!-- Card 6 -->
                 <div
-                    class="group bg-white rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-blue-900">
+                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
                     <i data-feather="monitor"
-                        class="w-10 h-10 mb-4 text-black transition duration-300 group-hover:text-[#FFD700]"></i>
+                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
                     <h3
-                        class="font-semibold text-lg mb-2 text-black transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Monitoring
                     </h3>
                     <p
-                        class="text-sm text-black px-4 transition duration-300 group-hover:bg-gradient-to-r group-hover:from-[#FFD700] group-hover:via-[#FFEC8B] group-hover:to-[#DAA520] group-hover:bg-clip-text group-hover:text-transparent">
+                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
                         Ensures implementation of legal aid schemes and reports on activities.
                     </p>
                 </div>
-
-
             </div>
         </div>
     </section>
@@ -462,7 +460,7 @@
         </div>
     </section>
 
-    @include('homepage.footer')
+    @include('homepage.layouts.footer')
 
     <script>
         feather.replace()
@@ -489,21 +487,25 @@
             list.innerHTML = list.innerHTML + list.innerHTML;
         }
 
-        //code for dropdown menu
-        const applyBtn = document.getElementById("apply-btn");
-        const dropdown = document.getElementById("dropdown");
+        //Drop down code
+        document.addEventListener("DOMContentLoaded", function() {
+            const btn = document.getElementById("apply-btn");
+            const menu = document.getElementById("dropdown");
 
-        // Toggle dropdown on button click
-        applyBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            dropdown.classList.toggle("hidden");
-        });
+            if (!btn || !menu) return;
 
-        // Close dropdown when clicking outside
-        document.addEventListener("click", (e) => {
-            if (!document.getElementById("apply-menu").contains(e.target)) {
-                dropdown.classList.add("hidden");
-            }
+            btn.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                menu.classList.toggle("hidden"); // toggle dropdown
+            });
+
+            // Close dropdown if clicked outside
+            document.addEventListener("click", function(event) {
+                if (!btn.contains(event.target) && !menu.contains(event.target)) {
+                    menu.classList.add("hidden");
+                }
+            });
         });
     </script>
 
@@ -577,7 +579,6 @@
             animation-play-state: paused;
         }
     </style>
-
 </body>
 
 </html>
