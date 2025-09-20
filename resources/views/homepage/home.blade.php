@@ -273,29 +273,22 @@
 
                     <!-- Card 3 -->
                     <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-purple-100 rounded-full mb-4">
-                            <span class="text-3xl">👩‍👧</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Women & Children</h3>
+                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
+                        <img src="/images/womenchildren.png" alt="Persons in Custody"
+                            class="w-full h-64 object-cover">
                     </div>
 
                     <!-- Card 4 -->
                     <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mb-4">
-                            <span class="text-3xl">🧠</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Mentally ill / Disabled</h3>
+                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
+                        <img src="/images/mentally.png" alt="Persons in Custody"
+                            class="w-full h-64 object-cover">
                     </div>
 
                     <!-- Card 5 -->
                     <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-red-100 rounded-full mb-4">
-                            <span class="text-3xl">🌪️</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Victims of Disaster / Violence</h3>
+                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
+                        <img src="/images/disaster.png" alt="Persons in Custody" class="w-full h-64 object-cover">
                     </div>
 
                     <!-- Card 6 -->
@@ -309,11 +302,8 @@
 
                     <!-- Card 7 -->
                     <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-indigo-100 rounded-full mb-4">
-                            <span class="text-3xl">🏛️</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Persons in Custody</h3>
+                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
+                        <img src="/images/custody.png" alt="Persons in Custody" class="w-full h-64 object-cover">
                     </div>
 
                     <!-- Card 8 -->
