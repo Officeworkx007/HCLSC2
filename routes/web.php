@@ -35,6 +35,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adm
 
 //admin viewing legal aid application
 Route::get('/admin/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
+Route::get('/admin/legal_aid/{applicant}', [LegalAidController::class, 'show'])->name('admin.legal_aid.show');
 
 // Panel Lawyers
 Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'index'])->name('admin.panel_lawyers.index'); // list

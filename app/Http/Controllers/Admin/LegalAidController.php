@@ -78,16 +78,31 @@ class LegalAidController extends Controller
 
     public function pageView()
     {
-       $applicants = Applicant::with([
-        'gender',
-        'religion',
-        'caste',
-        'occupation',
-        'income',
-        'eligibilityCategory',
-        'documents.uploadDocument'
-    ])->latest()->get();
+        $applicants = Applicant::with([
+            'gender',
+            'religion',
+            'caste',
+            'occupation',
+            'income',
+            'eligibilityCategory',
+            'documents.uploadDocument'
+        ])->latest()->get();
 
         return view('admin.legal_aid.index', compact('applicants'));
+    }
+
+    public function show($id)
+    {
+        $applicant = Applicant::with([
+            'gender',
+            'religion',
+            'caste',
+            'occupation',
+            'income',
+            'eligibilityCategory',
+            'documents.uploadDocument'
+        ])->findOrFail($id);
+
+        return view('admin.legal_aid.show', compact('applicant'));
     }
 }

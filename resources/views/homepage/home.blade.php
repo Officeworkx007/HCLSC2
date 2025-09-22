@@ -189,45 +189,39 @@
     <!-- Judges / Testimonials -->
     <section class="bg-gray-50 py-12 justify-items-center mt-[5rem]">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 justify-items-center">
 
                 <!-- Card 1 -->
-                <article
-                    class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
-                    <!-- Background image -->
-                    <img src="/images/A Bimol Singh.jpg" alt="Hon'ble Mr. Justice A. Bimol Singh"
-                        class="absolute inset-0 w-full h-full object-contain scale-110">
-                    <!-- 👆 object-top keeps face higher, scale-110 zooms out a bit -->
+                <div class="flex flex-col items-center">
+                    <article class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
+                        <!-- Background image -->
+                        <img src="/images/A Bimol Singh.jpg" alt="Hon'ble Mr. Justice A. Bimol Singh"
+                            class="absolute inset-0 w-full h-full object-contain scale-110">
 
-                    <!-- Gradient overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
-
-                    <!-- Bottom content -->
-                    <div class="absolute bottom-0 left-0 right-0 z-10 p-6">
-                        <h3 class="text-white text-2xl font-semibold drop-shadow">
-                            Hon'ble Mr. Justice A. Bimol Singh
-                        </h3>
-                        <p class="text-gray-100/90 text-sm">Judge, High Court of Manipur</p>
-                        <p class="text-gray-100/90 text-sm">Executive Chairman, Manipur State Legal Services Authority
-                        </p>
+                        <!-- Gradient overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
+                    </article>
+                    <!-- Content below the card -->
+                    <div class="mt-4 text-center">
+                        <h3 class="text-gray-900 text-xl font-semibold">Hon'ble Mr. Justice A. Bimol Singh</h3>
+                        <p class="text-gray-700 text-sm">Judge, High Court of Manipur</p>
+                        <p class="text-gray-700 text-sm">Executive Chairman, Manipur State Legal Services Authority</p>
                     </div>
-                </article>
+                </div>
 
                 <!-- Card 2 -->
-                <article
-                    class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
-                    <img src="/images/Justice A. Guneshwar Sharma.jpg" alt="Hon'ble Justice Name"
-                        class="absolute inset-0 w-full h-full object-cover object-top scale-110">
-
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
-
-                    <div class="absolute bottom-0 left-0 right-0 z-10 p-6">
-                        <h3 class="text-white text-2xl font-semibold drop-shadow">Hon'ble Mr. Justice A. Guneshwar
-                            Sharma</h3>
-                        <p class="text-gray-100/90 text-sm">Judge, High Court of Manipur</p>
-                        <p class="text-gray-100/90 text-sm">Chairman, High Court Legal Services Committee</p>
+                <div class="flex flex-col items-center">
+                    <article class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
+                        <img src="/images/Justice A. Guneshwar Sharma.jpg" alt="Hon'ble Justice Name"
+                            class="absolute inset-0 w-full h-full object-cover object-top scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
+                    </article>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-gray-900 text-xl font-semibold">Hon'ble Mr. Justice A. Guneshwar Sharma</h3>
+                        <p class="text-gray-700 text-sm">Judge, High Court of Manipur</p>
+                        <p class="text-gray-700 text-sm">Chairman, High Court Legal Services Committee</p>
                     </div>
-                </article>
+                </div>
 
             </div>
         </div>
