@@ -4,7 +4,7 @@
             <div class="py-12 md:py-16 flex flex-wrap items-start gap-10">
                 <!-- Brand + Tagline Side by Side -->
                 <div class="flex items-center gap-2 min-w-max">
-                    <img src="/images/logo2.png" alt="hclsc logo" class="w-[8rem] h-[8rem]">
+                    <img src="/images/hc logo.jpg" alt="High Court of Manipur logo" class="w-[8rem] h-[8rem]">
                     <p
                         class="bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text text-transparent font-bold text-2xl whitespace-nowrap">
                         High Court Legal Services Committee

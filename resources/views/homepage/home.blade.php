@@ -435,7 +435,7 @@
                         <div class="flex justify-center mb-3">
                             <img src="/images/totalmediations.png" alt="Total Mediations Done" class="w-[200px] h-[160px]">
                         </div>
-                        <p class="text-2xl font-bold text-gray-900">300</p>
+                        <p class="text-2xl font-bold text-gray-900">560</p>
                         <!-- <p class="text-blue-700">Total Mediations Completed</p> -->
                     </div>
                 </div>
@@ -444,10 +444,10 @@
                 <!-- Successful Mediations -->
                 <div>
                     <div class="flex justify-center mb-3">
-                        <img src="/images/mediator.png" alt="Successful Mediations" class="w-[55px] h-[55px]">
+                        <img src="/images/successful.png" alt="Successful Mediations" class="w-[200px] h-[160px]">
                     </div>
                     <p class="text-2xl font-bold text-gray-900">10</p>
-                    <p class="text-green-700">Successful Mediations</p>
+                    <!-- <p class="text-green-700">Successful Mediations</p> -->
                 </div>
 
                 <!-- Lok Adalats -->

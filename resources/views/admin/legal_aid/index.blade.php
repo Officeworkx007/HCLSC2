@@ -18,8 +18,8 @@
                         <th class="px-4 py-3 border-b">Phone</th>
                         <th class="px-4 py-3 border-b">Email</th>
                         <th class="px-4 py-3 border-b">Created At</th>
+                        <th class="px-4 py-3 border-b">Status</th>
                         <th class="px-4 py-3 border-b">View Details</th>
-                        <th class="px-4 py-3 border-b">Assign Lawyer</th>
                         <th class="px-4 py-3 border-b">Actions</th>
                     </tr>
                 </thead>
@@ -39,31 +39,46 @@
                             <td class="px-4 py-3">{{ $applicant->number }}</td>
                             <td class="px-4 py-3">{{ $applicant->email }}</td>
                             <td class="px-4 py-3 text-gray-500">{{ $applicant->created_at->format('d-m-Y') }}</td>
+
+                            {{-- Status Badge --}}
+                            <td class="px-4 py-3">
+                                @if ($applicant->status === 'ready')
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">Ready</span>
+                                @elseif ($applicant->status === 'assigned')
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">Assigned</span>
+                                @elseif ($applicant->status === 'rejected')
+                                    <span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded">Rejected</span>
+                                @else
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded">Pending</span>
+                                @endif
+                            </td>
+
+                            {{-- View Details Button --}}
                             <td class="px-4 py-3">
                                 <a href="{{ route('admin.legal_aid.show', $applicant->id) }}"
                                     class="inline-flex items-center px-3 py-1.5 bg-purple-500 text-white text-xs font-medium rounded-full shadow-sm
-          hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                                    hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 transition">
                                     Show
                                 </a>
                             </td>
-                            <td class="px-4 py-3">
-                            </td>
+
+                            {{-- Quick Actions (optional, keep minimal) --}}
                             <td class="px-4 py-3 space-x-3">
-                                <a href=""
-                                    class="inline-flex items-center px-3 py-1.5 bg-yellow-500 text-white text-xs font-medium rounded-full shadow-sm
-          hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-                                    Send
-                                </a>
-                                <a href=""
-                                    class="inline-flex items-center px-3 py-1.5 bg-red-500 text-white text-xs font-medium rounded-full shadow-sm
-          hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
-                                    Delete
-                                </a>
+                                <form action="" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this application?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="inline-flex items-center px-3 py-1.5 bg-red-500 text-white text-xs font-medium rounded-full shadow-sm
+                                        hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-4 py-6 text-center text-gray-500">No applications found</td>
+                            <td colspan="9" class="px-4 py-6 text-center text-gray-500">No applications found</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -11,7 +11,7 @@
 
             <!-- Left Side: Logo + Title -->
             <div class="flex items-center space-x-4">
-                <img src="/images/logo2.png" alt="hclsc logo" class="h-24 w-auto">
+                <img src="/images/hc logo.jpg" alt="High Court of Manipur logo" class="h-24 w-auto">
                 <div>
                     <h1 class="text-2xl font-bold">High Court Legal Services Committee</h1>
                     <p class="text-sm text-gray-600">High Court of Manipur, Mantripukhri</p>
