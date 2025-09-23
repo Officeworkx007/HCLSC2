@@ -189,11 +189,31 @@
     <!-- Judges / Testimonials -->
     <section class="bg-gray-50 py-12 justify-items-center mt-[5rem]">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 justify-items-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 justify-items-center">
 
                 <!-- Card 1 -->
                 <div class="flex flex-col items-center">
-                    <article class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
+                    <article
+                        class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
+                        <!-- Background image -->
+                        <img src="/images/Chief Justice M Sundar.jpg" alt="Hon'ble Chief Justice M Sundar"
+                            class="absolute inset-0 w-full h-full object-contain scale-150">
+
+                        <!-- Gradient overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
+                    </article>
+                    <!-- Content below the card -->
+                    <div class="mt-4 text-center">
+                        <h3 class="text-gray-900 text-xl font-semibold">Hon'ble Mr. Chief Justice M Sundar</h3>
+                        <p class="text-gray-700 text-sm">Judge, High Court of Manipur</p>
+                        <p class="text-gray-700 text-sm">Patron-in-Chief, High Court Legal Services Committee</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flex flex-col items-center">
+                    <article
+                        class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
                         <!-- Background image -->
                         <img src="/images/A Bimol Singh.jpg" alt="Hon'ble Mr. Justice A. Bimol Singh"
                             class="absolute inset-0 w-full h-full object-contain scale-110">
@@ -209,9 +229,10 @@
                     </div>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Card 3s -->
                 <div class="flex flex-col items-center">
-                    <article class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
+                    <article
+                        class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
                         <img src="/images/Justice A. Guneshwar Sharma.jpg" alt="Hon'ble Justice Name"
                             class="absolute inset-0 w-full h-full object-cover object-top scale-110">
                         <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
@@ -275,8 +296,7 @@
                     <!-- Card 4 -->
                     <div
                         class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
-                        <img src="/images/mentally.png" alt="Persons in Custody"
-                            class="w-full h-64 object-cover">
+                        <img src="/images/mentally.png" alt="Persons in Custody" class="w-full h-64 object-cover">
                     </div>
 
                     <!-- Card 5 -->
@@ -403,20 +423,20 @@
                 <!-- Panel Lawyers -->
                 <div>
                     <div class="flex justify-center mb-3 space-x-2">
-                        <img src="/images/panel.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                        <img src="/images/panellawyers.png" alt="Panel Lawyers" class="w-[200px] h-[160px]">
                     </div>
                     <p class="text-2xl font-bold text-gray-900">23</p>
-                    <p class="text-blue-700">Panel Lawyers</p>
+                    <!-- <p class="text-blue-700">Panel Lawyers</p> -->
                 </div>
                 <!-- Mediation done -->
                 <div>
                     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
                     <div>
                         <div class="flex justify-center mb-3">
-                            <img src="/images/discussion.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                            <img src="/images/totalmediations.png" alt="Total Mediations Done" class="w-[200px] h-[160px]">
                         </div>
                         <p class="text-2xl font-bold text-gray-900">300</p>
-                        <p class="text-blue-700">Total Mediations Completed</p>
+                        <!-- <p class="text-blue-700">Total Mediations Completed</p> -->
                     </div>
                 </div>
 
@@ -424,7 +444,7 @@
                 <!-- Successful Mediations -->
                 <div>
                     <div class="flex justify-center mb-3">
-                        <img src="/images/mediator.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                        <img src="/images/mediator.png" alt="Successful Mediations" class="w-[55px] h-[55px]">
                     </div>
                     <p class="text-2xl font-bold text-gray-900">10</p>
                     <p class="text-green-700">Successful Mediations</p>
@@ -434,10 +454,10 @@
                 <div>
                     <div class="flex justify-center mb-3">
                         <!-- Scales of Justice Icon -->
-                        <img src="/images/social-justice.png" alt="Total Mediations Done" class="w-[55px] h-[55px]">
+                        <img src="/images/adalat.png" alt="Lok Adalat" class="w-[200px] h-[160px]">
                     </div>
                     <p class="text-2xl font-bold text-gray-900">15</p>
-                    <p class="text-purple-700">Lok Adalat</p>
+                    <!-- <p class="text-purple-700">Lok Adalat</p> -->
                 </div>
 
             </div>

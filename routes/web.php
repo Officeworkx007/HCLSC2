@@ -18,7 +18,7 @@ Route::get('/notice-board', [NoticeController::class, 'publicView'])->name('home
 //legal aid
 Route::get('/homepage', [LegalAidController::class, 'index'])->name('homepage.legalaid');
 Route::post('/homepage/store', [LegalAidController::class, 'store'])->name('homepage.legalaid.store');
-
+Route::get('/homepage/track', [LegalAidController::class, 'trackPage'])->name('homepage.track');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

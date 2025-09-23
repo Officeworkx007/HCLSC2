@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('number', 15)->nullable();
             $table->string('email')->nullable();
+            $table->string('token_number')->unique();
 
             // Foreign keys for dropdowns
             $table->foreignId('gender_id')->nullable()->constrained('genders')->nullOnDelete();

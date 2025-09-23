@@ -1,3 +1,7 @@
+@php
+    $token = session('token_number');
+@endphp
+
 <!-- Header -->
 <header class="shadow">
 
@@ -29,7 +33,7 @@
     <!-- Bottom Header (Navigation) -->
     <div class="bg-blue-900 relative z-50">
         <nav
-            class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-md justify-center relative">
+            class="max-w-8xl mx-auto px-6 py-4 flex flex-wrap gap-x-6 font-medium text-white text-md justify-center relative">
 
             <a href="{{ route('homepage.home') }}" class="hover:text-[#FFD700] whitespace-nowrap">Home</a>
             <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">About Us</a>
@@ -56,6 +60,7 @@
                 </div>
             </div>
 
+            <a href="{{ route('homepage.track') }}" class="hover:text-[#FFD700] whitespace-nowrap">Track your Form</a>
             <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Guidelines</a>
             <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Contact Us</a>
         </nav>
@@ -79,7 +84,7 @@
         document.addEventListener('click', function(e) {
             document.querySelectorAll('.dropdown-menu').forEach(menu => {
                 if (!menu.contains(e.target) && !menu.previousElementSibling.contains(e
-                    .target)) {
+                        .target)) {
                     menu.classList.add('hidden');
                 }
             });

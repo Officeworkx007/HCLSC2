@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Applicant;
 use App\Models\Gender;
 use App\Models\Religion;
@@ -57,6 +58,9 @@ class LegalAidController extends Controller
             $applicant->photo = $request->file('photo')->store('applicants/photos', 'public');
         }
 
+        // 🔹 Generate token after save
+        $token = strtoupper('HCLSC' . now()->format('Ymd') . Str::random(6));
+        $applicant->token_number = $token;
         $applicant->save();
 
         // Handle document uploads
@@ -73,7 +77,9 @@ class LegalAidController extends Controller
             }
         }
 
-        return redirect()->route('homepage.legalaid')->with('success', 'Applicant created successfully!');
+        return redirect()->route('homepage.track', $applicant->token_number)
+            ->with('success', 'Applicant created successfully!')
+            ->with('token_number', $applicant->token_number);
     }
 
     public function pageView()
@@ -104,5 +110,23 @@ class LegalAidController extends Controller
         ])->findOrFail($id);
 
         return view('admin.legal_aid.show', compact('applicant'));
+    }
+
+    // Show track page with optional flash messages
+    public function trackPage(Request $request)
+    {
+        $form = null;
+        $error = null;
+
+        if ($request->has('token') && $request->has('name')) {
+            $form = Applicant::where('token_number', $request->token)
+                ->where('name', $request->name)
+                ->first();
+            if (!$form) {
+                $error = 'Invalid Token Number or Name!';
+            }
+        }
+
+        return view('homepage.track', compact('form', 'error'));
     }
 }

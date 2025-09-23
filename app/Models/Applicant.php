@@ -13,6 +13,7 @@ class Applicant extends Model
         'spouse_name',
         'gender_id',
         'phone_number',
+        'token_number',
         'email',
         'religion_id',
         'caste_id',
