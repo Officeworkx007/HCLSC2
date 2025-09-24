@@ -42,7 +42,7 @@
             <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Gallery</a>
             <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">National Lok Adalat</a>
             <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Mediation</a>
-            <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Notice Board</a>
+            <a href="{{ route('homepage.notice') }}" class="hover:text-[#FFD700] whitespace-nowrap">Notice Board</a>
 
             <!-- Apply Dropdown -->
             <div class="relative dropdown">

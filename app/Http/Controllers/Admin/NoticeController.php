@@ -10,7 +10,7 @@ class NoticeController extends Controller
 {
     public function index()
     {
-        $notices = Notice::latest()->paginate(10);
+        $notices = Notice::orderBy('id', 'asc')->paginate(10);
         return view('admin.notices.index', compact('notices'));
     }
 
@@ -89,14 +89,5 @@ class NoticeController extends Controller
         $notice->save();
 
         return redirect()->route('admin.notices.index')->with('success', 'Notice status updated.');
-    }
-
-    /**
-     * Show notice board for public view.
-     */
-    public function publicView()
-    {
-        $notices = Notice::where('status', 1)->latest()->get();
-        return view('homepage.notices', compact('notices'));
     }
 }

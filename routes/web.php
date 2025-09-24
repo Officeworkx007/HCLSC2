@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\NoticeController;
 Route::get('/', [HomeController::class, 'home'])->name('homepage.home');
 
 // Public Notice Board
-Route::get('/notice-board', [NoticeController::class, 'publicView'])->name('homepage.notices');
+Route::get('/homepage/notice', [HomeController::class, 'circular'])->name('homepage.notice');
 
 //legal aid
 Route::get('/homepage', [LegalAidController::class, 'index'])->name('homepage.legalaid');
