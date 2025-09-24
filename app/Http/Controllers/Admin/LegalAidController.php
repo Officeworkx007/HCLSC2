@@ -13,6 +13,7 @@ use App\Models\EligibilityCategory;
 use App\Models\Occupation;
 use App\Models\Income;
 use App\Models\UploadDocument;
+use App\Models\PanelLawyer;
 
 class LegalAidController extends Controller
 {
@@ -109,7 +110,8 @@ class LegalAidController extends Controller
             'documents.uploadDocument'
         ])->findOrFail($id);
 
-        return view('admin.legal_aid.show', compact('applicant'));
+        $panelLawyers = PanelLawyer::all(); // fetched from your panel lawyer table
+        return view('admin.legal_aid.show', compact('applicant', 'panelLawyers'));
     }
 
     // Show track page with optional flash messages
@@ -128,5 +130,64 @@ class LegalAidController extends Controller
         }
 
         return view('homepage.track', compact('form', 'error'));
+    }
+
+    public function assignLawyer(Request $request, $id)
+    {
+        $request->validate([
+            'lawyer_id' => 'required|exists:panel_lawyers,id',
+        ]);
+
+        $application = Applicant::findOrFail($id);
+        $application->lawyer_id = $request->lawyer_id;
+        $application->status = 'Assigned';
+        $application->save();
+
+        return redirect()->back()->with('success', 'Lawyer assigned successfully.');
+    }
+
+    /**
+     * Upload an order for the application
+     */
+    public function uploadOrder(Request $request, $id)
+    {
+        $request->validate([
+            'order_file' => 'required|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        $application = Applicant::findOrFail($id);
+
+        if ($request->hasFile('order_file')) {
+            $path = $request->file('order_file')->store('orders', 'public');
+            $application->order_file = $path;
+            $application->status = 'Order Uploaded';
+            $application->save();
+        }
+
+        return redirect()->back()->with('success', 'Order uploaded successfully.');
+    }
+
+    /**
+     * Mark application as Ready
+     */
+    public function markReady($id)
+    {
+        $application = Applicant::findOrFail($id);
+        $application->status = 'Ready';
+        $application->save();
+
+        return redirect()->back()->with('success', 'Application marked as Ready.');
+    }
+
+    /**
+     * Reject the application
+     */
+    public function reject($id)
+    {
+        $application = Applicant::findOrFail($id);
+        $application->status = 'Rejected';
+        $application->save();
+
+        return redirect()->back()->with('success', 'Application rejected.');
     }
 }

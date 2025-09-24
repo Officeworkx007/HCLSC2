@@ -99,7 +99,7 @@
 <body class="min-h-screen bg-gray-100 flex flex-col">
     @include('homepage.layouts.header')
 
-    <div class="bg-blue-800 py-12 text-center text-white shadow">
+    <div class="bg-[#FDFBD4] py-12 text-center text-black shadow">
         <h1 class="text-4xl md:text-5xl font-bold tracking-wide flex justify-center items-center gap-3">
             <i class="fas fa-clipboard-list text-yellow-500"></i> Notice Board
         </h1>

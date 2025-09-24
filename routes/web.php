@@ -36,6 +36,11 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adm
 //admin viewing legal aid application
 Route::get('/admin/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
 Route::get('/admin/legal_aid/{applicant}', [LegalAidController::class, 'show'])->name('admin.legal_aid.show');
+Route::post('/admin/legal-aid/{id}/assign-lawyer', [LegalAidController::class, 'assignLawyer'])->name('admin.legal_aid.assignLawyer');
+Route::post('/admin/legal-aid/{id}/upload-order', [LegalAidController::class, 'uploadOrder'])->name('admin.legal_aid.uploadOrder');
+Route::post('/admin/legal-aid/{id}/mark-ready', [LegalAidController::class, 'markReady'])->name('admin.legal_aid.markReady');
+Route::post('/admin/legal-aid/{id}/reject', [LegalAidController::class, 'reject'])->name('admin.legal_aid.reject');
+
 
 // Panel Lawyers
 Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'index'])->name('admin.panel_lawyers.index'); // list
