@@ -75,6 +75,24 @@
         #noticesTable td:nth-child(6) {
             white-space: nowrap;
         }
+
+        @keyframes blink {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
+        .blinking {
+            animation: blink 1s infinite;
+        }
     </style>
 </head>
 
@@ -139,7 +157,8 @@
                                 @endif
                             </td>
                             <td class="px-4 py-3">
-                                <span class="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">
+                                <span
+                                    class="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700 blinking">
                                     Active
                                 </span>
                             </td>
