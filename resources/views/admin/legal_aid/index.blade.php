@@ -5,7 +5,7 @@
 @section('page-title', 'Legal Aid Applications')
 
 @section('content')
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
+    <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 py-6">
         <h2 class="text-2xl font-bold mb-4">Applications List</h2>
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
@@ -19,6 +19,7 @@
                         <th class="px-4 py-3 border-b">Email</th>
                         <th class="px-4 py-3 border-b">Created At</th>
                         <th class="px-4 py-3 border-b">Status</th>
+                        <th class="px-4 py-3 border-b">Assigned Panel Lawyer</th>
                         <th class="px-4 py-3 border-b">View Details</th>
                         <th class="px-4 py-3 border-b">Actions</th>
                     </tr>
@@ -42,15 +43,26 @@
 
                             {{-- Status Badge --}}
                             <td class="px-4 py-3">
-                                @if ($applicant->status === 'ready')
-                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">Ready</span>
-                                @elseif ($applicant->status === 'assigned')
-                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">Assigned</span>
-                                @elseif ($applicant->status === 'rejected')
-                                    <span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded">Rejected</span>
+                                @if ($applicant->status === 'Assigned')
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">Assigned</span>
+                                @elseif ($applicant->status === 'Rejected')
+                                    <span
+                                        class="px-2 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded">Rejected</span>
                                 @else
-                                    <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded">Pending</span>
+                                    <span
+                                        class="px-2 py-1 bg-gray-100 text-yellow-600 text-xs font-semibold rounded">Pending</span>
                                 @endif
+                            </td>
+
+                            {{-- Assigned Panel Lawyer --}} <td class="px-4 py-3">
+                            @if ($applicant->panelLawyer)
+                                <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">
+                                    {{ $applicant->panelLawyer->first_name }} {{ $applicant->panelLawyer->last_name }}
+                                </span>
+                            @else
+                                <span class="italic text-gray-500 text-xs">Not assigned yet</span>
+                            @endif
                             </td>
 
                             {{-- View Details Button --}}
