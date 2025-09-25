@@ -23,6 +23,8 @@ class Applicant extends Model
         'income_id',
         'eligibility_category_id',
         'photo',
+        'panel_lawyer_id', // ✅ allow mass assignment for assigned lawyer
+        'status',
     ];
 
     /**
@@ -61,5 +63,11 @@ class Applicant extends Model
     public function documents()
     {
         return $this->hasMany(ApplicantDocument::class);
+    }
+
+    // ✅ New Relationship: Applicant → Panel Lawyer
+    public function panelLawyer()
+    {
+        return $this->belongsTo(PanelLawyer::class, 'panel_lawyer_id');
     }
 }

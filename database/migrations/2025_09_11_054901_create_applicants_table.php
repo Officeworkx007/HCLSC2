@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('number', 15)->nullable();
             $table->string('email')->nullable();
             $table->string('token_number')->unique();
+            $table->string('status')->default('Pending');
 
             // Foreign keys for dropdowns
             $table->foreignId('gender_id')->nullable()->constrained('genders')->nullOnDelete();
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->foreignId('occupation_id')->nullable()->constrained('occupations')->nullOnDelete();
             $table->foreignId('income_id')->nullable()->constrained('incomes')->nullOnDelete();
             $table->foreignId('eligibility_category_id')->nullable()->constrained('eligibility_category')->nullOnDelete();
+            $table->foreignId('panel_lawyer_id')->nullable()->constrained('panel_lawyers')->nullOnDelete();
             $table->string('certificate_no', 50)->nullable();
             $table->string('employment_details', 255)->nullable();
 

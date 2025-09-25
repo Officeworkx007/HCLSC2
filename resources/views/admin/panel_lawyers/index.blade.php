@@ -83,9 +83,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">
-                                No lawyers added yet.
-                            </td>
+                            @for ($i = 0; $i < 8; $i++)
+                                <td class="px-6 py-4 text-center text-gray-500">
+                                    @if ($i == 0)
+                                        No lawyers added yet.
+                                    @endif
+                                </td>
+                            @endfor
                         </tr>
                     @endforelse
                 </tbody>
@@ -101,7 +105,9 @@
                     lengthMenu: [5, 10, 25, 50],
                     ordering: true,
                     searching: true,
-                    order: [[0, 'asc']], // Order by index column ascending
+                    order: [
+                        [0, 'asc']
+                    ], // Order by index column ascending
                     language: {
                         search: "Search Lawyers:",
                         lengthMenu: "Show _MENU_ entries per page",
