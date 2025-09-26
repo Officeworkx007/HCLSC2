@@ -130,33 +130,40 @@
             </div>
         </div>
 
-        <!-- Right Side - Assign Panel Lawyer-->
+        <!-- Right Side - Actions-->
         <div class="w-80 bg-white shadow-lg rounded-xl p-6 border border-gray-100">
-            <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
-                <i class="bi bi-person-workspace text-indigo-600"></i> Assign Lawyer
-            </h3>
 
-            <form action="{{ route('admin.legal_aid.assignLawyer', $applicant->id) }}" method="POST">
-                @csrf
-                <div class="space-y-3">
-                    <label for="panel_lawyer_id" class="block text-sm font-medium text-gray-700">Select Lawyer</label>
-                    <select name="panel_lawyer_id" id="panel_lawyer_id"
-                        class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                        <option value="">-- Choose Lawyer --</option>
-                        @foreach ($panelLawyers as $lawyer)
-                            <option value="{{ $lawyer->id }}"
-                                {{ $applicant->panel_lawyer_id == $lawyer->id ? 'selected' : '' }}>
-                                {{ $lawyer->first_name }} {{ $lawyer->last_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+            <!-- Assign Lawyer -->
+            <div>
+                <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
+                    <i class="bi bi-person-workspace text-indigo-600"></i> Assign Lawyer
+                </h3>
 
-                <button type="submit"
-                    class="mt-4 w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow hover:bg-indigo-700 transition">
-                    <i class="bi bi-check2-circle"></i> Assign
-                </button>
-            </form>
+                <form action="{{ route('admin.legal_aid.assignLawyer', $applicant->id) }}" method="POST">
+                    @csrf
+                    <div class="space-y-3">
+                        <label for="panel_lawyer_id" class="block text-sm font-medium text-gray-700">Select
+                            Lawyer</label>
+                        <select name="panel_lawyer_id" id="panel_lawyer_id"
+                            class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                            <option value="">-- Choose Lawyer --</option>
+                            @foreach ($panelLawyers as $lawyer)
+                                <option value="{{ $lawyer->id }}"
+                                    {{ $applicant->panel_lawyer_id == $lawyer->id ? 'selected' : '' }}>
+                                    {{ $lawyer->first_name }} {{ $lawyer->last_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button type="submit"
+                        class="mt-4 w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow hover:bg-indigo-700 transition">
+                        <i class="bi bi-check2-circle"></i> Assign
+                    </button>
+                </form>
+            </div>
+
+            <!-- Reject Case -->
+            <div>
         </div>
     </div>
-</div>

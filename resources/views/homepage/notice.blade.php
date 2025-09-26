@@ -204,7 +204,9 @@
                         targets: 3
                     } // Date
                 ],
-                // redraw once after init so numbering runs
+                language: {
+                    emptyTable: "No active notices found."
+                },
                 drawCallback: function(settings) {
                     // optional: can use this for styling after draw
                 }
@@ -212,15 +214,20 @@
 
             // Dynamic Sl. No numbering that updates with search/sort/pagination
             table.on('order.dt search.dt draw.dt page.dt', function() {
-                table.column(0, {
+                var rows = table.column(0, {
                     search: 'applied',
                     order: 'applied'
-                }).nodes().each(function(cell, i) {
-                    cell.innerHTML = i + 1;
-                });
+                }).nodes();
+
+                if (rows.length > 0) {
+                    rows.each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }
             }).draw();
         });
     </script>
+
 </body>
 
 </html>

@@ -70,4 +70,9 @@ class Applicant extends Model
     {
         return $this->belongsTo(PanelLawyer::class, 'panel_lawyer_id');
     }
+
+    public function rejection()
+    {
+        return $this->hasOne(Rejection::class);
+    }
 }
