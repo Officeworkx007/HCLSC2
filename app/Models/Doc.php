@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Doc extends Model
 {
-    protected $fillable = [
-        'rejection_id',
-        'file_path',
-    ];
+    protected $fillable = ['rejection_id', 'file_path', 'original_name'];
 
     public function rejection()
     {

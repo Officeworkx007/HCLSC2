@@ -164,6 +164,49 @@
             </div>
 
             <!-- Reject Case -->
-            <div>
+            <div class="mt-5">
+                <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
+                    <i class="bi bi-x-circle text-red-600"></i> Reject Case
+                </h3>
+
+                <form action="#" method="POST">
+                    @csrf
+                    <div class="space-y-3">
+                        <label for="remark" class="block text-sm font-medium text-gray-700">Remark</label>
+                        <textarea name="remark" id="remark" rows="3"
+                            class="w-full rounded-lg border-gray-300 focus:ring-red-500 focus:border-red-500 text-sm"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="mt-4 w-full px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg shadow hover:bg-red-700 transition">
+                        <i class="bi bi-x-lg"></i>Reject
+                    </button>
+                </form>
+            </div>
+
+            <!-- Order & Documents -->
+            <div class="mt-5">
+                <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
+                    <i class="bi bi-folder2-open text-indigo-600"></i> Order & Documents
+                </h3>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="space-y-3">
+                        <label for="order_no" class="block text-sm font-medium text-gray-700">Order No</label>
+                        <input type="text" name="order_no" id="order_no"
+                            class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+
+                        <label for="docs" class="block text-sm font-medium text-gray-700">Upload Documents</label>
+                        <input type="file" name="docs[]" id="docs" multiple
+                            class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                    </div>
+
+                    <button type="submit"
+                        class="mt-4 w-full px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow hover:bg-indigo-700 transition">
+                        <i class="bi bi-upload"></i> Submit
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
+</div>

@@ -14,6 +14,8 @@ use App\Models\Occupation;
 use App\Models\Income;
 use App\Models\UploadDocument;
 use App\Models\PanelLawyer;
+use App\Models\Rejection;
+use App\Models\Doc;
 
 class LegalAidController extends Controller
 {
@@ -144,5 +146,58 @@ class LegalAidController extends Controller
         $applicant->save();
 
         return back()->with('success', 'Panel lawyer assigned successfully.');
+    }
+
+    public function rejectApplicant(Request $request, $id)
+    {
+        $request->validate([
+            'remark' => 'required|string|max:1000',
+        ]);
+
+        $applicant = Applicant::findOrFail($id);
+
+        // Create or update rejection record
+        $rejection = Rejection::updateOrCreate(
+            ['applicant_id' => $applicant->id],
+            [
+                'remark' => $request->remark,
+                'is_rejected' => true,
+            ]
+        );
+
+        // Update applicant status
+        $applicant->update([
+            'status' => 'rejected',
+            'panel_lawyer_id' => null, // remove lawyer if previously assigned
+        ]);
+
+        return back()->with('success', 'Applicant has been rejected successfully.');
+    }
+
+    public function storeOrderAndDocs(Request $request, $id)
+    {
+        $request->validate([
+            'order_no' => 'required|string|max:255',
+            'documents.*' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
+        ]);
+
+        $applicant = Applicant::findOrFail($id);
+
+        if ($applicant->status !== 'assigned') {
+            return back()->with('error', 'Order & documents can only be uploaded after lawyer is assigned.');
+        }
+
+        foreach ($request->file('documents') as $file) {
+            $path = $file->store('order_docs', 'public');
+
+            Doc::create([
+                'applicant_id'   => $applicant->id,
+                'order_no'       => $request->order_no,
+                'file_path'      => $path,
+                'original_name'  => $file->getClientOriginalName(),
+            ]);
+        }
+
+        return back()->with('success', 'Order and documents uploaded successfully.');
     }
 }
