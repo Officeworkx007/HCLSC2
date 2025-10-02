@@ -176,26 +176,34 @@ class LegalAidController extends Controller
 
     public function storeOrderAndDocs(Request $request, $id)
     {
+        // ✅ Validation
         $request->validate([
             'order_no' => 'required|string|max:255',
-            'documents.*' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
+            'docs' => 'required|array',
+            'docs.*' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
         ]);
 
+        // ✅ Fetch applicant
         $applicant = Applicant::findOrFail($id);
 
-        if ($applicant->status !== 'assigned') {
+        // ✅ Only allow upload if lawyer assigned
+        if ($applicant->status !== 'Assigned') {
             return back()->with('error', 'Order & documents can only be uploaded after lawyer is assigned.');
         }
 
-        foreach ($request->file('documents') as $file) {
-            $path = $file->store('order_docs', 'public');
+        // ✅ Handle each uploaded file correctly
+        $files = $request->file('docs'); // match input name "docs[]"
+        if ($files && count($files) > 0) {
+            foreach ($files as $file) {
+                $path = $file->store('order_docs', 'public');
 
-            Doc::create([
-                'applicant_id'   => $applicant->id,
-                'order_no'       => $request->order_no,
-                'file_path'      => $path,
-                'original_name'  => $file->getClientOriginalName(),
-            ]);
+                // ✅ Use the relationship to auto-fill applicant_id
+                $applicant->caseDocs()->create([
+                    'order_no'      => $request->order_no,
+                    'file_path'     => $path,
+                    'original_name' => $file->getClientOriginalName(),
+                ]);
+            }
         }
 
         return back()->with('success', 'Order and documents uploaded successfully.');

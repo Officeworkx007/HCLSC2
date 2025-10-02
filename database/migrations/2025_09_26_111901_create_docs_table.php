@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('docs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rejection_id')->constrained()->onDelete('cascade');
-            $table->string('file_path');
-            $table->string('original_name')->nullable();
+            $table->foreignId('applicant_id')->constrained()->onDelete('cascade'); // link to applicant
+             $table->string('order_no'); // added column for order number
+            $table->string('file_path'); // stored file path
+            $table->string('original_name')->nullable(); // original uploaded filename
             $table->timestamps();
         });
     }

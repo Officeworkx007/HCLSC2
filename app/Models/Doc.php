@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Doc extends Model
 {
-    protected $fillable = ['rejection_id', 'file_path', 'original_name'];
+    protected $fillable = [
+        'applicant_id',   // foreign key to applicant
+        'order_no',       // new column for the order number
+        'file_path',
+        'original_name',
+    ];
 
-    public function rejection()
+    public function applicant()
     {
-        return $this->belongsTo(Rejection::class);
+        return $this->belongsTo(Applicant::class);
     }
 }

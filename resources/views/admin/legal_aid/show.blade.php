@@ -189,7 +189,7 @@
                 <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
                     <i class="bi bi-folder2-open text-indigo-600"></i> Order & Documents
                 </h3>
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.legal_aid.storeOrderDocs', $applicant->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="space-y-3">
                         <label for="order_no" class="block text-sm font-medium text-gray-700">Order No</label>

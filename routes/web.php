@@ -37,8 +37,9 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adm
 Route::get('/admin/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
 Route::get('/admin/legal_aid/{applicant}', [LegalAidController::class, 'show'])->name('admin.legal_aid.show');
 Route::post('/admin/legal_aid/{id}/assign-lawyer', [LegalAidController::class, 'assignLawyer'])->name('admin.legal_aid.assignLawyer');
-// Reject applicant
-Route::post('/admin/legal_aid/{id}/reject', [LegalAidController::class, 'rejectApplicant'])->name('admin.legal_aid.reject');
+// Upload order documents after lawyer assignment
+Route::post('/admin/legal_aid/{id}/store-order-docs', [LegalAidController::class, 'storeOrderAndDocs'])
+    ->name('admin.legal_aid.storeOrderDocs');
 
 
 // Panel Lawyers

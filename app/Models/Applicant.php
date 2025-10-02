@@ -65,6 +65,14 @@ class Applicant extends Model
         return $this->hasMany(ApplicantDocument::class);
     }
 
+    /**
+     * Documents uploaded after lawyer assignment (orders, case files)
+     */
+    public function caseDocs()
+    {
+        return $this->hasMany(Doc::class, 'applicant_id');
+    }
+
     // ✅ New Relationship: Applicant → Panel Lawyer
     public function panelLawyer()
     {
