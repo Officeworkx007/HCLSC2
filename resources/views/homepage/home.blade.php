@@ -39,43 +39,28 @@
                     <h3 class="text-xl font-bold text-[#1E3A5F] mb-4 ml-24">Announcements</h3>
 
                     <div class="relative announcement-wrapper">
-                        <!-- Vertical Line (fixed inside the wrapper) -->
+                        <!-- Vertical Line -->
                         <div class="absolute left-4 top-0 bottom-0 w-[2px] bg-gray-300"></div>
 
-                        <!-- Scrolling list (NOTE: class name corrected) -->
+                        <!-- Dynamic Notices -->
                         <ul class="announcement-list">
-                            <!-- Item -->
-                            <li class="relative pl-12 pb-6 border-b border-gray-200">
-                                <span
-                                    class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
-                                <p class="text-[#A52A2A] font-semibold">Practice Direction</p>
-                                <p class="text-gray-700">Launch of Mediation Campaign – Notice (ENGLISH)</p>
-                                <span class="text-sm text-gray-500">23-08-2025</span>
-                            </li>
+                            @forelse($notices as $notice)
+                                <li class="relative pl-12 pb-6 border-b border-gray-200">
+                                    <span
+                                        class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
 
-                            <li class="relative pl-12 pb-6 border-b border-gray-200">
-                                <span
-                                    class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
-                                <p class="text-[#A52A2A] font-semibold">Practice Direction</p>
-                                <p class="text-gray-700">Launch of Mediation Campaign – Notice (MANIPURI)</p>
-                                <span class="text-sm text-gray-500">23-08-2025</span>
-                            </li>
+                                    <a href="{{ route('homepage.notice') }}"
+                                        class="text-gray-700 hover:underline block">
+                                        {{ Str::limit($notice->description, 80) }}
+                                    </a>
 
-                            <li class="relative pl-12 pb-6 border-b border-gray-200">
-                                <span
-                                    class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
-                                <p class="text-[#A52A2A] font-semibold">Notice</p>
-                                <p class="text-gray-700">Notice on Daily Sittings – 25.08.2025</p>
-                                <span class="text-sm text-gray-500">23-08-2025</span>
-                            </li>
-
-                            <li class="relative pl-12 pb-6 border-b border-gray-200">
-                                <span
-                                    class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
-                                <p class="text-[#A52A2A] font-semibold">Update</p>
-                                <p class="text-gray-700">Mediation Awareness Drive – Q4 2025</p>
-                                <span class="text-sm text-gray-500">22-08-2025</span>
-                            </li>
+                                    <span class="text-sm text-gray-500">
+                                        {{ \Carbon\Carbon::parse($notice->notice_date)->format('d-m-Y') }}
+                                    </span>
+                                </li>
+                            @empty
+                                <li class="pl-12 text-gray-500">No active announcements.</li>
+                            @endforelse
                         </ul>
                     </div>
                 </div>
@@ -229,7 +214,7 @@
                     </div>
                 </div>
 
-                <!-- Card 3s -->
+                <!-- Card 3 -->
                 <div class="flex flex-col items-center">
                     <article
                         class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
@@ -238,7 +223,9 @@
                         <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
                     </article>
                     <div class="mt-4 text-center">
-                        <h3 class="text-gray-900 text-xl font-semibold">Hon'ble Mr. Justice A. Guneshwar Sharma</h3>
+                        <h3 class="text-gray-900 text-xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
+                            Hon'ble Mr. Justice A. Guneshwar Sharma
+                        </h3>
                         <p class="text-gray-700 text-sm">Judge, High Court of Manipur</p>
                         <p class="text-gray-700 text-sm">Chairman, High Court Legal Services Committee</p>
                     </div>
@@ -404,7 +391,7 @@
             <!-- Button centered outside the grid -->
             <div class="flex justify-center mt-10">
                 <button
-                    class="px-6 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-gray-800 hover:bg-yellow-500">
+                    class="px-6 py-2 rounded-md shadow bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold">
                     Read More
                 </button>
             </div>
@@ -433,7 +420,8 @@
                     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
                     <div>
                         <div class="flex justify-center mb-3">
-                            <img src="/images/totalmediations.png" alt="Total Mediations Done" class="w-[200px] h-[160px]">
+                            <img src="/images/totalmediations.png" alt="Total Mediations Done"
+                                class="w-[200px] h-[160px]">
                         </div>
                         <p class="text-2xl font-bold text-gray-900">560</p>
                         <!-- <p class="text-blue-700">Total Mediations Completed</p> -->

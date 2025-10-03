@@ -10,7 +10,10 @@ class HomeController extends Controller
 {
     public function home()
     {
-        return view('homepage.home'); // path to your landing page blade
+        $notices = Notice::where('status', 1)
+            ->orderBy('notice_date', 'desc')
+            ->get();
+        return view('homepage.home', compact('notices')); // path to your landing page blade
     }
 
     public function circular()
