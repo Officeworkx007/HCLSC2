@@ -402,7 +402,7 @@
     <section class="py-12 bg-gray-50 pb-20 mt-[5rem]">
         <div class="container mx-auto px-4">
             <div class="text-start mb-12">
-                <span class="px-4 py-1 bg-yellow-200 text-gray-800 rounded-full text-sm font-medium">Statistics</span>
+                <span class="px-4 py-1 bg-yellow-200 text-gray-800 rounded-full text-xl font-medium">Statistics</span>
             </div>
 
             <!-- stats grid -->
