@@ -62,7 +62,7 @@
 
             <a href="{{ route('homepage.track') }}" class="hover:text-[#FFD700] whitespace-nowrap">Track your Form</a>
             <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Guidelines</a>
-            <a href="#" class="hover:text-[#FFD700] whitespace-nowrap">Contact Us</a>
+            <a href="{{ route('homepage.contactus') }}" class="hover:text-[#FFD700] whitespace-nowrap">Contact Us</a>
         </nav>
     </div>
 

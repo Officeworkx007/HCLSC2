@@ -23,4 +23,9 @@ class HomeController extends Controller
             ->get();
         return view('homepage.notice', compact('notices'));
     }
+
+    public function contact()
+    {
+        return view('homepage.contactus');
+    }
 }

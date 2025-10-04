@@ -14,6 +14,7 @@ Route::get('/', [HomeController::class, 'home'])->name('homepage.home');
 
 // Public Notice Board
 Route::get('/homepage/notice', [HomeController::class, 'circular'])->name('homepage.notice');
+Route::get('/homepage/contact', [HomeController::class, 'contact'])->name('homepage.contactus');
 
 //legal aid
 Route::get('/homepage', [LegalAidController::class, 'index'])->name('homepage.legalaid');
