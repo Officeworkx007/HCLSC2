@@ -338,60 +338,65 @@
         </div>
     </section>
 
-    <!-- apply section-->
-    <section class="py-12 mt-5 bg-gray-50 mt-[5rem]">
-        <div class="container mx-auto px-4">
+    <!-- Apply Section -->
+    <section class="py-12 bg-gray-50 mt-[5rem]">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Heading -->
             <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">
                 How to Apply for Legal Aid
             </h2>
 
             <!-- Grid for cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Card 1-->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
-                    <img src="/images/section1.png" alt="enter website" class="w-full h-64 object-cover">
+                <!-- Card 1 -->
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <img src="/images/section1.png" alt="Visit website" class="w-full h-56 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900">
-                            Visit the url www.hclscmanipur.in
+                        <h3 class="text-lg font-semibold text-blue-900 text-center">
+                            Visit the website www.hclscmanipur.in
                         </h3>
                     </div>
                 </div>
 
-                <!-- Card 2-->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
-                    <img src="/images/section2.png" alt="enter website" class="w-full h-64 object-cover">
+                <!-- Card 2 -->
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <img src="/images/section2.png" alt="Fill up form" class="w-full h-56 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900">
-                            Fill up the form by going to Apply
+                        <h3 class="text-lg font-semibold text-blue-900 text-center">
+                            Fill up the Legal Aid form under “Apply”
                         </h3>
                     </div>
                 </div>
 
-                <!-- Card 3-->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
-                    <img src="/images/section3.png" alt="enter website" class="w-full h-64 object-cover">
+                <!-- Card 3 -->
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <img src="/images/section3.png" alt="Track status" class="w-full h-56 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900">
-                            Track status of your Form using the id
+                        <h3 class="text-lg font-semibold text-blue-900 text-center">
+                            Track your application using your Form ID
                         </h3>
                     </div>
                 </div>
 
-                <!-- Card 4 (Optional, for balance if needed) -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm">
-                    <img src="/images/section4.png" alt="verification" class="w-full h-64 object-cover">
+                <!-- Card 4 -->
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <img src="/images/section4.png" alt="Verification" class="w-full h-56 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900">
-                            HCLSC staff will verify & assign lawyer
+                        <h3 class="text-lg font-semibold text-blue-900 text-center">
+                            HCLSC staff will verify & assign a lawyer
                         </h3>
                     </div>
                 </div>
             </div>
 
-            <!-- Button centered outside the grid -->
+            <!-- Button centered below grid -->
             <div class="flex justify-center mt-10">
                 <button
-                    class="px-6 py-2 rounded-md shadow bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold">
+                    class="px-8 py-2.5 rounded-md shadow bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold hover:from-yellow-500 hover:to-yellow-700 transition-all">
                     Read More
                 </button>
             </div>
@@ -399,53 +404,55 @@
     </section>
 
     <!-- Statistics Section -->
-    <section class="py-12 bg-gray-50 pb-20 mt-[5rem]">
-        <div class="container mx-auto px-4">
+    <section class="py-12 bg-gray-50 mt-[5rem]">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Heading (unchanged) -->
             <div class="text-start mb-12">
-                <span class="px-4 py-1 bg-yellow-200 text-gray-800 rounded-full text-xl font-medium">Statistics</span>
+                <span class="px-4 py-1 bg-yellow-200 text-gray-800 rounded-full text-xl font-medium">
+                    Statistics
+                </span>
             </div>
 
-            <!-- stats grid -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+
                 <!-- Panel Lawyers -->
                 <div>
-                    <div class="flex justify-center mb-3 space-x-2">
-                        <img src="/images/panellawyers.png" alt="Panel Lawyers" class="w-[200px] h-[160px]">
+                    <div class="flex justify-center mb-4">
+                        <img src="/images/panellawyers.png" alt="Panel Lawyers"
+                            class="w-[160px] h-[130px] object-contain">
                     </div>
-                    <p class="text-2xl font-bold text-gray-900">23</p>
-                    <!-- <p class="text-blue-700">Panel Lawyers</p> -->
-                </div>
-                <!-- Mediation done -->
-                <div>
-                    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-                    <div>
-                        <div class="flex justify-center mb-3">
-                            <img src="/images/totalmediations.png" alt="Total Mediations Done"
-                                class="w-[200px] h-[160px]">
-                        </div>
-                        <p class="text-2xl font-bold text-gray-900">560</p>
-                        <!-- <p class="text-blue-700">Total Mediations Completed</p> -->
-                    </div>
+                    <p class="text-3xl font-bold text-gray-900">23</p>
+                    <p class="text-blue-700 font-medium mt-1">Panel Lawyers</p>
                 </div>
 
+                <!-- Total Mediations Done -->
+                <div>
+                    <div class="flex justify-center mb-4">
+                        <img src="/images/totalmediations.png" alt="Total Mediations Done"
+                            class="w-[160px] h-[130px] object-contain">
+                    </div>
+                    <p class="text-3xl font-bold text-gray-900">560</p>
+                    <p class="text-blue-700 font-medium mt-1">Total Mediations Completed</p>
+                </div>
 
                 <!-- Successful Mediations -->
                 <div>
-                    <div class="flex justify-center mb-3">
-                        <img src="/images/successful.png" alt="Successful Mediations" class="w-[200px] h-[160px]">
+                    <div class="flex justify-center mb-4">
+                        <img src="/images/successful.png" alt="Successful Mediations"
+                            class="w-[160px] h-[130px] object-contain">
                     </div>
-                    <p class="text-2xl font-bold text-gray-900">10</p>
-                    <!-- <p class="text-green-700">Successful Mediations</p> -->
+                    <p class="text-3xl font-bold text-gray-900">10</p>
+                    <p class="text-green-700 font-medium mt-1">Successful Mediations</p>
                 </div>
 
                 <!-- Lok Adalats -->
                 <div>
-                    <div class="flex justify-center mb-3">
-                        <!-- Scales of Justice Icon -->
-                        <img src="/images/adalat.png" alt="Lok Adalat" class="w-[200px] h-[160px]">
+                    <div class="flex justify-center mb-4">
+                        <img src="/images/adalat.png" alt="Lok Adalat" class="w-[160px] h-[130px] object-contain">
                     </div>
-                    <p class="text-2xl font-bold text-gray-900">15</p>
-                    <!-- <p class="text-purple-700">Lok Adalat</p> -->
+                    <p class="text-3xl font-bold text-gray-900">15</p>
+                    <p class="text-purple-700 font-medium mt-1">Lok Adalats</p>
                 </div>
 
             </div>
@@ -473,10 +480,10 @@
             });
         });
 
-        // Duplicate announcements for seamless infinite scroll
+        // Announcement list
         const list = document.querySelector('.announcement-list');
-        if (list) {
-            list.innerHTML = list.innerHTML + list.innerHTML;
+        if (list && list.children.length >= 5) {
+            list.innerHTML += list.innerHTML;
         }
 
         //Drop down code
@@ -515,12 +522,9 @@
         .announcement-wrapper {
             position: relative;
             height: 420px;
-            /* matches your design */
             overflow: hidden;
-            /* clip the scrolling list */
         }
 
-        /* Optional: soft fade masks top/bottom for a cleaner loop look */
         .announcement-wrapper::before,
         .announcement-wrapper::after {
             content: "";
@@ -528,7 +532,6 @@
             left: 0;
             right: 0;
             height: 32px;
-            /* adjust to taste */
             pointer-events: none;
             z-index: 5;
         }
@@ -543,30 +546,28 @@
             background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
         }
 
-        /* Keyframes for bottom-to-top loop */
+        /* Correct bottom-to-top scroll loop */
         @keyframes scroll-up {
             0% {
-                transform: translateY(0);
+                transform: translateY(100%);
             }
 
             100% {
-                transform: translateY(-50%);
+                transform: translateY(-100%);
             }
-
-            /* move up by half after duplicating */
         }
 
-        /* The animated list */
         .announcement-list {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            /* equals your space-y-6 */
             will-change: transform;
-            animation: scroll-up 20s linear infinite;
+            animation: scroll-up 12s linear infinite;
+            transform: translateY(100%);
+            /* start from bottom */
         }
 
-        /* Pause on hover so users can read */
+        /* Pause on hover */
         .announcement-wrapper:hover .announcement-list {
             animation-play-state: paused;
         }

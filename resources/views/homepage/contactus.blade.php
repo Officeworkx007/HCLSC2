@@ -34,10 +34,8 @@
 
         <!-- Left Info -->
         <div>
-            <h2 class="text-2xl font-semibold mb-4">Always Here to Help You</h2>
-            <p class="text-gray-600 mb-8">There are many variations of passages of Lorem Ipsum available, but the
-                majority have suffered alteration in some form, by injected humor, or randomized words which don't look
-                even slightly believable.</p>
+            <h2 class="text-2xl font-semibold mb-4">✅ Always Here to Help You</h2>
+            <p class="text-gray-600 mb-8">We are dedicated to ensuring access to justice for all. For any assistance regarding legal aid, panel lawyers, or services offered by the High Court Legal Services Committee, please reach out through the contact details below</p>
 
             <div class="space-y-6">
                 <!-- Location -->
@@ -47,7 +45,7 @@
                     </div>
                     <div>
                         <h4 class="font-semibold">Location</h4>
-                        <p>4517 Washington Ave. Manchester, Kentucky 39495</p>
+                        <p>The Secretary, High Court Complex, Mantripukhri, Imphal, Manipur 795002.</p>
                     </div>
                 </div>
 
@@ -58,7 +56,7 @@
                     </div>
                     <div>
                         <h4 class="font-semibold">Contact</h4>
-                        <p>(603) 555-0128<br>(603) 555-0123</p>
+                        <p>+91 9615892598 / 0385-2911701</p>
                     </div>
                 </div>
 
@@ -69,7 +67,7 @@
                     </div>
                     <div>
                         <h4 class="font-semibold">Email</h4>
-                        <p>support@thefork.com</p>
+                        <p>hclscman@gmail.com</p>
                     </div>
                 </div>
 
@@ -80,7 +78,7 @@
                     </div>
                     <div>
                         <h4 class="font-semibold">Hours of Operation</h4>
-                        <p>Monday - Friday: 09.00 - 20.00<br>Sunday & Saturday: 10.30 - 22.30</p>
+                        <p>Monday - Friday: 10.00 am - 04.30 pm </p>
                     </div>
                 </div>
             </div>
@@ -88,7 +86,7 @@
 
         <!-- Right Form -->
         <div class="bg-white p-8 shadow-md rounded-2xl">
-            <h3 class="text-xl font-semibold mb-6">Ready To Get Started?</h3>
+            <h3 class="text-xl font-semibold mb-6">Fill up the form below</h3>
             <form class="space-y-4">
                 <input type="text" placeholder="John Doe"
                     class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -117,8 +115,10 @@
     <section class="px-6 pb-12">
         <div class="max-w-7xl mx-auto">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.689370783871!2d-118.24368318478857!3d34.05223448060524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c7b8f32f7d19%3A0xc16e0cce4425bc5!2sCalifornia!5e0!3m2!1sen!2sus!4v1615372488455!5m2!1sen!2sus"
-                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4294.978872691813!2d93.93998387592151!3d24.83670094620681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3749279c702e88d3%3A0x9c60a52603ac5f9d!2sHigh%20Court%20Complex%2C%20Mantripukhri%2C%20Chingmeirong%2C%20Imphal%2C%20Heingang%2C%20Manipur%20795001!5e1!3m2!1sen!2sin!4v1759728398906!5m2!1sen!2sin"
+                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
     </section>
 
