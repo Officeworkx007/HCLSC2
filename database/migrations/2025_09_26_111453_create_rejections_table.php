@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('rejections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('applicant_id')->constrained()->onDelete('cascade');
-            $table->string('order_no');
             $table->text('remark')->nullable();
             $table->boolean('is_rejected')->default(false);
             $table->timestamps();

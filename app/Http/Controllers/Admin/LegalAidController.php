@@ -94,7 +94,8 @@ class LegalAidController extends Controller
             'occupation',
             'income',
             'eligibilityCategory',
-            'documents.uploadDocument'
+            'documents.uploadDocument',
+            'rejection'
         ])->latest()->get();
 
         return view('admin.legal_aid.index', compact('applicants'));
@@ -165,9 +166,9 @@ class LegalAidController extends Controller
             ]
         );
 
-        // Update applicant status
+        // Update applicant status (consistent capitalization)
         $applicant->update([
-            'status' => 'rejected',
+            'status' => 'Rejected',
             'panel_lawyer_id' => null, // remove lawyer if previously assigned
         ]);
 

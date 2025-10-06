@@ -36,10 +36,10 @@
                             <th class="px-4 py-3 font-medium text-gray-600 w-40">Photo</th>
                             <td class="px-4 py-3">
                                 @if ($applicant->photo)
-                                <img src="{{ asset('storage/' . $applicant->photo) }}" alt="photo"
-                                    class="w-24 h-24 rounded-full object-cover border shadow-sm">
+                                    <img src="{{ asset('storage/' . $applicant->photo) }}" alt="photo"
+                                        class="w-24 h-24 rounded-full object-cover border shadow-sm">
                                 @else
-                                <span class="text-gray-400 italic">N/A</span>
+                                    <span class="text-gray-400 italic">N/A</span>
                                 @endif
                             </td>
                         </tr>
@@ -103,21 +103,21 @@
                             <th class="px-4 py-3">Documents</th>
                             <td class="px-4 py-3">
                                 @if ($applicant->documents->count())
-                                <ul class="space-y-2">
-                                    @foreach ($applicant->documents as $doc)
-                                    <li
-                                        class="flex items-center justify-between bg-gray-50 border rounded-md px-3 py-2">
-                                        <span
-                                            class="text-gray-800 font-medium text-sm">{{ $doc->uploadDocument?->name ?? 'Document' }}</span>
-                                        <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank"
-                                            class="text-indigo-600 hover:text-indigo-800 text-sm flex items-center gap-1">
-                                            <i class="bi bi-box-arrow-up-right"></i> View
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
+                                    <ul class="space-y-2">
+                                        @foreach ($applicant->documents as $doc)
+                                            <li
+                                                class="flex items-center justify-between bg-gray-50 border rounded-md px-3 py-2">
+                                                <span
+                                                    class="text-gray-800 font-medium text-sm">{{ $doc->uploadDocument?->name ?? 'Document' }}</span>
+                                                <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank"
+                                                    class="text-indigo-600 hover:text-indigo-800 text-sm flex items-center gap-1">
+                                                    <i class="bi bi-box-arrow-up-right"></i> View
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 @else
-                                <span class="text-gray-400 italic text-sm">No docs</span>
+                                    <span class="text-gray-400 italic text-sm">No docs</span>
                                 @endif
                             </td>
                         </tr>
@@ -148,10 +148,10 @@
                             class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                             <option value="">-- Choose Lawyer --</option>
                             @foreach ($panelLawyers as $lawyer)
-                            <option value="{{ $lawyer->id }}"
-                                {{ $applicant->panel_lawyer_id == $lawyer->id ? 'selected' : '' }}>
-                                {{ $lawyer->first_name }} {{ $lawyer->last_name }}
-                            </option>
+                                <option value="{{ $lawyer->id }}"
+                                    {{ $applicant->panel_lawyer_id == $lawyer->id ? 'selected' : '' }}>
+                                    {{ $lawyer->first_name }} {{ $lawyer->last_name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -169,67 +169,75 @@
                     <i class="bi bi-x-circle text-red-600"></i> Reject Case
                 </h3>
 
-                <form action="#" method="POST">
+                <form action="{{ route('admin.legal_aid.rejectApplicant', $applicant->id) }}" method="POST"
+                    onsubmit="return confirm('Are you sure you want to reject this applicant? This action can be reversed by admin later.')">
                     @csrf
+
                     <div class="space-y-3">
                         <label for="remark" class="block text-sm font-medium text-gray-700">Remark</label>
-                        <textarea name="remark" id="remark" rows="3"
+                        <textarea name="remark" id="remark" rows="3" required
                             class="w-full rounded-lg border-gray-300 focus:ring-red-500 focus:border-red-500 text-sm"></textarea>
                     </div>
 
                     <button type="submit"
                         class="mt-4 w-full px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg shadow hover:bg-red-700 transition">
-                        <i class="bi bi-x-lg"></i>Reject
+                        <i class="bi bi-x-lg"></i> Reject
                     </button>
                 </form>
             </div>
 
             <!-- Previously Uploaded Orders & Documents (compact, fits inside the card) -->
-            @if($applicant->caseDocs->count() > 0)
-            <div class="mb-6">
-                <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                    <i class="bi bi-archive text-indigo-600"></i>
-                   Uploaded Orders
-                </h4>
+            @if ($applicant->caseDocs->count() > 0)
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <i class="bi bi-archive text-indigo-600"></i>
+                        Uploaded Orders
+                    </h4>
 
-                <!-- fixed-height scroll area so long lists don't stretch the card -->
-                <div class="max-h-56 overflow-y-auto space-y-3 pr-1">
-                    @foreach($applicant->caseDocs as $doc)
-                    <div class="flex items-start justify-between bg-gray-50 p-3 rounded-lg border border-gray-100">
-                        <!-- left: icon + details (use min-w-0 so truncation works) -->
-                        <div class="flex items-start gap-3 min-w-0">
-                            @php
-                            $ext = pathinfo($doc->original_name, PATHINFO_EXTENSION);
-                            $icon = 'bi-file-earmark';
-                            if(in_array(strtolower($ext), ['pdf'])) $icon = 'bi-file-earmark-pdf text-red-500';
-                            elseif(in_array(strtolower($ext), ['doc','docx'])) $icon = 'bi-file-earmark-word text-blue-500';
-                            elseif(in_array(strtolower($ext), ['jpg','jpeg','png','gif'])) $icon = 'bi-file-earmark-image text-green-500';
-                            @endphp
+                    <!-- fixed-height scroll area so long lists don't stretch the card -->
+                    <div class="max-h-56 overflow-y-auto space-y-3 pr-1">
+                        @foreach ($applicant->caseDocs as $doc)
+                            <div
+                                class="flex items-start justify-between bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                <!-- left: icon + details (use min-w-0 so truncation works) -->
+                                <div class="flex items-start gap-3 min-w-0">
+                                    @php
+                                        $ext = pathinfo($doc->original_name, PATHINFO_EXTENSION);
+                                        $icon = 'bi-file-earmark';
+                                        if (in_array(strtolower($ext), ['pdf'])) {
+                                            $icon = 'bi-file-earmark-pdf text-red-500';
+                                        } elseif (in_array(strtolower($ext), ['doc', 'docx'])) {
+                                            $icon = 'bi-file-earmark-word text-blue-500';
+                                        } elseif (in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif'])) {
+                                            $icon = 'bi-file-earmark-image text-green-500';
+                                        }
+                                    @endphp
 
-                            <i class="bi {{ $icon }} text-2xl flex-shrink-0 mt-0.5"></i>
+                                    <i class="bi {{ $icon }} text-2xl flex-shrink-0 mt-0.5"></i>
 
-                            <div class="min-w-0">
-                                <p class="text-xs text-gray-500">Order No</p>
-                                <p class="text-sm font-medium text-gray-700 break-words">{{ $doc->order_no }}</p>
+                                    <div class="min-w-0">
+                                        <p class="text-xs text-gray-500">Order No</p>
+                                        <p class="text-sm font-medium text-gray-700 break-words">{{ $doc->order_no }}
+                                        </p>
 
-                                <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank"
-                                    class="text-indigo-600 hover:text-indigo-800 text-sm truncate block mt-1"
-                                    title="{{ $doc->original_name }}">
-                                    <i class="bi bi-box-arrow-up-right mr-1"></i>
-                                    {{ $doc->original_name }}
-                                </a>
+                                        <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank"
+                                            class="text-indigo-600 hover:text-indigo-800 text-sm truncate block mt-1"
+                                            title="{{ $doc->original_name }}">
+                                            <i class="bi bi-box-arrow-up-right mr-1"></i>
+                                            {{ $doc->original_name }}
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- right: small meta (date + id) -->
+                                <div class="text-right flex-shrink-0 ml-3">
+                                    <p class="text-xs text-gray-400">{{ $doc->created_at->format('d M, Y') }}</p>
+                                    <p class="text-xs text-gray-400">#{{ $doc->id }}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- right: small meta (date + id) -->
-                        <div class="text-right flex-shrink-0 ml-3">
-                            <p class="text-xs text-gray-400">{{ $doc->created_at->format('d M, Y') }}</p>
-                            <p class="text-xs text-gray-400">#{{ $doc->id }}</p>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
             @endif
 
             <!-- Order & Documents Form -->
@@ -237,7 +245,8 @@
                 <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
                     <i class="bi bi-folder2-open text-indigo-600"></i> Upload New Order & Documents
                 </h3>
-                <form action="{{ route('admin.legal_aid.storeOrderDocs', $applicant->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.legal_aid.storeOrderDocs', $applicant->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="space-y-3">
                         <label for="order_no" class="block text-sm font-medium text-gray-700">Order No</label>

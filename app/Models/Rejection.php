@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rejection extends Model
 {
-    protected $fillable = ['applicant_id', 'order_no', 'remark', 'is_rejected'];
+    protected $fillable = ['applicant_id', 'remark', 'is_rejected'];
 
     public function applicant()
     {

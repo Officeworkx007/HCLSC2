@@ -41,6 +41,9 @@ Route::post('/admin/legal_aid/{id}/assign-lawyer', [LegalAidController::class, '
 // Upload order documents after lawyer assignment
 Route::post('/admin/legal_aid/{id}/store-order-docs', [LegalAidController::class, 'storeOrderAndDocs'])
     ->name('admin.legal_aid.storeOrderDocs');
+// Reject applicant
+Route::post('/admin/legal-aid/{id}/reject', [LegalAidController::class, 'rejectApplicant'])
+    ->name('admin.legal_aid.rejectApplicant');
 
 
 // Panel Lawyers

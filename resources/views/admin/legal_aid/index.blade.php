@@ -19,6 +19,7 @@
                         <th class="px-4 py-3 border-b">Email</th>
                         <th class="px-4 py-3 border-b">Created At</th>
                         <th class="px-4 py-3 border-b">Status</th>
+                        <th class="px-4 py-3 border-b">Remark</th>
                         <th class="px-4 py-3 border-b">Assigned Panel Lawyer</th>
                         <th class="px-4 py-3 border-b">View Details</th>
                         <th class="px-4 py-3 border-b">Actions</th>
@@ -43,26 +44,44 @@
 
                             {{-- Status Badge --}}
                             <td class="px-4 py-3">
-                                @if ($applicant->status === 'Assigned')
-                                    <span
-                                        class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">Assigned</span>
-                                @elseif ($applicant->status === 'Rejected')
-                                    <span
-                                        class="px-2 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded">Rejected</span>
+                                @php $status = ucfirst($applicant->status); @endphp
+                                @if ($status == 'Rejected')
+                                    <span class="inline-block px-3 py-1 rounded-full font-semibold !text-red-700 !bg-red-100">
+                                        {{ $status }}
+                                    </span>
+                                @elseif ($status == 'Approved')
+                                    <span class="inline-block px-3 py-1 rounded-full font-semibold text-green-700 bg-green-100">
+                                        {{ $status }}
+                                    </span>
+                                @elseif ($status == 'Pending')
+                                    <span class="inline-block px-3 py-1 rounded-full font-semibold text-yellow-700 bg-yellow-100">
+                                        {{ $status }}
+                                    </span>
                                 @else
-                                    <span
-                                        class="px-2 py-1 bg-gray-100 text-yellow-600 text-xs font-semibold rounded">Pending</span>
+                                    <span class="inline-block px-3 py-1 rounded-full font-semibold text-gray-700 bg-gray-100">
+                                        {{ $status }}
+                                    </span>
                                 @endif
                             </td>
 
-                            {{-- Assigned Panel Lawyer --}} <td class="px-4 py-3">
-                            @if ($applicant->panelLawyer)
-                                <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">
-                                    {{ $applicant->panelLawyer->first_name }} {{ $applicant->panelLawyer->last_name }}
-                                </span>
-                            @else
-                                <span class="italic text-gray-500 text-xs">Not assigned yet</span>
-                            @endif
+                            {{-- Remark --}}
+                            <td class="px-4 py-3 text-sm text-gray-600 italic">
+                                @if($applicant->rejection)
+                                    {{ $applicant->rejection->remark }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+
+                            {{-- Assigned Panel Lawyer --}}
+                            <td class="px-4 py-3">
+                                @if ($applicant->panelLawyer)
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">
+                                        {{ $applicant->panelLawyer->first_name }} {{ $applicant->panelLawyer->last_name }}
+                                    </span>
+                                @else
+                                    <span class="italic text-gray-500 text-xs">Not assigned yet</span>
+                                @endif
                             </td>
 
                             {{-- View Details Button --}}
@@ -74,7 +93,7 @@
                                 </a>
                             </td>
 
-                            {{-- Quick Actions (optional, keep minimal) --}}
+                            {{-- Quick Actions --}}
                             <td class="px-4 py-3 space-x-3">
                                 <form action="" method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this application?');">
@@ -90,7 +109,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="px-4 py-6 text-center text-gray-500">No applications found</td>
+                            <td colspan="11" class="px-4 py-6 text-center text-gray-500">No applications found</td>
                         </tr>
                     @endforelse
                 </tbody>
