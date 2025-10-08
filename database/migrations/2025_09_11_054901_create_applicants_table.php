@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('number', 15)->nullable();
             $table->string('email')->nullable();
-            $table->string('token_number')->unique();
+            $table->string('token_number')->nullable()->unique();
             $table->string('status')->default('Pending');
 
             // Foreign keys for dropdowns

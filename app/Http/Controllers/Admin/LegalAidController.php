@@ -37,7 +37,7 @@ class LegalAidController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'photo' => 'nullable|image|max:2048',
-            'upload_documents.*' => 'nullable|integer|exists:upload_documents,id', // <-- fixed table name
+            'upload_documents.*' => 'nullable|integer|exists:upload_documents,id',
             'document_files.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
         ]);
 
@@ -57,31 +57,50 @@ class LegalAidController extends Controller
         $applicant->income_id = $request->income;
         $applicant->eligibility_category_id = $request->eligibility_category;
 
+        // ✅ Save photo if uploaded
         if ($request->hasFile('photo')) {
             $applicant->photo = $request->file('photo')->store('applicants/photos', 'public');
         }
 
-        // 🔹 Generate token after save
-        $token = strtoupper('HCLSC' . now()->format('Ymd') . Str::random(6));
-        $applicant->token_number = $token;
+        // ✅ Save the applicant first (needed for ID-based token)
         $applicant->save();
 
-        // Handle document uploads
+        // ✅ Generate a structured token number: HCLSC2025-00001
+        $year = now()->year;
+        $lastApplicant = Applicant::whereYear('created_at', $year)
+            ->whereNotNull('token_number')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // Extract last number if exists, else start at 1
+        if ($lastApplicant && preg_match('/HCLSC' . $year . '-(\d+)/', $lastApplicant->token_number, $matches)) {
+            $nextNumber = intval($matches[1]) + 1;
+        } else {
+            $nextNumber = 1;
+        }
+
+        $token = 'HCLSC' . $year . '-' . str_pad($nextNumber, 5, '0', STR_PAD_LEFT);
+
+        // ✅ Update applicant with the token number
+        $applicant->update(['token_number' => $token]);
+
+        // ✅ Handle document uploads
         if ($request->has('upload_documents')) {
             foreach ($request->upload_documents as $index => $documentId) {
                 if ($documentId && isset($request->document_files[$index])) {
                     $filePath = $request->file('document_files')[$index]->store('applicants/documents', 'public');
 
                     $applicant->documents()->create([
-                        'upload_document_id' => $documentId, // <-- use this exact column name
+                        'upload_document_id' => $documentId,
                         'file_path' => $filePath,
                     ]);
                 }
             }
         }
 
-        return redirect()->route('homepage.track', $applicant->token_number)
-            ->with('success', 'Applicant created successfully!')
+        // ✅ Redirect to tracking page with token number
+        return redirect()->route('homepage.track', ['token' => $applicant->token_number])
+            ->with('success', 'Application submitted successfully!')
             ->with('token_number', $applicant->token_number);
     }
 

@@ -186,6 +186,16 @@
                 </form>
             </div>
 
+            <!-- Revert Case Button -->
+            <form action="" method="POST"
+                onsubmit="return confirm('Are you sure you want to revert this applicant status?')">
+                @csrf
+                <button type="submit"
+                    class="mt-3 w-full px-4 py-2 bg-yellow-500 text-white text-sm font-medium rounded-lg shadow hover:bg-yellow-600 transition">
+                    <i class="bi bi-arrow-counterclockwise"></i> Revert Case
+                </button>
+            </form>
+
             <!-- Previously Uploaded Orders & Documents (compact, fits inside the card) -->
             @if ($applicant->caseDocs->count() > 0)
                 <div class="mb-6">
