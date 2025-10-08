@@ -187,7 +187,7 @@
             </div>
 
             <!-- Revert Case Button -->
-            <form action="" method="POST"
+            <form action="{{ route('admin.legal_aid.revertApplicant', $applicant->id) }}" method="POST"
                 onsubmit="return confirm('Are you sure you want to revert this applicant status?')">
                 @csrf
                 <button type="submit"

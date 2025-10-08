@@ -157,15 +157,25 @@ class LegalAidController extends Controller
     public function assignLawyer(Request $request, $id)
     {
         $request->validate([
-            'panel_lawyer_id' => 'required|exists:panel_lawyers,id',
+            'panel_lawyer_id' => 'nullable|exists:panel_lawyers,id',
         ]);
 
         $applicant = Applicant::findOrFail($id);
-        $applicant->panel_lawyer_id = $request->panel_lawyer_id;
-        $applicant->status = 'Assigned';
+
+        if ($request->panel_lawyer_id) {
+            $applicant->panel_lawyer_id = $request->panel_lawyer_id;
+            $applicant->status = 'Assigned';
+        } else {
+            // ✅ “None” selected → revert to pending
+            $applicant->panel_lawyer_id = null;
+            $applicant->status = 'Pending';
+        }
+
         $applicant->save();
 
-        return back()->with('success', 'Panel lawyer assigned successfully.');
+        return back()->with('success', $request->panel_lawyer_id
+            ? 'Panel lawyer assigned successfully.'
+            : 'Case reverted to Pending.');
     }
 
     public function rejectApplicant(Request $request, $id)
@@ -192,6 +202,27 @@ class LegalAidController extends Controller
         ]);
 
         return back()->with('success', 'Applicant has been rejected successfully.');
+    }
+
+    public function revertApplicant($id)
+    {
+        $applicant = Applicant::findOrFail($id);
+
+        // ✅ Update applicant status back to Pending
+        $applicant->update([
+            'status' => 'Pending',
+            'panel_lawyer_id' => null,
+        ]);
+
+        // ✅ Clear rejection remark and mark as not rejected
+        if ($applicant->rejection) {
+            $applicant->rejection->update([
+                'is_rejected' => false,
+                'remark' => null, // 🧹 clears the previous rejection note
+            ]);
+        }
+
+        return back()->with('success', 'Applicant status reverted to Pending and remarks cleared successfully.');
     }
 
     public function storeOrderAndDocs(Request $request, $id)

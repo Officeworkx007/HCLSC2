@@ -44,6 +44,9 @@ Route::post('/admin/legal_aid/{id}/store-order-docs', [LegalAidController::class
 // Reject applicant
 Route::post('/admin/legal-aid/{id}/reject', [LegalAidController::class, 'rejectApplicant'])
     ->name('admin.legal_aid.rejectApplicant');
+// Reverting rejection case
+Route::post('/legal-aid/{id}/revert', [LegalAidController::class, 'revertApplicant'])
+    ->name('admin.legal_aid.revertApplicant');
 
 
 // Panel Lawyers
