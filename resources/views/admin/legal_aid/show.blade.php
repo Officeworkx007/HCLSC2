@@ -146,7 +146,7 @@
                             Lawyer</label>
                         <select name="panel_lawyer_id" id="panel_lawyer_id"
                             class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                            <option value="">-- Choose Lawyer --</option>
+                            <option value="">-- None / Pending --</option> <!-- This is the key -->
                             @foreach ($panelLawyers as $lawyer)
                                 <option value="{{ $lawyer->id }}"
                                     {{ $applicant->panel_lawyer_id == $lawyer->id ? 'selected' : '' }}>

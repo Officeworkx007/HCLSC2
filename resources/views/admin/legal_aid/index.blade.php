@@ -44,29 +44,23 @@
 
                             {{-- Status Badge --}}
                             <td class="px-4 py-3">
-                                @php $status = ucfirst($applicant->status); @endphp
-                                @if ($status == 'Rejected')
-                                    <span class="inline-block px-3 py-1 rounded-full font-semibold !text-red-700 !bg-red-100">
-                                        {{ $status }}
-                                    </span>
-                                @elseif ($status == 'Approved')
-                                    <span class="inline-block px-3 py-1 rounded-full font-semibold text-green-700 bg-green-100">
-                                        {{ $status }}
-                                    </span>
-                                @elseif ($status == 'Pending')
-                                    <span class="inline-block px-3 py-1 rounded-full font-semibold text-yellow-700 bg-yellow-100">
-                                        {{ $status }}
-                                    </span>
-                                @else
-                                    <span class="inline-block px-3 py-1 rounded-full font-semibold text-gray-700 bg-gray-100">
-                                        {{ $status }}
-                                    </span>
-                                @endif
+                                @php
+                                    $status = ucfirst($applicant->status);
+                                    $badgeClasses = match ($status) {
+                                        'Pending' => 'text-yellow-800 bg-yellow-100',
+                                        'Rejected' => 'text-red-800 bg-red-100',
+                                        'Assigned' => 'text-teal-800 bg-teal-100',
+                                    };
+                                @endphp
+
+                                <span class="inline-block px-3 py-1 rounded-md font-semibold shadow-sm {{ $badgeClasses }}">
+                                    {{ $status }}
+                                </span>
                             </td>
 
                             {{-- Remark --}}
                             <td class="px-4 py-3 text-sm text-gray-600 italic">
-                                @if($applicant->rejection)
+                                @if ($applicant->rejection)
                                     {{ $applicant->rejection->remark }}
                                 @else
                                     -
