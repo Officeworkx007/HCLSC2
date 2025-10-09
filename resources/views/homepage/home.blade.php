@@ -16,54 +16,23 @@
 
     @include('homepage.layouts.header')
 
-    <section class="relative w-full h-[560px] bg-white">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch h-full">
+    <section class="relative w-full h-[560px] bg-cover bg-center" style="background-image: url('/images/home.jpeg');">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50"></div>
 
-            <!-- Left Section -->
-            <div class="w-full md:w-1/2 flex flex-col justify-center px-10 md:px-16 py-12">
-                <h2 class="text-4xl font-bold text-[#1E3A5F] leading-snug">
-                    Mediation for the Nation
-                </h2>
-                <p class="mt-4 text-lg text-[#1E3A5F]/80 max-w-md">
-                    Because every dispute deserves a fair, timely, and peaceful solution.
-                </p>
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12">
+            <h2 class="text-5xl font-bold text-white leading-tight drop-shadow-lg">
+                Mediation for the Nation
+            </h2>
+            <p class="mt-4 text-lg text-gray-200 max-w-xl">
+                Because every dispute deserves a fair, timely, and peaceful solution.
+            </p>
+            <div class="mt-6 flex gap-4">
                 <button
-                    class="mt-6 bg-[#A52A2A] text-white text-sm font-semibold px-5 py-2 rounded-full shadow hover:bg-[#8B0000] transition">
+                    class="bg-[#A52A2A] text-white text-sm font-semibold px-6 py-2.5 rounded-full shadow-lg hover:bg-[#8B0000] transition">
                     Read More
                 </button>
-            </div>
-
-            <!-- Right Section (Announcements) -->
-            <div class="w-full md:w-1/2 flex justify-end">
-                <div class="flex flex-col items-start w-full md:w-[90%] lg:w-[75%] mt-4 pl-32">
-                    <h3 class="text-xl font-bold text-[#1E3A5F] mb-4 ml-24">Announcements</h3>
-
-                    <div class="relative announcement-wrapper">
-                        <!-- Vertical Line -->
-                        <div class="absolute left-4 top-0 bottom-0 w-[2px] bg-gray-300"></div>
-
-                        <!-- Dynamic Notices -->
-                        <ul class="announcement-list">
-                            @forelse($notices as $notice)
-                                <li class="relative pl-12 pb-6 border-b border-gray-200">
-                                    <span
-                                        class="absolute left-2 top-2 w-4 h-4 rounded-full bg-[#A52A2A] border-2 border-white"></span>
-
-                                    <a href="{{ route('homepage.notice') }}"
-                                        class="text-gray-700 hover:underline block">
-                                        {{ Str::limit($notice->description, 80) }}
-                                    </a>
-
-                                    <span class="text-sm text-gray-500">
-                                        {{ \Carbon\Carbon::parse($notice->notice_date)->format('d-m-Y') }}
-                                    </span>
-                                </li>
-                            @empty
-                                <li class="pl-12 text-gray-500">No active announcements.</li>
-                            @endforelse
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -170,64 +139,60 @@
         </div>
     </section>
 
-
     <!-- Judges / Testimonials -->
-    <section class="bg-gray-50 py-12 justify-items-center mt-[5rem]">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 justify-items-center">
+    <section class="bg-gradient-to-b from-gray-50 to-white py-16 mt-[5rem]">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <!-- Section Title -->
+            <h2 class="text-3xl font-bold text-gray-900 mb-14 tracking-tight">
+                Hon’ble Judges
+            </h2>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
 
                 <!-- Card 1 -->
-                <div class="flex flex-col items-center">
-                    <article
-                        class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
-                        <!-- Background image -->
-                        <img src="/images/Chief Justice M Sundar.jpg" alt="Hon'ble Chief Justice M Sundar"
-                            class="absolute inset-0 w-full h-full object-contain scale-150">
-
-                        <!-- Gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
-                    </article>
-                    <!-- Content below the card -->
-                    <div class="mt-4 text-center">
-                        <h3 class="text-gray-900 text-xl font-semibold">Hon'ble Mr. Chief Justice M Sundar</h3>
-                        <p class="text-gray-700 text-sm">Judge, High Court of Manipur</p>
-                        <p class="text-gray-700 text-sm">Patron-in-Chief, High Court Legal Services Committee</p>
+                <div
+                    class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
+                    <!-- Image -->
+                    <img src="/images/Chief Justice M Sundar.jpg" alt="Hon'ble Chief Justice M Sundar"
+                        class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
+                    <!-- Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                    <!-- Content -->
+                    <div class="absolute bottom-0 p-6 text-white text-center">
+                        <h3 class="text-xl font-semibold">Hon'ble Mr. Chief Justice M Sundar</h3>
+                        <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
+                        <p class="text-sm opacity-90 mt-1">Patron-in-Chief, High Court Legal Services Committee</p>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="flex flex-col items-center">
-                    <article
-                        class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
-                        <!-- Background image -->
-                        <img src="/images/A Bimol Singh.jpg" alt="Hon'ble Mr. Justice A. Bimol Singh"
-                            class="absolute inset-0 w-full h-full object-contain scale-110">
-
-                        <!-- Gradient overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
-                    </article>
-                    <!-- Content below the card -->
-                    <div class="mt-4 text-center">
-                        <h3 class="text-gray-900 text-xl font-semibold">Hon'ble Mr. Justice A. Bimol Singh</h3>
-                        <p class="text-gray-700 text-sm">Judge, High Court of Manipur</p>
-                        <p class="text-gray-700 text-sm">Executive Chairman, Manipur State Legal Services Authority</p>
+                <div
+                    class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
+                    <img src="/images/A Bimol Singh.jpg" alt="Hon'ble Mr. Justice A. Bimol Singh"
+                        class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 p-6 text-white text-center">
+                        <h3 class="text-xl font-semibold">Hon'ble Mr. Justice A. Bimol Singh</h3>
+                        <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
+                        <p class="text-sm opacity-90 mt-1">Executive Chairman, Manipur State Legal Services Authority
+                        </p>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="flex flex-col items-center">
-                    <article
-                        class="relative h-[28rem] w-[22rem] rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 transition hover:shadow-2xl">
-                        <img src="/images/Justice A. Guneshwar Sharma.jpg" alt="Hon'ble Justice Name"
-                            class="absolute inset-0 w-full h-full object-cover object-top scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80"></div>
-                    </article>
-                    <div class="mt-4 text-center">
-                        <h3 class="text-gray-900 text-xl font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
+                <div
+                    class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
+                    <img src="/images/Justice A. Guneshwar Sharma.jpg" alt="Hon'ble Justice Name"
+                        class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 p-6 text-white text-center">
+                        <h3 class="text-xl font-semibold">
                             Hon'ble Mr. Justice A. Guneshwar Sharma
                         </h3>
-                        <p class="text-gray-700 text-sm">Judge, High Court of Manipur</p>
-                        <p class="text-gray-700 text-sm">Chairman, High Court Legal Services Committee</p>
+                        <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
+                        <p class="text-sm opacity-90 mt-1">Chairman, High Court Legal Services Committee</p>
                     </div>
                 </div>
 
@@ -256,8 +221,7 @@
                 <div id="scrollContainer" class="flex overflow-x-auto gap-6 scrollbar-hide scroll-smooth mt-5">
 
                     <!-- Card 1 -->
-                    <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
+                    <div class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
                         <div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-4">
                             <span class="text-3xl">🪶</span>
                         </div>
@@ -404,60 +368,56 @@
     </section>
 
     <!-- Statistics Section -->
-    <section class="py-12 bg-gray-50 mt-[5rem]">
-        <div class="max-w-7xl mx-auto px-6">
-            <!-- Heading (unchanged) -->
-            <div class="text-start mb-12">
-                <span class="px-4 py-1 bg-yellow-200 text-gray-800 rounded-full text-xl font-medium">
+    <section class="relative bg-white py-16 mt-20 shadow-sm overflow-hidden">
+        <!-- Optional Background Illustration (light city-like background effect) -->
+        <div class="absolute inset-0 opacity-10 bg-[url('/images/statcard.png')] bg-center bg-cover"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Heading -->
+            <div class="text-center mb-12">
+                <span class="px-6 py-2 bg-yellow-200 text-gray-800 rounded-full text-xl font-semibold">
                     Statistics
                 </span>
             </div>
 
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
 
                 <!-- Panel Lawyers -->
-                <div>
-                    <div class="flex justify-center mb-4">
-                        <img src="/images/panellawyers.png" alt="Panel Lawyers"
-                            class="w-[160px] h-[130px] object-contain">
-                    </div>
-                    <p class="text-3xl font-bold text-gray-900">23</p>
-                    <p class="text-blue-700 font-medium mt-1">Panel Lawyers</p>
+                <div class="flex flex-col items-center">
+                    <img src="/images/panellawyers.png" alt="Panel Lawyers"
+                        class="w-[170px] h-[140px] mb-6 object-contain">
+                    <p class="text-5xl font-extrabold text-green-600">23</p>
+                    <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Panel Lawyers</p>
                 </div>
 
                 <!-- Total Mediations Done -->
-                <div>
-                    <div class="flex justify-center mb-4">
-                        <img src="/images/totalmediations.png" alt="Total Mediations Done"
-                            class="w-[160px] h-[130px] object-contain">
-                    </div>
-                    <p class="text-3xl font-bold text-gray-900">560</p>
-                    <p class="text-blue-700 font-medium mt-1">Total Mediations Completed</p>
+                <div class="flex flex-col items-center">
+                    <img src="/images/totalmediations.png" alt="Total Mediations"
+                        class="w-[170px] h-[140px] mb-6 object-contain">
+                    <p class="text-5xl font-extrabold text-green-600">560</p>
+                    <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Mediations Completed</p>
                 </div>
 
                 <!-- Successful Mediations -->
-                <div>
-                    <div class="flex justify-center mb-4">
-                        <img src="/images/successful.png" alt="Successful Mediations"
-                            class="w-[160px] h-[130px] object-contain">
-                    </div>
-                    <p class="text-3xl font-bold text-gray-900">10</p>
-                    <p class="text-green-700 font-medium mt-1">Successful Mediations</p>
+                <div class="flex flex-col items-center">
+                    <img src="/images/successful.png" alt="Successful Mediations"
+                        class="w-[170px] h-[140px] mb-6 object-contain">
+                    <p class="text-5xl font-extrabold text-green-600">10</p>
+                    <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Successful Mediations</p>
                 </div>
 
                 <!-- Lok Adalats -->
-                <div>
-                    <div class="flex justify-center mb-4">
-                        <img src="/images/adalat.png" alt="Lok Adalat" class="w-[160px] h-[130px] object-contain">
-                    </div>
-                    <p class="text-3xl font-bold text-gray-900">15</p>
-                    <p class="text-purple-700 font-medium mt-1">Lok Adalats</p>
+                <div class="flex flex-col items-center">
+                    <img src="/images/adalat.png" alt="Lok Adalat" class="w-[170px] h-[140px] mb-6 object-contain">
+                    <p class="text-5xl font-extrabold text-green-600">15</p>
+                    <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Lok Adalats</p>
                 </div>
 
             </div>
         </div>
     </section>
+
 
     @include('homepage.layouts.footer')
 
