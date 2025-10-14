@@ -1,4 +1,4 @@
-<footer class="bg-blue-900 text-slate-300 mt-[5rem]">
+<footer class="bg-gradient-to-b from-[#0A2240] to-[#102C57] text-slate-300 mt-[5rem]">
     <div class="max-w-7xl mx-auto px-6">
         <!-- Top -->
         <div class="py-12 md:py-16 flex flex-wrap items-start gap-10">

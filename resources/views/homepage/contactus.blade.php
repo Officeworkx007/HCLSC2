@@ -20,15 +20,6 @@
 <body class="min-h-screen bg-gray-100 flex flex-col">
     @include('homepage.layouts.header')
 
-    <!-- Hero Section -->
-    <section
-        class="bg-cover bg-center bg[url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1470&q=80')] h-48 flex items-center justify-center relative">
-        <div class="absolute inset-0 bg-black/50"></div>
-        <div class="relative text-center text-white">
-            <h1 class="text-3xl font-semibold">Contact Us</h1>
-        </div>
-    </section>
-
     <!-- Contact Info & Form -->
     <section class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12">
 

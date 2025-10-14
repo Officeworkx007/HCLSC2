@@ -28,4 +28,9 @@ class HomeController extends Controller
     {
         return view('homepage.contactus');
     }
+
+    public function hclscintro()
+    {
+        return view('homepage.intro');
+    }
 }

@@ -16,24 +16,45 @@
 
     @include('homepage.layouts.header')
 
-    <section class="relative w-full h-[560px] bg-cover bg-center" style="background-image: url('/images/home.jpeg');">
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/50"></div>
+    <section class="bg-white py-10 flex justify-center">
+        <div
+            class="relative w-[90%] md:w-[85%] max-w-7xl h-[560px] rounded-xl overflow-hidden shadow-lg flex flex-col md:flex-row bg-gradient-to-r from-[#0A2240] via-[#0F3575] to-[#1E40AF]">
 
-        <!-- Content -->
-        <div class="relative z-10 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12">
-            <h2 class="text-5xl font-bold text-white leading-tight drop-shadow-lg">
-                Mediation for the Nation
-            </h2>
-            <p class="mt-4 text-lg text-gray-200 max-w-xl">
-                Because every dispute deserves a fair, timely, and peaceful solution.
-            </p>
-            <div class="mt-6 flex gap-4">
-                <button
-                    class="bg-[#A52A2A] text-white text-sm font-semibold px-6 py-2.5 rounded-full shadow-lg hover:bg-[#8B0000] transition">
-                    Read More
-                </button>
+            <div class="md:w-1/2 h-full">
+                <img src="" alt="Legal Aid" class="object-cover w-full h-full" />
             </div>
+
+            <!-- RIGHT: Text Content -->
+            <div class="md:w-1/2 flex flex-col justify-center px-8 md:px-12 py-10 text-white">
+                <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+                    JUSTICE <br>
+                    <span class="text-white">WITHOUT <span class="text-[#FFD700]">BARRIERS!</span></span>
+                </h2>
+
+                <p class="text-lg text-gray-200 mb-2">
+                    Legal Aid For The Marginalised |
+                    <span class="font-semibold text-[#FFD700]">Lok Adalats</span> For Speedy Resolutions
+                </p>
+
+                <p class="text-gray-300 mb-6">
+                    Your Rights Matter – Get The Support You Deserve!
+                </p>
+
+                <a href="#"
+                    class="inline-block bg-white text-[#0A2240] font-semibold text-sm px-6 py-3 rounded-md shadow hover:bg-[#E6E6E6] transition">
+                    SEEK LEGAL ASSISTANCE NOW
+                </a>
+            </div>
+
+            <!-- Optional: Arrow Buttons (like in the shared design) -->
+            <button
+                class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white text-[#0A2240] rounded-full p-2 shadow hover:bg-gray-100">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-[#0A2240] rounded-full p-2 shadow hover:bg-gray-100">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
     </section>
 
@@ -140,13 +161,16 @@
     </section>
 
     <!-- Judges / Testimonials -->
-    <section class="bg-gradient-to-b from-gray-50 to-white py-16 mt-[5rem]">
-        <div class="max-w-7xl mx-auto px-6 text-center">
+    <section class="bg-gradient-to-b from-gray-50 to-white py-16 mt-[5rem] flex justify-center">
+        <div
+            class="max-w-7xl w-full mx-6 p-10 rounded-2xl border border-blue-400 shadow-[0_4px_25px_-5px_rgba(59,130,246,0.3)] bg-white">
 
-            <!-- Section Title -->
-            <h2 class="text-3xl font-bold text-gray-900 mb-14 tracking-tight">
-                Hon’ble Judges
-            </h2>
+            <div class="text-center mb-14">
+                <!-- Section Title -->
+                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">
+                    Advisory Board
+                </h2>
+            </div>
 
             <!-- Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
@@ -154,16 +178,13 @@
                 <!-- Card 1 -->
                 <div
                     class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
-                    <!-- Image -->
                     <img src="/images/Chief Justice M Sundar.jpg" alt="Hon'ble Chief Justice M Sundar"
                         class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
-                    <!-- Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                    <!-- Content -->
                     <div class="absolute bottom-0 p-6 text-white text-center">
                         <h3 class="text-xl font-semibold">Hon'ble Mr. Chief Justice M Sundar</h3>
                         <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
-                        <p class="text-sm opacity-90 mt-1">Patron-in-Chief, High Court Legal Services Committee</p>
+                        <p class="text-sm opacity-90 mt-1">Patron-in-Chief, Manipur State Legal Services Authority</p>
                     </div>
                 </div>
 
@@ -184,13 +205,11 @@
                 <!-- Card 3 -->
                 <div
                     class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
-                    <img src="/images/Justice A. Guneshwar Sharma.jpg" alt="Hon'ble Justice Name"
+                    <img src="/images/Justice A. Guneshwar Sharma.jpg" alt="Hon'ble Mr. Justice A. Guneshwar Sharma"
                         class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                     <div class="absolute bottom-0 p-6 text-white text-center">
-                        <h3 class="text-xl font-semibold">
-                            Hon'ble Mr. Justice A. Guneshwar Sharma
-                        </h3>
+                        <h3 class="text-xl font-semibold">Hon'ble Mr. Justice A. Guneshwar Sharma</h3>
                         <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
                         <p class="text-sm opacity-90 mt-1">Chairman, High Court Legal Services Committee</p>
                     </div>
@@ -221,7 +240,8 @@
                 <div id="scrollContainer" class="flex overflow-x-auto gap-6 scrollbar-hide scroll-smooth mt-5">
 
                     <!-- Card 1 -->
-                    <div class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
+                    <div
+                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
                         <div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-4">
                             <span class="text-3xl">🪶</span>
                         </div>

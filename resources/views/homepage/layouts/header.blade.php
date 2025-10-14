@@ -34,28 +34,32 @@
     </div>
 
     <!-- NAVBAR -->
-    <nav class="bg-[#0B2447] text-white font-medium text-[15px] md:flex md:items-center md:justify-center md:space-x-8 py-3 hidden transition-all duration-300"
+    <nav class="bg-gradient-to-b from-[#0A2240] to-[#102C57] text-white font-medium text-[15px] md:flex md:items-center md:justify-center md:space-x-8 py-3 hidden transition-all duration-300"
         id="navMenu">
 
         <a href="{{ route('homepage.home') }}" class="hover:text-[#FFD700] transition">Home</a>
 
         <!-- ABOUT US DROPDOWN -->
         <div class="relative group">
-            <button type="button"
-                class="flex items-center hover:text-[#FFD700] focus:outline-none transition">
+            <button type="button" class="flex items-center hover:text-[#FFD700] focus:outline-none transition">
                 About Us
                 <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
             </button>
+
+            <!-- Dropdown -->
             <div
-                class="absolute left-0 mt-2 w-56 bg-[#102C57] text-white rounded-lg shadow-lg border border-[#FFD700]/20 opacity-0 scale-y-0 origin-top transform transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-y-100">
-                <a href="#" class="block px-4 py-2 hover:bg-[#FFD700]/10">High Court Legal Services Committee</a>
-                <a href="#" class="block px-4 py-2 hover:bg-[#FFD700]/10">Advisory Board</a>
-                <a href="#" class="block px-4 py-2 hover:bg-[#FFD700]/10">Members</a>
+                class="absolute left-0 mt-2 w-64 bg-[#102C57] text-white rounded-lg shadow-lg border border-[#1D4ED8] opacity-0 scale-y-0 origin-top transform transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-y-100 overflow-hidden">
+
+                <a href="{{ route('homepage.intro') }}" class="block px-4 py-2 hover:bg-[#1D4ED8] transition">High Court Legal Services
+                    Committee</a>
+                <div class="border-t border-[#1D4ED8]"></div>
+                <a href="#" class="block px-4 py-2 hover:bg-[#1D4ED8] transition">Advisory Board</a>
+                <div class="border-t border-[#1D4ED8]"></div>
+                <a href="#" class="block px-4 py-2 hover:bg-[#1D4ED8] transition">Members</a>
             </div>
         </div>
 
         <a href="#" class="hover:text-[#FFD700] transition">Panel Lawyers</a>
-        <a href="#" class="hover:text-[#FFD700] transition">Services</a>
         <a href="#" class="hover:text-[#FFD700] transition">Gallery</a>
         <a href="#" class="hover:text-[#FFD700] transition">National Lok Adalat</a>
         <a href="#" class="hover:text-[#FFD700] transition">Mediation</a>
@@ -63,16 +67,21 @@
 
         <!-- APPLY DROPDOWN -->
         <div class="relative group">
-            <button type="button"
-                class="flex items-center hover:text-[#FFD700] focus:outline-none transition">
+            <button type="button" class="flex items-center hover:text-[#FFD700] focus:outline-none transition">
                 Apply
                 <i class="fa-solid fa-chevron-down text-xs ml-1"></i>
             </button>
+
+            <!-- Dropdown -->
             <div
-                class="absolute left-0 mt-2 w-48 bg-[#102C57] text-white rounded-lg shadow-lg border border-[#FFD700]/20 opacity-0 scale-y-0 origin-top transform transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-y-100">
-                <a href="{{ route('homepage.legalaid') }}" class="block px-4 py-2 hover:bg-[#FFD700]/10">Legal Aid</a>
-                <a href="#" class="block px-4 py-2 hover:bg-[#FFD700]/10">Panel Lawyer</a>
-                <a href="#" class="block px-4 py-2 hover:bg-[#FFD700]/10">Mediation</a>
+                class="absolute left-0 mt-2 w-56 bg-[#102C57] text-white rounded-lg shadow-lg border border-[#FFD700]/20 opacity-0 scale-y-0 origin-top transform transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-y-100 overflow-hidden">
+
+                <a href="{{ route('homepage.legalaid') }}"
+                    class="block px-4 py-2 hover:bg-[#1D4ED8] transition">Legal Aid</a>
+                <div class="border-t border-[#1D4ED8]"></div>
+                <a href="#" class="block px-4 py-2 hover:bg-[#1D4ED8] transition">Panel Lawyer</a>
+                <div class="border-t border-[#1D4ED8]"></div>
+                <a href="#" class="block px-4 py-2 hover:bg-[#1D4ED8] transition">Mediation</a>
             </div>
         </div>
 
