@@ -12,11 +12,12 @@
   <style>
     /* Decorative Manipur overlay background */
     .manipur-overlay {
-      background-image: url('assets/manipur-overlay.png'); /* 🟦 Replace with your actual map image */
+      background-image: url('/images/manipur.png'); /* 🟦 Replace with your actual map image */
       background-repeat: no-repeat;
-      background-position: right 5% bottom 10%;
-      background-size: 38%;
+      background-position: center center; /* Center the map image */
+      background-size: 55%; /* Make it more prominent */
       position: relative;
+      min-height: 450px; /* Increase the visual height of the section */
     }
 
     /* Blue gradient overlay layer */
@@ -42,6 +43,12 @@
       .floating-container {
         margin-top: -7rem; /* pulls card above blue section */
       }
+    }
+
+    /* Smooth gradient transition into gray footer */
+    .transition-band {
+      height: 40px;
+      background: linear-gradient(180deg, rgba(6,8,10,0.95) 0%, #f4f4f4 100%);
     }
   </style>
 </head>
@@ -118,22 +125,23 @@
   </div>
 
   <!-- Blue Info Area (with Manipur overlay background) -->
-  <section class="relative z-10 manipur-overlay text-white mt-20">
-    <div class="max-w-7xl mx-auto px-6 py-16 relative z-10">
+  <section class="relative z-10 manipur-overlay text-white mt-20 flex items-center">
+    <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 
         <!-- Column 1: Locations -->
         <div>
-          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">Minnesota</h4>
-          <p class="text-sm">8939 Columbine Rd<br>Eden Prairie, MN 55347</p>
-
-          <h4 class="text-sm uppercase tracking-widest text-blue-200 mt-6 mb-3">Ontario</h4>
-          <p class="text-sm">619 Kumpf Drive Unit 100<br>Waterloo, ON N2V 1K8</p>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">High Court Complex, Mantripukhri</h4>
+          <p class="text-sm leading-relaxed">
+            High Court Complex <br>
+            Mantripukhri, Chingmeirong, <br>
+            Imphal, Heingang, Manipur 795001
+          </p>
         </div>
 
         <!-- Column 2: Contact -->
         <div>
-          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">Contact</h4>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">Contact / Office Hours</h4>
           <p class="flex items-center gap-3 text-sm">
             <i class="fa-solid fa-phone text-blue-300"></i> +91 9615892598 / 0385-2911701
           </p>
@@ -143,15 +151,6 @@
 
           <h4 class="text-sm uppercase tracking-widest text-blue-200 mt-6 mb-3">Hours</h4>
           <p class="text-sm">Monday - Friday: 10:00 AM - 04:30 PM</p>
-        </div>
-
-        <!-- Column 3: Other Offices -->
-        <div>
-          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">United Kingdom</h4>
-          <p class="text-sm">Earl Grey House<br>77 Grey St, 3rd Floor<br>Newcastle upon Tyne NE1 6EF</p>
-
-          <h4 class="text-sm uppercase tracking-widest text-blue-200 mt-6 mb-3">Germany</h4>
-          <p class="text-sm">Messeturm, 19th Floor<br>Friedrich-Ebert-Anlage 49<br>60308 Frankfurt am Main</p>
         </div>
       </div>
     </div>
