@@ -1,120 +1,167 @@
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Contact Us</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact | HCLSC</title>
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-    <!-- FontAwesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Decorative Manipur overlay background */
+    .manipur-overlay {
+      background-image: url('assets/manipur-overlay.png'); /* 🟦 Replace with your actual map image */
+      background-repeat: no-repeat;
+      background-position: right 5% bottom 10%;
+      background-size: 38%;
+      position: relative;
+    }
 
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    /* Blue gradient overlay layer */
+    .manipur-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 10, 12, 0.9) 0%, rgba(6, 8, 10, 0.95) 100%);
+      z-index: 0;
+    }
 
-    <!-- jQuery then DataTables JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    /* Floating form + map card styling */
+    .floating-card {
+      box-shadow: 0 30px 60px rgba(2,6,23,0.45);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(6px);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      background-color: white;
+    }
+
+    @media (min-width: 768px) {
+      .floating-container {
+        margin-top: -7rem; /* pulls card above blue section */
+      }
+    }
+  </style>
 </head>
+<body class="bg-gray-50 text-gray-800">
 
-<body class="min-h-screen bg-gray-100 flex flex-col">
-    @include('homepage.layouts.header')
+  <!-- Optional header -->
+  <!-- @include('homepage.layouts.header') -->
 
-    <!-- Contact Info & Form -->
-    <section class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12">
+  <!-- Spacer for header -->
+  <div class="h-24 md:h-32"></div>
 
-        <!-- Left Info -->
+  <!-- Floating Card (Map + Contact Form) -->
+  <div class="max-w-6xl mx-auto px-6 relative z-30 floating-container">
+    <div class="floating-card md:flex">
+      <!-- Left: Map -->
+      <div class="md:w-1/2 w-full h-80 md:h-auto">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4294.978872691813!2d93.93998387592151!3d24.83670094620681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3749279c702e88d3%3A0x9c60a52603ac5f9d!2sHigh%20Court%20Complex%2C%20Mantripukhri%2C%20Imphal%2C%20Heingang%2C%20Manipur%20795001!5e1!3m2!1sen!2sin!4v1759728398906!5m2!1sen!2sin"
+          class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="md:w-1/2 w-full p-8 md:p-10">
+        <h2 class="text-2xl font-semibold mb-2">Our cybersecurity experts are ready to help.</h2>
+        <p class="text-sm text-gray-500 mb-6">Fill out the form and we'll get in touch with you.</p>
+
+        <form class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input type="text" placeholder="First name"
+                   class="p-3 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-600 outline-none">
+            <input type="text" placeholder="Last name"
+                   class="p-3 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-600 outline-none">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input type="email" placeholder="Email address"
+                   class="p-3 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-600 outline-none">
+            <input type="tel" placeholder="Phone number"
+                   class="p-3 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-600 outline-none">
+          </div>
+
+          <input type="text" placeholder="Company name"
+                 class="w-full p-3 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-600 outline-none">
+
+          <label class="block text-sm text-gray-700">What challenges are you looking to solve?</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-blue-600"> Cloud Security</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-blue-600"> Incident Response</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-blue-600"> Managed Detection</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-blue-600"> Awareness Training</label>
+          </div>
+
+          <textarea rows="3" placeholder="How can we help?"
+                    class="w-full p-3 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-600 outline-none"></textarea>
+
+          <div class="flex items-center gap-3">
+            <input id="consent" type="checkbox" class="accent-blue-600">
+            <label for="consent" class="text-sm text-gray-600">
+              Yes, I would like to receive marketing emails about solutions that may be of interest to me.
+            </label>
+          </div>
+
+          <button type="submit"
+                  class="w-full py-3 bg-gradient-to-tr from-orange-500 to-orange-400 text-white rounded-md font-semibold">
+            Submit
+          </button>
+
+          <p class="text-xs text-gray-400 pt-2">
+            By submitting this form, you agree to our Terms of Use and Privacy Policy. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blue Info Area (with Manipur overlay background) -->
+  <section class="relative z-10 manipur-overlay text-white mt-20">
+    <div class="max-w-7xl mx-auto px-6 py-16 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+        <!-- Column 1: Locations -->
         <div>
-            <h2 class="text-2xl font-semibold mb-4">✅ Always Here to Help You</h2>
-            <p class="text-gray-600 mb-8">We are dedicated to ensuring access to justice for all. For any assistance regarding legal aid, panel lawyers, or services offered by the High Court Legal Services Committee, please reach out through the contact details below</p>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">Minnesota</h4>
+          <p class="text-sm">8939 Columbine Rd<br>Eden Prairie, MN 55347</p>
 
-            <div class="space-y-6">
-                <!-- Location -->
-                <div class="flex items-start gap-4">
-                    <div class="bg-blue-100 p-3 rounded-full">
-                        <i class="fa-solid fa-location-dot text-blue-600 text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold">Location</h4>
-                        <p>The Secretary, High Court Complex, Mantripukhri, Imphal, Manipur 795002.</p>
-                    </div>
-                </div>
-
-                <!-- Contact -->
-                <div class="flex items-start gap-4">
-                    <div class="bg-blue-100 p-3 rounded-full">
-                        <i class="fa-solid fa-phone text-blue-600 text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold">Contact</h4>
-                        <p>+91 9615892598 / 0385-2911701</p>
-                    </div>
-                </div>
-
-                <!-- Email -->
-                <div class="flex items-start gap-4">
-                    <div class="bg-blue-100 p-3 rounded-full">
-                        <i class="fa-solid fa-envelope text-blue-600 text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold">Email</h4>
-                        <p>hclscman@gmail.com</p>
-                    </div>
-                </div>
-
-                <!-- Hours -->
-                <div class="flex items-start gap-4">
-                    <div class="bg-blue-100 p-3 rounded-full">
-                        <i class="fa-solid fa-clock text-blue-600 text-xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold">Hours of Operation</h4>
-                        <p>Monday - Friday: 10.00 am - 04.30 pm </p>
-                    </div>
-                </div>
-            </div>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mt-6 mb-3">Ontario</h4>
+          <p class="text-sm">619 Kumpf Drive Unit 100<br>Waterloo, ON N2V 1K8</p>
         </div>
 
-        <!-- Right Form -->
-        <div class="bg-white p-8 shadow-md rounded-2xl">
-            <h3 class="text-xl font-semibold mb-6">Fill up the form below</h3>
-            <form class="space-y-4">
-                <input type="text" placeholder="John Doe"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <input type="email" placeholder="Email"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <input type="tel" placeholder="Enter number"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <textarea placeholder="Write a message..." rows="4"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        <!-- Column 2: Contact -->
+        <div>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">Contact</h4>
+          <p class="flex items-center gap-3 text-sm">
+            <i class="fa-solid fa-phone text-blue-300"></i> +91 9615892598 / 0385-2911701
+          </p>
+          <p class="flex items-center gap-3 mt-3 text-sm">
+            <i class="fa-solid fa-envelope text-blue-300"></i> hclscman@gmail.com
+          </p>
 
-                <label class="flex items-center gap-2 text-sm text-gray-600">
-                    <input type="checkbox" class="accent-blue-600">
-                    Accept <a href="#" class="text-blue-600 underline">terms</a> and <a href="#"
-                        class="text-blue-600 underline">privacy policy</a>.
-                </label>
-
-                <button type="submit"
-                    class="w-full bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition-all">Send
-                    Message</button>
-            </form>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mt-6 mb-3">Hours</h4>
+          <p class="text-sm">Monday - Friday: 10:00 AM - 04:30 PM</p>
         </div>
 
-    </section>
+        <!-- Column 3: Other Offices -->
+        <div>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mb-3">United Kingdom</h4>
+          <p class="text-sm">Earl Grey House<br>77 Grey St, 3rd Floor<br>Newcastle upon Tyne NE1 6EF</p>
 
-    <!-- Google Map -->
-    <section class="px-6 pb-12">
-        <div class="max-w-7xl mx-auto">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4294.978872691813!2d93.93998387592151!3d24.83670094620681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3749279c702e88d3%3A0x9c60a52603ac5f9d!2sHigh%20Court%20Complex%2C%20Mantripukhri%2C%20Chingmeirong%2C%20Imphal%2C%20Heingang%2C%20Manipur%20795001!5e1!3m2!1sen!2sin!4v1759728398906!5m2!1sen!2sin"
-                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+          <h4 class="text-sm uppercase tracking-widest text-blue-200 mt-6 mb-3">Germany</h4>
+          <p class="text-sm">Messeturm, 19th Floor<br>Friedrich-Ebert-Anlage 49<br>60308 Frankfurt am Main</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/a2e0e6ad52.js" crossorigin="anonymous"></script>
+  <!-- Transition band before gray footer -->
+  <div class="transition-band"></div>
 
-    @include('homepage.layouts.footer')
+  <!-- Your actual site footer (gray) -->
+  @include('homepage.layouts.footer')
+
 </body>
+</html>

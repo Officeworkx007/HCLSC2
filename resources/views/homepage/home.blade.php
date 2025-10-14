@@ -27,17 +27,17 @@
             <!-- RIGHT: Text Content -->
             <div class="md:w-1/2 flex flex-col justify-center px-8 md:px-12 py-10 text-white">
                 <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
-                    JUSTICE <br>
-                    <span class="text-white">WITHOUT <span class="text-[#FFD700]">BARRIERS!</span></span>
+                    EQUAL RIGHTS <br>
+                    <span class="text-[#FFD700]">EQUAL JUSTICE!</span></span>
                 </h2>
 
                 <p class="text-lg text-gray-200 mb-2">
-                    Legal Aid For The Marginalised |
-                    <span class="font-semibold text-[#FFD700]">Lok Adalats</span> For Speedy Resolutions
+                    For Speedy Resolutions Free Legal Assistance for the Needy | <br>
+                    <span class="font-semibold text-[#FFD700]">Lok Adalats</span> for Fair & Quick Justice
                 </p>
 
                 <p class="text-gray-300 mb-6">
-                    Your Rights Matter – Get The Support You Deserve!
+                    Every voice deserves to be heard. Every right deserves protection !
                 </p>
 
                 <a href="#"
