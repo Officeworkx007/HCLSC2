@@ -54,7 +54,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Optional header -->
   <!-- @include('homepage.layouts.header') -->
 
   <!-- Spacer for header -->
