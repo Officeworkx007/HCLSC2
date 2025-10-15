@@ -28,13 +28,12 @@
         <!-- Modern Card Table Container -->
         <div class="overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl backdrop-blur-lg bg-white/70 border border-white/40">
             <div class="overflow-x-auto">
-                <table class="min-w-full text-sm text-left text-gray-700">
+                <table class="min-w-full text-sm text-left text-gray-700 text-align">
                     <thead class="bg-[#e0e7ff]/60 backdrop-blur-sm">
                         <tr>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">#</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Name</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Email</th>
-                            <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Phone</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Address</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">City</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Pin Code</th>
@@ -59,7 +58,6 @@
                                 </td>
 
                                 <td class="px-6 py-4">{{ $lawyer->email ?? '-' }}</td>
-                                <td class="px-6 py-4">{{ $lawyer->phone_number ?? '-' }}</td>
                                 <td class="px-6 py-4">{{ $lawyer->address ?? '-' }}</td>
                                 <td class="px-6 py-4">{{ $lawyer->city ?? '-' }}</td>
                                 <td class="px-6 py-4">{{ $lawyer->pin_code ?? '-' }}</td>
