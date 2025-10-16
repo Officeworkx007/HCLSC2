@@ -142,14 +142,6 @@
     <section class="bg-gradient-to-b from-gray-50 to-white py-16 mt-[5rem] flex justify-center">
         <div
             class="max-w-7xl w-full mx-6 p-10 rounded-2xl border border-blue-400 shadow-[0_4px_25px_-5px_rgba(59,130,246,0.3)] bg-white">
-
-            <div class="text-center mb-14">
-                <!-- Section Title -->
-                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">
-                    Advisory Board
-                </h2>
-            </div>
-
             <!-- Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
 

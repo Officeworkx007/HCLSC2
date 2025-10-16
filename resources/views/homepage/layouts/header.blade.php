@@ -1,6 +1,11 @@
 @php
     $token = session('token_number');
 @endphp
+<!-- DEVELOPMENT NOTICE -->
+<div class="bg-yellow-400 text-blue-900 text-center py-2 px-4 font-semibold text-sm shadow-md flex items-center justify-center gap-2">
+    <i class="fa-solid fa-triangle-exclamation text-blue-900"></i>
+    <span>Website is currently under development. Some pages may load slowly or may not function as expected.</span>
+</div>
 
 <!-- HEADER -->
 <header class="bg-white shadow-md sticky top-0 z-50">
