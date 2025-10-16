@@ -210,10 +210,10 @@
             <div class="grid lg:grid-cols-2 gap-10 items-center">
                 <!-- Left content -->
                 <div>
-                    <p class="text-lg leading-relaxed mb-6 text-slate-200 text-align indent-4">
-                        Applying for legal aid through the High Court Legal Services Committee (HCLSC) is quick and
-                        simple.
-                        Follow these easy steps to get legal assistance and track your case status easily.
+                    <p class="text-lg leading-relaxed mb-6 text-slate-200 indent-4">
+                        Applying for legal aid through the High Court Legal Services Committee (HCLSC)
+                        is quick and simple. Follow these easy steps to get legal assistance and track your case status
+                        easily.
                     </p>
                     <button
                         class="px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-blue-900 font-semibold rounded-md shadow-lg hover:from-yellow-500 hover:to-yellow-700 transition-all">
@@ -255,44 +255,106 @@
                 </div>
             </div>
         </div>
+
         <!-- Optional gradient overlay for depth -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
     </section>
 
-    <section
-        class="mt-5 bg-gradient-to-r from-yellow-400 to-yellow-600 py-10 shadow-lg rounded-2xl mx-auto w-full max-w-6xl">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 text-white text-center px-6">
+    <!-- Floating Beneficiary Categories Section -->
+    <section class="relative z-20">
+        <div class="max-w-7xl mx-auto px-6 -mt-10 bg-white rounded-2xl shadow-2xl py-10">
+            <!-- Heading -->
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">
+                Beneficiaries Eligible for <span class="text-yellow-500">Free Legal Aid</span>
+            </h2>
 
-            <!-- Example Card -->
-            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
-                <div class="text-4xl mb-3">👩</div>
-                <h3 class="text-xl font-bold">Women</h3>
-                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
-                <p class="text-sm opacity-80">Empowering women through legal aid and support</p>
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
+
+                <!-- Women -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">👩</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Women</p>
+                </div>
+
+                <!-- Children -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">👧</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Children</p>
+                </div>
+
+                <!-- Persons with disability -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">♿</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Persons with Disability</p>
+                </div>
+
+                <!-- Industrial Workmen -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">🏭</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Industrial Workmen</p>
+                </div>
+
+                <!-- Victims of Disaster -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">🌊</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Victims of Disaster / Violence</p>
+                </div>
+
+                <!-- Victims of Trafficking -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">🚨</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Victims of Trafficking / Beggary</p>
+                </div>
+
+                <!-- Persons in Custody -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">🏥</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Persons in Custody / Homes</p>
+                </div>
+
+                <!-- General (Low Income) -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">💰</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">General (Low Income)</p>
+                </div>
+
+                <!-- Transgender -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">🌈</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Transgender</p>
+                </div>
+
+                <!-- Scheduled Caste -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">⚖️</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Scheduled Caste</p>
+                </div>
+
+                <!-- Scheduled Tribe -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">🌿</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Scheduled Tribe</p>
+                </div>
+
+                <!-- Senior Citizens -->
+                <div
+                    class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
+                    <div class="text-3xl mb-2">👴</div>
+                    <p class="text-sm font-semibold text-blue-900 text-center">Senior Citizens</p>
+                </div>
             </div>
-
-            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
-                <div class="text-4xl mb-3">👧</div>
-                <h3 class="text-xl font-bold">Children</h3>
-                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
-                <p class="text-sm opacity-80">Protecting child rights and welfare</p>
-            </div>
-
-            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
-                <div class="text-4xl mb-3">♿</div>
-                <h3 class="text-xl font-bold">Persons with Disability</h3>
-                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
-                <p class="text-sm opacity-80">Ensuring accessibility and inclusion</p>
-            </div>
-
-            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
-                <div class="text-4xl mb-3">🏭</div>
-                <h3 class="text-xl font-bold">Industrial Workmen</h3>
-                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
-                <p class="text-sm opacity-80">Safeguarding workers’ legal rights</p>
-            </div>
-
-            <!-- You can continue adding others in the same pattern -->
         </div>
     </section>
 
@@ -346,7 +408,6 @@
             </div>
         </div>
     </section>
-
 
     @include('homepage.layouts.footer')
 
