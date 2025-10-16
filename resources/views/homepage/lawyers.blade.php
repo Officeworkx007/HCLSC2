@@ -17,26 +17,25 @@
     <section class="max-w-7xl mx-auto px-6 py-16">
         <!-- Page Header -->
         <div class="text-center mb-14">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-[#0d0d0e] mb-4">
-                Our <span class="text-[#1D4ED8]">Panel Lawyers</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#1e3a8a] mb-4">
+                Our <span class="text-[#2563eb]">Panel Lawyers</span>
             </h1>
             <p class="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
-                The following panel comprises dedicated legal professionals ensuring fair access to justice.
+                 Meet our dedicated panel of lawyers committed to providing access to justice without barriers.
             </p>
         </div>
 
         <!-- Modern Card Table Container -->
         <div class="overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl backdrop-blur-lg bg-white/70 border border-white/40">
             <div class="overflow-x-auto">
-                <table class="min-w-full text-sm text-left text-gray-700 text-align">
+                <table class="min-w-full text-sm text-left text-gray-700">
                     <thead class="bg-[#e0e7ff]/60 backdrop-blur-sm">
                         <tr>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">#</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Name</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Email</th>
+                            <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Phone</th>
                             <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Address</th>
-                            <th class="px-6 py-4 font-semibold text-[#1e3a8a]">City</th>
-                            <th class="px-6 py-4 font-semibold text-[#1e3a8a]">Pin Code</th>
                         </tr>
                     </thead>
 
@@ -58,9 +57,8 @@
                                 </td>
 
                                 <td class="px-6 py-4">{{ $lawyer->email ?? '-' }}</td>
+                                <td class="px-6 py-4">{{ $lawyer->phone_number ?? '-' }}</td>
                                 <td class="px-6 py-4">{{ $lawyer->address ?? '-' }}</td>
-                                <td class="px-6 py-4">{{ $lawyer->city ?? '-' }}</td>
-                                <td class="px-6 py-4">{{ $lawyer->pin_code ?? '-' }}</td>
                             </tr>
                         @empty
                             <tr>

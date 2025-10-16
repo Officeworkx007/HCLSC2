@@ -60,102 +60,80 @@
 
 
     <!-- Help Section -->
-    <section class="relative bg-blue-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-10 text-center">How We Can Help</h2>
+    <section class="relative py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-600 text-white overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/images/pattern-light.svg')] opacity-10"></div>
+        <!-- Optional subtle graphic -->
 
-            <!-- Cards Grid (equal sizes like San Jose site) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 text-center">
+        <div class="relative max-w-7xl mx-auto px-6">
+            <!-- Heading -->
+            <div class="text-center mb-14">
+                <h2
+                    class="text-4xl font-bold tracking-wide bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text text-transparent">
+                    How We Can Help
+                </h2>
+                <div class="w-24 h-1 bg-[#FFD700] mx-auto mt-3 rounded-full"></div>
+                <p class="text-gray-200 max-w-2xl mx-auto mt-4 text-sm md:text-base">
+                    We provide comprehensive support and access to justice through various services, programs, and
+                    initiatives.
+                </p>
+            </div>
 
-                <!-- Card 1 -->
-                <div
-                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
-                    <i data-feather="file-text"
-                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
-                    <h3
-                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Eligibility & Services
-                    </h3>
-                    <p
-                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Free legal services including advice, drafting, representation, and court fee coverage.
-                    </p>
-                </div>
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
 
-                <!-- Card 2 -->
-                <div
-                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
-                    <i data-feather="users"
-                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
-                    <h3
-                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Lok Adalats
-                    </h3>
-                    <p
-                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Organizes Lok Adalats for settlement of pending and pre-litigation disputes.
-                    </p>
-                </div>
+                <!-- Card Template -->
+                @php
+                    $cards = [
+                        [
+                            'icon' => 'file-text',
+                            'title' => 'Eligibility & Services',
+                            'desc' =>
+                                'Free legal services including advice, drafting, representation, and court fee coverage.',
+                        ],
+                        [
+                            'icon' => 'users',
+                            'title' => 'Lok Adalats',
+                            'desc' => 'Organizes Lok Adalats for settlement of pending and pre-litigation disputes.',
+                        ],
+                        [
+                            'icon' => 'book-open',
+                            'title' => 'Legal Awareness',
+                            'desc' => 'Awareness programs, workshops, and campaigns on legal rights and remedies.',
+                        ],
+                        [
+                            'icon' => 'briefcase',
+                            'title' => 'Panel of Advocates',
+                            'desc' =>
+                                'Maintains a panel of advocates to represent eligible persons before the High Court.',
+                        ],
+                        [
+                            'icon' => 'user-check',
+                            'title' => 'Support for ADR',
+                            'desc' => 'Encourages mediation and conciliation for quicker, less adversarial resolution.',
+                        ],
+                        [
+                            'icon' => 'monitor',
+                            'title' => 'Monitoring',
+                            'desc' => 'Ensures implementation of legal aid schemes and reports on activities.',
+                        ],
+                    ];
+                @endphp
 
-                <!-- Card 3 -->
-                <div
-                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
-                    <i data-feather="book-open"
-                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
-                    <h3
-                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Legal Awareness
-                    </h3>
-                    <p
-                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Awareness programs, workshops, and campaigns on legal rights and remedies.
-                    </p>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
-                    <i data-feather="briefcase"
-                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
-                    <h3
-                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Panel of Advocates
-                    </h3>
-                    <p
-                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Maintains a panel of advocates to represent eligible persons before the High Court.
-                    </p>
-                </div>
-
-                <!-- Card 5 -->
-                <div
-                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
-                    <i data-feather="user-check"
-                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
-                    <h3
-                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Support for ADR
-                    </h3>
-                    <p
-                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Encourages mediation and conciliation for quicker, less adversarial resolution.
-                    </p>
-                </div>
-
-                <!-- Card 6 -->
-                <div
-                    class="group bg-blue-900 rounded-lg flex flex-col justify-center items-center py-10 transition duration-300 hover:bg-white">
-                    <i data-feather="monitor"
-                        class="w-10 h-10 mb-4 text-[#FFD700] transition duration-300 group-hover:text-black"></i>
-                    <h3
-                        class="font-semibold text-lg mb-2 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Monitoring
-                    </h3>
-                    <p
-                        class="text-sm px-4 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text transition duration-300 group-hover:text-black group-hover:bg-none">
-                        Ensures implementation of legal aid schemes and reports on activities.
-                    </p>
-                </div>
+                @foreach ($cards as $card)
+                    <div
+                        class="group bg-blue-800/30 backdrop-blur-sm border border-blue-400/20 rounded-xl flex flex-col justify-center items-center p-10 transition duration-500 hover:bg-white hover:scale-[1.03] hover:shadow-2xl hover:border-yellow-400">
+                        <i data-feather="{{ $card['icon'] }}"
+                            class="w-12 h-12 mb-4 text-[#FFD700] transition duration-500 group-hover:text-blue-800"></i>
+                        <h3
+                            class="font-semibold text-lg mb-3 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text group-hover:text-blue-900 group-hover:bg-none transition">
+                            {{ $card['title'] }}
+                        </h3>
+                        <p
+                            class="text-sm text-gray-200 group-hover:text-gray-700 transition duration-500 px-3 leading-relaxed">
+                            {{ $card['desc'] }}
+                        </p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -219,171 +197,102 @@
         </div>
     </section>
 
-    <!--Entitlement to legal aid-->
-    <section class="py-12 bg-gray-50 mt-[5rem]">
+    <!-- Apply Section -->
+    <section
+        class="relative py-16 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-600 text-white overflow-hidden mt-[5rem]">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Heading -->
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">Who is entitled to Free Legal Services?
+            <h2 class="text-4xl font-bold text-center mb-10">
+                How to Apply for <span class="text-yellow-400">Legal Aid</span>
             </h2>
-            <!-- Wrapper with arrows -->
-            <div class="relative">
-                <!-- Left Arrow -->
-                <button id="scrollLeft"
-                    class="absolute -left-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
 
-                <!-- Scroll Container -->
-                <div id="scrollContainer" class="flex overflow-x-auto gap-6 scrollbar-hide scroll-smooth mt-5">
-
-                    <!-- Card 1 -->
-                    <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-4">
-                            <span class="text-3xl">🪶</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Scheduled Caste / Tribe</h3>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-pink-100 rounded-full mb-4">
-                            <span class="text-3xl">🚸</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Victim of Trafficking / Begar</h3>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div
-                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
-                        <img src="/images/womenchildren.png" alt="Persons in Custody"
-                            class="w-full h-64 object-cover">
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div
-                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
-                        <img src="/images/mentally.png" alt="Persons in Custody" class="w-full h-64 object-cover">
-                    </div>
-
-                    <!-- Card 5 -->
-                    <div
-                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
-                        <img src="/images/disaster.png" alt="Persons in Custody" class="w-full h-64 object-cover">
-                    </div>
-
-                    <!-- Card 6 -->
-                    <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-yellow-100 rounded-full mb-4">
-                            <span class="text-3xl">⚒️</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Industrial Workmen</h3>
-                    </div>
-
-                    <!-- Card 7 -->
-                    <div
-                        class="min-w-[220px] shadow-md rounded-xl overflow-hidden flex flex-col items-center text-center">
-                        <img src="/images/custody.png" alt="Persons in Custody" class="w-full h-64 object-cover">
-                    </div>
-
-                    <!-- Card 8 -->
-                    <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-teal-100 rounded-full mb-4">
-                            <span class="text-3xl">💰</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Income below ₹3,00,000/-</h3>
-                    </div>
-
-                    <!-- Card 9 -->
-                    <div
-                        class="min-w-[220px] bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center">
-                        <div class="w-16 h-16 flex items-center justify-center bg-orange-100 rounded-full mb-4">
-                            <span class="text-3xl">🌈</span>
-                        </div>
-                        <h3 class="font-semibold text-gray-800">Senior Citizens, Transgenders, HIV+</h3>
-                    </div>
+            <!-- Content layout: Left text + Right steps box -->
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+                <!-- Left content -->
+                <div>
+                    <p class="text-lg leading-relaxed mb-6 text-slate-200 text-align indent-4">
+                        Applying for legal aid through the High Court Legal Services Committee (HCLSC) is quick and
+                        simple.
+                        Follow these easy steps to get legal assistance and track your case status easily.
+                    </p>
+                    <button
+                        class="px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-blue-900 font-semibold rounded-md shadow-lg hover:from-yellow-500 hover:to-yellow-700 transition-all">
+                        Learn More
+                    </button>
                 </div>
 
-                <!-- Right Arrow -->
-                <button id="scrollRight"
-                    class="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
+                <!-- Right floating box with steps -->
+                <div
+                    class="bg-gradient-to-b from-blue-700 via-blue-800 to-blue-900 rounded-2xl shadow-2xl p-8 lg:translate-x-10">
+                    <div class="space-y-8">
+                        <!-- Step 1 -->
+                        <div class="flex gap-4 items-start">
+                            <div class="text-3xl font-bold text-yellow-400">1</div>
+                            <p>Visit our official website <span
+                                    class="font-semibold text-yellow-400">www.hclscmanipur.in</span></p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex gap-4 items-start">
+                            <div class="text-3xl font-bold text-yellow-400">2</div>
+                            <p>Fill up the <span class="font-semibold text-yellow-400">Legal Aid Form</span> under
+                                “Apply”.</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex gap-4 items-start">
+                            <div class="text-3xl font-bold text-yellow-400">3</div>
+                            <p>HCLSC staff will verify your details and assign a suitable lawyer.</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="flex gap-4 items-start">
+                            <div class="text-3xl font-bold text-yellow-400">4</div>
+                            <p>Track your application using your <span class="font-semibold text-yellow-400">Form
+                                    ID</span>.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- Optional gradient overlay for depth -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
     </section>
 
-    <!-- Apply Section -->
-    <section class="py-12 bg-gray-50 mt-[5rem]">
-        <div class="max-w-7xl mx-auto px-6">
-            <!-- Heading -->
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">
-                How to Apply for Legal Aid
-            </h2>
+    <section
+        class="mt-5 bg-gradient-to-r from-yellow-400 to-yellow-600 py-10 shadow-lg rounded-2xl mx-auto w-full max-w-6xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 text-white text-center px-6">
 
-            <!-- Grid for cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Card 1 -->
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <img src="/images/section1.png" alt="Visit website" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900 text-center">
-                            Visit the website www.hclscmanipur.in
-                        </h3>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <img src="/images/section2.png" alt="Fill up form" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900 text-center">
-                            Fill up the Legal Aid form under “Apply”
-                        </h3>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <img src="/images/section3.png" alt="Track status" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900 text-center">
-                            Track your application using your Form ID
-                        </h3>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                    class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <img src="/images/section4.png" alt="Verification" class="w-full h-56 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-blue-900 text-center">
-                            HCLSC staff will verify & assign a lawyer
-                        </h3>
-                    </div>
-                </div>
+            <!-- Example Card -->
+            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
+                <div class="text-4xl mb-3">👩</div>
+                <h3 class="text-xl font-bold">Women</h3>
+                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
+                <p class="text-sm opacity-80">Empowering women through legal aid and support</p>
             </div>
 
-            <!-- Button centered below grid -->
-            <div class="flex justify-center mt-10">
-                <button
-                    class="px-8 py-2.5 rounded-md shadow bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold hover:from-yellow-500 hover:to-yellow-700 transition-all">
-                    Read More
-                </button>
+            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
+                <div class="text-4xl mb-3">👧</div>
+                <h3 class="text-xl font-bold">Children</h3>
+                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
+                <p class="text-sm opacity-80">Protecting child rights and welfare</p>
             </div>
+
+            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
+                <div class="text-4xl mb-3">♿</div>
+                <h3 class="text-xl font-bold">Persons with Disability</h3>
+                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
+                <p class="text-sm opacity-80">Ensuring accessibility and inclusion</p>
+            </div>
+
+            <div class="flex flex-col items-center p-6 bg-yellow-500/20 rounded-xl hover:bg-yellow-500/30 transition">
+                <div class="text-4xl mb-3">🏭</div>
+                <h3 class="text-xl font-bold">Industrial Workmen</h3>
+                <div class="w-12 h-1 bg-white mt-2 mb-2"></div>
+                <p class="text-sm opacity-80">Safeguarding workers’ legal rights</p>
+            </div>
+
+            <!-- You can continue adding others in the same pattern -->
         </div>
     </section>
 

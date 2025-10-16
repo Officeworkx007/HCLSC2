@@ -3,7 +3,7 @@
 @endphp
 
 <!-- HEADER -->
-<header class="bg-white shadow-md sticky top-0 z-50 border-b border-gray-100">
+<header class="bg-white shadow-md sticky top-0 z-50">
 
     <!-- Top Section -->
     <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
@@ -12,10 +12,10 @@
         <div class="flex items-center gap-4">
             <img src="/images/hc logo.jpg" alt="High Court of Manipur logo" class="h-20 w-auto rounded-md shadow-sm">
             <div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-[#0B2447] tracking-tight">
+                <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-900 via-blue-800 to-blue-600 bg-clip-text text-transparent inline-block">
                     High Court Legal Services Committee
                 </h1>
-                <p class="text-sm text-gray-600">High Court of Manipur, Mantripukhri</p>
+                <p class="text-md font-semibold text-black">High Court of Manipur, Mantripukhri</p>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
     </div>
 
     <!-- NAVBAR -->
-    <nav class="bg-gradient-to-b from-[#0A2240] to-[#102C57] text-white font-medium text-[15px] md:flex md:items-center md:justify-center md:space-x-8 py-3 hidden transition-all duration-300"
+    <nav class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-600 text-white font-medium text-[15px] md:flex md:items-center md:justify-center md:space-x-8 py-3 hidden transition-all duration-300"
         id="navMenu">
 
         <a href="{{ route('homepage.home') }}" class="hover:text-[#FFD700] transition">Home</a>
