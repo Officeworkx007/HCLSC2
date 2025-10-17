@@ -20,8 +20,9 @@
         <div
             class="relative w-[90%] md:w-[85%] max-w-7xl h-[560px] rounded-xl overflow-hidden shadow-lg flex flex-col md:flex-row bg-gradient-to-r from-[#0A2240] via-[#0F3575] to-[#1E40AF]">
 
-            <div class="md:w-1/2 h-full">
-                <img src="" alt="Legal Aid" class="object-cover w-full h-full" />
+            <div class="md:w-1/2 h-full relative overflow-hidden">
+                <img src="/images/coverrr.png" alt="Legal Aid"
+                    class="object-cover w-full h-full scale-110 translate-x-2 md:translate-x-4 transition-transform duration-700 ease-in-out" />
             </div>
 
             <!-- RIGHT: Text Content -->
@@ -32,7 +33,7 @@
                 </h2>
 
                 <p class="text-lg text-gray-200 mb-2">
-                    For Speedy Resolutions Free Legal Assistance for the Needy | <br>
+                    For Speedy Resolutions, Free Legal Assistance | <br>
                     <span class="font-semibold text-[#FFD700]">Lok Adalats</span> for Fair & Quick Justice
                 </p>
 
@@ -40,8 +41,8 @@
                     Every voice deserves to be heard. Every right deserves protection !
                 </p>
 
-                <a href="#"
-                    class="inline-block bg-white text-[#0A2240] font-semibold text-sm px-6 py-3 rounded-md shadow hover:bg-[#E6E6E6] transition">
+                <a href="{{ route('homepage.legalaid') }}"
+                    class="inline-block border-2 border-[#FFD700] text-[#FFD700] font-semibold text-sm px-8 py-3 rounded-md hover:bg-[#FFD700] hover:text-[#0A2240] transition-all duration-300 shadow">
                     SEEK LEGAL ASSISTANCE NOW
                 </a>
             </div>
@@ -57,7 +58,6 @@
             </button>
         </div>
     </section>
-
 
     <!-- Help Section -->
     <section class="relative py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-600 text-white overflow-hidden">
@@ -393,7 +393,7 @@
                 <!-- Lok Adalats -->
                 <div class="flex flex-col items-center">
                     <img src="/images/adalat.png" alt="Lok Adalat" class="w-[170px] h-[140px] mb-6 object-contain">
-                    <p class="text-5xl font-extrabold text-green-600">15</p>
+                    <p class="text-5xl font-extrabold text-green-600">3 (2025)</p>
                     <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Lok Adalats</p>
                 </div>
 

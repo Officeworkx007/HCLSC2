@@ -21,7 +21,7 @@
 
                 <!--Header-->
                 <div id="toggleBtn1"
-                    class="flex justify-between items-center bg-gray-800 text-white px-6 py-3 cursor-pointer rounded-t-lg">
+                    class="flex justify-between items-center bg-black text-white px-6 py-3 cursor-pointer rounded-t-lg">
                     <h2 class="text-lg font-semibold">Personal Details</h2>
                     <span id="toggleIcon1" class="text-2xl font-bold">-</span>
                 </div>
@@ -155,7 +155,7 @@
 
                 <!--Header-->
                 <div id="toggleBtn2"
-                    class="flex justify-between items-center bg-gray-800 text-white px-6 py-3 cursor-pointer rounded-t-lg">
+                    class="flex justify-between items-center bg-black text-white px-6 py-3 cursor-pointer rounded-t-lg">
                     <h2 class="text-lg font-semibold">Attach Document</h2>
                     <span id="toggleIcon2" class="text-2xl font-bold">+</span>
                 </div>
