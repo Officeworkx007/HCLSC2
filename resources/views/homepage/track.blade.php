@@ -10,27 +10,25 @@
 <body class="min-h-screen bg-gray-100 flex flex-col">
     @include('homepage.layouts.header')
 
-    <div class="min-h-screen flex flex-col items-center py-8 px-4 w-full">
+    <div class="flex flex-col items-center py-8 px-4 w-full">
 
         {{-- ✅ Flash Success Message --}}
         @if (session('success'))
-            <div id="successMessage" class="bg-green-100 text-green-800 p-3 rounded mb-4 w-full max-w-2xl">
+            <div id="successMessage" class="bg-green-100 text-green-800 p-4 rounded mb-4 w-full max-w-xl text-center">
                 {{ session('success') }}
             </div>
         @endif
 
         {{-- ✅ Token Message --}}
         @if (session('token_number'))
-            <div id="tokenMessage"
-                class="bg-blue-100 text-blue-800 p-3 rounded mb-4 w-full max-w-2xl flex justify-between items-center">
+            <div id="tokenMessage" class="bg-blue-100 text-blue-800 p-4 rounded mb-4 w-full max-w-xl flex flex-col sm:flex-row justify-between items-center gap-2">
                 <span>Your Token Number: <strong>{{ session('token_number') }}</strong></span>
-                <button onclick="document.getElementById('tokenMessage').remove()"
-                    class="ml-4 text-red-600 font-bold">X</button>
+                <button onclick="document.getElementById('tokenMessage').remove()" class="text-red-600 font-bold px-2 py-1 rounded hover:bg-red-100 transition">X</button>
             </div>
         @endif
 
         {{-- ✅ Tracking Form --}}
-        <div class="bg-white shadow-md rounded p-6 w-full max-w-2xl mb-6">
+        <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-xl mb-6">
             <h2 class="text-xl font-semibold mb-4 text-gray-700 text-center">Track Your Application</h2>
             <form method="GET" action="{{ route('homepage.track') }}" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -42,27 +40,25 @@
                         class="border rounded px-3 py-2 w-full focus:ring-blue-500 focus:border-blue-500" required>
                 </div>
                 <div class="flex justify-center">
-                    <button type="submit"
-                        class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Check
-                        Status</button>
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Check Status</button>
                 </div>
             </form>
         </div>
 
         {{-- ❌ Error Message --}}
         @if (isset($error))
-            <div class="bg-red-100 text-red-700 p-3 rounded w-full max-w-2xl mb-4">
+            <div class="bg-red-100 text-red-700 p-4 rounded w-full max-w-xl mb-4 text-center">
                 {{ $error }}
             </div>
         @endif
 
         {{-- ✅ Tracking Display --}}
         @if (isset($form) && $form)
-            <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-2xl mb-10">
+            <div class="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-xl mb-10">
                 <h3 class="text-lg font-bold mb-6 text-center text-blue-800">Application Status</h3>
 
                 {{-- Basic Applicant Info --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm mb-6">
                     <p><strong>Name:</strong> {{ $form->name }}</p>
                     <p><strong>Token Number:</strong> {{ $form->token_number }}</p>
                     <p><strong>Phone:</strong> {{ $form->number }}</p>
@@ -83,31 +79,28 @@
 
                 {{-- 🎯 Status-Specific Display --}}
                 @if ($form->status === 'Pending')
-                    <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-lg text-center">
-                        <i class="fa-solid fa-hourglass-half text-yellow-500 text-3xl mb-3"></i>
+                    <div class="p-4 sm:p-6 bg-yellow-50 border border-yellow-300 rounded-lg text-center">
+                        <i class="fa-solid fa-hourglass-half text-yellow-500 text-3xl mb-2 sm:mb-3"></i>
                         <p class="font-medium text-yellow-800">Your application is under review.</p>
                         <p class="text-sm text-yellow-700 mt-1">We will notify you once a lawyer is assigned.</p>
                     </div>
 
                 @elseif ($form->status === 'Rejected')
-                    <div class="p-6 bg-red-50 border border-red-300 rounded-lg text-center">
-                        <i class="fa-solid fa-circle-xmark text-red-600 text-3xl mb-3"></i>
+                    <div class="p-4 sm:p-6 bg-red-50 border border-red-300 rounded-lg text-center">
+                        <i class="fa-solid fa-circle-xmark text-red-600 text-3xl mb-2 sm:mb-3"></i>
                         <p class="font-medium text-red-700">Unfortunately, your application was rejected.</p>
                         @if ($form->rejection && $form->rejection->remark)
-                            <p class="mt-2 text-sm text-red-600">
-                                <strong>Reason:</strong> {{ $form->rejection->remark }}
-                            </p>
+                            <p class="mt-2 text-sm text-red-600"><strong>Reason:</strong> {{ $form->rejection->remark }}</p>
                         @endif
                     </div>
 
                 @elseif ($form->status === 'Assigned')
-                    <div class="p-6 bg-green-50 border border-green-300 rounded-lg text-center">
-                        <i class="fa-solid fa-scale-balanced text-green-600 text-3xl mb-3"></i>
+                    <div class="p-4 sm:p-6 bg-green-50 border border-green-300 rounded-lg text-center">
+                        <i class="fa-solid fa-scale-balanced text-green-600 text-3xl mb-2 sm:mb-3"></i>
                         <p class="font-medium text-green-700 mb-3">A lawyer has been assigned to your case.</p>
 
                         @if ($form->panelLawyer)
-                            <div
-                                class="bg-white border border-green-200 rounded-lg shadow-sm p-4 text-left inline-block text-sm">
+                            <div class="bg-white border border-green-200 rounded-lg shadow-sm p-4 text-left text-sm">
                                 <p><strong>Lawyer Name:</strong> {{ $form->panelLawyer->first_name }} {{ $form->panelLawyer->last_name }}</p>
                                 <p><strong>Contact:</strong> {{ $form->panelLawyer->contact_number ?? 'N/A' }}</p>
                                 <p><strong>Email:</strong> {{ $form->panelLawyer->email ?? 'N/A' }}</p>

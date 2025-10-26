@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -19,10 +20,11 @@
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
     <style>
+        /* Container width is fluid but constrained */
         .notice-container {
             max-width: 1400px;
-            /* increase as needed */
             width: 95%;
+            margin: auto;
         }
 
         /* General table sizing & font */
@@ -32,17 +34,15 @@
             border-collapse: collapse;
         }
 
-        /* Make header/body cells use same padding so they're aligned */
         #noticesTable th,
         #noticesTable td {
             padding: 0.75rem 1rem !important;
-            /* matches px-4 py-3 */
             vertical-align: middle;
             text-align: left;
             box-sizing: border-box;
         }
 
-        /* Allow description column to wrap */
+        /* Allow text wrapping */
         #noticesTable td:nth-child(2) {
             white-space: normal;
             word-break: break-word;
@@ -53,99 +53,124 @@
             margin-bottom: 1rem;
         }
 
-        /* Make DataTables controls align nicely with Tailwind */
+        /* Make DataTables controls align nicely */
         .dataTables_wrapper .dataTables_length,
         .dataTables_wrapper .dataTables_filter {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.75rem;
             align-items: center;
+            justify-content: flex-start;
         }
 
-        /* Add a right margin on header text (keeps sorting arrows away) */
-        /* We wrap header text in .th-text so this always works regardless of DataTables' pseudo elements */
+        /* Keep header text spacing consistent */
         #noticesTable thead th .th-text {
             display: inline-block;
             margin-right: 1.25rem;
-            /* increase to push arrows further */
         }
 
-        /* Optional: small tweak to make PDF/status column compact */
+        /* PDF/status compact columns */
         #noticesTable td:nth-child(5),
         #noticesTable td:nth-child(6) {
             white-space: nowrap;
         }
 
+        /* Blinking active badge */
         @keyframes blink {
-
-            0%,
-            50%,
-            100% {
-                opacity: 1;
-            }
-
-            25%,
-            75% {
-                opacity: 0;
-            }
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
         }
 
         .blinking {
             animation: blink 1s infinite;
         }
+
+        /* ✅ MOBILE OPTIMIZATION BELOW */
+
+        /* Make table horizontally scrollable on small screens */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Adjust DataTables inputs for mobile */
+        .dataTables_wrapper select,
+        .dataTables_wrapper input {
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 0.3rem 0.5rem;
+        }
+
+        /* Prevent zoom issues on mobile */
+        input,
+        select {
+            font-size: 16px;
+        }
+
+        /* Tighten margins on very small devices */
+        @media (max-width: 640px) {
+            .notice-container {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem !important;
+            }
+
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            #noticesTable th,
+            #noticesTable td {
+                padding: 0.5rem !important;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
 <body class="min-h-screen bg-gray-100 flex flex-col">
+
     @include('homepage.layouts.header')
 
     <div class="bg-[#FDFBD4] py-12 text-center text-black shadow">
-        <h1 class="text-4xl md:text-5xl font-bold tracking-wide flex justify-center items-center gap-3">
-            <i class="fas fa-clipboard-list text-yellow-500"></i> Notice Board
+        <h1 class="text-4xl md:text-5xl font-bold tracking-wide flex flex-wrap justify-center items-center gap-3 px-4">
+            <i class="fas fa-clipboard-list text-yellow-500"></i>
+            Notice Board
         </h1>
-        <p class="mt-2 text-lg">Stay updated with the latest notices</p>
+        <p class="mt-2 text-base md:text-lg">Stay updated with the latest notices</p>
     </div>
 
-    <div class="mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl notice-container">
-        <div class="overflow-x-auto">
+    <div class="notice-container mt-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl">
+        <div class="table-wrapper">
             <table id="noticesTable" class="display w-full text-gray-700">
-                <thead class="bg-blue-700 text-white uppercase">
+                <thead class="bg-blue-700 text-white uppercase text-sm sm:text-base">
                     <tr>
-                        <th class="sl-no-col">
-                            <span class="th-text">Sl. No</span>
-                        </th>
-                        <th>
-                            <span class="th-text">Description</span>
-                        </th>
-                        <th>
-                            <span class="th-text">Order No.</span>
-                        </th>
-                        <th>
-                            <span class="th-text">Date</span>
-                        </th>
-                        <th>
-                            <span class="th-text">PDF</span>
-                        </th>
-                        <th>
-                            <span class="th-text">Status</span>
-                        </th>
+                        <th><span class="th-text">Sl. No</span></th>
+                        <th><span class="th-text">Description</span></th>
+                        <th><span class="th-text">Order No.</span></th>
+                        <th><span class="th-text">Date</span></th>
+                        <th><span class="th-text">PDF</span></th>
+                        <th><span class="th-text">Status</span></th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @php
-                        $activeNotices = $notices->where('status', 1)->values();
-                    @endphp
+                    @php $activeNotices = $notices->where('status', 1)->values(); @endphp
 
                     @forelse ($activeNotices as $index => $notice)
                         <tr class="hover:bg-gray-50">
-                            {{-- First column left blank — DataTables will fill numbering client-side so it updates on search/sort/pagination --}}
-                            <td class="px-4 py-3"></td>
-
-                            <td class="px-4 py-3 text-sm text-gray-700">{{ $notice->description }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700">{{ $notice->order_no }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 w-40">
+                            <td></td>
+                            <td class="text-sm text-gray-700">{{ $notice->description }}</td>
+                            <td class="text-sm text-gray-700">{{ $notice->order_no }}</td>
+                            <td class="text-sm text-gray-700 w-40">
                                 {{ \Carbon\Carbon::parse($notice->notice_date)->format('d-m-Y') }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="text-sm">
                                 @if ($notice->pdf_path)
                                     <a href="{{ asset('storage/' . $notice->pdf_path) }}" target="_blank"
                                         class="text-indigo-600 hover:underline flex items-center gap-1">
@@ -155,14 +180,14 @@
                                     <span class="text-gray-400">No File</span>
                                 @endif
                             </td>
-                            <td class="px-4 py-3">
+                            <td>
                                 <span
                                     class="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700 blinking">
                                     Active
                                 </span>
                             </td>
                         </tr>
-                        @empty
+                    @empty
                     @endforelse
                 </tbody>
             </table>
@@ -179,42 +204,20 @@
                 ordering: true,
                 info: true,
                 pageLength: 10,
-                autoWidth: false, // don't let DataTables set widths automatically (keeps header/body aligned)
-                order: [
-                    [3, "asc"]
-                ], // default sort by Date column (index 3)
-                columnDefs: [{
-                        orderable: false,
-                        targets: [4, 5]
-                    }, // PDF & Status not sortable
-                    {
-                        width: "60px",
-                        targets: 0
-                    }, // Sl no small
-                    {
-                        width: "40%",
-                        targets: 1
-                    }, // Description wider
-                    {
-                        width: "100px",
-                        targets: 3
-                    } // Date
+                autoWidth: false,
+                order: [[3, "desc"]],
+                columnDefs: [
+                    { orderable: false, targets: [4, 5] },
+                    { width: "60px", targets: 0 },
+                    { width: "40%", targets: 1 },
+                    { width: "100px", targets: 3 }
                 ],
-                language: {
-                    emptyTable: "No active notices found."
-                },
-                drawCallback: function(settings) {
-                    // optional: can use this for styling after draw
-                }
+                language: { emptyTable: "No active notices found." }
             });
 
-            // Dynamic Sl. No numbering that updates with search/sort/pagination
+            // Dynamic numbering
             table.on('order.dt search.dt draw.dt page.dt', function() {
-                var rows = table.column(0, {
-                    search: 'applied',
-                    order: 'applied'
-                }).nodes();
-
+                var rows = table.column(0, { search: 'applied', order: 'applied' }).nodes();
                 if (rows.length > 0) {
                     rows.each(function(cell, i) {
                         cell.innerHTML = i + 1;
@@ -223,7 +226,5 @@
             }).draw();
         });
     </script>
-
 </body>
-
 </html>
