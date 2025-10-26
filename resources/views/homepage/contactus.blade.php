@@ -11,17 +11,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* white rounded container center with shadow */
         .page-frame {
             background: #ffffff;
             border-radius: 18px;
             max-width: 1050px;
-            margin: 3.5rem auto;
-            padding: 3rem;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
-        /* divider lines inside cards */
+        @media (min-width: 768px) {
+            .page-frame {
+                margin: 3rem auto;
+                padding: 3rem;
+            }
+        }
+
         .card-divider {
             border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
@@ -36,19 +41,20 @@
     </header>
 
     <!-- PAGE CONTENT -->
-    <main class="flex-grow w-full flex items-start justify-center py-8 px-4">
+    <main class="flex-grow w-full flex items-start justify-center py-6 px-3 sm:px-4">
         <div class="page-frame w-full">
 
             <!-- Header -->
             <div class="flex flex-col md:flex-row md:items-start md:gap-8 mb-8">
                 <div class="md:w-1/2">
-                    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">CONTACT US</h1>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
+                        CONTACT US
+                    </h1>
                 </div>
 
-                <div class="md:w-1/2 mt-6 md:mt-0 text-justify">
-                    <p class="text-gray-500 leading-relaxed">
-                        If you have any questions regarding legal aid, free legal assistance, or services provided by
-                        the
+                <div class="md:w-1/2 mt-4 md:mt-0 text-justify">
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        If you have any questions regarding legal aid, free legal assistance, or services provided by the
                         <span class="font-semibold text-gray-800">High Court Legal Services Committee</span>,
                         please feel free to reach out to us via phone, email, or by filling out the contact form below.
                     </p>
@@ -60,7 +66,7 @@
 
                 <!-- Left: Form -->
                 <div class="lg:col-span-7">
-                    <div class="bg-gray-50 rounded-lg shadow-sm p-6">
+                    <div class="bg-gray-50 rounded-lg shadow-sm p-5 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">GET IN TOUCH</h3>
 
                         <form action="" method="POST" class="space-y-4">
@@ -71,7 +77,7 @@
                                     <label class="block text-xs font-semibold text-gray-600 mb-2">NAME</label>
                                     <input name="name" value="{{ old('name') }}" type="text"
                                         placeholder="Enter your name*"
-                                        class="w-full rounded-md border border-gray-200 px-4 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                        class="w-full rounded-md border border-gray-200 px-4 py-2 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
                                     @error('name')
                                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -81,7 +87,7 @@
                                     <label class="block text-xs font-semibold text-gray-600 mb-2">PHONE NUMBER</label>
                                     <input name="phone" value="{{ old('phone') }}" type="text"
                                         placeholder="Enter your phone number*"
-                                        class="w-full rounded-md border border-gray-200 px-4 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                        class="w-full rounded-md border border-gray-200 px-4 py-2 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
                                     @error('phone')
                                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -92,7 +98,7 @@
                                 <label class="block text-xs font-semibold text-gray-600 mb-2">EMAIL</label>
                                 <input name="email" value="{{ old('email') }}" type="email"
                                     placeholder="Enter your email*"
-                                    class="w-full rounded-md border border-gray-200 px-4 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                    class="w-full rounded-md border border-gray-200 px-4 py-2 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
                                 @error('email')
                                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -101,7 +107,7 @@
                             <div>
                                 <label class="block text-xs font-semibold text-gray-600 mb-2">YOUR MESSAGE</label>
                                 <textarea name="message" rows="5" placeholder="Write your message here..."
-                                    class="w-full rounded-md border border-gray-200 px-4 py-3 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">{{ old('message') }}</textarea>
+                                    class="w-full rounded-md border border-gray-200 px-4 py-3 bg-white text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none">{{ old('message') }}</textarea>
                                 @error('message')
                                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -109,7 +115,7 @@
 
                             <div class="pt-2">
                                 <button type="submit"
-                                    class="inline-block px-6 py-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                    class="inline-block w-full sm:w-auto text-center px-6 py-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
                                     SEND MESSAGE
                                 </button>
                             </div>
@@ -121,13 +127,13 @@
                 <div class="lg:col-span-5 flex flex-col gap-6">
 
                     <!-- Contact Information -->
-                    <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+                    <div class="bg-gray-50 rounded-lg p-5 sm:p-6 shadow-sm">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">CONTACT INFORMATION</h3>
                         <div class="card-divider pt-4 pb-4 mb-4"></div>
 
-                        <div class="space-y-4">
+                        <div class="space-y-5">
                             <div class="flex items-start gap-4">
-                                <div class="p-3 rounded-full bg-white border border-gray-100">
+                                <div class="p-3 rounded-full bg-white border border-gray-100 flex-shrink-0">
                                     <i class="fa-solid fa-phone text-blue-700"></i>
                                 </div>
                                 <div>
@@ -137,17 +143,17 @@
                             </div>
 
                             <div class="flex items-start gap-4">
-                                <div class="p-3 rounded-full bg-white border border-gray-100">
+                                <div class="p-3 rounded-full bg-white border border-gray-100 flex-shrink-0">
                                     <i class="fa-solid fa-envelope text-blue-700"></i>
                                 </div>
                                 <div>
                                     <div class="text-xs font-semibold text-gray-600">EMAIL</div>
-                                    <div class="text-sm text-gray-700 mt-1">hclscman@gmail.com</div>
+                                    <div class="text-sm text-gray-700 mt-1 break-all">hclscman@gmail.com</div>
                                 </div>
                             </div>
 
                             <div class="flex items-start gap-4">
-                                <div class="p-3 rounded-full bg-white border border-gray-100">
+                                <div class="p-3 rounded-full bg-white border border-gray-100 flex-shrink-0">
                                     <i class="fa-solid fa-location-dot text-blue-700"></i>
                                 </div>
                                 <div>
@@ -163,7 +169,7 @@
                     </div>
 
                     <!-- Office Hours -->
-                    <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+                    <div class="bg-gray-50 rounded-lg p-5 sm:p-6 shadow-sm">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">OFFICE HOURS</h3>
                         <div class="card-divider pt-4 mb-4"></div>
 
@@ -182,18 +188,16 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
             <!-- Map Section -->
             <div class="mt-10 bg-white rounded-lg overflow-hidden shadow-lg">
-                <div class="h-72 md:h-96 w-full">
+                <div class="h-64 sm:h-72 md:h-96 w-full">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3586.119037553904!2d93.93998387592153!3d24.836700946206804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3749279c702e88d3%3A0x9c60a52603ac5f9d!2sHigh%20Court%20Complex%2C%20Mantripukhri%2C%20Chingmeirong%2C%20Imphal%2C%20Heingang%2C%20Manipur%20795001!5e0!3m2!1sen!2sin!4v1760680143956!5m2!1sen!2sin"
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade" class="w-full h-full rounded-lg">
-                    </iframe>
+                        referrerpolicy="no-referrer-when-downgrade" class="w-full h-full rounded-lg"></iframe>
                 </div>
             </div>
 
@@ -201,7 +205,6 @@
             <div class="mt-8 text-center text-gray-400 text-sm">
                 © {{ date('Y') }} High Court Legal Services Committee. All rights reserved.
             </div>
-
         </div>
     </main>
 
