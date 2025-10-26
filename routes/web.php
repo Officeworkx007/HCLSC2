@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LegalAidController;
 use App\Http\Controllers\Admin\PanelLawyerController;
 use App\Http\Controllers\Admin\NoticeController;
+use App\Http\Controllers\Admin\MediationController;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('homepage.home');
@@ -50,7 +51,6 @@ Route::post('/admin/legal-aid/{id}/reject', [LegalAidController::class, 'rejectA
 Route::post('/legal-aid/{id}/revert', [LegalAidController::class, 'revertApplicant'])
     ->name('admin.legal_aid.revertApplicant');
 
-
 // Panel Lawyers
 Route::get('/admin/panel_lawyers', [PanelLawyerController::class, 'index'])->name('admin.panel_lawyers.index'); // list
 Route::get('/admin/panel_lawyers/create', [PanelLawyerController::class, 'create'])->name('admin.panel_lawyers.create'); // form
@@ -61,8 +61,12 @@ Route::delete('/admin/panel_lawyers/{id}', [PanelLawyerController::class, 'destr
 Route::get('notices', [NoticeController::class, 'index'])->name('admin.notices.index');
 Route::get('notices/create', [NoticeController::class, 'create'])->name('admin.notices.create');
 Route::post('notices/store', [NoticeController::class, 'store'])->name('admin.notices.store');
-
 // Toggle status
 Route::get('notices/{notice}/toggle-status', [NoticeController::class, 'toggleStatus'])->name('admin.notices.toggle-status');
+
+// Mediation Cause Lists
+Route::get('/mediations', [MediationController::class, 'index'])->name('admin.mediations.index');
+Route::get('/mediations/create', [MediationController::class, 'create'])->name('admin.mediations.create');
+Route::post('/mediations/store', [MediationController::class, 'store'])->name('admin.mediations.store');
 
 require __DIR__ . '/auth.php';
