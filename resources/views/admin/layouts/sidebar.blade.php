@@ -138,7 +138,7 @@
                 <button @click="open = !open"
                     class="w-full flex items-center justify-between px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33] focus:outline-none">
                     <div class="flex items-center space-x-3">
-                        <i class="fas fa-clipboard"></i>
+                        <i class="fas fa-file-pdf text-red-500"></i>
                         <span class="sidebar-text">Mediation Causelist</span>
                     </div>
                     <!-- Arrow -->
