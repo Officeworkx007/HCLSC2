@@ -16,7 +16,8 @@ return new class extends Migration
             $table->date('cause_list_date');
             $table->text('description')->nullable();
             $table->string('file_path');
-            $table->enum('status', ['upcoming', 'completed'])->default('upcoming');
+            $table->date('to_be_held_on')->nullable();
+            $table->enum('status', ['upcoming', 'ongoing', 'completed'])->default('upcoming');
             $table->foreignId('uploaded_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

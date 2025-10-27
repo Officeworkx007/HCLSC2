@@ -68,5 +68,8 @@ Route::get('notices/{notice}/toggle-status', [NoticeController::class, 'toggleSt
 Route::get('/mediations', [MediationController::class, 'index'])->name('admin.mediations.index');
 Route::get('/mediations/create', [MediationController::class, 'create'])->name('admin.mediations.create');
 Route::post('/mediations/store', [MediationController::class, 'store'])->name('admin.mediations.store');
+Route::get('/mediations/{id}/edit', [MediationController::class, 'edit'])->name('admin.mediations.edit');
+Route::delete('/mediations/{id}', [MediationController::class, 'destroy'])->name('admin.mediations.destroy');
+Route::put('/mediations/{id}/update', [MediationController::class, 'update'])->name('admin.mediations.update');
 
 require __DIR__ . '/auth.php';

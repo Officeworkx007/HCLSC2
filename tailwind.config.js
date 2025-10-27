@@ -14,6 +14,11 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+        aqua: {
+          DEFAULT: '#00F5D4',
+        },
+      },
         },
     },
 

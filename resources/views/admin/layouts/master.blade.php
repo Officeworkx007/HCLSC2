@@ -12,13 +12,14 @@
     {{-- AdminLTE CSS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
 
+    {{-- Laravel compiled assets --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
-    {{-- Your Laravel compiled assets --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
 
