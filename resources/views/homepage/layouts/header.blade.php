@@ -92,7 +92,7 @@
         <a href="{{ route('homepage.lawyers') }}" class="hover:text-[#FFD700] transition">Panel Lawyers</a>
         <a href="#" class="hover:text-[#FFD700] transition">Gallery</a>
         <a href="#" class="hover:text-[#FFD700] transition">National Lok Adalat</a>
-        <a href="#" class="hover:text-[#FFD700] transition">Mediation</a>
+        <a href="{{ route('homepage.mediation') }}" class="hover:text-[#FFD700] transition">Mediation</a>
         <a href="{{ route('homepage.notice') }}" class="hover:text-[#FFD700] transition">Notice Board</a>
 
         <!-- APPLY DROPDOWN -->

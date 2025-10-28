@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Models\PanelLawyer;
+use App\Models\MediationCauseList;
 
 class HomeController extends Controller
 {
@@ -39,5 +40,11 @@ class HomeController extends Controller
     {
         $panelLawyers = PanelLawyer::paginate(10);
         return view('homepage.lawyers', compact('panelLawyers'));
+    }
+
+    public function mediations()
+    {
+        $mediation = MediationCauseList::paginate(10);
+        return view('homepage.mediation', compact('mediation'));
     }
 }

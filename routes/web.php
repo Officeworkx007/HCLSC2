@@ -15,6 +15,7 @@ Route::get('/', [HomeController::class, 'home'])->name('homepage.home');
 
 // Public Notice Board
 Route::get('/homepage/notice', [HomeController::class, 'circular'])->name('homepage.notice');
+
 Route::get('/homepage/contact', [HomeController::class, 'contact'])->name('homepage.contactus');
 Route::get('/homepage/intro', [HomeController::class, 'hclscintro'])->name('homepage.intro');
 Route::get('/homepage/lawyers', [HomeController::class, 'lawyers'])->name('homepage.lawyers');
@@ -23,6 +24,9 @@ Route::get('/homepage/lawyers', [HomeController::class, 'lawyers'])->name('homep
 Route::get('/homepage', [LegalAidController::class, 'index'])->name('homepage.legalaid');
 Route::post('/homepage/store', [LegalAidController::class, 'store'])->name('homepage.legalaid.store');
 Route::get('/homepage/track', [LegalAidController::class, 'trackPage'])->name('homepage.track');
+
+//Mediation Cause List
+Route::get('/homepage/mediation', [HomeController::class, 'mediations'])->name('homepage.mediation');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
