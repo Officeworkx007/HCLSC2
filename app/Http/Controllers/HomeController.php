@@ -54,12 +54,17 @@ class HomeController extends Controller
     {
         $file = \App\Models\MediationCauseList::findOrFail($id);
 
+        // Ensure file exists
         if (!$file->file_path || !\Storage::disk('public')->exists($file->file_path)) {
             abort(404, 'File not found.');
         }
 
-        // Return the file as a public URL
-        $url = asset('storage/' . $file->file_path);
-        return redirect($url); // just redirects browser to open directly
+        // Get the full public URL of the PDF
+        $pdfUrl = asset('storage/' . $file->file_path);
+
+        // Redirect to the PDF.js viewer with the file URL as a query parameter
+        $viewerUrl = asset('pdfjs/web/viewer.html') . '?file=' . urlencode($pdfUrl);
+
+        return redirect($viewerUrl);
     }
 }

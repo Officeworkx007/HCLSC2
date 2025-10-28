@@ -132,11 +132,10 @@
                                 @if ($list->file_path)
                                     <div class="flex gap-3">
                                         <!-- View Button -->
-                                        <button
-                                            onclick="openPdfModal('{{ route('homepage.mediation.view.pdf', $list->id) }}')"
-                                            class="text-blue-600 hover:underline flex items-center gap-1">
-                                            <i class="fa-solid fa-eye"></i> View
-                                        </button>
+                                        <a href="{{ route('homepage.mediation.view.pdf', $list->id) }}" target="_blank"
+                                            class="text-indigo-600 hover:underline flex items-center gap-1">
+                                            <i class="fa-solid fa-file-pdf"></i> View PDF
+                                        </a>
 
                                         <!-- Download Button -->
                                         <a href="{{ asset('storage/' . $list->file_path) }}" download
