@@ -19,6 +19,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
+    <!-- ✅ PDF.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.js"></script>
+
     <style>
         .notice-container {
             max-width: 1400px;
@@ -80,6 +85,21 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
         @media (max-width: 640px) {
             .notice-container {
                 width: 100%;
@@ -130,12 +150,12 @@
                             </td>
                             <td class="text-sm">
                                 @if ($list->file_path)
-                                    <div class="flex gap-3">
+                                    <div class="flex items-center gap-5">
                                         <!-- View Button -->
-                                        <a href="{{ route('homepage.mediation.view.pdf', $list->id) }}" target="_blank"
-                                            class="text-indigo-600 hover:underline flex items-center gap-1">
-                                            <i class="fa-solid fa-file-pdf"></i> View PDF
-                                        </a>
+                                        <button onclick="openPdfViewer('{{ asset('storage/' . $list->file_path) }}')"
+                                            class="text-blue-600 hover:underline flex items-center gap-1">
+                                            <i class="fa-solid fa-eye"></i> View
+                                        </button>
 
                                         <!-- Download Button -->
                                         <a href="{{ asset('storage/' . $list->file_path) }}" download
@@ -165,22 +185,18 @@
         </div>
     </div>
 
-    @include('homepage.layouts.footer')
-
-    <!-- PDF Viewer Modal -->
-    <div id="pdfModal"
-        class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-white w-11/12 h-[90vh] rounded-lg relative shadow-lg flex flex-col">
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="bg-white rounded-lg shadow-xl max-w-6xl w-[90%] h-[90vh] flex flex-col relative">
             <button onclick="closePdfModal()"
-                class="absolute top-3 right-4 text-3xl font-bold text-red-600 hover:text-red-800">&times;</button>
-
-            <canvas id="pdfCanvas" class="w-full h-full"></canvas>
+                class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600">
+                ✕
+            </button>
+            <div id="pdf-viewer" class="flex-1 overflow-auto p-4 bg-gray-100 rounded-lg"></div>
         </div>
     </div>
 
-    <!-- PDF.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+    @include('homepage.layouts.footer')
 
     <script>
         // DataTables setup
@@ -217,7 +233,7 @@
                 }
             });
 
-            // Auto numbering
+            // Auto numbering for Sl. No
             table.on('order.dt search.dt draw.dt page.dt', function() {
                 let rows = table.column(0, {
                     search: 'applied',
@@ -229,46 +245,43 @@
             }).draw();
         });
 
-        // PDF.js setup
-        const pdfjsLib = window['pdfjs-dist/build/pdf'];
-        pdfjsLib.GlobalWorkerOptions.workerSrc =
-            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        // ===== PDF.js Viewer =====
+        async function openPdfViewer(pdfUrl) {
+            document.getElementById('pdfModal').classList.add('active');
+            const viewer = document.getElementById('pdf-viewer');
+            viewer.innerHTML = "<p class='text-center text-gray-500 mt-4'>Loading PDF...</p>";
 
-        let pdfDoc = null;
-        const canvas = document.getElementById('pdfCanvas');
-        const ctx = canvas.getContext('2d');
+            try {
+                const loadingTask = pdfjsLib.getDocument(pdfUrl);
+                const pdf = await loadingTask.promise;
+                viewer.innerHTML = ''; // clear loader
 
-        function openPdfModal(url) {
-            document.getElementById('pdfModal').classList.remove('hidden');
-            pdfjsLib.getDocument(url).promise.then(function(pdf) {
-                pdfDoc = pdf;
-                renderPage(1);
-            }).catch(err => {
-                alert("Error loading PDF file.");
-                console.error(err);
-            });
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    const scale = 1.2;
+                    const viewport = page.getViewport({
+                        scale
+                    });
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    canvas.classList.add("mb-4", "shadow-md", "bg-white");
+                    viewer.appendChild(canvas);
+                    await page.render({
+                        canvasContext: context,
+                        viewport
+                    }).promise;
+                }
+            } catch (error) {
+                viewer.innerHTML =
+                    `<p class='text-center text-red-500 mt-4'>Failed to load PDF: ${error.message}</p>`;
+            }
         }
 
         function closePdfModal() {
-            document.getElementById('pdfModal').classList.add('hidden');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            pdfDoc = null;
-        }
-
-        function renderPage(num) {
-            pdfDoc.getPage(num).then(function(page) {
-                const viewport = page.getViewport({
-                    scale: 1.2
-                });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-                page.render(renderContext);
-            });
+            document.getElementById('pdfModal').classList.remove('active');
+            document.getElementById('pdf-viewer').innerHTML = '';
         }
     </script>
 </body>
