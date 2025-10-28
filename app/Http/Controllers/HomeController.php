@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Models\PanelLawyer;
 use App\Models\MediationCauseList;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -44,7 +46,20 @@ class HomeController extends Controller
 
     public function mediations()
     {
-        $mediation = MediationCauseList::paginate(10);
-        return view('homepage.mediation', compact('mediation'));
+        $causeLists = \App\Models\MediationCauseList::orderByDesc('to_be_held_on')->paginate(10);
+        return view('homepage.mediation', compact('causeLists'));
+    }
+
+    public function viewPDF($id)
+    {
+        $file = \App\Models\MediationCauseList::findOrFail($id);
+
+        if (!$file->file_path || !\Storage::disk('public')->exists($file->file_path)) {
+            abort(404, 'File not found.');
+        }
+
+        // Return the file as a public URL
+        $url = asset('storage/' . $file->file_path);
+        return redirect($url); // just redirects browser to open directly
     }
 }

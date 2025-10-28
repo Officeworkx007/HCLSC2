@@ -27,6 +27,9 @@ Route::get('/homepage/track', [LegalAidController::class, 'trackPage'])->name('h
 
 //Mediation Cause List
 Route::get('/homepage/mediation', [HomeController::class, 'mediations'])->name('homepage.mediation');
+Route::get('/homepage/mediation/view/{id}', [HomeController::class, 'viewPDF'])
+    ->name('homepage.mediation.view.pdf');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
