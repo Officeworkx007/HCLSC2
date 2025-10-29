@@ -57,19 +57,20 @@
                                 <td class="px-4 py-3 text-sm text-gray-700">{{ $list->description ?? '-' }}</td>
 
                                 {{-- PDF --}}
-                                <td class="px-4 py-3 text-sm text-gray-700 flex items-center gap-2">
+                                <td class="px-4 py-3 text-sm text-gray-700">
                                     @if ($list->file_path)
-                                        <a href="{{ asset('storage/' . $list->file_path) }}" target="_blank"
-                                            class="flex items-center gap-2 hover:text-blue-600 transition">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500"
-                                                fill="currentColor" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zM13 3.5L18.5 9H14a1 1 0 0 1-1-1V3.5z" />
-                                            </svg>
-                                            <span class="truncate max-w-[150px]">{{ basename($list->file_path) }}</span>
-                                        </a>
-                                    @else
-                                        <span class="text-gray-400 italic">No file</span>
+                                        <div class="flex flex-col gap-2">
+                                            <a href="{{ asset('storage/' . $list->file_path) }}" target="_blank"
+                                                class="flex items-center gap-2 hover:text-blue-600 transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500"
+                                                    fill="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zM13 3.5L18.5 9H14a1 1 0 0 1-1-1V3.5z" />
+                                                </svg>
+                                                <span class="truncate max-w-[150px]">{{ basename($list->file_path) }}</span>
+                                            </a>
+                                        @else
+                                            <span class="text-gray-400 italic">No file</span>
                                     @endif
                                 </td>
 

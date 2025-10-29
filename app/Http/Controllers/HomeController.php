@@ -50,20 +50,21 @@ class HomeController extends Controller
         return view('homepage.mediation', compact('causeLists'));
     }
 
-    public function viewPDF($id)
+    public function viewPdf($filename)
     {
-        $file = \App\Models\MediationCauseList::findOrFail($id);
+        // Decode URL-encoded filename (handles spaces, dots, etc.)
+        $decodedFilename = urldecode($filename);
 
-        if (!$file->file_path || !Storage::disk('public')->exists($file->file_path)) {
+        // Build the public URL (from /public/storage symlink)
+        $fileUrl = asset('storage/causelists/' . $decodedFilename);
+
+        // Check if the actual file exists in storage
+        $filePath = storage_path('app/public/causelists/' . $decodedFilename);
+        if (!file_exists($filePath)) {
             abort(404, 'File not found.');
         }
 
-        $filePath = Storage::disk('public')->path($file->file_path);
-
-        return response()->file($filePath, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . basename($filePath) . '"',
-            'Cache-Control' => 'no-cache, must-revalidate',
-        ]);
+        // Redirect to PDF.js viewer with ?file= parameter
+        return redirect("/pdfjs/web/viewer.html?file=" . urlencode($fileUrl));
     }
 }

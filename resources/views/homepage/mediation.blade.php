@@ -19,11 +19,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
-    <!-- ✅ PDF.js CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.js"></script>
-
     <style>
         .notice-container {
             max-width: 1400px;
@@ -85,21 +80,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Modal */
-        .modal {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
         @media (max-width: 640px) {
             .notice-container {
                 width: 100%;
@@ -141,6 +121,7 @@
                     @forelse ($causeLists as $list)
                         @php
                             $status = $list->dynamic_status ?? 'upcoming';
+                            $fileName = basename($list->file_path ?? '');
                         @endphp
                         <tr class="hover:bg-gray-50 transition">
                             <td></td>
@@ -148,23 +129,20 @@
                             <td class="text-sm text-gray-700">
                                 {{ \Carbon\Carbon::parse($list->to_be_held_on)->format('d-m-Y') }}
                             </td>
-                            <td class="text-sm">
-                                @if ($list->file_path)
-                                    <div class="flex items-center gap-5">
-                                        <!-- View Button -->
-                                        <button onclick="openPdfViewer('{{ asset('storage/' . $list->file_path) }}')"
-                                            class="text-blue-600 hover:underline flex items-center gap-1">
-                                            <i class="fa-solid fa-eye"></i> View
-                                        </button>
+                            <td class="text-sm space-x-2">
+                                @if (!empty($fileName))
+                                    <a href="{{ route('homepage.mediation.view', ['filename' => urlencode($fileName)]) }}"
+                                        target="_blank"
+                                        class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-md shadow hover:bg-blue-700 transition">
+                                        <i class="fa-solid fa-eye mr-1"></i> View
+                                    </a>
 
-                                        <!-- Download Button -->
-                                        <a href="{{ asset('storage/' . $list->file_path) }}" download
-                                            class="text-green-600 hover:underline flex items-center gap-1">
-                                            <i class="fa-solid fa-download"></i> Download
-                                        </a>
-                                    </div>
+                                    <a href="{{ asset('storage/causelists/' . $fileName) }}" download
+                                        class="inline-flex items-center px-3 py-1.5 bg-green-600 text-white text-sm font-medium rounded-md shadow hover:bg-green-700 transition">
+                                        <i class="fa-solid fa-download mr-1"></i> Download
+                                    </a>
                                 @else
-                                    <span class="text-gray-400">No File</span>
+                                    <span class="text-gray-400 italic">No file</span>
                                 @endif
                             </td>
                             <td>
@@ -185,21 +163,9 @@
         </div>
     </div>
 
-    <!-- PDF Modal -->
-    <div id="pdfModal" class="modal">
-        <div class="bg-white rounded-lg shadow-xl max-w-6xl w-[90%] h-[90vh] flex flex-col relative">
-            <button onclick="closePdfModal()"
-                class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600">
-                ✕
-            </button>
-            <div id="pdf-viewer" class="flex-1 overflow-auto p-4 bg-gray-100 rounded-lg"></div>
-        </div>
-    </div>
-
     @include('homepage.layouts.footer')
 
     <script>
-        // DataTables setup
         $(document).ready(function() {
             var table = $('#mediationTable').DataTable({
                 paging: true,
@@ -208,81 +174,23 @@
                 info: true,
                 pageLength: 10,
                 autoWidth: false,
-                order: [
-                    [2, "desc"]
+                order: [[2, "desc"]],
+                columnDefs: [
+                    { orderable: false, targets: [3, 4] },
+                    { width: "60px", targets: 0 },
+                    { width: "40%", targets: 1 },
+                    { width: "120px", targets: 2 }
                 ],
-                columnDefs: [{
-                        orderable: false,
-                        targets: [3, 4]
-                    },
-                    {
-                        width: "60px",
-                        targets: 0
-                    },
-                    {
-                        width: "40%",
-                        targets: 1
-                    },
-                    {
-                        width: "120px",
-                        targets: 2
-                    }
-                ],
-                language: {
-                    emptyTable: "No mediation cause list found."
-                }
+                language: { emptyTable: "No mediation cause list found." }
             });
 
-            // Auto numbering for Sl. No
             table.on('order.dt search.dt draw.dt page.dt', function() {
-                let rows = table.column(0, {
-                    search: 'applied',
-                    order: 'applied'
-                }).nodes();
+                let rows = table.column(0, { search: 'applied', order: 'applied' }).nodes();
                 rows.each(function(cell, i) {
                     cell.innerHTML = i + 1;
                 });
             }).draw();
         });
-
-        // ===== PDF.js Viewer =====
-        async function openPdfViewer(pdfUrl) {
-            document.getElementById('pdfModal').classList.add('active');
-            const viewer = document.getElementById('pdf-viewer');
-            viewer.innerHTML = "<p class='text-center text-gray-500 mt-4'>Loading PDF...</p>";
-
-            try {
-                const loadingTask = pdfjsLib.getDocument(pdfUrl);
-                const pdf = await loadingTask.promise;
-                viewer.innerHTML = ''; // clear loader
-
-                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                    const page = await pdf.getPage(pageNum);
-                    const scale = 1.2;
-                    const viewport = page.getViewport({
-                        scale
-                    });
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-                    canvas.classList.add("mb-4", "shadow-md", "bg-white");
-                    viewer.appendChild(canvas);
-                    await page.render({
-                        canvasContext: context,
-                        viewport
-                    }).promise;
-                }
-            } catch (error) {
-                viewer.innerHTML =
-                    `<p class='text-center text-red-500 mt-4'>Failed to load PDF: ${error.message}</p>`;
-            }
-        }
-
-        function closePdfModal() {
-            document.getElementById('pdfModal').classList.remove('active');
-            document.getElementById('pdf-viewer').innerHTML = '';
-        }
     </script>
 </body>
 

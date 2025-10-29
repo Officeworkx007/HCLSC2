@@ -41,8 +41,9 @@ class MediationController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        // Store uploaded file in 'storage/app/public/causelists'
-        $filePath = $request->file('file')->store('causelists', 'public');
+        // Store uploaded file in 'storage/app/public/causelists' with original file name
+        $originalName = $request->file('file')->getClientOriginalName();
+        $filePath = $request->file('file')->storeAs('causelists', $originalName, 'public');
 
         // Determine initial status dynamically
         $heldDate = \Carbon\Carbon::parse($request->to_be_held_on);
@@ -100,11 +101,11 @@ class MediationController extends Controller
         $filePath = $causeList->file_path;
 
         if ($request->hasFile('file')) {
-            // Delete old file if exists
             if ($filePath && \Storage::disk('public')->exists($filePath)) {
                 \Storage::disk('public')->delete($filePath);
             }
-            $filePath = $request->file('file')->store('causelists', 'public');
+            $originalName = $request->file('file')->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('causelists', $originalName, 'public');
         }
 
         $causeList->update([
