@@ -35,4 +35,7 @@ return [
         ],
     ],
 
+    'adobe_pdf' => [
+        'client_id' => env('ADOBE_PDF_CLIENT_ID'),
+    ],
 ];

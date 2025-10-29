@@ -134,4 +134,43 @@ class MediationController extends Controller
         return redirect()->route('admin.mediations.index')
             ->with('success', 'Cause list deleted successfully!');
     }
+
+    public function viewPdf($filename)
+    {
+        // Generate the URL pointing to the NEW route that streams the content
+        $fileUrl = route('admin.mediations.servePdfContent', ['filename' => $filename]);
+
+        return view('admin.mediations.pdf-view', compact('fileUrl'));
+    }
+    // In app/Http/Controllers/Admin/MediationController.php
+
+    /**
+     * Serves the PDF file content directly to the browser for viewing.
+     */
+
+    // In app/Http/Controllers/Admin/MediationController.php
+
+    public function servePdfContent($filename)
+    {
+        $filePath = 'causelists/' . $filename;
+
+        if (!\Storage::disk('public')->exists($filePath)) {
+            abort(404, 'PDF file not found.');
+        }
+
+        // Read the file content as raw bytes
+        $pdfContent = \Storage::disk('public')->get($filePath);
+        $fileNameForDisplay = pathinfo($filename, PATHINFO_BASENAME);
+
+        // This is the CRITICAL part: 
+        // We explicitly set 'inline' and the Content-Type header.
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Length', strlen($pdfContent))
+            ->header('Content-Disposition', 'inline; filename="' . $fileNameForDisplay . '"')
+            // Add CORS headers, as the Adobe API is making a cross-origin request to this URL
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
+    }
 }
