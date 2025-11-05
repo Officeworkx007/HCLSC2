@@ -4,77 +4,73 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
 
-    <!-- Total Notices -->
     <div
-        class="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-2xl shadow-md p-5 sm:p-6 flex items-center justify-between hover:scale-[1.02] transition">
+        class="bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-[1.02] p-6 flex items-center justify-between">
         <div>
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Notices</h3>
-            <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">{{ $totalNotices }}</p>
+            <h3 class="text-sm font-medium text-blue-600 uppercase tracking-wider">Total Notices</h3>
+            {{-- Big, bold number is a modern dashboard trend --}}
+            <p class="text-4xl font-extrabold text-gray-900 mt-2">{{ $totalNotices }}</p>
         </div>
-        <div class="bg-orange-200 text-orange-700 p-3 sm:p-4 rounded-full">
-            <i class="fa-solid fa-bullhorn text-xl sm:text-2xl"></i>
+        {{-- Icon with a subtle, NIC-style blue circle background --}}
+        <div class="bg-blue-50 text-blue-600 p-4 rounded-full">
+            <i class="fa-solid fa-bullhorn text-2xl"></i>
         </div>
     </div>
 
-    <!-- Total Panel Lawyers -->
     <div
-        class="bg-gradient-to-br from-green-50 to-emerald-100 border border-emerald-200 rounded-2xl shadow-md p-5 sm:p-6 flex items-center justify-between hover:scale-[1.02] transition">
+        class="bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-[1.02] p-6 flex items-center justify-between">
         <div>
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide">Panel Lawyers</h3>
-            <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">{{ $totalPanelLawyers }}</p>
+            <h3 class="text-sm font-medium text-emerald-600 uppercase tracking-wider">Panel Lawyers</h3>
+            <p class="text-4xl font-extrabold text-gray-900 mt-2">{{ $totalPanelLawyers }}</p>
         </div>
-        <div class="bg-emerald-200 text-emerald-700 p-3 sm:p-4 rounded-full">
-            <i class="fa-solid fa-scale-balanced text-xl sm:text-2xl"></i>
+        <div class="bg-emerald-50 text-emerald-600 p-4 rounded-full">
+            <i class="fa-solid fa-scale-balanced text-2xl"></i>
         </div>
     </div>
 
-    <!-- Total Applications -->
     <div
-        class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl shadow-md p-5 sm:p-6 flex items-center justify-between hover:scale-[1.02] transition">
+        class="bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-[1.02] p-6 flex items-center justify-between">
         <div>
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Applications</h3>
-            <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">{{ $totalApplications }}</p>
+            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Applications</h3>
+            <p class="text-4xl font-extrabold text-gray-900 mt-2">{{ $totalApplications }}</p>
         </div>
-        <div class="bg-blue-200 text-blue-700 p-3 sm:p-4 rounded-full">
-            <i class="fa-solid fa-file-lines text-xl sm:text-2xl"></i>
+        <div class="bg-indigo-50 text-indigo-600 p-4 rounded-full">
+            <i class="fa-solid fa-file-lines text-2xl"></i>
         </div>
     </div>
 
-    <!-- Assigned Lawyers -->
     <div
-        class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-2xl shadow-md p-5 sm:p-6 flex items-center justify-between hover:scale-[1.02] transition">
+        class="bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-[1.02] p-6 flex items-center justify-between">
         <div>
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide">Assigned Lawyers</h3>
-            <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">{{ $assignedApplications }}</p>
+            <h3 class="text-sm font-medium text-purple-600 uppercase tracking-wider">Assigned Applications</h3>
+            <p class="text-4xl font-extrabold text-gray-900 mt-2">{{ $assignedApplications }}</p>
         </div>
-        <div class="bg-purple-200 text-purple-700 p-3 sm:p-4 rounded-full">
-            <i class="fa-solid fa-user-tie text-xl sm:text-2xl"></i>
+        <div class="bg-purple-50 text-purple-600 p-4 rounded-full">
+            <i class="fa-solid fa-user-tie text-2xl"></i>
         </div>
     </div>
 
-    <!-- Pending Applications -->
     <div
-        class="bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-2xl shadow-md p-5 sm:p-6 flex items-center justify-between hover:scale-[1.02] transition">
+        class="bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-[1.02] p-6 flex items-center justify-between">
         <div>
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide">Pending Applications</h3>
-            <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">{{ $pendingApplications }}</p>
+            <h3 class="text-sm font-medium text-yellow-600 uppercase tracking-wider">Pending Applications</h3>
+            <p class="text-4xl font-extrabold text-gray-900 mt-2">{{ $pendingApplications }}</p>
         </div>
-        <div class="bg-yellow-200 text-yellow-700 p-3 sm:p-4 rounded-full">
-            <i class="fa-solid fa-hourglass-half text-xl sm:text-2xl"></i>
+        <div class="bg-yellow-50 text-yellow-600 p-4 rounded-full">
+            <i class="fa-solid fa-hourglass-half text-2xl"></i>
         </div>
     </div>
 
-    <!-- Rejected Applications -->
     <div
-        class="bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 rounded-2xl shadow-md p-5 sm:p-6 flex items-center justify-between hover:scale-[1.02] transition">
+        class="bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-[1.02] p-6 flex items-center justify-between">
         <div>
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide">Rejected Applications</h3>
-            <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">{{ $rejectedApplications }}</p>
+            <h3 class="text-sm font-medium text-rose-600 uppercase tracking-wider">Rejected Applications</h3>
+            <p class="text-4xl font-extrabold text-gray-900 mt-2">{{ $rejectedApplications }}</p>
         </div>
-        <div class="bg-rose-200 text-rose-700 p-3 sm:p-4 rounded-full">
-            <i class="fa-solid fa-xmark-circle text-xl sm:text-2xl"></i>
+        <div class="bg-rose-50 text-rose-600 p-4 rounded-full">
+            <i class="fa-solid fa-circle-xmark text-2xl"></i>
         </div>
     </div>
 

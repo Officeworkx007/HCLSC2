@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PanelLawyer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PanelLawyerController extends Controller
 {
@@ -32,7 +33,8 @@ class PanelLawyerController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        // 1. Validation and 10MB Limit Enforcement
+        $validatedData = $request->validate([
             'first_name'   => 'required|string|max:100',
             'last_name'    => 'required|string|max:100',
             'email'        => 'nullable|email|unique:panel_lawyers,email',
@@ -40,18 +42,43 @@ class PanelLawyerController extends Controller
             'address'      => 'nullable|string|max:500',
             'city'         => 'nullable|string|max:50',
             'pin_code'     => 'nullable|string|max:20',
+
+            // 📸 Photo Validation (max:10240 = 10MB)
+            'photo'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         ]);
 
-        PanelLawyer::create($data);
+        $validatedData['photo'] = null; // Initialize photo path as null
+
+        // 2. Handle File Upload
+        if ($request->hasFile('photo')) {
+            // Store the file and get the path.
+            // Files will be stored in storage/app/public/lawyer_photos/
+            $path = $request->file('photo')->store('lawyer_photos', 'public');
+
+            // Save the public path to the data array
+            $validatedData['photo'] = $path;
+        }
+
+        // 3. Create the Database Record
+        PanelLawyer::create($validatedData);
 
         return redirect()
             ->route('admin.panel_lawyers.index')
             ->with('success', 'Panel Lawyer added successfully!');
     }
 
+    /**
+     * Remove the specified panel lawyer from storage.
+     */
     public function destroy($id)
     {
         $lawyer = PanelLawyer::findOrFail($id);
+
+        // 🗑️ Delete the photo file from storage if it exists
+        if ($lawyer->photo) {
+            Storage::disk('public')->delete($lawyer->photo);
+        }
+
         $lawyer->delete();
 
         return redirect()

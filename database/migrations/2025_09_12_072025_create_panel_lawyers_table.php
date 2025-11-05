@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('pin_code')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

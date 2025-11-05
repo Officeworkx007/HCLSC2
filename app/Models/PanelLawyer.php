@@ -17,5 +17,6 @@ class PanelLawyer extends Model
         'address',
         'city',
         'pin_code',
+        'photo',
     ];
 }
