@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('pin_code')->nullable();
             $table->string('photo')->nullable();
+            $table->string('designation')->nullable();
             $table->timestamps();
         });
     }

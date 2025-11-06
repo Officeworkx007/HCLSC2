@@ -18,7 +18,7 @@
 
             <div class="space-y-6">
 
-                {{-- Name Fields --}}
+                {{-- Name & Designation Fields (Updated) --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name <span class="text-red-500">*</span></label>
@@ -41,10 +41,23 @@
                     </div>
                 </div>
 
+                {{-- 🆕 NEW FIELD: Designation (Full Width) --}}
+                <div class="grid grid-cols-1 gap-6">
+                    <div>
+                        <label for="designation" class="block text-sm font-medium text-gray-700 mb-1">Designation</label>
+                        <input type="text" name="designation" id="designation"
+                               value="{{ old('designation', $lawyer->designation) }}"
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 @error('designation') border-red-500 @enderror">
+                        @error('designation')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
                 {{-- Contact Fields --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email (Optional)</label>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input type="email" name="email" id="email"
                                value="{{ old('email', $lawyer->email) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 @error('email') border-red-500 @enderror">
@@ -54,7 +67,7 @@
                     </div>
 
                     <div>
-                        <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
+                        <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                         <input type="text" name="phone_number" id="phone_number"
                                value="{{ old('phone_number', $lawyer->phone_number) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 @error('phone_number') border-red-500 @enderror">
@@ -64,10 +77,10 @@
                     </div>
                 </div>
 
-                {{-- Address Fields --}}
+                {{-- Address Fields (City/Pin Code) --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City (Optional)</label>
+                        <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
                         <input type="text" name="city" id="city"
                                value="{{ old('city', $lawyer->city) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 @error('city') border-red-500 @enderror">
@@ -77,7 +90,7 @@
                     </div>
 
                     <div>
-                        <label for="pin_code" class="block text-sm font-medium text-gray-700 mb-1">Pin Code (Optional)</label>
+                        <label for="pin_code" class="block text-sm font-medium text-gray-700 mb-1">Pin Code</label>
                         <input type="text" name="pin_code" id="pin_code"
                                value="{{ old('pin_code', $lawyer->pin_code) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 @error('pin_code') border-red-500 @enderror">
@@ -89,9 +102,9 @@
 
                 {{-- Address Textarea --}}
                 <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address (Optional)</label>
+                    <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
                     <textarea name="address" id="address" rows="3"
-                              class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 @error('address') border-red-500 @enderror">{{ old('address', $lawyer->address) }}</textarea>
+                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 @error('address') border-red-500 @enderror">{{ old('address', $lawyer->address) }}</textarea>
                     @error('address')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                     @enderror
@@ -138,7 +151,7 @@
                     </a>
                     <button type="submit"
                             class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-indigo-700 transition transform hover:scale-[1.01]">
-                        <i class="fas fa-save mr-2"></i> Update Lawyer
+                        <i class="fas fa-save mr-2"></i> **Update Lawyer**
                     </button>
                 </div>
             </div>

@@ -42,6 +42,7 @@ class PanelLawyerController extends Controller
             'address'      => 'nullable|string|max:500',
             'city'         => 'nullable|string|max:50',
             'pin_code'     => 'nullable|string|max:20',
+            'designation'  => 'nullable|string|max:50',
 
             // 📸 Photo Validation (max:10240 = 10MB)
             'photo'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
@@ -112,6 +113,8 @@ class PanelLawyerController extends Controller
             'address'      => 'nullable|string|max:500',
             'city'         => 'nullable|string|max:50',
             'pin_code'     => 'nullable|string|max:20',
+            'designation'  => 'nullable|string|max:50',
+
             // Photo is nullable, max 10MB
             'photo'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         ]);

@@ -63,6 +63,15 @@
                                 class="w-full border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('last_name') border-red-500 @enderror" />
                             @error('last_name') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
                         </div>
+
+                        {{-- 🆕 NEW FIELD: Designation --}}
+                        <div class="sm:col-span-2">
+                            <label for="designation" class="block text-sm font-medium text-gray-700 mb-1">Designation</label>
+                            <input type="text" id="designation" name="designation" value="{{ old('designation') }}"
+                                class="w-full border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition @error('designation') border-red-500 @enderror" />
+                            @error('designation') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+                        </div>
+
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                             <input type="email" id="email" name="email" value="{{ old('email') }}"
@@ -136,8 +145,7 @@
                     return;
                 }
 
-                // Show the progress bar simulation (since we are using a standard form submission,
-                // this is a simulated bar until the page redirects after submission)
+                // Show the progress bar simulation
                 simulateProgress();
 
                 // Show the preview
