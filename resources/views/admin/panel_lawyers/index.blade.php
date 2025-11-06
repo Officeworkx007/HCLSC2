@@ -34,10 +34,12 @@
             <table id="panelLawyersTable" class="min-w-full divide-y divide-gray-200 text-sm text-left text-gray-500">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">#</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Sl. No.</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Photo
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name
+                        </th>
+                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Designation
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email
                         </th>
@@ -77,6 +79,7 @@
                                     {{ $lawyer->first_name }} {{ $lawyer->last_name }}
                                 </div>
                             </td>
+                            <td class="px-6 py-4">{{ $lawyer->designation ?? '-' }}</td>
                             <td class="px-6 py-4">{{ $lawyer->email ?? '-' }}</td>
                             <td class="px-6 py-4">{{ $lawyer->phone_number ?? '-' }}</td>
                             <td class="px-6 py-4">{{ $lawyer->address ?? '-' }}</td>

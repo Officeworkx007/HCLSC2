@@ -89,6 +89,7 @@
                             <th class="px-4 sm:px-6 py-4 w-10">#</th>
                             <th class="px-4 sm:px-6 py-4 w-16">Photo</th>
                             <th class="px-4 sm:px-6 py-4">Name</th>
+                            <th class="px-4 sm:px-6 py-4">Designation</th>
                             <th class="px-4 sm:px-6 py-4">Email</th>
                             <th class="px-4 sm:px-6 py-4">Address</th>
                         </tr>
@@ -123,6 +124,7 @@
                                     </div>
                                 </td>
 
+                                <td class="px-4 sm:px-6 py-4 whitespace-normal">{{ $lawyer->designation ?? '-' }}</td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-normal">{{ $lawyer->email ?? '-' }}</td>
                                 <td class="px-4 sm:px-6 py-4 whitespace-normal">{{ $lawyer->address ?? '-' }}</td>
                             </tr>
