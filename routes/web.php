@@ -48,7 +48,7 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 // =========================================================================
 // PDF CONTENT SERVER (UNPROTECTED) - FIX FOR ADOBE API 🛠️
 // =========================================================================
-// This route MUST be outside the 'auth' middleware group so the Adobe viewer 
+// This route MUST be outside the 'auth' middleware group so the Adobe viewer
 // (which is unauthenticated) can successfully fetch the raw PDF bytes.
 Route::get('/mediations/serve-pdf/{filename}', [MediationController::class, 'servePdfContent'])->name('admin.mediations.servePdfContent');
 
@@ -56,7 +56,7 @@ Route::get('/mediations/serve-pdf/{filename}', [MediationController::class, 'ser
 // =========================================================================
 // ADMIN PANEL (PROTECTED)
 // =========================================================================
-Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () { 
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -74,6 +74,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/panel_lawyers/create', [PanelLawyerController::class, 'create'])->name('admin.panel_lawyers.create');
     Route::post('/panel_lawyers/store', [PanelLawyerController::class, 'store'])->name('admin.panel_lawyers.store');
     Route::delete('/panel_lawyers/{id}', [PanelLawyerController::class, 'destroy'])->name('admin.panel_lawyers.destroy');
+    Route::get('/panel_lawyers/{id}/edit', [PanelLawyerController::class, 'edit'])->name('admin.panel_lawyers.edit');
+    Route::put('/panel_lawyers/{id}/update', [PanelLawyerController::class, 'update'])->name('admin.panel_lawyers.update');
 
     // Notices (Protected)
     Route::get('notices', [NoticeController::class, 'index'])->name('admin.notices.index');

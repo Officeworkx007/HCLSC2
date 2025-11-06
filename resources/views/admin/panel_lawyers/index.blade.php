@@ -9,7 +9,9 @@
 
         {{-- 🔔 Success/Error Message Display (Updated for Fade-out) --}}
         @if (session('success'))
-            <div id="success-alert" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-lg shadow-md transition-opacity duration-500" role="alert">
+            <div id="success-alert"
+                class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-lg shadow-md transition-opacity duration-500"
+                role="alert">
                 <p class="font-bold">Success</p>
                 <p>{{ session('success') }}</p>
             </div>
@@ -19,7 +21,8 @@
             <h2 class="text-2xl font-bold text-gray-800">Panel Lawyers</h2>
             <a href="{{ route('admin.panel_lawyers.create') }}"
                 class="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-indigo-700 transition transform hover:scale-[1.01]">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
                 Add Panel Lawyer
@@ -32,14 +35,22 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">#</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Photo</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone Number</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Address</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">City</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Pin Code</th>
-                        <th class="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Photo
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone
+                            Number</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Address
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">City
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Pin
+                            Code</th>
+                        <th class="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 bg-white">
@@ -54,7 +65,8 @@
                                             src="{{ asset('storage/' . $lawyer->photo) }}"
                                             alt="{{ $lawyer->first_name }} Photo">
                                     @else
-                                        <div class="h-full w-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold text-sm border-2 border-dashed border-gray-400">
+                                        <div
+                                            class="h-full w-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold text-sm border-2 border-dashed border-gray-400">
                                             {{ strtoupper(substr($lawyer->first_name, 0, 1)) }}
                                         </div>
                                     @endif
@@ -73,12 +85,11 @@
 
                             <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center gap-2">
-                                    <a href=""
+                                    <a href="{{ route('admin.panel_lawyers.edit', $lawyer->id) }}"
                                         class="p-2 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 transition"
                                         title="Edit">
                                         <i class="fas fa-pen text-blue-600 text-sm"></i>
                                     </a>
-
                                     <form action="{{ route('admin.panel_lawyers.destroy', $lawyer->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this lawyer and their photo?');">
                                         @csrf
