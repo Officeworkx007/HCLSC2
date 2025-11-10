@@ -40,7 +40,8 @@ class HomeController extends Controller
 
     public function lawyers()
     {
-        $panelLawyers = PanelLawyer::paginate(10);
+        // 🛑 FIX: Fetch all lawyers, not just 10. DataTables will handle the visual pagination.
+        $panelLawyers = PanelLawyer::all();
         return view('homepage.lawyers', compact('panelLawyers'));
     }
 
