@@ -6,20 +6,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Mediation Cause List</title>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
-    <!-- jQuery + DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
     <style>
+        /* General styling for container and table appearance */
         .notice-container {
             max-width: 1400px;
             width: 95%;
@@ -52,12 +49,14 @@
             background-color: #EEF2FF;
         }
 
+        /* Status badges */
         .status-badge {
             display: inline-block;
             padding: 0.35rem 0.8rem;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .status-upcoming {
@@ -75,11 +74,13 @@
             color: #166534;
         }
 
+        /* Essential for mobile/iPad responsiveness: enables horizontal scrolling */
         .table-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
 
+        /* Mobile specific adjustments (max-width: 640px) */
         @media (max-width: 640px) {
             .notice-container {
                 width: 100%;
@@ -106,6 +107,16 @@
     <div class="notice-container mt-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl">
         <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Mediation Cause List</h1>
 
+        <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 flex flex-col sm:flex-row gap-4 justify-start items-stretch sm:items-center">
+            <div class="flex flex-col flex-1">
+                <label for="min-date" class="text-sm font-medium text-gray-700 mb-1">From Date</label>
+                <input type="date" id="min-date" class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div class="flex flex-col flex-1">
+                <label for="max-date" class="text-sm font-medium text-gray-700 mb-1">To Date</label>
+                <input type="date" id="max-date" class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
+            </div>
+        </div>
         <div class="table-wrapper">
             <table id="mediationTable" class="display w-full text-gray-700">
                 <thead>
@@ -127,16 +138,12 @@
                             <td></td>
                             <td class="text-sm text-gray-700">{{ $list->description }}</td>
                             <td class="text-sm text-gray-700">
+                                {{-- Date format here ('d-m-Y') is crucial for the JS filter logic --}}
                                 {{ \Carbon\Carbon::parse($list->to_be_held_on)->format('d-m-Y') }}
                             </td>
-                            <td class="text-sm space-x-2">
+                            <td class="text-sm space-x-2 whitespace-nowrap">
                                 @if (!empty($fileName))
-                                    <a href="{{ route('homepage.mediation.view', ['filename' => urlencode($fileName)]) }}"
-                                        target="_blank"
-                                        class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-md shadow hover:bg-blue-700 transition">
-                                        <i class="fa-solid fa-eye mr-1"></i> View
-                                    </a>
-
+                                    {{-- Only 'Download' action --}}
                                     <a href="{{ asset('storage/causelists/' . $fileName) }}" download
                                         class="inline-flex items-center px-3 py-1.5 bg-green-600 text-white text-sm font-medium rounded-md shadow hover:bg-green-700 transition">
                                         <i class="fa-solid fa-download mr-1"></i> Download
@@ -152,10 +159,15 @@
                             </td>
                         </tr>
                     @empty
+                        {{-- 🟢 DEFINITIVE FIX FOR COLUMN COUNT ERROR: Use five separate <td> tags instead of colspan="5" --}}
                         <tr>
-                            <td colspan="5" class="text-center text-gray-400 py-6 italic">
+                            <td></td>
+                            <td></td>
+                            <td class="text-center text-gray-400 py-6 italic">
                                 No mediation cause list found.
                             </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -166,6 +178,14 @@
     @include('homepage.layouts.footer')
 
     <script>
+        // Helper function to convert 'd-m-Y' string (from PHP) to a comparable Date object's milliseconds
+        function dateToMs(dateString) {
+            if (!dateString) return null;
+            let parts = dateString.split('-');
+            // Date(year, monthIndex, day) - Month is 0-indexed in JS
+            return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+        }
+
         $(document).ready(function() {
             var table = $('#mediationTable').DataTable({
                 paging: true,
@@ -174,20 +194,74 @@
                 info: true,
                 pageLength: 10,
                 autoWidth: false,
-                order: [[2, "desc"]],
-                columnDefs: [
-                    { orderable: false, targets: [3, 4] },
-                    { width: "60px", targets: 0 },
-                    { width: "40%", targets: 1 },
-                    { width: "120px", targets: 2 }
+                order: [
+                    [2, "desc"]
                 ],
-                language: { emptyTable: "No mediation cause list found." }
+                columnDefs: [
+                    {
+                        orderable: false,
+                        targets: [3, 4]
+                    },
+                    {
+                        width: "60px",
+                        targets: 0
+                    },
+                    {
+                        width: "40%",
+                        targets: 1
+                    },
+                    {
+                        width: "120px",
+                        targets: 2
+                    }
+                ],
+                // DataTables handles the emptyTable language option automatically
+                language: {
+                    emptyTable: "No mediation cause list found."
+                }
             });
 
+            // 1. DataTables Custom Date Range Filtering Logic
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    if (settings.nTable.id !== 'mediationTable') {
+                        return true;
+                    }
+
+                    const minDateVal = $('#min-date').val();
+                    const maxDateVal = $('#max-date').val();
+                    const heldOnDateStr = data[2] || '';
+
+                    if (heldOnDateStr.length < 8) return true;
+
+                    const heldOnMs = dateToMs(heldOnDateStr);
+                    const minMs = minDateVal ? new Date(minDateVal).getTime() : null;
+                    const maxMs = maxDateVal ? new Date(maxDateVal).getTime() : null;
+
+                    if (minMs && heldOnMs < minMs) {
+                        return false;
+                    }
+                    if (maxMs && heldOnMs > maxMs) {
+                        return false;
+                    }
+
+                    return true;
+                }
+            );
+
+            // 2. Trigger table redraw when date inputs change
+            $('#min-date, #max-date').change(function() {
+                table.draw();
+            });
+
+            // 3. Serial Number Generation Logic
             table.on('order.dt search.dt draw.dt page.dt', function() {
-                let rows = table.column(0, { search: 'applied', order: 'applied' }).nodes();
+                let rows = table.column(0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).nodes();
                 rows.each(function(cell, i) {
-                    cell.innerHTML = i + 1;
+                    cell.innerHTML = table.page.start() + i + 1;
                 });
             }).draw();
         });
