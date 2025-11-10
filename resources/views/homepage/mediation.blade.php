@@ -34,12 +34,21 @@
             color: white;
         }
 
-        #mediationTable th,
+        /* --- FIX: Increased padding and centered headers --- */
+        #mediationTable th {
+            padding: 1rem 1.25rem !important; /* Slightly more vertical and horizontal padding */
+            vertical-align: middle;
+            text-align: left;
+            /* Ensure text and sort icons are centered within their header cell */
+            display: table-cell;
+        }
+
         #mediationTable td {
-            padding: 0.9rem 1rem !important;
+            padding: 0.9rem 1.25rem !important;
             vertical-align: middle;
             text-align: left;
         }
+        /* --- END FIX --- */
 
         #mediationTable tbody tr:nth-child(even) {
             background-color: #F9FAFB;
@@ -80,7 +89,24 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Mobile specific adjustments (max-width: 640px) */
+        /* --- Custom CSS for DataTables Layout/Gaps and Mobile Responsiveness --- */
+
+        /* Add margin below the search/length controls (DataTables 'l' and 'f' elements) */
+        .dataTables_filter,
+        .dataTables_length {
+            margin-bottom: 1rem;
+        }
+
+        /* Ensure search and length controls stack nicely on small screens */
+        .dataTables_wrapper .row:first-child>div {
+            margin-bottom: 0.5rem; /* Add slight separation between top elements */
+        }
+
+        /* Add margin above pagination/info (DataTables 'i' and 'p' elements) */
+        .dataTables_info, .dataTables_paginate {
+            margin-top: 1rem;
+        }
+
         @media (max-width: 640px) {
             .notice-container {
                 width: 100%;
@@ -96,12 +122,19 @@
                 padding: 0.5rem !important;
                 font-size: 0.9rem;
             }
+
+            /* Force search and length to full width/stacked layout on mobile */
+            .dataTables_length, .dataTables_filter {
+                width: 100% !important;
+                text-align: left !important;
+            }
         }
     </style>
 </head>
 
 <body class="min-h-screen bg-gray-100 flex flex-col">
 
+    {{-- Assuming @include('homepage.layouts.header') exists --}}
     @include('homepage.layouts.header')
 
     <div class="notice-container mt-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl">
@@ -117,27 +150,29 @@
                 <input type="date" id="max-date" class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
             </div>
         </div>
+
         <div class="table-wrapper">
             <table id="mediationTable" class="display w-full text-gray-700">
                 <thead>
                     <tr>
                         <th>Sl. No</th>
                         <th>Description</th>
-                        <th>To be held on</th>
-                        <th>Actions</th>
-                        <th>Status</th>
+                        <th class="whitespace-nowrap">Mediation Date</th>
+                        <th class="whitespace-nowrap">Actions</th>
+                        <th class="whitespace-nowrap">Status</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($causeLists as $list)
                         @php
+                            // NOTE: The dynamic_status property is assumed to be defined/calculated in the Model or Controller
                             $status = $list->dynamic_status ?? 'upcoming';
                             $fileName = basename($list->file_path ?? '');
                         @endphp
                         <tr class="hover:bg-gray-50 transition">
                             <td></td>
                             <td class="text-sm text-gray-700">{{ $list->description }}</td>
-                            <td class="text-sm text-gray-700">
+                            <td class="text-sm text-gray-700 whitespace-nowrap">
                                 {{-- Date format here ('d-m-Y') is crucial for the JS filter logic --}}
                                 {{ \Carbon\Carbon::parse($list->to_be_held_on)->format('d-m-Y') }}
                             </td>
@@ -159,7 +194,7 @@
                             </td>
                         </tr>
                     @empty
-                        {{-- 🟢 DEFINITIVE FIX FOR COLUMN COUNT ERROR: Use five separate <td> tags instead of colspan="5" --}}
+                        {{-- DEFINITIVE FIX: Use five separate <td> tags to satisfy DataTables column count check --}}
                         <tr>
                             <td></td>
                             <td></td>
@@ -175,6 +210,7 @@
         </div>
     </div>
 
+    {{-- Assuming @include('homepage.layouts.footer') exists --}}
     @include('homepage.layouts.footer')
 
     <script>
@@ -207,15 +243,18 @@
                         targets: 0
                     },
                     {
-                        width: "40%",
+                        width: "35%", // Slightly decreased width to give room to date/actions
                         targets: 1
                     },
+                    // --- FIX: Increased Mediation Date width ---
                     {
-                        width: "120px",
+                        width: "150px", // Ensured enough space for the date + sorting icon
                         targets: 2
-                    }
+                    },
+                    // --- END FIX ---
                 ],
-                // DataTables handles the emptyTable language option automatically
+                // Customize DOM structure for better mobile layout and to prevent Tailwind conflicts
+                dom: 'lfrtip', // Default: l=length, f=filter, r=processing, t=table, i=info, p=pagination
                 language: {
                     emptyTable: "No mediation cause list found."
                 }
