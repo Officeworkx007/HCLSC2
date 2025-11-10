@@ -34,12 +34,11 @@
             color: white;
         }
 
-        /* --- FIX: Increased padding and centered headers --- */
+        /* --- Updated padding and alignment --- */
         #mediationTable th {
-            padding: 1rem 1.25rem !important; /* Slightly more vertical and horizontal padding */
+            padding: 1rem 1.25rem !important;
             vertical-align: middle;
             text-align: left;
-            /* Ensure text and sort icons are centered within their header cell */
             display: table-cell;
         }
 
@@ -48,7 +47,13 @@
             vertical-align: middle;
             text-align: left;
         }
-        /* --- END FIX --- */
+
+        /* Ensure Sl. No column is centered */
+        #mediationTable tbody tr td:first-child {
+            text-align: center;
+        }
+        /* --- End Updated padding and alignment --- */
+
 
         #mediationTable tbody tr:nth-child(even) {
             background-color: #F9FAFB;
@@ -134,7 +139,6 @@
 
 <body class="min-h-screen bg-gray-100 flex flex-col">
 
-    {{-- Assuming @include('homepage.layouts.header') exists --}}
     @include('homepage.layouts.header')
 
     <div class="notice-container mt-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl">
@@ -155,8 +159,8 @@
             <table id="mediationTable" class="display w-full text-gray-700">
                 <thead>
                     <tr>
-                        <th>Sl. No</th>
-                        <th>Description</th>
+                        <th class="whitespace-nowrap">Sl. No</th>
+                        <th class="whitespace-nowrap">Description</th>
                         <th class="whitespace-nowrap">Mediation Date</th>
                         <th class="whitespace-nowrap">Actions</th>
                         <th class="whitespace-nowrap">Status</th>
@@ -165,20 +169,20 @@
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($causeLists as $list)
                         @php
-                            // NOTE: The dynamic_status property is assumed to be defined/calculated in the Model or Controller
                             $status = $list->dynamic_status ?? 'upcoming';
                             $fileName = basename($list->file_path ?? '');
                         @endphp
                         <tr class="hover:bg-gray-50 transition">
-                            <td></td>
+                            {{-- FIX: Use $loop->iteration to guarantee serial number visibility on load --}}
+                            <td class="text-sm">
+                                {{ $loop->iteration }} </td>
+
                             <td class="text-sm text-gray-700">{{ $list->description }}</td>
                             <td class="text-sm text-gray-700 whitespace-nowrap">
-                                {{-- Date format here ('d-m-Y') is crucial for the JS filter logic --}}
                                 {{ \Carbon\Carbon::parse($list->to_be_held_on)->format('d-m-Y') }}
                             </td>
                             <td class="text-sm space-x-2 whitespace-nowrap">
                                 @if (!empty($fileName))
-                                    {{-- Only 'Download' action --}}
                                     <a href="{{ asset('storage/causelists/' . $fileName) }}" download
                                         class="inline-flex items-center px-3 py-1.5 bg-green-600 text-white text-sm font-medium rounded-md shadow hover:bg-green-700 transition">
                                         <i class="fa-solid fa-download mr-1"></i> Download
@@ -194,15 +198,11 @@
                             </td>
                         </tr>
                     @empty
-                        {{-- DEFINITIVE FIX: Use five separate <td> tags to satisfy DataTables column count check --}}
+                        {{-- Let DataTables handle the empty state, but ensure a valid cell for the column count --}}
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="text-center text-gray-400 py-6 italic">
+                            <td colspan="5" class="dataTables_empty text-center text-gray-400 py-6 italic">
                                 No mediation cause list found.
                             </td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -210,7 +210,6 @@
         </div>
     </div>
 
-    {{-- Assuming @include('homepage.layouts.footer') exists --}}
     @include('homepage.layouts.footer')
 
     <script>
@@ -231,34 +230,30 @@
                 pageLength: 10,
                 autoWidth: false,
                 order: [
-                    [2, "desc"]
+                    [2, "desc"] // Order by Mediation Date (column 2) descending
                 ],
                 columnDefs: [
+                    // FIX: Remove DataTables serial number setup since we use PHP
                     {
                         orderable: false,
-                        targets: [3, 4]
+                        targets: [0, 3, 4] // Sl. No, Actions, Status
                     },
                     {
-                        width: "60px",
-                        targets: 0
+                        width: "35%",
+                        targets: 1 // Description column width
                     },
                     {
-                        width: "35%", // Slightly decreased width to give room to date/actions
-                        targets: 1
-                    },
-                    // --- FIX: Increased Mediation Date width ---
-                    {
-                        width: "150px", // Ensured enough space for the date + sorting icon
+                        width: "150px", // Mediation Date
                         targets: 2
                     },
-                    // --- END FIX ---
                 ],
-                // Customize DOM structure for better mobile layout and to prevent Tailwind conflicts
-                dom: 'lfrtip', // Default: l=length, f=filter, r=processing, t=table, i=info, p=pagination
+                dom: 'lfrtip',
                 language: {
                     emptyTable: "No mediation cause list found."
                 }
+                // Removed all JS Serial Number Logic (updateSerialNumbers and bindings)
             });
+
 
             // 1. DataTables Custom Date Range Filtering Logic
             $.fn.dataTable.ext.search.push(
@@ -293,16 +288,6 @@
                 table.draw();
             });
 
-            // 3. Serial Number Generation Logic
-            table.on('order.dt search.dt draw.dt page.dt', function() {
-                let rows = table.column(0, {
-                    search: 'applied',
-                    order: 'applied'
-                }).nodes();
-                rows.each(function(cell, i) {
-                    cell.innerHTML = table.page.start() + i + 1;
-                });
-            }).draw();
         });
     </script>
 </body>
