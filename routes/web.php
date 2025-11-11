@@ -27,7 +27,8 @@ Route::get('/homepage/lawyers', [HomeController::class, 'lawyers'])->name('homep
 // Legal Aid
 Route::get('/homepage', [LegalAidController::class, 'index'])->name('homepage.legalaid');
 Route::post('/homepage/store', [LegalAidController::class, 'store'])->name('homepage.legalaid.store');
-Route::get('/homepage/track', [LegalAidController::class, 'trackPage'])->name('homepage.track');
+Route::get('/homepage/track', [LegalAidController::class, 'showTrackForm'])->name('homepage.track');
+Route::post('/homepage/track-status', [LegalAidController::class, 'trackApplication'])->name('homepage.track.status');
 
 // Public Mediation Cause List
 Route::get('/homepage/mediation', [HomeController::class, 'mediations'])->name('homepage.mediation');
@@ -68,6 +69,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::post('/legal_aid/{id}/store-order-docs', [LegalAidController::class, 'storeOrderAndDocs'])->name('admin.legal_aid.storeOrderDocs');
     Route::post('/legal-aid/{id}/reject', [LegalAidController::class, 'rejectApplicant'])->name('admin.legal_aid.rejectApplicant');
     Route::post('/legal-aid/{id}/revert', [LegalAidController::class, 'revertApplicant'])->name('admin.legal_aid.revertApplicant');
+    Route::delete('/legal-aid/case-doc/{docId}', [LegalAidController::class, 'deleteCaseDoc'])->name('admin.legal_aid.deleteCaseDoc');
 
     // Panel Lawyers (Protected)
     Route::get('/panel_lawyers', [PanelLawyerController::class, 'index'])->name('admin.panel_lawyers.index');

@@ -1,9 +1,8 @@
-\{{-- Font Awesome --}}
+{{-- Font Awesome --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 {{-- AdminLTE CSS --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-<!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -11,7 +10,6 @@
 
 <div class="bg-white shadow-lg rounded-xl p-6 mx-auto max-w-6xl border border-gray-100">
 
-    <!-- Header -->
     <div class="flex items-center justify-between border-b pb-4 mb-6">
         <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <i class="bi bi-person-badge text-indigo-600"></i> Applicant Details
@@ -22,10 +20,8 @@
         </a>
     </div>
 
-    <!-- Main content split: right applicant info / right assignment and others -->
     <div class="flex gap-6">
 
-        <!-- Left side - Applicant Details -->
         <div class="flex-1">
 
             {{-- Applicant Info --}}
@@ -55,10 +51,26 @@
                             <th class="px-4 py-3">Mother Name</th>
                             <td class="px-4 py-3">{{ $applicant->mother_name }}</td>
                         </tr>
+
+                        {{-- 👇 MARITAL STATUS DISPLAY 👇 --}}
                         <tr class="hover:bg-gray-50">
-                            <th class="px-4 py-3">Spouse Name</th>
-                            <td class="px-4 py-3">{{ $applicant->spouse_name }}</td>
+                            <th class="px-4 py-3">Marital Status</th>
+                            <td class="px-4 py-3">
+                                @if ($applicant->marital_status)
+                                    <span class="font-medium text-green-600">Married</span>
+                                @else
+                                    <span class="font-medium text-gray-600">Unmarried / Other</span>
+                                @endif
+                            </td>
                         </tr>
+                        {{-- Spouse Name is shown conditionally/based on value --}}
+                        @if ($applicant->marital_status)
+                            <tr class="hover:bg-gray-50">
+                                <th class="px-4 py-3">Spouse Name</th>
+                                <td class="px-4 py-3">{{ $applicant->spouse_name ?? 'N/A' }}</td>
+                            </tr>
+                        @endif
+
                         <tr class="hover:bg-gray-50">
                             <th class="px-4 py-3">Gender</th>
                             <td class="px-4 py-3">{{ $applicant->gender?->name ?? 'N/A' }}</td>
@@ -130,10 +142,9 @@
             </div>
         </div>
 
-        <!-- Right Side - Actions-->
         <div class="w-80 bg-white shadow-lg rounded-xl p-6 border border-gray-100">
 
-            <!-- Assign Lawyer -->
+            {{-- Assign Lawyer --}}
             <div>
                 <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
                     <i class="bi bi-person-workspace text-indigo-600"></i> Assign Lawyer
@@ -146,7 +157,7 @@
                             Lawyer</label>
                         <select name="panel_lawyer_id" id="panel_lawyer_id"
                             class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                            <option value="">-- None / Pending --</option> <!-- This is the key -->
+                            <option value="">-- None / Pending --</option>
                             @foreach ($panelLawyers as $lawyer)
                                 <option value="{{ $lawyer->id }}"
                                     {{ $applicant->panel_lawyer_id == $lawyer->id ? 'selected' : '' }}>
@@ -163,10 +174,15 @@
                 </form>
             </div>
 
-            <!-- Reject Case -->
+            {{-- Reject Case --}}
             <div class="mt-5">
                 <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
                     <i class="bi bi-x-circle text-red-600"></i> Reject Case
+                    {{-- Display Current Status if Rejected --}}
+                    @if ($applicant->status === 'Rejected')
+                        <span
+                            class="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">Rejected</span>
+                    @endif
                 </h3>
 
                 <form action="{{ route('admin.legal_aid.rejectApplicant', $applicant->id) }}" method="POST"
@@ -176,7 +192,12 @@
                     <div class="space-y-3">
                         <label for="remark" class="block text-sm font-medium text-gray-700">Remark</label>
                         <textarea name="remark" id="remark" rows="3" required
-                            class="w-full rounded-lg border-gray-300 focus:ring-red-500 focus:border-red-500 text-sm"></textarea>
+                            class="w-full rounded-lg border-gray-300 focus:ring-red-500 focus:border-red-500 text-sm">@php echo trim($applicant->rejection?->remark); @endphp</textarea>
+                        {{-- Blade trim fix applied here --}}
+
+                        @error('remark')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <button type="submit"
@@ -186,9 +207,9 @@
                 </form>
             </div>
 
-            <!-- Revert Case Button -->
+            {{-- Revert Case (Logic must handle remark clearance and document deletion in controller) --}}
             <form action="{{ route('admin.legal_aid.revertApplicant', $applicant->id) }}" method="POST"
-                onsubmit="return confirm('Are you sure you want to revert this applicant status?')">
+                onsubmit="return confirm('Are you sure you want to revert this applicant status? This will clear the rejection remark and delete all associated case documents.')">
                 @csrf
                 <button type="submit"
                     class="mt-3 w-full px-4 py-2 bg-yellow-500 text-white text-sm font-medium rounded-lg shadow hover:bg-yellow-600 transition">
@@ -196,20 +217,18 @@
                 </button>
             </form>
 
-            <!-- Previously Uploaded Orders & Documents (compact, fits inside the card) -->
+            {{-- Uploaded Orders with Delete Button --}}
             @if ($applicant->caseDocs->count() > 0)
-                <div class="mb-6">
+                <div class="mb-6 mt-5"> {{-- Added mt-5 for spacing --}}
                     <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
                         <i class="bi bi-archive text-indigo-600"></i>
                         Uploaded Orders
                     </h4>
 
-                    <!-- fixed-height scroll area so long lists don't stretch the card -->
                     <div class="max-h-56 overflow-y-auto space-y-3 pr-1">
                         @foreach ($applicant->caseDocs as $doc)
                             <div
                                 class="flex items-start justify-between bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                <!-- left: icon + details (use min-w-0 so truncation works) -->
                                 <div class="flex items-start gap-3 min-w-0">
                                     @php
                                         $ext = pathinfo($doc->original_name, PATHINFO_EXTENSION);
@@ -239,10 +258,20 @@
                                     </div>
                                 </div>
 
-                                <!-- right: small meta (date + id) -->
-                                <div class="text-right flex-shrink-0 ml-3">
+                                <div class="text-right flex-shrink-0 ml-3 flex flex-col items-end gap-1">
                                     <p class="text-xs text-gray-400">{{ $doc->created_at->format('d M, Y') }}</p>
-                                    <p class="text-xs text-gray-400">#{{ $doc->id }}</p>
+
+                                    {{-- 👇 DELETE BUTTON FORM 👇 --}}
+                                    <form action="{{ route('admin.legal_aid.deleteCaseDoc', $doc->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this document? This cannot be undone.')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="text-red-500 hover:text-red-700 text-sm p-1 rounded-full hover:bg-red-100 transition leading-none">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                    {{-- 👆 END DELETE BUTTON FORM 👆 --}}
                                 </div>
                             </div>
                         @endforeach
@@ -250,7 +279,7 @@
                 </div>
             @endif
 
-            <!-- Order & Documents Form -->
+            {{-- Upload New Order & Documents --}}
             <div class="mt-5">
                 <h3 class="text-lg font-bold text-black mb-4 flex items-center gap-2">
                     <i class="bi bi-folder2-open text-indigo-600"></i> Upload New Order & Documents
@@ -260,7 +289,14 @@
                     @csrf
                     <div class="space-y-3">
                         <label for="order_no" class="block text-sm font-medium text-gray-700">Order No</label>
+
+                        {{-- 👇 FETCHING LAST SUBMITTED ORDER NO. 👇 --}}
+                        @php
+                            $lastOrderNo = $applicant->caseDocs->sortByDesc('created_at')->first()->order_no ?? '';
+                        @endphp
+
                         <input type="text" name="order_no" id="order_no"
+                            value="{{ old('order_no', $lastOrderNo) }}"
                             class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
 
                         <label for="docs" class="block text-sm font-medium text-gray-700">Upload Documents</label>

@@ -10,14 +10,15 @@ class Applicant extends Model
         'name',
         'father_name',
         'mother_name',
+        'marital_status',
         'spouse_name',
         'gender_id',
-        'phone_number',
+        'number',
         'token_number',
         'email',
         'religion_id',
         'caste_id',
-        'caste_certificate_no',
+        'certificate_no',
         'occupation_id',
         'employment',
         'income_id',
@@ -25,6 +26,10 @@ class Applicant extends Model
         'photo',
         'panel_lawyer_id', // ✅ allow mass assignment for assigned lawyer
         'status',
+    ];
+
+    protected $casts = [
+        'marital_status' => 'boolean',
     ];
 
     /**

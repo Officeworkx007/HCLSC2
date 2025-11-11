@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Applicant;
 use App\Models\Gender;
 use App\Models\Religion;
@@ -16,6 +17,7 @@ use App\Models\UploadDocument;
 use App\Models\PanelLawyer;
 use App\Models\Rejection;
 use App\Models\Doc;
+
 
 class LegalAidController extends Controller
 {
@@ -34,17 +36,40 @@ class LegalAidController extends Controller
 
     public function store(Request $request)
     {
+        // 🚨 START: ADDED MISSING VALIDATION RULES
         $request->validate([
             'name' => 'required|string|max:255',
-            'photo' => 'nullable|image|max:2048',
+            'marital_status' => 'required|boolean', // Added boolean check
+            'spouse_name' => 'nullable|string|max:255', // Kept nullable as conditional logic is in the JS/Model
+            'gender' => 'required|integer|exists:genders,id',
+            'number' => 'required|string|max:15',
+            'email' => 'nullable|email|max:255',
+            'religion' => 'required|integer|exists:religions,id',
+            'caste' => 'required|integer|exists:castes,id',
+            'occupation' => 'required|integer|exists:occupations,id',
+            'income' => 'required|integer|exists:incomes,id',
+            'eligibility_category' => 'required|integer|exists:eligibility_category,id',
+
+            'father_name' => 'nullable|string|max:255',
+            'mother_name' => 'nullable|string|max:255',
+            'certificate_no' => 'nullable|string|max:50',
+            'employment_details' => 'nullable|string|max:255',
+
+            'photo' => 'nullable|image|max:10048',
             'upload_documents.*' => 'nullable|integer|exists:upload_documents,id',
             'document_files.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
         ]);
+        // 🚨 END: ADDED MISSING VALIDATION RULES
 
         $applicant = new Applicant();
         $applicant->name = $request->name;
         $applicant->father_name = $request->father_name;
         $applicant->mother_name = $request->mother_name;
+
+        // 🚨 START: ADDED MARITAL STATUS BOOLEAN LOGIC
+        $applicant->marital_status = $request->marital_status;
+        // 🚨 END: ADDED MARITAL STATUS BOOLEAN LOGIC
+
         $applicant->spouse_name = $request->spouse_name;
         $applicant->gender_id = $request->gender;
         $applicant->number = $request->number;
@@ -99,8 +124,8 @@ class LegalAidController extends Controller
         }
 
         // ✅ Redirect to tracking page with token number
-        return redirect()->route('homepage.track', ['token' => $applicant->token_number])
-            ->with('success', 'Application submitted successfully!')
+        return redirect()->route('homepage.track')
+            ->with('success', 'Application submitted successfully! Please use your Token Number and Name to check the status.')
             ->with('token_number', $applicant->token_number);
     }
 
@@ -137,20 +162,32 @@ class LegalAidController extends Controller
     }
 
     // Show track page with optional flash messages
-    public function trackPage(Request $request)
+    public function showTrackForm()
     {
-        $form = null;
-        $error = null;
+        // This function will be called on the initial GET request to /track
+        return view('homepage.track', ['form' => null, 'error' => null]);
+    }
 
-        if ($request->has('token') && $request->has('name')) {
-            $form = Applicant::where('token_number', $request->token)
-                ->where('name', $request->name)
-                ->first();
-            if (!$form) {
-                $error = 'Invalid Token Number or Name!';
-            }
+    // 2. Renamed function to process the form submission (POST)
+    public function trackApplication(Request $request)
+    {
+        $request->validate([
+            'token' => 'required|string|max:50',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $form = Applicant::where('token_number', $request->token)
+            ->where('name', $request->name)
+            ->with(['rejection', 'panelLawyer', 'caseDocs'])
+            ->first();
+
+        $error = null;
+        if (!$form) {
+            $error = 'Invalid Token Number or Name!';
         }
 
+        // Return the view with the results or error
+        // The URL will remain the POST endpoint, but we are returning the track view.
         return view('homepage.track', compact('form', 'error'));
     }
 
@@ -231,7 +268,7 @@ class LegalAidController extends Controller
         $request->validate([
             'order_no' => 'required|string|max:255',
             'docs' => 'required|array',
-            'docs.*' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
+            'docs.*' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:10048',
         ]);
 
         // ✅ Fetch applicant
@@ -259,4 +296,21 @@ class LegalAidController extends Controller
 
         return back()->with('success', 'Order and documents uploaded successfully.');
     }
+
+    // 🌟 START: ADDED DELETE FUNCTION 🌟
+    public function deleteCaseDoc($docId)
+    {
+        $doc = Doc::findOrFail($docId);
+
+        // Delete the file from storage
+        if (Storage::disk('public')->exists($doc->file_path)) {
+            Storage::disk('public')->delete($doc->file_path);
+        }
+
+        // Delete the database record
+        $doc->delete();
+
+        return back()->with('success', 'Case document/order deleted successfully.');
+    }
+    // 🌟 END: ADDED DELETE FUNCTION 🌟
 }

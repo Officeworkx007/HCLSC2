@@ -12,14 +12,14 @@
 
     <div class="flex flex-col items-center py-8 px-4 w-full">
 
-        {{-- ✅ Flash Success Message --}}
+        {{-- ✅ Flash Success Message (unchanged) --}}
         @if (session('success'))
             <div id="successMessage" class="bg-green-100 text-green-800 p-4 rounded mb-4 w-full max-w-xl text-center">
                 {{ session('success') }}
             </div>
         @endif
 
-        {{-- ✅ Token Message --}}
+        {{-- ✅ Token Message (unchanged) --}}
         @if (session('token_number'))
             <div id="tokenMessage" class="bg-blue-100 text-blue-800 p-4 rounded mb-4 w-full max-w-xl flex flex-col sm:flex-row justify-between items-center gap-2">
                 <span>Your Token Number: <strong>{{ session('token_number') }}</strong></span>
@@ -27,16 +27,19 @@
             </div>
         @endif
 
-        {{-- ✅ Tracking Form --}}
+        {{-- ✅ Tracking Form (FIXED) --}}
         <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-xl mb-6">
             <h2 class="text-xl font-semibold mb-4 text-gray-700 text-center">Track Your Application</h2>
-            <form method="GET" action="{{ route('homepage.track') }}" class="space-y-4">
+            <form method="POST" action="{{ route('homepage.track.status') }}" class="space-y-4">
+                @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" name="token" placeholder="Enter Token Number"
-                        value="{{ request('token') }}"
+                        {{-- Changed value="{{ request('token') }}" to use old() --}}
+                        value="{{ old('token') }}"
                         class="border rounded px-3 py-2 w-full focus:ring-blue-500 focus:border-blue-500" required>
                     <input type="text" name="name" placeholder="Enter Applicant Name"
-                        value="{{ request('name') }}"
+                        {{-- Changed value="{{ request('name') }}" to use old() --}}
+                        value="{{ old('name') }}"
                         class="border rounded px-3 py-2 w-full focus:ring-blue-500 focus:border-blue-500" required>
                 </div>
                 <div class="flex justify-center">
@@ -45,14 +48,14 @@
             </form>
         </div>
 
-        {{-- ❌ Error Message --}}
+        {{-- ❌ Error Message (unchanged) --}}
         @if (isset($error))
             <div class="bg-red-100 text-red-700 p-4 rounded w-full max-w-xl mb-4 text-center">
                 {{ $error }}
             </div>
         @endif
 
-        {{-- ✅ Tracking Display --}}
+        {{-- ✅ Tracking Display (unchanged, as the previous changes already covered lawyer/docs) --}}
         @if (isset($form) && $form)
             <div class="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-xl mb-10">
                 <h3 class="text-lg font-bold mb-6 text-center text-blue-800">Application Status</h3>
@@ -100,14 +103,49 @@
                         <p class="font-medium text-green-700 mb-3">A lawyer has been assigned to your case.</p>
 
                         @if ($form->panelLawyer)
-                            <div class="bg-white border border-green-200 rounded-lg shadow-sm p-4 text-left text-sm">
-                                <p><strong>Lawyer Name:</strong> {{ $form->panelLawyer->first_name }} {{ $form->panelLawyer->last_name }}</p>
-                                <p><strong>Contact:</strong> {{ $form->panelLawyer->contact_number ?? 'N/A' }}</p>
-                                <p><strong>Email:</strong> {{ $form->panelLawyer->email ?? 'N/A' }}</p>
+                            <div class="bg-white border border-green-200 rounded-lg shadow-sm p-4 text-left text-sm mb-4">
+                                <h4 class="font-bold text-base mb-2 text-green-700">Lawyer Details</h4>
+                                <p><strong>Name:</strong> {{ $form->panelLawyer->first_name }} {{ $form->panelLawyer->last_name }}</p>
+                                <p><strong>Contact:</strong> <a href="tel:{{ $form->panelLawyer->contact_number }}" class="text-blue-600 hover:text-blue-800">{{ $form->panelLawyer->contact_number ?? 'N/A' }}</a></p>
+                                <p><strong>Email:</strong> <a href="mailto:{{ $form->panelLawyer->email }}" class="text-blue-600 hover:text-blue-800">{{ $form->panelLawyer->email ?? 'N/A' }}</a></p>
                             </div>
                         @else
-                            <p class="text-gray-600 text-sm italic">Lawyer details will be updated soon.</p>
+                            <p class="text-gray-600 text-sm italic mb-4">Lawyer details will be updated soon.</p>
                         @endif
+
+                        {{-- Case Documents/Order Display (NEW SECTION) --}}
+                        <h4 class="font-bold text-base mb-3 text-blue-800">Case Documents & Orders</h4>
+
+                        @if ($form->caseDocs->count() > 0)
+                            <div class="bg-white border border-blue-200 rounded-lg shadow-sm p-4 text-left text-sm space-y-3">
+                                @php
+                                    // Group documents by order number
+                                    $groupedDocs = $form->caseDocs->groupBy('order_no');
+                                @endphp
+
+                                @foreach ($groupedDocs as $orderNo => $docs)
+                                    <div class="border-b pb-2 last:border-b-0 last:pb-0">
+                                        <p class="font-semibold text-gray-800 mb-1">Order No: <span class="text-blue-700">{{ $orderNo }}</span></p>
+                                        <ul class="list-disc list-inside ml-2 space-y-1">
+                                            @foreach ($docs as $doc)
+                                                <li>
+                                                    <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="text-blue-600 hover:underline">
+                                                        <i class="fa-solid fa-file-arrow-down mr-1"></i> {{ $doc->original_name ?? 'View Document' }}
+                                                    </a>
+                                                    <span class="text-gray-500 text-xs"> ({{ strtoupper(pathinfo($doc->original_name, PATHINFO_EXTENSION)) }})</span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-4">
+                                <p class="text-gray-600 text-sm italic">No case orders or documents uploaded yet.</p>
+                                <p class="text-xs text-gray-500 mt-1">Check back later for updates from the legal team.</p>
+                            </div>
+                        @endif
+
                     </div>
                 @endif
             </div>
