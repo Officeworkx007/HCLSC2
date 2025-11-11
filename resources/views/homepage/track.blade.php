@@ -7,39 +7,39 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 
+{{-- 🏆 Structural Change: Use flex-col and min-h-screen to ensure the footer stays at the bottom --}}
 <body class="min-h-screen bg-gray-100 flex flex-col">
     @include('homepage.layouts.header')
 
-    <div class="flex flex-col items-center py-8 px-4 w-full">
+    {{-- 🏆 Main Content Wrapper: Add flex-grow to push the footer down --}}
+    <div class="flex flex-col items-center py-8 px-4 w-full flex-grow">
 
-        {{-- ✅ Flash Success Message (unchanged) --}}
+        {{-- ✅ Flash Success Message (Updated responsiveness: max-w-full on small screens) --}}
         @if (session('success'))
-            <div id="successMessage" class="bg-green-100 text-green-800 p-4 rounded mb-4 w-full max-w-xl text-center">
+            <div id="successMessage" class="bg-green-100 text-green-800 p-4 rounded mb-4 w-full max-w-xs sm:max-w-xl text-center">
                 {{ session('success') }}
             </div>
         @endif
 
-        {{-- ✅ Token Message (unchanged) --}}
+        {{-- ✅ Token Message (Updated responsiveness: flex-col on small screens) --}}
         @if (session('token_number'))
-            <div id="tokenMessage" class="bg-blue-100 text-blue-800 p-4 rounded mb-4 w-full max-w-xl flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div id="tokenMessage" class="bg-blue-100 text-blue-800 p-4 rounded mb-4 w-full max-w-xs sm:max-w-xl flex flex-col sm:flex-row justify-between items-center gap-2">
                 <span>Your Token Number: <strong>{{ session('token_number') }}</strong></span>
                 <button onclick="document.getElementById('tokenMessage').remove()" class="text-red-600 font-bold px-2 py-1 rounded hover:bg-red-100 transition">X</button>
             </div>
         @endif
 
-        {{-- ✅ Tracking Form (FIXED) --}}
-        <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-xl mb-6">
+        {{-- ✅ Tracking Form (Responsive width added) --}}
+        <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-xs sm:max-w-xl mb-6">
             <h2 class="text-xl font-semibold mb-4 text-gray-700 text-center">Track Your Application</h2>
             <form method="POST" action="{{ route('homepage.track.status') }}" class="space-y-4">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" name="token" placeholder="Enter Token Number"
-                        {{-- Changed value="{{ request('token') }}" to use old() --}}
-                        value="{{ old('token') }}"
+                        value="{{ session('token_input', old('token')) }}"
                         class="border rounded px-3 py-2 w-full focus:ring-blue-500 focus:border-blue-500" required>
                     <input type="text" name="name" placeholder="Enter Applicant Name"
-                        {{-- Changed value="{{ request('name') }}" to use old() --}}
-                        value="{{ old('name') }}"
+                        value="{{ session('name_input', old('name')) }}"
                         class="border rounded px-3 py-2 w-full focus:ring-blue-500 focus:border-blue-500" required>
                 </div>
                 <div class="flex justify-center">
@@ -48,19 +48,19 @@
             </form>
         </div>
 
-        {{-- ❌ Error Message (unchanged) --}}
+        {{-- ❌ Error Message (Responsive width added) --}}
         @if (isset($error))
-            <div class="bg-red-100 text-red-700 p-4 rounded w-full max-w-xl mb-4 text-center">
+            <div class="bg-red-100 text-red-700 p-4 rounded w-full max-w-xs sm:max-w-xl mb-4 text-center">
                 {{ $error }}
             </div>
         @endif
 
-        {{-- ✅ Tracking Display (unchanged, as the previous changes already covered lawyer/docs) --}}
+        {{-- ✅ Tracking Display (Responsive width added) --}}
         @if (isset($form) && $form)
-            <div class="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-xl mb-10">
+            <div class="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-xs sm:max-w-xl mb-10">
                 <h3 class="text-lg font-bold mb-6 text-center text-blue-800">Application Status</h3>
 
-                {{-- Basic Applicant Info --}}
+                {{-- Basic Applicant Info (Responsive grid) --}}
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm mb-6">
                     <p><strong>Name:</strong> {{ $form->name }}</p>
                     <p><strong>Token Number:</strong> {{ $form->token_number }}</p>
@@ -80,7 +80,7 @@
                     </p>
                 </div>
 
-                {{-- 🎯 Status-Specific Display --}}
+                {{-- 🎯 Status-Specific Display (Responsive padding) --}}
                 @if ($form->status === 'Pending')
                     <div class="p-4 sm:p-6 bg-yellow-50 border border-yellow-300 rounded-lg text-center">
                         <i class="fa-solid fa-hourglass-half text-yellow-500 text-3xl mb-2 sm:mb-3"></i>
@@ -113,7 +113,7 @@
                             <p class="text-gray-600 text-sm italic mb-4">Lawyer details will be updated soon.</p>
                         @endif
 
-                        {{-- Case Documents/Order Display (NEW SECTION) --}}
+                        {{-- Case Documents/Order Display (Responsive padding) --}}
                         <h4 class="font-bold text-base mb-3 text-blue-800">Case Documents & Orders</h4>
 
                         @if ($form->caseDocs->count() > 0)

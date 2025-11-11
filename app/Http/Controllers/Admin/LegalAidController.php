@@ -161,16 +161,21 @@ class LegalAidController extends Controller
         return view('admin.legal_aid.show', compact('applicant', 'panelLawyers'));
     }
 
-    // Show track page with optional flash messages
-    public function showTrackForm()
+    public function showTrackForm(Request $request)
     {
+        // 1. Retrieve the flashed data (form results and error message)
+        $form = session('form', null);
+        $error = session('error', null);
+
         // This function will be called on the initial GET request to /track
-        return view('homepage.track', ['form' => null, 'error' => null]);
+        // It renders the view, either empty or with the one-time flashed results.
+        return view('homepage.track', compact('form', 'error'));
     }
 
     // 2. Renamed function to process the form submission (POST)
     public function trackApplication(Request $request)
     {
+        // Validation handles error redirect automatically, flashing input data
         $request->validate([
             'token' => 'required|string|max:50',
             'name' => 'required|string|max:255',
@@ -181,14 +186,23 @@ class LegalAidController extends Controller
             ->with(['rejection', 'panelLawyer', 'caseDocs'])
             ->first();
 
-        $error = null;
-        if (!$form) {
-            $error = 'Invalid Token Number or Name!';
+        $flashData = [];
+
+        if ($form) {
+            // Flash the successful result object to the session
+            $flashData['form'] = $form;
+        } else {
+            // Flash the error message to the session
+            $flashData['error'] = 'Invalid Token Number or Name!';
         }
 
-        // Return the view with the results or error
-        // The URL will remain the POST endpoint, but we are returning the track view.
-        return view('homepage.track', compact('form', 'error'));
+        // Flash the input data so the fields remain filled on the GET page
+        $flashData['token_input'] = $request->token;
+        $flashData['name_input'] = $request->name;
+
+        // **CRITICAL CHANGE:** Redirect back to the GET route and flash data.
+        // This stops the browser from holding the POST data on refresh.
+        return redirect()->route('homepage.track')->with($flashData);
     }
 
     public function assignLawyer(Request $request, $id)
