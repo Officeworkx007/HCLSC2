@@ -115,7 +115,7 @@
                                 <div class="bg-white border border-green-200 rounded-md shadow-sm p-4 text-left text-sm space-y-2">
                                     <h4 class="font-bold text-base text-green-700 border-b pb-1">Assigned Counsel Details</h4>
                                     <p><strong>Name:</strong> <span class="font-normal">{{ $form->panelLawyer->first_name }} {{ $form->panelLawyer->last_name }}</span></p>
-                                    <p><strong>Contact:</strong> <a href="tel:{{ $form->panelLawyer->contact_number }}" class="text-blue-600 hover:text-blue-800">{{ $form->panelLawyer->contact_number ?? 'N/A' }}</a></p>
+                                    <p><strong>Contact:</strong> <a href="tel:{{ $form->panelLawyer->phone_number }}" class="text-blue-600 hover:text-blue-800">{{ $form->panelLawyer->phone_number ?? 'N/A' }}</a></p>
                                     <p><strong>Email:</strong> <a href="mailto:{{ $form->panelLawyer->email }}" class="text-blue-600 hover:text-blue-800">{{ $form->panelLawyer->email ?? 'N/A' }}</a></p>
                                 </div>
                             @else

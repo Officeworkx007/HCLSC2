@@ -64,7 +64,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
        // --- ROLES & PERMISSIONS MANAGEMENT (NEW) ---
 
-
     // Legal Aid (Protected)
     Route::get('/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
     Route::get('/legal_aid/{applicant}', [LegalAidController::class, 'show'])->name('admin.legal_aid.show');
