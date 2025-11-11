@@ -62,6 +62,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+       // --- ROLES & PERMISSIONS MANAGEMENT (NEW) ---
+
+
     // Legal Aid (Protected)
     Route::get('/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
     Route::get('/legal_aid/{applicant}', [LegalAidController::class, 'show'])->name('admin.legal_aid.show');
