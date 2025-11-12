@@ -52,6 +52,7 @@
         #mediationTable tbody tr td:first-child {
             text-align: center;
         }
+
         /* --- End Updated padding and alignment --- */
 
 
@@ -104,11 +105,13 @@
 
         /* Ensure search and length controls stack nicely on small screens */
         .dataTables_wrapper .row:first-child>div {
-            margin-bottom: 0.5rem; /* Add slight separation between top elements */
+            margin-bottom: 0.5rem;
+            /* Add slight separation between top elements */
         }
 
         /* Add margin above pagination/info (DataTables 'i' and 'p' elements) */
-        .dataTables_info, .dataTables_paginate {
+        .dataTables_info,
+        .dataTables_paginate {
             margin-top: 1rem;
         }
 
@@ -129,7 +132,8 @@
             }
 
             /* Force search and length to full width/stacked layout on mobile */
-            .dataTables_length, .dataTables_filter {
+            .dataTables_length,
+            .dataTables_filter {
                 width: 100% !important;
                 text-align: left !important;
             }
@@ -144,14 +148,17 @@
     <div class="notice-container mt-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl">
         <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Mediation Cause List</h1>
 
-        <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 flex flex-col sm:flex-row gap-4 justify-start items-stretch sm:items-center">
+        <div
+            class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 flex flex-col sm:flex-row gap-4 justify-start items-stretch sm:items-center">
             <div class="flex flex-col flex-1">
                 <label for="min-date" class="text-sm font-medium text-gray-700 mb-1">From Date</label>
-                <input type="date" id="min-date" class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <input type="date" id="min-date"
+                    class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
             </div>
             <div class="flex flex-col flex-1">
                 <label for="max-date" class="text-sm font-medium text-gray-700 mb-1">To Date</label>
-                <input type="date" id="max-date" class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <input type="date" id="max-date"
+                    class="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
             </div>
         </div>
 
@@ -198,7 +205,8 @@
                             </td>
                         </tr>
                     @empty
-                        {{-- Let DataTables handle the empty state, but ensure a valid cell for the column count --}}
+                        {{-- 💡 Blade Fallback: This row will be displayed if no results are present AND JavaScript is disabled.
+                        It will be removed by the JS below if DataTables runs. --}}
                         <tr>
                             <td colspan="5" class="dataTables_empty text-center text-gray-400 py-6 italic">
                                 No mediation cause list found.
@@ -222,6 +230,14 @@
         }
 
         $(document).ready(function() {
+            // 🛑 FIX: Cleanup the Blade empty state row if it exists before DataTables initialization.
+            const $tbody = $('#mediationTable tbody');
+            // Check if there is exactly 1 row and that row contains a td with the colspan attribute (the empty message)
+            if ($tbody.find('tr').length === 1 && $tbody.find('td[colspan]').length > 0) {
+                $tbody.empty();
+            }
+            // End FIX
+
             var table = $('#mediationTable').DataTable({
                 paging: true,
                 searching: true,
@@ -249,9 +265,9 @@
                 ],
                 dom: 'lfrtip',
                 language: {
+                    // DataTables will display this message automatically after parsing the empty DOM
                     emptyTable: "No mediation cause list found."
                 }
-                // Removed all JS Serial Number Logic (updateSerialNumbers and bindings)
             });
 
 
