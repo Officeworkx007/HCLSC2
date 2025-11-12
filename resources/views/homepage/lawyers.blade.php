@@ -88,7 +88,7 @@
     <section class="flex-grow w-full max-w-8xl mx-auto px-6 lg:px-8 py-12">
         <div class="text-center mb-12">
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1e3a8a] mb-4">
-                Our <span class="text-[#2563eb]">Panel Lawyers</span>
+                Panel Lawyers <span class="text-[#2563eb]">of The High Court Legal Services Commitee</span>
             </h1>
             <p class="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
                 Meet our dedicated panel of lawyers committed to providing access to justice without barriers.

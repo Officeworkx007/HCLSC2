@@ -138,12 +138,11 @@
 
     @include('homepage.layouts.header')
 
-    <div class="bg-[#FDFBD4] py-12 text-center text-black shadow">
+    <div class="py-12 text-center text-black">
         <h1 class="text-4xl md:text-5xl font-bold tracking-wide flex flex-wrap justify-center items-center gap-3 px-4">
             <i class="fas fa-clipboard-list text-yellow-500"></i>
             Notice Board
         </h1>
-        <p class="mt-2 text-base md:text-lg">Stay updated with the latest notices</p>
     </div>
 
     <div class="notice-container mt-10 p-4 sm:p-6 bg-white shadow-lg rounded-xl">

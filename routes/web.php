@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LegalAidController;
 use App\Http\Controllers\Admin\PanelLawyerController;
@@ -63,6 +64,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
        // --- ROLES & PERMISSIONS MANAGEMENT (NEW) ---
+    Route::resource('permissions', PermissionController::class)->names('admin.permissions')->except(['show']);
 
     // Legal Aid (Protected)
     Route::get('/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
@@ -98,6 +100,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     // PDF VIEWER ROUTE (Protected to ensure only admins can load the viewer HTML)
     Route::get('/mediations/view-pdf/{filename}', [MediationController::class, 'viewPdf'])
         ->name('admin.mediations.viewPdf');
+
 });
 
 
