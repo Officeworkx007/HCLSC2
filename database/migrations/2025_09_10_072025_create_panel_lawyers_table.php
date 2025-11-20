@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('pin_code')->nullable();
             $table->string('photo')->nullable();
             $table->string('designation')->nullable();
+            $table->string('enrolment_no')->nullable();
             $table->timestamps();
         });
     }

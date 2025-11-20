@@ -19,5 +19,6 @@ class PanelLawyer extends Model
         'pin_code',
         'photo',
         'designation',
+        'enrolment_no',
     ];
 }

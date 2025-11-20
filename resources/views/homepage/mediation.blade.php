@@ -162,6 +162,16 @@
             </div>
         </div>
 
+        @php
+        // Helper function to convert ordinal suffixes (1st, 2nd, etc.) to superscripts
+        function formatOrdinal($text) {
+            if (!$text) return '';
+            // Use a regular expression to find numbers followed by st, nd, rd, or th
+            // and wrap the suffix in <sup> tags. The 'i' makes it case-insensitive.
+            return preg_replace('/(\d+)(st|nd|rd|th)/i', '$1<sup>$2</sup>', $text);
+        }
+        @endphp
+
         <div class="table-wrapper">
             <table id="mediationTable" class="display w-full text-gray-700">
                 <thead>
@@ -178,19 +188,30 @@
                         @php
                             $status = $list->dynamic_status ?? 'upcoming';
                             $fileName = basename($list->file_path ?? '');
+                            $pdfUrl = asset('storage/causelists/' . $fileName);
                         @endphp
                         <tr class="hover:bg-gray-50 transition">
                             {{-- FIX: Use $loop->iteration to guarantee serial number visibility on load --}}
                             <td class="text-sm">
                                 {{ $loop->iteration }} </td>
 
-                            <td class="text-sm text-gray-700">{{ $list->description }}</td>
+                            {{-- FIX: Apply the ordinal formatting helper here --}}
+                            <td class="text-sm text-gray-700">
+                                {!! formatOrdinal($list->description) !!}
+                            </td>
                             <td class="text-sm text-gray-700 whitespace-nowrap">
                                 {{ \Carbon\Carbon::parse($list->to_be_held_on)->format('d-m-Y') }}
                             </td>
-                            <td class="text-sm space-x-2 whitespace-nowrap">
+                            <td class="text-sm space-x-2 whitespace-nowrap flex items-center gap-2"> {{-- Added flex/gap for buttons --}}
                                 @if (!empty($fileName))
-                                    <a href="{{ asset('storage/causelists/' . $fileName) }}" download
+                                    {{-- NEW: View Button (Opens in new tab) --}}
+                                    <a href="{{ $pdfUrl }}" target="_blank"
+                                        class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-md shadow hover:bg-blue-700 transition">
+                                        <i class="fa-solid fa-eye mr-1"></i> View
+                                    </a>
+
+                                    {{-- Existing Download Button --}}
+                                    <a href="{{ $pdfUrl }}" download="{{ $fileName }}"
                                         class="inline-flex items-center px-3 py-1.5 bg-green-600 text-white text-sm font-medium rounded-md shadow hover:bg-green-700 transition">
                                         <i class="fa-solid fa-download mr-1"></i> Download
                                     </a>
@@ -221,7 +242,32 @@
     @include('homepage.layouts.footer')
 
     <script>
-        // Helper function to convert 'd-m-Y' string (from PHP) to a comparable Date object's milliseconds
+        // DataTables Date Sorting Plug-in for 'd-m-Y' format
+        // This is crucial for correct chronological sorting of the date column.
+        $.extend($.fn.dataTableExt.oSort, {
+            "date-d-m-y-pre": function(a) {
+                // Return 0 if data is empty/invalid
+                if (!a) return 0;
+                let parts = a.split('-');
+                // Convert to a sortable number format (YYYYMMDD)
+                // If parts.length is not 3 (not d-m-Y), this will still return 0.
+                if (parts.length === 3) {
+                    return parts[2] * 10000 + parts[1] * 100 + parts[0] * 1;
+                }
+                return 0; // Invalid date format
+            },
+
+            "date-d-m-y-asc": function(a, b) {
+                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+            },
+
+            "date-d-m-y-desc": function(a, b) {
+                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+            }
+        });
+
+
+        // Helper function for the custom date range filter
         function dateToMs(dateString) {
             if (!dateString) return null;
             let parts = dateString.split('-');
@@ -249,7 +295,11 @@
                     [2, "desc"] // Order by Mediation Date (column 2) descending
                 ],
                 columnDefs: [
-                    // FIX: Remove DataTables serial number setup since we use PHP
+                    // Set custom type for Mediation Date (column 2)
+                    {
+                        type: 'date-d-m-y',
+                        targets: 2
+                    },
                     {
                         orderable: false,
                         targets: [0, 3, 4] // Sl. No, Actions, Status
@@ -280,18 +330,22 @@
 
                     const minDateVal = $('#min-date').val();
                     const maxDateVal = $('#max-date').val();
+                    // Get the content of the Mediation Date column (index 2)
                     const heldOnDateStr = data[2] || '';
 
-                    if (heldOnDateStr.length < 8) return true;
+                    if (heldOnDateStr.length < 8) return true; // If data is missing/invalid, show it by default
 
                     const heldOnMs = dateToMs(heldOnDateStr);
+                    // Date picker inputs return YYYY-MM-DD format, which JS Date constructor handles easily.
                     const minMs = minDateVal ? new Date(minDateVal).getTime() : null;
-                    const maxMs = maxDateVal ? new Date(maxDateVal).getTime() : null;
+                    // For the 'max' date, we add a day's worth of milliseconds to include the whole day selected.
+                    const maxMs = maxDateVal ? new Date(maxDateVal).getTime() + (24 * 60 * 60 * 1000) : null;
+
 
                     if (minMs && heldOnMs < minMs) {
                         return false;
                     }
-                    if (maxMs && heldOnMs > maxMs) {
+                    if (maxMs && heldOnMs >= maxMs) {
                         return false;
                     }
 

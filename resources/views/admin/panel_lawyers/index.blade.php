@@ -39,7 +39,9 @@
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name
                         </th>
-                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Designation
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Designation
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bar Enrolment No
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email
                         </th>
@@ -80,6 +82,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">{{ $lawyer->designation ?? '-' }}</td>
+                            <td class="px-6 py-4">{{ $lawyer->enrolment_no ?? '-' }}</td>
                             <td class="px-6 py-4">{{ $lawyer->email ?? '-' }}</td>
                             <td class="px-6 py-4">{{ $lawyer->phone_number ?? '-' }}</td>
                             <td class="px-6 py-4">{{ $lawyer->address ?? '-' }}</td>

@@ -12,9 +12,12 @@ class MediationController extends Controller
 {
     public function index()
     {
-        // Fetch all cause lists, newest first, with uploader info
+        // Fetch all cause lists, newest scheduled mediation date first, with uploader info
         $causeLists = MediationCauseList::with('uploader')
-            ->orderByDesc('cause_list_date')
+            // 👇 Change the sorting column to the date the mediation is scheduled for
+            ->orderByDesc('to_be_held_on')
+            // 👇 Add a secondary sort by upload time, in case two lists have the same held-on date
+            ->orderByDesc('created_at')
             ->get();
 
         // Return the index view with the cause lists

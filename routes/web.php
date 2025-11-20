@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\LegalAidController;
 use App\Http\Controllers\Admin\PanelLawyerController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\MediationController;
+use App\Http\Controllers\FileServeController;
 
 
 // =========================================================================
