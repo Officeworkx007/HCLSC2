@@ -138,7 +138,7 @@
                 <button @click="open = !open"
                     class="w-full flex items-center justify-between px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33] focus:outline-none">
                     <div class="flex items-center space-x-3">
-                        <i class="fas fa-file-pdf text-red-500"></i>
+                        <i class="fas fa-file-pdf"></i>
                         <span class="sidebar-text">Mediation Causelist</span>
                     </div>
                     <!-- Arrow -->
@@ -163,6 +163,44 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.mediations.create') }}"
+                            class="block px-3 py-2 rounded hover:bg-white hover:text-[#0c1e33] transition">
+                            Create
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Photo Gallery Dropdown -->
+            <li x-data="{ open: false }" class="relative">
+                <!-- Main Item -->
+                <button @click="open = !open"
+                    class="w-full flex items-center justify-between px-6 py-3 rounded-l-full transition duration-300 hover:bg-white hover:text-[#0c1e33] focus:outline-none">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-images"></i>
+                        <span class="sidebar-text">Photo Gallery</span>
+                    </div>
+                    <!-- Arrow -->
+                    <svg :class="open ? 'rotate-90' : ''" class="w-4 h-4 transform transition-transform"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown Items -->
+                <ul x-show="open" x-transition
+                    class="relative ml-10 mt-2 flex flex-col space-y-2 text-sm text-gray-300">
+
+                    <!-- vertical line -->
+                    <span class="absolute left-0 top-0 h-full w-px bg-gray-600"></span>
+
+                    <li>
+                        <a href=""
+                            class="block px-3 py-2 rounded hover:bg-white hover:text-[#0c1e33] transition">
+                            View
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.photo_gallery.create') }}"
                             class="block px-3 py-2 rounded hover:bg-white hover:text-[#0c1e33] transition">
                             Create
                         </a>

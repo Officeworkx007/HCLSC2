@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PanelLawyerController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\MediationController;
 use App\Http\Controllers\FileServeController;
+use App\Http\Controllers\Admin\GalleryController;
 
 
 // =========================================================================
@@ -37,9 +38,7 @@ Route::get('/homepage/mediation', [HomeController::class, 'mediations'])->name('
 // View Public Mediation Cause List PDF
 Route::get('/homepage/mediation/view/{filename}', [HomeController::class, 'viewPdf'])->name('homepage.mediation.view');
 
-// -------------------------------------------------------------------------
-// AUTHENTICATION ROUTES (Forms are public, logic usually inside)
-// -------------------------------------------------------------------------
+Route::get('/homepage/gallery', [HomeController::class, 'images'])->name('homepage.gallery');
 
 // Admin Auth Routes (The forms are public, logic is protected or redirects)
 Route::get('/admin/register', [AdminAuthController::class, 'registerForm'])->name('admin.register');
@@ -47,12 +46,6 @@ Route::get('/admin/login', [AdminAuthController::class, 'loginForm'])->name('adm
 Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin.register');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 
-
-// =========================================================================
-// PDF CONTENT SERVER (UNPROTECTED) - FIX FOR ADOBE API 🛠️
-// =========================================================================
-// This route MUST be outside the 'auth' middleware group so the Adobe viewer
-// (which is unauthenticated) can successfully fetch the raw PDF bytes.
 Route::get('/mediations/serve-pdf/{filename}', [MediationController::class, 'servePdfContent'])->name('admin.mediations.servePdfContent');
 
 
@@ -101,6 +94,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     // PDF VIEWER ROUTE (Protected to ensure only admins can load the viewer HTML)
     Route::get('/mediations/view-pdf/{filename}', [MediationController::class, 'viewPdf'])
         ->name('admin.mediations.viewPdf');
+
+    // Photo Gallery (Protected)
+    Route::get('/photo_gallery/create', [GalleryController::class, 'create'])->name('admin.photo_gallery.create');    
 
 });
 

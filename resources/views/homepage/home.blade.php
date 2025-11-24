@@ -401,6 +401,85 @@
         </div>
     </section>
 
+    <!-- Photo Gallery Section -->
+    <section class="bg-gray-50 py-20 mt-[5rem]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <h2 class="text-4xl font-bold tracking-wide text-blue-900">
+                    📸 Photo <span class="text-yellow-500">Gallery</span>
+                </h2>
+                <div class="w-32 h-1 bg-yellow-500 mx-auto mt-3 rounded-full"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4 text-sm md:text-base">
+                    Glimpses of our legal awareness camps, Lok Adalats, and community outreach programs.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <a href="/gallery/lok-adalats"
+                    class="block group relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
+                    <img src="https://via.placeholder.com/600x400?text=Lok+Adalat+2025" alt="Lok Adalat Photo Album"
+                        class="w-full h-64 object-cover object-center transition-opacity duration-300 group-hover:opacity-80">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-blue-900/60 transition duration-300"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-1 group-hover:text-yellow-400 transition">Lok Adalats 2025
+                        </h3>
+                        <p class="text-sm">View all photos from the Lok Adalat events.</p>
+                        <span class="mt-2 text-yellow-400 text-sm flex items-center">
+                            View Gallery
+                            <i data-feather="arrow-right"
+                                class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="/gallery/awareness-camps"
+                    class="block group relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
+                    <img src="https://via.placeholder.com/600x400?text=Awareness+Camp"
+                        alt="Legal Awareness Photo Album"
+                        class="w-full h-64 object-cover object-center transition-opacity duration-300 group-hover:opacity-80">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-blue-900/60 transition duration-300"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-1 group-hover:text-yellow-400 transition">Legal Awareness
+                            Camps</h3>
+                        <p class="text-sm">Photos from various community outreach programs.</p>
+                        <span class="mt-2 text-yellow-400 text-sm flex items-center">
+                            View Gallery
+                            <i data-feather="arrow-right"
+                                class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="/gallery/official-events"
+                    class="block group relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
+                    <img src="https://via.placeholder.com/600x400?text=Official+Function"
+                        alt="Official Events Photo Album"
+                        class="w-full h-64 object-cover object-center transition-opacity duration-300 group-hover:opacity-80">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-blue-900/60 transition duration-300"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-1 group-hover:text-yellow-400 transition">Official Functions
+                        </h3>
+                        <p class="text-sm">Key moments from important official gatherings.</p>
+                        <span class="mt-2 text-yellow-400 text-sm flex items-center">
+                            View Gallery
+                            <i data-feather="arrow-right"
+                                class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="/gallery/all"
+                    class="inline-block px-10 py-3 bg-blue-900 text-yellow-400 font-semibold rounded-lg shadow-lg hover:bg-blue-800 transition-all border-2 border-yellow-400">
+                    View All Galleries
+                </a>
+            </div>
+        </div>
+    </section>
+
     @include('homepage.layouts.footer')
 
     <script>

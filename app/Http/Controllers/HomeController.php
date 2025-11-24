@@ -68,4 +68,9 @@ class HomeController extends Controller
         // Redirect to PDF.js viewer with ?file= parameter
         return redirect("/pdfjs/web/viewer.html?file=" . urlencode($fileUrl));
     }
+
+    public function images()
+    {
+        return view('homepage.gallery');
+    }
 }
