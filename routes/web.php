@@ -96,8 +96,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
         ->name('admin.mediations.viewPdf');
 
     // Photo Gallery (Protected)
-    Route::get('/photo_gallery/create', [GalleryController::class, 'create'])->name('admin.photo_gallery.create');    
-
+    Route::get('/photo_gallery', [GalleryController::class, 'index'])->name('admin.photo_gallery.index');
+    Route::get('/photo_gallery/create', [GalleryController::class, 'create'])->name('admin.photo_gallery.create');
+    Route::post('/photo_gallery/store', [GalleryController::class, 'store'])->name('admin.photo_gallery.store');
+    Route::get('/photo_gallery/{album}', [GalleryController::class, 'show'])->name('admin.photo_gallery.show');
 });
 
 

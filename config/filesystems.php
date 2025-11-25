@@ -62,8 +62,8 @@ return [
 
         'uploads' => [
             'driver' => 'local',
-            'root'   => public_path('uploads'),
-            'url'    => env('APP_URL') . '/uploads',
+            'root'  => public_path('uploads'),
+            'url'   => env('APP_URL') . '/uploads',
             'visibility' => 'public',
         ],
     ],
@@ -80,7 +80,8 @@ return [
     */
 
     'links' => [
-        '/home/imjku9sm5n0y/public_html/storage' => '/home/imjku9sm5n0y/hclsc/storage/app/public',
+        // FIXED: Using standard Laravel path helpers for local environment
+        public_path('storage') => storage_path('app/public'),
     ],
 
 ];

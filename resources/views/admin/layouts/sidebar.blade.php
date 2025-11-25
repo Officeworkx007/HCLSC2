@@ -194,7 +194,7 @@
                     <span class="absolute left-0 top-0 h-full w-px bg-gray-600"></span>
 
                     <li>
-                        <a href=""
+                        <a href="{{ route('admin.photo_gallery.index') }}"
                             class="block px-3 py-2 rounded hover:bg-white hover:text-[#0c1e33] transition">
                             View
                         </a>
