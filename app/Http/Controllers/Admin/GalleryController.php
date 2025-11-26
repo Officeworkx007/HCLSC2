@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Log;
 
 class GalleryController extends Controller
 {
@@ -16,7 +17,7 @@ class GalleryController extends Controller
     {
         $albums = GalleryAlbum::withCount('photos')
             ->latest('event_date') // Order by event date, newest first
-            ->paginate(5); // Adjust pagination limit as needed
+            ->paginate(10); // Adjust pagination limit as needed
 
         return view('admin.photo_gallery.index', compact('albums'));
     }
@@ -44,25 +45,29 @@ class GalleryController extends Controller
             return back()->withInput()->withErrors($e->errors());
         }
 
+        $album = null; // Initialize $album outside try block for cleanup
+        $pathPrefix = null; // Initialize $pathPrefix
+
         // 2. Transaction and Storage
         try {
             DB::beginTransaction();
 
-            // **2A. Create the Album Record** (This is the most likely failure point if tables are mismatched)
+            // 2A. Create the Album Record
             $album = GalleryAlbum::create([
                 'title' => $request->input('title'),
                 'event_date' => $request->input('event_date'),
                 'description' => $request->input('description'),
             ]);
 
-            // **2B. Define the storage path**
+            // 2B. Define the storage path after album creation
             $pathPrefix = 'albums/' . date('Y', strtotime($album->event_date)) . '/' . $album->id;
 
             $photosToInsert = [];
             $order = 1;
 
-            // **2C. Loop, Store Files, and Prepare Photo Records**
+            // 2C. Loop, Store Files, and Prepare Photo Records
             foreach ($request->file('album_photos') as $photoFile) {
+                // The directory will be created if it doesn't exist
                 $filePath = Storage::disk('public')->put($pathPrefix, $photoFile);
 
                 $photosToInsert[] = [
@@ -77,7 +82,7 @@ class GalleryController extends Controller
                 ];
             }
 
-            // **2D. Insert Photo Records**
+            // 2D. Insert Photo Records
             if (!empty($photosToInsert)) {
                 $photosToInsert[0]['is_cover'] = true;
                 GalleryPhoto::insert($photosToInsert);
@@ -90,14 +95,11 @@ class GalleryController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            // 🛑 CRITICAL DEBUG DUMP 🛑
-            // This will expose the exact database/file storage error message and line number.
-            dd(
-                "FATAL STORE EXCEPTION:",
-                "Message: " . $e->getMessage(),
-                "File: " . $e->getFile(),
-                "Line: " . $e->getLine()
-            );
+            // If the transaction fails, remove the uploaded folder from storage/app/public
+            if ($pathPrefix) {
+                // Storage::deleteDirectory is recursive and handles the entire folder
+                Storage::disk('public')->deleteDirectory($pathPrefix);
+            }
 
             return back()
                 ->withInput()
@@ -111,5 +113,68 @@ class GalleryController extends Controller
         $album->load('photos');
 
         return view('admin.photo_gallery.show', compact('album'));
+    }
+
+    public function destroy(GalleryAlbum $album)
+    {
+        // 1. Define the base path for cleanup
+        // We replicate the path structure used in the 'store' method.
+        $pathToDelete = 'albums/' . date('Y', strtotime($album->event_date)) . '/' . $album->id;
+
+        try {
+            DB::beginTransaction();
+
+            // 2. Delete the associated photos (DB records)
+            // Note: If you use Model events (like 'deleting'), this is safer than a raw DELETE.
+            // Using the album's relationship for deletion ensures foreign key safety.
+            $album->photos()->delete();
+
+            // 3. Delete the album record itself
+            $album->delete();
+
+            // 4. Delete the physical directory from the disk
+            // NOTE: This must happen AFTER the album model is deleted if you use Model events.
+            // Storage::deleteDirectory is recursive, deleting the folder and all contents.
+            Storage::disk('public')->deleteDirectory($pathToDelete);
+
+            DB::commit();
+
+            return redirect()->route('admin.photo_gallery.index')
+                ->with('success', "Album '{$album->title}' and all associated photos deleted successfully!");
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            // Log the error for debugging
+            \Log::error("Failed to delete album {$album->id}: " . $e->getMessage());
+
+            return back()
+                ->with('error', 'Failed to delete the album due to an error: ' . $e->getMessage());
+        }
+    }
+
+    // 💡 Add the DESTROY method for deleting individual photos
+    public function destroyPhoto(GalleryAlbum $album, GalleryPhoto $photo)
+    {
+        // Ensure the photo belongs to the album (security check)
+        if ($photo->gallery_album_id !== $album->id) {
+            abort(404);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // 1. Delete the file from the storage disk
+            Storage::disk('public')->delete($photo->file_path);
+
+            // 2. Delete the database record
+            $photo->delete();
+
+            DB::commit();
+
+            return back()->with('success', 'Photo deleted successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Failed to delete photo: ' . $e->getMessage());
+        }
     }
 }

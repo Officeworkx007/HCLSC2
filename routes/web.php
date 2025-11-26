@@ -100,6 +100,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/photo_gallery/create', [GalleryController::class, 'create'])->name('admin.photo_gallery.create');
     Route::post('/photo_gallery/store', [GalleryController::class, 'store'])->name('admin.photo_gallery.store');
     Route::get('/photo_gallery/{album}', [GalleryController::class, 'show'])->name('admin.photo_gallery.show');
+    Route::delete('/photo_gallery/{album}', [GalleryController::class, 'destroy'])->name('admin.photo_gallery.destroy');
+    Route::delete('/photo_gallery/{album}/photo/{photo}', [GalleryController::class, 'destroyPhoto'])->name('admin.photo_gallery.destroyPhoto');
 });
 
 
