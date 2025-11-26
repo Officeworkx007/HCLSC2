@@ -3,6 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Caste;
+use App\Models\Doc;
+use App\Models\Gender;
+use App\Models\Income;
+use App\Models\Religion;
+use App\Models\Rejection;
+use App\Models\Occupation;
+use App\Models\PanelLawyer;
+use App\Models\ApplicantDocument;
+use App\Models\EligibilityCategory;
 
 class Applicant extends Model
 {
@@ -26,6 +36,7 @@ class Applicant extends Model
         'photo',
         'panel_lawyer_id', // ✅ allow mass assignment for assigned lawyer
         'status',
+        'annual_income_amount',
     ];
 
     protected $casts = [

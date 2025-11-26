@@ -36,11 +36,14 @@ class LegalAidController extends Controller
 
     public function store(Request $request)
     {
-        // 🚨 START: ADDED MISSING VALIDATION RULES
-        $request->validate([
+        // Define the ID for the 'General' category from your seeder list (index 7, so ID 8)
+        $generalEligibilityId = 8;
+
+        // 🚨 START: UPDATED VALIDATION RULES
+        $rules = [
             'name' => 'required|string|max:255',
-            'marital_status' => 'required|boolean', // Added boolean check
-            'spouse_name' => 'nullable|string|max:255', // Kept nullable as conditional logic is in the JS/Model
+            'marital_status' => 'required|boolean',
+            'spouse_name' => 'nullable|string|max:255',
             'gender' => 'required|integer|exists:genders,id',
             'number' => 'required|string|max:15',
             'email' => 'nullable|email|max:255',
@@ -58,18 +61,26 @@ class LegalAidController extends Controller
             'photo' => 'nullable|image|max:10048',
             'upload_documents.*' => 'nullable|integer|exists:upload_documents,id',
             'document_files.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
-        ]);
-        // 🚨 END: ADDED MISSING VALIDATION RULES
+
+            // ⭐ NEW CONDITIONAL VALIDATION RULE ⭐
+            'annual_income_amount' => [
+                'nullable',
+                'integer',
+                'min:0',
+                // This rule makes the field REQUIRED if the selected eligibility_category is the 'General' ID (8)
+                'required_if:eligibility_category,' . $generalEligibilityId,
+            ],
+        ];
+
+        $request->validate($rules);
+        // 🚨 END: UPDATED VALIDATION RULES
 
         $applicant = new Applicant();
         $applicant->name = $request->name;
         $applicant->father_name = $request->father_name;
         $applicant->mother_name = $request->mother_name;
 
-        // 🚨 START: ADDED MARITAL STATUS BOOLEAN LOGIC
         $applicant->marital_status = $request->marital_status;
-        // 🚨 END: ADDED MARITAL STATUS BOOLEAN LOGIC
-
         $applicant->spouse_name = $request->spouse_name;
         $applicant->gender_id = $request->gender;
         $applicant->number = $request->number;
@@ -82,6 +93,8 @@ class LegalAidController extends Controller
         $applicant->income_id = $request->income;
         $applicant->eligibility_category_id = $request->eligibility_category;
 
+        // ⭐ NEW: SAVE THE ANNUAL INCOME AMOUNT ⭐
+        $applicant->annual_income_amount = $request->annual_income_amount;
         // ✅ Save photo if uploaded
         if ($request->hasFile('photo')) {
             $applicant->photo = $request->file('photo')->store('applicants/photos', 'public');

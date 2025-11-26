@@ -24,13 +24,13 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('token_number')->nullable()->unique();
             $table->string('status')->default('Pending');
+            $table->unsignedBigInteger('annual_income_amount')->nullable();
 
             // Foreign keys for dropdowns (All constraints are kept as you originally defined them)
             $table->foreignId('gender_id')->nullable()->constrained('genders')->nullOnDelete();
             $table->foreignId('religion_id')->nullable()->constrained('religions')->nullOnDelete();
             $table->foreignId('caste_id')->nullable()->constrained('castes')->nullOnDelete();
             $table->foreignId('occupation_id')->nullable()->constrained('occupations')->nullOnDelete();
-            $table->foreignId('income_id')->nullable()->constrained('incomes')->nullOnDelete();
 
             // Keeping singular constraint to match your controller validation logic: `exists:eligibility_category,id`
             $table->foreignId('eligibility_category_id')->nullable()->constrained('eligibility_category')->nullOnDelete();
