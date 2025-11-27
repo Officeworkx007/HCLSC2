@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             CasteSeeder::class,
             EligibilityCategorySeeder::class,
             GenderSeeder::class,
-            IncomeSeeder::class,
             OccupationSeeder::class,
             ReligionSeeder::class,
             UploadDocumentSeeder::class,

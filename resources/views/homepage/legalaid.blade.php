@@ -31,7 +31,8 @@
 
         /* Highlight validation errors */
         .is-invalid {
-            border-color: #ef4444; /* Tailwind red-500 */
+            border-color: #ef4444;
+            /* Tailwind red-500 */
         }
 
         /* Prevent text overflow on smaller devices */
@@ -62,9 +63,9 @@
 
                         {{-- Applicant Name --}}
                         <div>
-                            <label for="name" class="block text-sm mb-1">Applicant Name <span class="text-red-500">*</span></label>
-                            <input type="text" name="name" id="name"
-                                value="{{ old('name') }}"
+                            <label for="name" class="block text-sm mb-1">Applicant Name <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" name="name" id="name" value="{{ old('name') }}"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('name') is-invalid @enderror"
                                 placeholder="Enter Name">
                             @error('name')
@@ -75,8 +76,7 @@
                         {{-- Father Name --}}
                         <div>
                             <label for="father_name" class="block text-sm mb-1">Father Name</label>
-                            <input type="text" name="father_name" id="father_name"
-                                value="{{ old('father_name') }}"
+                            <input type="text" name="father_name" id="father_name" value="{{ old('father_name') }}"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('father_name') is-invalid @enderror"
                                 placeholder="Enter Father's Name">
                             @error('father_name')
@@ -87,8 +87,7 @@
                         {{-- Mother Name --}}
                         <div>
                             <label for="mother_name" class="block text-sm mb-1">Mother Name</label>
-                            <input type="text" name="mother_name" id="mother_name"
-                                value="{{ old('mother_name') }}"
+                            <input type="text" name="mother_name" id="mother_name" value="{{ old('mother_name') }}"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('mother_name') is-invalid @enderror"
                                 placeholder="Enter Mother's Name">
                             @error('mother_name')
@@ -98,7 +97,8 @@
 
                         {{-- Marital Status --}}
                         <div>
-                            <label for="marital_status" class="block text-sm mb-1">Marital Status <span class="text-red-500">*</span></label>
+                            <label for="marital_status" class="block text-sm mb-1">Marital Status <span
+                                    class="text-red-500">*</span></label>
                             <div class="flex gap-4 mt-2 @error('marital_status') is-invalid @enderror">
                                 <label class="inline-flex items-center">
                                     <input type="radio" name="marital_status" value="1"
@@ -120,12 +120,13 @@
 
                         {{-- Spouse Name Field (Dynamically hidden/shown) --}}
                         {{-- Added @error class to container to force show if validation fails --}}
-                        <div id="spouseNameContainer" class="{{ old('marital_status') === '1' || $errors->has('spouse_name') ? '' : 'hidden' }}">
+                        <div id="spouseNameContainer"
+                            class="{{ old('marital_status') === '1' || $errors->has('spouse_name') ? '' : 'hidden' }}">
                             <label for="spouse_name" class="block text-sm mb-1">Spouse Name
-                                <span class="spouse-required-indicator text-red-500 {{ old('marital_status') === '1' ? '' : 'hidden' }}">*</span>
+                                <span
+                                    class="spouse-required-indicator text-red-500 {{ old('marital_status') === '1' ? '' : 'hidden' }}">*</span>
                             </label>
-                            <input type="text" name="spouse_name" id="spouse_name"
-                                value="{{ old('spouse_name') }}"
+                            <input type="text" name="spouse_name" id="spouse_name" value="{{ old('spouse_name') }}"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('spouse_name') is-invalid @enderror"
                                 placeholder="Enter Spouse Name (Required if Married)">
                             @error('spouse_name')
@@ -145,13 +146,15 @@
 
                         {{-- Gender --}}
                         <div>
-                            <label for="gender" class="block text-sm mb-1">Gender <span class="text-red-500">*</span></label>
+                            <label for="gender" class="block text-sm mb-1">Gender <span
+                                    class="text-red-500">*</span></label>
                             <select name="gender" id="gender"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('gender') is-invalid @enderror">
                                 <option value="">-- Select Gender --</option>
                                 @foreach ($genders as $gender)
                                     <option value="{{ $gender->id }}"
-                                        {{ old('gender') == $gender->id ? 'selected' : '' }}>{{ $gender->name }}</option>
+                                        {{ old('gender') == $gender->id ? 'selected' : '' }}>{{ $gender->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('gender')
@@ -161,9 +164,9 @@
 
                         {{-- Phone Number --}}
                         <div>
-                            <label for="number" class="block text-sm mb-1">Phone Number <span class="text-red-500">*</span></label>
-                            <input type="text" name="number" id="number"
-                                value="{{ old('number') }}"
+                            <label for="number" class="block text-sm mb-1">Phone Number <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" name="number" id="number" value="{{ old('number') }}"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('number') is-invalid @enderror"
                                 placeholder="Enter Phone Number">
                             @error('number')
@@ -174,8 +177,7 @@
                         {{-- Email --}}
                         <div>
                             <label for="email" class="block text-sm mb-1">Email</label>
-                            <input type="email" name="email" id="email"
-                                value="{{ old('email') }}"
+                            <input type="email" name="email" id="email" value="{{ old('email') }}"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('email') is-invalid @enderror"
                                 placeholder="Enter Email Address">
                             @error('email')
@@ -185,13 +187,15 @@
 
                         {{-- Religion --}}
                         <div>
-                            <label for="religion" class="block text-sm mb-1">Religion <span class="text-red-500">*</span></label>
+                            <label for="religion" class="block text-sm mb-1">Religion <span
+                                    class="text-red-500">*</span></label>
                             <select name="religion" id="religion"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('religion') is-invalid @enderror">
                                 <option value="">-- Select Religion --</option>
                                 @foreach ($religions as $religion)
                                     <option value="{{ $religion->id }}"
-                                        {{ old('religion') == $religion->id ? 'selected' : '' }}>{{ $religion->name }}</option>
+                                        {{ old('religion') == $religion->id ? 'selected' : '' }}>{{ $religion->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('religion')
@@ -201,13 +205,15 @@
 
                         {{-- Caste --}}
                         <div>
-                            <label for="caste" class="block text-sm mb-1">Caste <span class="text-red-500">*</span></label>
+                            <label for="caste" class="block text-sm mb-1">Caste <span
+                                    class="text-red-500">*</span></label>
                             <select name="caste" id="caste"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('caste') is-invalid @enderror">
                                 <option value="">-- Select Caste --</option>
                                 @foreach ($castes as $caste)
                                     <option value="{{ $caste->id }}"
-                                        {{ old('caste') == $caste->id ? 'selected' : '' }}>{{ $caste->name }}</option>
+                                        {{ old('caste') == $caste->id ? 'selected' : '' }}>{{ $caste->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('caste')
@@ -229,13 +235,15 @@
 
                         {{-- Occupation --}}
                         <div>
-                            <label for="occupation" class="block text-sm mb-1">Occupation <span class="text-red-500">*</span></label>
+                            <label for="occupation" class="block text-sm mb-1">Occupation <span
+                                    class="text-red-500">*</span></label>
                             <select name="occupation" id="occupation"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('occupation') is-invalid @enderror">
                                 <option value="">-- Select Occupation --</option>
                                 @foreach ($occupations as $occupation)
                                     <option value="{{ $occupation->id }}"
-                                        {{ old('occupation') == $occupation->id ? 'selected' : '' }}>{{ $occupation->name }}</option>
+                                        {{ old('occupation') == $occupation->id ? 'selected' : '' }}>
+                                        {{ $occupation->name }}</option>
                                 @endforeach
                             </select>
                             @error('occupation')
@@ -255,34 +263,34 @@
                             @enderror
                         </div>
 
-                        {{-- Annual Income --}}
-                        <div>
-                            <label for="income" class="block text-sm mb-1">Annual Income <span class="text-red-500">*</span></label>
-                            <select name="income" id="income"
-                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('income') is-invalid @enderror">
-                                <option value="">-- Select Income --</option>
-                                @foreach ($incomes as $income)
-                                    <option value="{{ $income->id }}"
-                                        {{ old('income') == $income->id ? 'selected' : '' }}>{{ $income->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('income')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                         {{-- Eligibility Category --}}
                         <div>
-                            <label for="eligibility_category" class="block text-sm mb-1">Eligibility Category <span class="text-red-500">*</span></label>
+                            <label for="eligibility_category" class="block text-sm mb-1">Eligibility Category <span
+                                    class="text-red-500">*</span></label>
                             <select name="eligibility_category" id="eligibility_category"
                                 class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('eligibility_category') is-invalid @enderror">
                                 <option value="">-- Select Eligibility Category --</option>
                                 @foreach ($eligibilities as $eligibility)
                                     <option value="{{ $eligibility->id }}"
-                                        {{ old('eligibility_category') == $eligibility->id ? 'selected' : '' }}>{{ $eligibility->name }}</option>
+                                        {{ old('eligibility_category') == $eligibility->id ? 'selected' : '' }}>
+                                        {{ $eligibility->name }}</option>
                                 @endforeach
                             </select>
                             @error('eligibility_category')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- ANNUAL INCOME AMOUNT (only visible when eligibility == General (id 8)) --}}
+                        <div id="annual_income_wrapper"
+                            class="{{ old('eligibility_category') == 8 || $errors->has('annual_income_amount') ? '' : 'hidden' }}">
+                            <label for="annual_income_amount" class="block text-sm mb-1">Annual Income Amount <span
+                                    class="text-red-500 {{ old('eligibility_category') == 8 ? '' : 'hidden' }}">*</span></label>
+                            <input type="number" name="annual_income_amount" id="annual_income_amount"
+                                value="{{ old('annual_income_amount') }}"
+                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('annual_income_amount') is-invalid @enderror"
+                                placeholder="Enter amount (required if General)">
+                            @error('annual_income_amount')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
@@ -302,7 +310,8 @@
                 </div>
 
                 {{-- Force container visible if document upload validation failed --}}
-                <div id="formContainer2" class="collapsible px-6 py-6 space-y-6 {{ $errors->has('upload_documents.*') || $errors->has('document_files.*') || old('upload_documents') ? '' : 'hidden' }}">
+                <div id="formContainer2"
+                    class="collapsible px-6 py-6 space-y-6 {{ $errors->has('upload_documents.*') || $errors->has('document_files.*') || old('upload_documents') ? '' : 'hidden' }}">
                     <div id="documentsWrapper" class="space-y-6">
 
                         @php
@@ -311,9 +320,11 @@
                         @endphp
 
                         @foreach ($oldDocuments as $index => $oldDocumentId)
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center single-doc-row">
+                            <div
+                                class="flex flex-col sm:flex-row items-start sm:items-center gap-6 single-doc-row document-row">
+
                                 {{-- Document Type Select --}}
-                                <div>
+                                <div class="w-full sm:w-1/2">
                                     <label class="block text-sm mb-1">Upload Document</label>
                                     <select name="upload_documents[]"
                                         class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 @error('upload_documents.' . $index) is-invalid @enderror">
@@ -330,16 +341,23 @@
                                     @enderror
                                 </div>
 
-                                {{-- File Input and Delete Button --}}
-                                <div class="flex gap-3 items-center">
-                                    <input type="file" name="document_files[]" accept="image/*,.pdf"
-                                        class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer @error('document_files.' . $index) is-invalid @enderror">
-                                    <button type="button"
-                                        class="delete-row bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700">X</button>
+                                {{-- File Input + Delete --}}
+                                <div class="w-full sm:w-1/2">
+                                    <label class="block text-sm mb-1">Choose File</label>
+                                    <div class="flex items-center gap-3">
+                                        <input type="file" name="document_files[]" accept="image/*,.pdf"
+                                            class="flex-1 border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer @error('document_files.' . $index) is-invalid @enderror">
+
+                                        <button type="button"
+                                            class="delete-row bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700">
+                                            X
+                                        </button>
+                                    </div>
+
+                                    @error('document_files.' . $index)
+                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                                @error('document_files.' . $index)
-                                    <p class="text-red-500 text-xs mt-1 sm:col-span-2">{{ $message }}</p>
-                                @enderror
                             </div>
                         @endforeach
 
@@ -379,7 +397,7 @@
         if (document.getElementById('formContainer1').classList.contains('hidden')) {
             toggleSection('toggleBtn1', 'formContainer1', 'toggleIcon1');
         } else {
-             document.getElementById('toggleIcon1').textContent = '-';
+            document.getElementById('toggleIcon1').textContent = '-';
         }
 
         if (document.getElementById('formContainer2').classList.contains('hidden')) {
@@ -388,35 +406,44 @@
             document.getElementById('toggleIcon2').textContent = '-';
         }
 
-        // Dynamic Document Rows
+        // Combine all DOMContentLoaded logic in one listener
         document.addEventListener("DOMContentLoaded", function() {
+
+            /* ------------------------------
+               Dynamic Document Rows (Add/Remove)
+               - Keeps the same input names: upload_documents[] and document_files[]
+               - Preserves old() server behaviour
+            --------------------------------*/
             const addMoreBtn = document.getElementById("addMoreDocs");
             const wrapper = document.getElementById("documentsWrapper");
-            const documentSelectOptions = wrapper.querySelector("select").innerHTML; // Cache options for new rows
+            // cache options for new rows from the first select (if present)
+            const firstSelect = wrapper.querySelector("select");
+            const documentSelectOptions = firstSelect ? firstSelect.innerHTML : '';
 
-            addMoreBtn.addEventListener("click", function() {
-                // Template for a new row
-                const newRowHTML = `
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center single-doc-row">
-                        <div>
-                            <label class="block text-sm mb-1">Upload Document</label>
-                            <select name="upload_documents[]"
-                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300">
-                                ${documentSelectOptions}
-                            </select>
-                        </div>
-                        <div class="flex gap-3 items-center">
-                            <input type="file" name="document_files[]" accept="image/*,.pdf"
-                                class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer">
-                            <button type="button"
-                                class="delete-row bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700">X</button>
-                        </div>
+            addMoreBtn && addMoreBtn.addEventListener("click", function() {
+                const newRow = document.createElement('div');
+                newRow.className =
+                    'grid grid-cols-1 sm:grid-cols-2 gap-6 items-center single-doc-row document-row';
+
+                newRow.innerHTML = `
+                    <div>
+                        <label class="block text-sm mb-1">Upload Document</label>
+                        <select name="upload_documents[]"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300">
+                            ${documentSelectOptions}
+                        </select>
+                    </div>
+                    <div class="flex gap-3 items-center">
+                        <input type="file" name="document_files[]" accept="image/*,.pdf"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300 cursor-pointer">
+                        <button type="button"
+                            class="delete-row bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700">X</button>
                     </div>
                 `;
-                wrapper.insertAdjacentHTML('beforeend', newRowHTML);
+                wrapper.appendChild(newRow);
             });
 
-            // Delete row logic
+            // Delete row logic (delegated)
             wrapper.addEventListener("click", function(e) {
                 if (e.target.classList.contains("delete-row")) {
                     const rows = wrapper.querySelectorAll(".single-doc-row");
@@ -427,10 +454,9 @@
                     }
                 }
             });
-        });
 
-        // Spouse section for collapsible
-        document.addEventListener("DOMContentLoaded", function() {
+
+            // Spouse section for collapsible
             const marriedYes = document.getElementById('marriedYes');
             const marriedNo = document.getElementById('marriedNo');
             const spouseNameContainer = document.getElementById('spouseNameContainer');
@@ -439,31 +465,64 @@
 
             // Function to handle the visibility toggle and requirement
             const toggleSpouseNameField = () => {
-                if (marriedYes.checked) {
+                if (marriedYes && marriedYes.checked) {
                     spouseNameContainer.classList.remove('hidden');
                     spouseRequiredIndicator.classList.remove('hidden');
-                    spouseNameInput.setAttribute('required', 'required'); // Client-side required
+                    spouseNameInput && spouseNameInput.setAttribute('required',
+                        'required'); // Client-side required
                 } else {
                     // Check if validation error is forcing it to stay open, if not, hide it
-                    if (!spouseNameContainer.classList.contains('is-invalid') && !document.querySelector('.is-invalid')) {
-                         spouseNameContainer.classList.add('hidden');
+                    if (!spouseNameContainer.classList.contains('is-invalid') && !document.querySelector(
+                            '.is-invalid')) {
+                        spouseNameContainer.classList.add('hidden');
                     }
                     spouseRequiredIndicator.classList.add('hidden');
-                    spouseNameInput.removeAttribute('required');
+                    spouseNameInput && spouseNameInput.removeAttribute('required');
                     // Only clear the field if it was successfully unmarried/not selected on server
                     if (!spouseNameContainer.classList.contains('is-invalid')) {
-                         spouseNameInput.value = '';
+                        spouseNameInput && (spouseNameInput.value = '');
                     }
                 }
             };
 
             // Listen for changes on both radio buttons
-            marriedYes.addEventListener('change', toggleSpouseNameField);
-            marriedNo.addEventListener('change', toggleSpouseNameField);
+            marriedYes && marriedYes.addEventListener('change', toggleSpouseNameField);
+            marriedNo && marriedNo.addEventListener('change', toggleSpouseNameField);
 
             // Initial check (handles both default state and old input retention)
             toggleSpouseNameField();
-        });
+
+
+            /* ------------------------------
+               Show/hide annual_income_amount ONLY when eligibility_category == 8
+               (Matches controller 'required_if:eligibility_category,8')
+            -------------------------------*/
+            const eligibilitySelect = document.getElementById("eligibility_category");
+            const annualWrapper = document.getElementById("annual_income_wrapper");
+            const annualInput = document.getElementById("annual_income_amount");
+
+            function toggleAnnualField() {
+                if (!eligibilitySelect) return;
+                // string compare because option values come as strings
+                if (eligibilitySelect.value === "8") {
+                    annualWrapper.classList.remove("hidden");
+                } else {
+                    // hide + clear value if not forced by server errors
+                    if (!annualWrapper.classList.contains('is-invalid')) {
+                        annualWrapper.classList.add("hidden");
+                        if (annualInput) annualInput.value = "";
+                    } else {
+                        // if server validation added is-invalid, keep visible so error shows
+                        annualWrapper.classList.remove("hidden");
+                    }
+                }
+            }
+
+            eligibilitySelect && eligibilitySelect.addEventListener('change', toggleAnnualField);
+            // run once on load to reflect old() state / validation errors
+            toggleAnnualField();
+
+        }); // end DOMContentLoaded
     </script>
 </body>
 

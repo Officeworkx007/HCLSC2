@@ -31,7 +31,6 @@ class Applicant extends Model
         'certificate_no',
         'occupation_id',
         'employment',
-        'income_id',
         'eligibility_category_id',
         'photo',
         'panel_lawyer_id', // ✅ allow mass assignment for assigned lawyer
@@ -64,11 +63,6 @@ class Applicant extends Model
     public function occupation()
     {
         return $this->belongsTo(Occupation::class, 'occupation_id');
-    }
-
-    public function income()
-    {
-        return $this->belongsTo(Income::class, 'income_id');
     }
 
     public function eligibilityCategory()

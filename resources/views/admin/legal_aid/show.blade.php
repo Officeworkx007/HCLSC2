@@ -105,7 +105,7 @@
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <th class="px-4 py-3">Annual Income</th>
-                            <td class="px-4 py-3">{{ $applicant->income?->name ?? 'N/A' }}</td>
+                            <td class="px-4 py-3">{{ $applicant->annual_income_amount ?? 'N/A' }}</td>
                         </tr>
                         <tr class="hover:bg-gray-50">
                             <th class="px-4 py-3">Eligibility</th>

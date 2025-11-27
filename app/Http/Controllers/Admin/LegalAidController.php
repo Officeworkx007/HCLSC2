@@ -12,7 +12,6 @@ use App\Models\Religion;
 use App\Models\Caste;
 use App\Models\EligibilityCategory;
 use App\Models\Occupation;
-use App\Models\Income;
 use App\Models\UploadDocument;
 use App\Models\PanelLawyer;
 use App\Models\Rejection;
@@ -27,11 +26,10 @@ class LegalAidController extends Controller
         $religions = Religion::all();
         $castes = Caste::all();
         $occupations = Occupation::all();
-        $incomes = Income::all();
         $eligibilities = EligibilityCategory::all();
         $documents = UploadDocument::all();
 
-        return view('homepage.legalaid', compact('genders', 'religions', 'castes', 'occupations', 'incomes', 'eligibilities', 'documents'));
+        return view('homepage.legalaid', compact('genders', 'religions', 'castes', 'occupations', 'eligibilities', 'documents'));
     }
 
     public function store(Request $request)
@@ -50,7 +48,6 @@ class LegalAidController extends Controller
             'religion' => 'required|integer|exists:religions,id',
             'caste' => 'required|integer|exists:castes,id',
             'occupation' => 'required|integer|exists:occupations,id',
-            'income' => 'required|integer|exists:incomes,id',
             'eligibility_category' => 'required|integer|exists:eligibility_category,id',
 
             'father_name' => 'nullable|string|max:255',
@@ -90,7 +87,6 @@ class LegalAidController extends Controller
         $applicant->certificate_no = $request->certificate_no;
         $applicant->occupation_id = $request->occupation;
         $applicant->employment_details = $request->employment_details;
-        $applicant->income_id = $request->income;
         $applicant->eligibility_category_id = $request->eligibility_category;
 
         // ⭐ NEW: SAVE THE ANNUAL INCOME AMOUNT ⭐
@@ -149,7 +145,6 @@ class LegalAidController extends Controller
             'religion',
             'caste',
             'occupation',
-            'income',
             'eligibilityCategory',
             'documents.uploadDocument',
             'rejection'
@@ -165,7 +160,6 @@ class LegalAidController extends Controller
             'religion',
             'caste',
             'occupation',
-            'income',
             'eligibilityCategory',
             'documents.uploadDocument'
         ])->findOrFail($id);
