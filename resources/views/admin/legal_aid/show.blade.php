@@ -1,14 +1,12 @@
-{{-- Font Awesome --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-{{-- AdminLTE CSS --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+@extends('admin.layouts.master')
 
-@vite(['resources/css/app.css', 'resources/js/app.js'])
-@stack('styles')
+@section('title', 'Admin Dashboard')
 
-<div class="bg-white shadow-lg rounded-xl p-6 mx-auto max-w-6xl border border-gray-100">
+@section('page-title', 'Legal Aid Applications')
+
+@section('content')
+
+<div class="bg-white shadow-lg rounded-xl p-6 mx-auto max-w-6xl border border-gray-100 mb-5">
 
     <div class="flex items-center justify-between border-b pb-4 mb-6">
         <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
@@ -313,3 +311,5 @@
         </div>
     </div>
 </div>
+
+@endsection

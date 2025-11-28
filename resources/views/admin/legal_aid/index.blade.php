@@ -89,7 +89,7 @@
 
                             {{-- Quick Actions --}}
                             <td class="px-4 py-3 space-x-3">
-                                <form action="" method="POST"
+                                <form action="{{ route('admin.legal_aid.destroy', $applicant->id) }}" method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this application?');">
                                     @csrf
                                     @method('DELETE')

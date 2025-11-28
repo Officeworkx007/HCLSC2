@@ -57,7 +57,7 @@ class LegalAidController extends Controller
 
             'photo' => 'nullable|image|max:10048',
             'upload_documents.*' => 'nullable|integer|exists:upload_documents,id',
-            'document_files.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
+            'document_files.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240',
 
             // ⭐ NEW CONDITIONAL VALIDATION RULE ⭐
             'annual_income_amount' => [
@@ -289,7 +289,7 @@ class LegalAidController extends Controller
         $request->validate([
             'order_no' => 'required|string|max:255',
             'docs' => 'required|array',
-            'docs.*' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:10048',
+            'docs.*' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:10240',
         ]);
 
         // ✅ Fetch applicant
@@ -334,4 +334,40 @@ class LegalAidController extends Controller
         return back()->with('success', 'Case document/order deleted successfully.');
     }
     // 🌟 END: ADDED DELETE FUNCTION 🌟
+
+    public function destroy($id)
+    {
+        $applicant = Applicant::with(['documents', 'rejection', 'caseDocs'])->findOrFail($id);
+
+        // 1️⃣ Delete uploaded applicant photo if exists
+        if ($applicant->photo && Storage::disk('public')->exists($applicant->photo)) {
+            Storage::disk('public')->delete($applicant->photo);
+        }
+
+        // 2️⃣ Delete related uploaded documents
+        foreach ($applicant->documents as $doc) {
+            if ($doc->file_path && Storage::disk('public')->exists($doc->file_path)) {
+                Storage::disk('public')->delete($doc->file_path);
+            }
+            $doc->delete();
+        }
+
+        // 3️⃣ Delete related case documents/orders
+        foreach ($applicant->caseDocs as $caseDoc) {
+            if ($caseDoc->file_path && Storage::disk('public')->exists($caseDoc->file_path)) {
+                Storage::disk('public')->delete($caseDoc->file_path);
+            }
+            $caseDoc->delete();
+        }
+
+        // 4️⃣ Delete rejection record if exists
+        if ($applicant->rejection) {
+            $applicant->rejection->delete();
+        }
+
+        // 5️⃣ Finally, delete the applicant
+        $applicant->delete();
+
+        return redirect()->route('admin.legal_aid.index')->with('success', 'Applicant and all related records have been deleted successfully.');
+    }
 }

@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     // Legal Aid (Protected)
     Route::get('/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
     Route::get('/legal_aid/{applicant}', [LegalAidController::class, 'show'])->name('admin.legal_aid.show');
+    Route::delete('/legal_aid/{id}', [LegalAidController::class, 'destroy'])->name('admin.legal_aid.destroy');
     Route::post('/legal_aid/{id}/assign-lawyer', [LegalAidController::class, 'assignLawyer'])->name('admin.legal_aid.assignLawyer');
     Route::post('/legal_aid/{id}/store-order-docs', [LegalAidController::class, 'storeOrderAndDocs'])->name('admin.legal_aid.storeOrderDocs');
     Route::post('/legal-aid/{id}/reject', [LegalAidController::class, 'rejectApplicant'])->name('admin.legal_aid.rejectApplicant');
