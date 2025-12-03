@@ -62,7 +62,6 @@
     <!-- Help Section -->
     <section class="relative py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-600 text-white overflow-hidden">
         <div class="absolute inset-0 bg-[url('/images/pattern-light.svg')] opacity-10"></div>
-        <!-- Optional subtle graphic -->
 
         <div class="relative max-w-7xl mx-auto px-6">
             <!-- Heading -->
@@ -116,14 +115,34 @@
                             'title' => 'Monitoring',
                             'desc' => 'Ensures implementation of legal aid schemes and reports on activities.',
                         ],
+                        [
+                            'icon' => 'advocate',
+                            'title' => 'Pro Bono Lawyers',
+                            'desc' =>
+                                'Access to dedicated pro bono lawyers offering voluntary legal support for deserving cases.',
+                        ],
                     ];
                 @endphp
 
                 @foreach ($cards as $card)
                     <div
                         class="group bg-blue-800/30 backdrop-blur-sm border border-blue-400/20 rounded-xl flex flex-col justify-center items-center p-10 transition duration-500 hover:bg-white hover:scale-[1.03] hover:shadow-2xl hover:border-yellow-400">
-                        <i data-feather="{{ $card['icon'] }}"
-                            class="w-12 h-12 mb-4 text-[#FFD700] transition duration-500 group-hover:text-blue-800"></i>
+
+                        <!-- ICON HANDLING -->
+                        @if ($card['icon'] === 'advocate')
+                            <!-- Custom Advocate SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-12 h-12 mb-4 text-[#FFD700] transition duration-500 group-hover:text-blue-800"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm6 10v-1c0-2.76-4-4-6-4s-6 1.24-6 4v1h12z" />
+                            </svg>
+                        @else
+                            <!-- Feather Icon -->
+                            <i data-feather="{{ $card['icon'] }}"
+                                class="w-12 h-12 mb-4 text-[#FFD700] transition duration-500 group-hover:text-blue-800"></i>
+                        @endif
+
                         <h3
                             class="font-semibold text-lg mb-3 text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFEC8B] to-[#DAA520] bg-clip-text group-hover:text-blue-900 group-hover:bg-none transition">
                             {{ $card['title'] }}
@@ -206,6 +225,10 @@
                         Applying for legal aid through the High Court Legal Services Committee (HCLSC)
                         is quick and simple. Follow these easy steps to get legal assistance and track your case status
                         easily.
+                    </p> <br>
+                    <p class="text-lg leading-relaxed mb-6 text-slate-200 indent-4">
+                        🏛️ For Offline Submition, Please visit our Front Office at High Court Legal Services Committee,
+                        High Court of Manipur, Mantripukhri.
                     </p>
                     <button
                         class="px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-blue-900 font-semibold rounded-md shadow-lg hover:from-yellow-500 hover:to-yellow-700 transition-all">
@@ -308,7 +331,7 @@
                 <!-- Persons in Custody -->
                 <div
                     class="flex flex-col items-center p-4 bg-yellow-400 rounded-xl shadow-md hover:shadow-lg transition">
-                    <div class="text-3xl mb-2">🏥</div>
+                    <div class="text-3xl mb-2">🚔🧍‍♂️</div>
                     <p class="text-sm font-semibold text-blue-900 text-center">Persons in Custody / Homes</p>
                 </div>
 
@@ -364,7 +387,7 @@
             </div>
 
             <!-- Stats Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 text-center">
 
                 <!-- Panel Lawyers -->
                 <div class="flex flex-col items-center">
@@ -378,7 +401,7 @@
                 <div class="flex flex-col items-center">
                     <img src="/images/totalmediations.png" alt="Total Mediations"
                         class="w-[170px] h-[140px] mb-6 object-contain">
-                    <p class="text-5xl font-extrabold text-green-600">560</p>
+                    <p class="text-5xl font-extrabold text-green-600">566</p>
                     <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Mediations Completed</p>
                 </div>
 
@@ -386,7 +409,7 @@
                 <div class="flex flex-col items-center">
                     <img src="/images/successful.png" alt="Successful Mediations"
                         class="w-[170px] h-[140px] mb-6 object-contain">
-                    <p class="text-5xl font-extrabold text-green-600">10</p>
+                    <p class="text-5xl font-extrabold text-green-600">50</p>
                     <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Successful Mediations</p>
                 </div>
 
@@ -397,85 +420,13 @@
                     <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Lok Adalats</p>
                 </div>
 
-            </div>
-        </div>
-    </section>
+                <!-- Mediators -->
+                <div class="flex flex-col items-center">
+                    <img src="/images/mediators.png" alt="Mediators" class="w-[170px] h-[140px] mb-6 object-contain">
+                    <p class="text-5xl font-extrabold text-green-600">22</p>
+                    <p class="text-gray-700 tracking-wide uppercase text-sm mt-1 font-medium">Mediators</p>
+                </div>
 
-    <!-- Photo Gallery Section -->
-    <section class="bg-gray-50 py-20 mt-[5rem]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-14">
-                <h2 class="text-4xl font-bold tracking-wide text-blue-900">
-                    📸 Photo <span class="text-yellow-500">Gallery</span>
-                </h2>
-                <div class="w-32 h-1 bg-yellow-500 mx-auto mt-3 rounded-full"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-4 text-sm md:text-base">
-                    Glimpses of our legal awareness camps, Lok Adalats, and community outreach programs.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                <a href="/gallery/lok-adalats"
-                    class="block group relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
-                    <img src="https://via.placeholder.com/600x400?text=Lok+Adalat+2025" alt="Lok Adalat Photo Album"
-                        class="w-full h-64 object-cover object-center transition-opacity duration-300 group-hover:opacity-80">
-                    <div class="absolute inset-0 bg-black/40 group-hover:bg-blue-900/60 transition duration-300"></div>
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <h3 class="text-2xl font-bold mb-1 group-hover:text-yellow-400 transition">Lok Adalats 2025
-                        </h3>
-                        <p class="text-sm">View all photos from the Lok Adalat events.</p>
-                        <span class="mt-2 text-yellow-400 text-sm flex items-center">
-                            View Gallery
-                            <i data-feather="arrow-right"
-                                class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"></i>
-                        </span>
-                    </div>
-                </a>
-
-                <a href="/gallery/awareness-camps"
-                    class="block group relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
-                    <img src="https://via.placeholder.com/600x400?text=Awareness+Camp"
-                        alt="Legal Awareness Photo Album"
-                        class="w-full h-64 object-cover object-center transition-opacity duration-300 group-hover:opacity-80">
-                    <div class="absolute inset-0 bg-black/40 group-hover:bg-blue-900/60 transition duration-300"></div>
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <h3 class="text-2xl font-bold mb-1 group-hover:text-yellow-400 transition">Legal Awareness
-                            Camps</h3>
-                        <p class="text-sm">Photos from various community outreach programs.</p>
-                        <span class="mt-2 text-yellow-400 text-sm flex items-center">
-                            View Gallery
-                            <i data-feather="arrow-right"
-                                class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"></i>
-                        </span>
-                    </div>
-                </a>
-
-                <a href="/gallery/official-events"
-                    class="block group relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
-                    <img src="https://via.placeholder.com/600x400?text=Official+Function"
-                        alt="Official Events Photo Album"
-                        class="w-full h-64 object-cover object-center transition-opacity duration-300 group-hover:opacity-80">
-                    <div class="absolute inset-0 bg-black/40 group-hover:bg-blue-900/60 transition duration-300"></div>
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <h3 class="text-2xl font-bold mb-1 group-hover:text-yellow-400 transition">Official Functions
-                        </h3>
-                        <p class="text-sm">Key moments from important official gatherings.</p>
-                        <span class="mt-2 text-yellow-400 text-sm flex items-center">
-                            View Gallery
-                            <i data-feather="arrow-right"
-                                class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"></i>
-                        </span>
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="/gallery/all"
-                    class="inline-block px-10 py-3 bg-blue-900 text-yellow-400 font-semibold rounded-lg shadow-lg hover:bg-blue-800 transition-all border-2 border-yellow-400">
-                    View All Galleries
-                </a>
             </div>
         </div>
     </section>
