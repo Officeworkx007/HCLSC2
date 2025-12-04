@@ -43,18 +43,27 @@
     <!-- PAGE CONTENT -->
     <main class="flex-grow w-full flex items-start justify-center py-6 px-3 sm:px-4">
         <div class="page-frame w-full">
+            @if (session('success'))
+                <div id="alert-message"
+                    class="mb-4 p-4 bg-green-100 border border-green-300 text-green-800 text-sm rounded-md">
+                    <i class="fa-solid fa-circle-check mr-2"></i>
+                    {{ session('success') }}
+                </div>
+            @endif
 
             <!-- Header -->
             <div class="flex flex-col md:flex-row md:items-start md:gap-8 mb-8">
                 <div class="md:w-1/2">
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
+                    <h1
+                        class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
                         CONTACT US
                     </h1>
                 </div>
 
                 <div class="md:w-1/2 mt-4 md:mt-0 text-justify">
                     <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
-                        If you have any questions regarding legal aid, free legal assistance, or services provided by the
+                        If you have any questions regarding legal aid, free legal assistance, or services provided by
+                        the
                         <span class="font-semibold text-gray-800">High Court Legal Services Committee</span>,
                         please feel free to reach out to us via phone, email, or by filling out the contact form below.
                     </p>
@@ -69,7 +78,7 @@
                     <div class="bg-gray-50 rounded-lg shadow-sm p-5 sm:p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">GET IN TOUCH</h3>
 
-                        <form action="" method="POST" class="space-y-4">
+                        <form action="{{ route('homepage.contactus.store') }}" method="POST" class="space-y-4">
                             @csrf
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -212,6 +221,19 @@
     <footer class="w-full mt-8">
         @include('homepage.layouts.footer')
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alertBox = document.getElementById('alert-message');
+            if (alertBox) {
+                setTimeout(() => {
+                    alertBox.style.transition = "opacity 0.5s ease";
+                    alertBox.style.opacity = "0";
+
+                    setTimeout(() => alertBox.remove(), 500); // remove from DOM
+                }, 3000); // show for 3 seconds
+            }
+        });
+    </script>
 
 </body>
 

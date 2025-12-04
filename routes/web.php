@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\MediationController;
 use App\Http\Controllers\FileServeController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\ContactUsController;
 
 
 // =========================================================================
@@ -24,6 +25,7 @@ Route::get('/', [HomeController::class, 'home'])->name('homepage.home');
 Route::get('/homepage/notice', [HomeController::class, 'circular'])->name('homepage.notice');
 
 Route::get('/homepage/contact', [HomeController::class, 'contact'])->name('homepage.contactus');
+Route::post('/homepage/contact/store', [ContactUsController::class, 'store'])->name('homepage.contactus.store');
 Route::get('/homepage/intro', [HomeController::class, 'hclscintro'])->name('homepage.intro');
 Route::get('/homepage/lawyers', [HomeController::class, 'lawyers'])->name('homepage.lawyers');
 
