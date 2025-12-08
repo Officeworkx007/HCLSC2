@@ -16,8 +16,8 @@ class GalleryController extends Controller
     public function index()
     {
         $albums = GalleryAlbum::withCount('photos')
-            ->latest('event_date') // Order by event date, newest first
-            ->paginate(10); // Adjust pagination limit as needed
+            ->orderBy('event_date', 'desc')
+            ->get(); // IMPORTANT — NO paginate()
 
         return view('admin.photo_gallery.index', compact('albums'));
     }
