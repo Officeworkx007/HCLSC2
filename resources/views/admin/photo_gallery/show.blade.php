@@ -1,191 +1,256 @@
 @extends('admin.layouts.master')
 
 @section('title', 'View Album: ' . $album->title)
-
 @section('page-title', 'Album Photos')
 
-{{-- CLEAN CSS: Only includes necessary styles for image fitting --}}
 @push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-    /* Ensures image takes full height of its container while maintaining aspect ratio */
-    .image-grid-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    /* Table/Card wrapper */
+    .album-wrapper {
+        overflow-x: auto;
+        margin-top: 1rem;
     }
 
-    /* Lightbox image sizing for full view with scrolling */
-    #lightboxImage {
-        /* This ensures the image is constrained by the screen but allows scrolling */
+    /* Header Card */
+    .album-header {
+        background: linear-gradient(90deg, #1e3a8a, #2563eb);
+        color: white;
+        border-radius: 0.75rem;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .album-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .admin-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 1.1rem;
+        background: linear-gradient(90deg, #1e3a8a, #2563eb);
+        color: #ffffff;
+        font-size: 0.875rem;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        transition: all 0.18s ease-in-out;
+        text-decoration: none;
+        letter-spacing: 0.3px;
+    }
+
+    .admin-btn-primary:hover {
+        background: linear-gradient(90deg, #23398f, #1d4ed8);
+        transform: translateY(-1px);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.20);
+        color: #fff;
+    }
+
+    /* Album Metadata */
+    .album-meta {
+        background: #ffffff;
+        border-radius: 0.75rem;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        color: #374151;
+    }
+
+    /* Photo Grid */
+    .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .photo-card {
+        background: #ffffff;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: all 0.2s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .photo-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .photo-card img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        transition: opacity 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+    .photo-card img:hover {
+        opacity: 0.85;
+    }
+
+    .photo-card .photo-info {
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+        font-size: 0.85rem;
+        color: #374151;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .photo-card .photo-info a,
+    .photo-card .photo-info button {
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .photo-card .photo-info a:hover,
+    .photo-card .photo-info button:hover {
+        color: #1e3a8a;
+        transform: scale(1.05);
+    }
+
+    /* Lightbox */
+    #lightbox {
+        position: fixed;
+        inset: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 50;
+        background-color: rgba(0,0,0,0.85);
+        padding: 1rem;
+    }
+
+    #lightbox img {
         max-width: 90vw;
         max-height: 90vh;
-        object-fit: contain;
-        width: auto;
-        height: auto;
+        border-radius: 0.5rem;
+    }
+
+    #lightbox p {
+        color: white;
+        text-align: center;
+        margin-top: 0.5rem;
+        font-weight: 600;
+    }
+
+    #lightbox .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    #lightbox .close-btn:hover {
+        color: #f87171;
     }
 </style>
 @endpush
 
 @section('content')
-
 <section class="p-8 bg-gray-100 min-h-screen">
     <div class="max-w-7xl mx-auto">
 
-        {{-- Header Section --}}
-        <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-300">
-            <h1 class="text-3xl font-extrabold text-gray-800 flex items-center">
-                <i class="fa-solid fa-images w-7 h-7 mr-3 text-indigo-600"></i> Photos in "{{ $album->title }}"
-            </h1>
-            <a href="{{ route('admin.photo_gallery.index') }}"
-               class="inline-flex items-center px-4 py-2 border border-indigo-400 text-sm font-medium rounded-lg shadow-sm text-indigo-600 bg-white hover:bg-indigo-50 transition duration-150">
-                <i class="fa-solid fa-arrow-left mr-2"></i> Back to Albums
+        {{-- Header --}}
+        <div class="album-header">
+            <h1><i class="fa-solid fa-images"></i> Photos in "{{ $album->title }}"</h1>
+            <a href="{{ route('admin.photo_gallery.index') }}" class="admin-btn-primary">
+                <i class="fa-solid fa-arrow-left"></i> Back to Albums
             </a>
         </div>
 
         {{-- Album Metadata --}}
-        <div class="mb-8 p-4 bg-white rounded-xl shadow-lg border-t-4 border-indigo-600">
-            <p class="text-gray-700 text-lg font-semibold">
-                Event Date:
-                <span class="font-normal text-gray-600">
-                    {{ $album->event_date?->format('F d, Y') ?? 'N/A' }}
-                </span>
-                |
-                Total Photos:
-                <span class="font-normal text-gray-600">
-                    {{ $album->photos->count() }}
-                </span>
-            </p>
+        <div class="album-meta">
+            <div>
+                <strong>Event Date:</strong>
+                {{ $album->event_date?->format('F d, Y') ?? 'N/A' }}
+            </div>
+            <div>
+                <strong>Total Photos:</strong> {{ $album->photos->count() }}
+            </div>
         </div>
 
-        {{-- Success Message --}}
-        @if (session('success'))
-            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg" role="alert">
-                <p>{{ session('success') }}</p>
-            </div>
-        @endif
-
         {{-- Photo Grid --}}
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div class="photo-grid">
             @forelse ($album->photos as $photo)
+            <div class="photo-card">
+                <img src="{{ Storage::disk('public')->url($photo->file_path) }}"
+                     alt="{{ $photo->file_name }}"
+                     onclick="openLightbox('{{ Storage::disk('public')->url($photo->file_path) }}', '{{ $photo->file_name }}')">
 
-            {{-- Image Card --}}
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
+                <div class="photo-info">
+                    <a href="{{ Storage::disk('public')->url($photo->file_path) }}" download title="Download">
+                        <i class="fa-solid fa-download"></i>
+                    </a>
 
-                {{-- 1. CLICKABLE IMAGE AREA (CLEAN) --}}
-                <div class="w-full pb-[100%] relative cursor-pointer image-grid-item"
-                     onclick="window.openLightbox('{{ Storage::disk('public')->url($photo->file_path) }}', '{{ $photo->file_name }}')">
-                    <img src="{{ Storage::disk('public')->url($photo->file_path) }}"
-                         alt="{{ $photo->file_name }}"
-                         loading="lazy"
-                         class="absolute inset-0 transition duration-300 group-hover:opacity-80">
+                    <form action="{{ route('admin.photo_gallery.destroyPhoto', ['album' => $album->id, 'photo' => $photo->id]) }}"
+                          method="POST"
+                          onsubmit="return confirm('Delete this photo: {{ $photo->file_name }}?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" title="Delete Photo"><i class="fa-solid fa-trash"></i></button>
+                    </form>
                 </div>
-
-                <div class="p-3">
-                    {{-- Caption below the image --}}
-                    <div class="p-1 text-xs text-gray-600 truncate text-center mb-2 border-b border-gray-100">
-                        {{ $photo->file_name }}
-                    </div>
-
-                    {{-- 2. ACTION BUTTONS (ALWAYS VISIBLE, NO CONFLICTS) --}}
-                    <div class="flex justify-center space-x-4 text-sm">
-
-                        {{-- Download Button --}}
-                        <a href="{{ Storage::disk('public')->url($photo->file_path) }}"
-                            download
-                            class="text-indigo-600 hover:text-indigo-800 transition flex items-center"
-                            title="Download Photo">
-                            <i class="fa-solid fa-download mr-1"></i> Download
-                        </a>
-
-                        {{-- Delete Button --}}
-                        <form action="{{ route('admin.photo_gallery.destroyPhoto', ['album' => $album->id, 'photo' => $photo->id]) }}"
-                            method="POST"
-                            onsubmit="return confirm('Delete this photo: {{ $photo->file_name }}?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                    class="text-red-600 hover:text-red-800 transition flex items-center" title="Delete Photo">
-                                <i class="fa-solid fa-trash mr-1"></i> Delete
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
             </div>
-
             @empty
             <div class="col-span-full bg-yellow-100 p-6 rounded-xl text-center text-yellow-800 border border-yellow-300 shadow-md">
                 <i class="fa-solid fa-triangle-exclamation mr-2"></i> No photos uploaded for this album yet.
             </div>
             @endforelse
         </div>
-
     </div>
 </section>
 
-{{-- Lightbox (Set to start as 'hidden' via Tailwind) --}}
-<div id="lightbox"
-     class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center z-50 p-4"
-     style="display: none;" {{-- Added style="display: none;" as an extra failsafe --}}
-     onclick="window.closeLightbox(event)">
-
-    {{-- Container for image and caption --}}
-    <div class="relative max-w-[90vw] max-h-[90vh]" onclick="event.stopPropagation()">
-
-        {{-- Close Button --}}
-        <button onclick="window.closeLightbox()"
-                class="absolute top-4 right-4 text-white text-3xl font-bold p-2 transition hover:text-red-400 z-50">
-            <i class="fas fa-times"></i>
-        </button>
-
-        <img id="lightboxImage" src=""
-             alt="Enlarged Photo"
-             class="rounded shadow-2xl">
-
-        <p id="lightboxCaption" class="text-center text-white text-lg font-semibold mt-4"></p>
-    </div>
+{{-- Lightbox --}}
+<div id="lightbox" onclick="closeLightbox(event)">
+    <span class="close-btn" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightboxImage" src="">
+    <p id="lightboxCaption"></p>
 </div>
-
 @endsection
 
-@section('scripts')
-
+@push('scripts')
 <script>
-    /**
-     * Opens the lightbox/modal with the given image URL and caption.
-     * Defined on window object for guaranteed global access.
-     */
     window.openLightbox = function(imageUrl, caption) {
         const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const lightboxCaption = document.getElementById('lightboxCaption');
+        const img = document.getElementById('lightboxImage');
+        const cap = document.getElementById('lightboxCaption');
 
-        lightboxImage.src = imageUrl;
-        lightboxCaption.textContent = caption;
+        img.src = imageUrl;
+        cap.textContent = caption;
 
-        // Use explicit style to override the initial 'hidden' or 'display: none'
         lightbox.style.display = 'flex';
-        lightbox.classList.remove('hidden');
     }
 
-    /**
-     * Closes the lightbox/modal.
-     * Defined on window object for guaranteed global access.
-     */
     window.closeLightbox = function(event) {
-        const lightbox = document.getElementById('lightbox');
-
-        // Prevent closing if click was inside the image container
-        if (event && event.currentTarget !== event.target) {
-            return;
-        }
-
-        // Use explicit style to hide it
-        lightbox.style.display = 'none';
-        lightbox.classList.add('hidden');
+        if(event && event.currentTarget !== event.target) return;
+        document.getElementById('lightbox').style.display = 'none';
     }
-
-    // Call the functions directly in the onclick attribute using window.openLightbox(...)
 </script>
-
-@endsection
+@endpush

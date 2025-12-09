@@ -71,6 +71,11 @@ class HomeController extends Controller
 
     public function images()
     {
-        return view('homepage.gallery');
+        // Fetch all gallery albums with number of photos in each
+        $albums = \App\Models\GalleryAlbum::withCount('photos')
+            ->orderByDesc('id')
+            ->get();
+
+        return view('homepage.gallery', compact('albums'));
     }
 }
