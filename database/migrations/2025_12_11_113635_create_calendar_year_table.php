@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('calendar_year');
+        Schema::dropIfExists('calendar_year_table');
     }
 };
