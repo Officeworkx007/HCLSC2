@@ -10,6 +10,11 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- FullCalendar (required) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
 </head>
 
 <body class="font-sans bg-gray-50">
@@ -431,28 +436,78 @@
         </div>
     </section>
 
-    @include('homepage.layouts.footer')
+    <!-- Public Events Calendar Section -->
+    <section class="relative bg-gray-50 py-20 mt-20">
+        <div class="max-w-7xl mx-auto px-6">
 
+            <!-- Heading -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-blue-900">
+                    Events & Activities
+                </h2>
+                <div class="w-28 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>
+                <p class="text-gray-600 mt-4 text-sm md:text-base">
+                    Monthly schedule of Lok Adalats, legal awareness programs and other activities.
+                </p>
+            </div>
+
+            <!-- Calendar + Events Layout -->
+            <div
+                class="grid grid-cols-1 lg:grid-cols-3 gap-10 bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
+
+                <!-- LEFT: Mini Calendar -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-md border border-blue-200 p-4">
+                        <div id="public-calendar"></div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Events List -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold text-blue-900">
+                            Events in <span id="current-month-text"></span>
+                        </h3>
+                    </div>
+
+                    <div id="monthly-events" class="space-y-4 max-h-[420px] overflow-y-auto pr-2 scrollbar-hide">
+
+                        <p class="text-gray-500 text-sm">
+                            Loading events...
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @include('homepage.layouts.footer')
     <script>
         feather.replace()
     </script>
+    <script src="fullcalendar.js"></script>
 
-    <!-- FullCalendar (CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         const scrollContainer = document.getElementById('scrollContainer');
-        document.getElementById('scrollLeft').addEventListener('click', () => {
-            scrollContainer.scrollBy({
-                left: -250,
-                behavior: 'smooth'
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+
+        if (scrollContainer && scrollLeftBtn && scrollRightBtn) {
+            scrollLeftBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({
+                    left: -250,
+                    behavior: 'smooth'
+                });
             });
-        });
-        document.getElementById('scrollRight').addEventListener('click', () => {
-            scrollContainer.scrollBy({
-                left: 250,
-                behavior: 'smooth'
+
+            scrollRightBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({
+                    left: 250,
+                    behavior: 'smooth'
+                });
             });
-        });
+        }
 
         // Announcement list
         const list = document.querySelector('.announcement-list');
@@ -479,6 +534,82 @@
                     menu.classList.add("hidden");
                 }
             });
+        });
+
+        // Calendar Script
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const calendarEl = document.getElementById('public-calendar');
+            const eventsContainer = document.getElementById('monthly-events');
+            const monthText = document.getElementById('current-month-text');
+
+            function formatMonthYear(date) {
+                return date.toLocaleString('default', {
+                    month: 'long',
+                    year: 'numeric'
+                });
+            }
+
+            function loadMonthlyEvents(year, month) {
+                eventsContainer.innerHTML = '<p class="text-gray-500 text-sm">Loading events...</p>';
+
+                fetch(`{{ route('homepage.calendar.month') }}?year=${year}&month=${month}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        eventsContainer.innerHTML = '';
+
+                        if (!data.length) {
+                            eventsContainer.innerHTML =
+                                `<p class="text-red-500 text-sm">No events scheduled for this month.</p>`;
+                            return;
+                        }
+
+                        data.forEach(event => {
+                            eventsContainer.innerHTML += `
+                        <div class="bg-blue-50 border-l-4 border-blue-600 rounded-lg p-4 shadow-sm">
+                            <p class="text-sm text-blue-700 font-semibold mb-1">
+                                ${event.date}
+                            </p>
+                            <h4 class="text-lg font-semibold text-gray-800">
+                                ${event.title}
+                            </h4>
+                            <p class="text-sm text-gray-600 mt-1 line-clamp-2">
+                                ${event.description ?? ''}
+                            </p>
+                        </div>
+                    `;
+                        });
+                    });
+            }
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                height: 'auto',
+                selectable: false,
+                navLinks: false,
+                editable: false,
+                dayMaxEvents: true,
+
+                headerToolbar: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: ''
+                },
+
+                events: `{{ route('homepage.calendar.events') }}`,
+
+                datesSet: function(info) {
+                    const date = info.view.currentStart; // IMPORTANT FIX
+                    const year = date.getFullYear();
+                    const month = date.getMonth() + 1;
+
+                    monthText.innerText = formatMonthYear(date);
+                    loadMonthlyEvents(year, month);
+                }
+            });
+
+            calendar.render();
         });
     </script>
 
@@ -544,10 +675,6 @@
         /* Pause on hover */
         .announcement-wrapper:hover .announcement-list {
             animation-play-state: paused;
-        }
-
-        #calendar {
-            min-height: 400px !important;
         }
     </style>
 </body>

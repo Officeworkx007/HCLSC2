@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Models\PanelLawyer;
+use App\Models\CalendarYear;
+use Carbon\Carbon;
 use App\Models\MediationCauseList;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
@@ -77,5 +79,43 @@ class HomeController extends Controller
             ->get();
 
         return view('homepage.gallery', compact('albums'));
+    }
+
+    public function publicCalendarEvents()
+    {
+        $events = CalendarYear::orderBy('event_date')
+            ->get()
+            ->map(function ($event) {
+                return [
+                    'id'    => $event->id,
+                    'title' => $event->title,
+                    'start' => $event->event_date->toDateString(),
+                ];
+            });
+
+        return response()->json($events);
+    }
+
+    public function publicCalendarMonth(Request $request)
+    {
+        $year  = $request->year;
+        $month = $request->month;
+
+        $events = CalendarYear::whereYear('event_date', $year)
+            ->whereMonth('event_date', $month)
+            ->orderBy('event_date')
+            ->get()
+            ->map(function ($event) {
+                return [
+                    'id'          => $event->id,
+                    'title'       => $event->title,
+                    'description' => $event->description,
+                    'date'        => $event->event_date->format('d M Y'),
+                    'link'        => $event->link,
+                    'image'       => $event->image,
+                ];
+            });
+
+        return response()->json($events);
     }
 }

@@ -42,6 +42,10 @@ Route::get('/homepage/mediation/view/{filename}', [HomeController::class, 'viewP
 
 Route::get('/homepage/gallery', [HomeController::class, 'images'])->name('homepage.gallery');
 
+Route::get('/calendar/events', [HomeController::class, 'publicCalendarEvents'])->name('homepage.calendar.events');
+
+Route::get('/calendar/month', [HomeController::class, 'publicCalendarMonth'])->name('homepage.calendar.month');
+
 // Admin Auth Routes (The forms are public, logic is protected or redirects)
 Route::get('/admin/register', [AdminAuthController::class, 'registerForm'])->name('admin.register');
 Route::get('/admin/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
