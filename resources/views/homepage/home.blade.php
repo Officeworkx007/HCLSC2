@@ -452,31 +452,27 @@
             </div>
 
             <!-- Calendar + Events Layout -->
-            <div
-                class="grid grid-cols-1 lg:grid-cols-3 gap-10 bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
-                <!-- LEFT: Mini Calendar -->
-                <div class="lg:col-span-1">
-                    <div class="bg-white rounded-xl shadow-md border border-blue-200 p-4">
-                        <div id="public-calendar"></div>
+                    <!-- LEFT: Calendar -->
+                    <div>
+                        <div class="rounded-xl border border-blue-200 shadow-sm p-4">
+                            <div id="public-calendar"></div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- RIGHT: Events List -->
-                <div class="lg:col-span-2">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-xl font-semibold text-blue-900">
+                    <!-- RIGHT: Events -->
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-900 mb-4">
                             Events in <span id="current-month-text"></span>
                         </h3>
+
+                        <div id="monthly-events" class="space-y-4">
+                            <p class="text-gray-500 text-sm">Loading events...</p>
+                        </div>
                     </div>
 
-                    <div id="monthly-events" class="space-y-4 max-h-[420px] overflow-y-auto pr-2 scrollbar-hide">
-
-                        <p class="text-gray-500 text-sm">
-                            Loading events...
-                        </p>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -537,7 +533,6 @@
         });
 
         // Calendar Script
-
         document.addEventListener('DOMContentLoaded', function() {
 
             const calendarEl = document.getElementById('public-calendar');
@@ -552,12 +547,11 @@
             }
 
             function loadMonthlyEvents(year, month) {
-                eventsContainer.innerHTML = '<p class="text-gray-500 text-sm">Loading events...</p>';
+                eventsContainer.innerHTML = '';
 
                 fetch(`{{ route('homepage.calendar.month') }}?year=${year}&month=${month}`)
                     .then(res => res.json())
                     .then(data => {
-                        eventsContainer.innerHTML = '';
 
                         if (!data.length) {
                             eventsContainer.innerHTML =
@@ -565,47 +559,76 @@
                             return;
                         }
 
-                        data.forEach(event => {
+                        const MAX_EVENTS = 5;
+
+                        // Show first 5 events
+                        data.slice(0, MAX_EVENTS).forEach((event, index) => {
                             eventsContainer.innerHTML += `
-                        <div class="bg-blue-50 border-l-4 border-blue-600 rounded-lg p-4 shadow-sm">
-                            <p class="text-sm text-blue-700 font-semibold mb-1">
-                                ${event.date}
-                            </p>
-                            <h4 class="text-lg font-semibold text-gray-800">
-                                ${event.title}
-                            </h4>
-                            <p class="text-sm text-gray-600 mt-1 line-clamp-2">
-                                ${event.description ?? ''}
-                            </p>
+                            <div class="flex gap-4 bg-blue-50 border-l-4 border-blue-700 rounded-lg p-4 shadow-sm">
+
+                             <!-- SERIAL -->
+                                <div class="w-8 h-8 flex items-center justify-center
+                                    rounded-full bg-blue-800 text-white font-bold">
+                                        ${index + 1}
+                                </div>
+
+                            <!-- EVENT CONTENT -->
+                                <div>
+                                    <p class="text-sm text-blue-700 font-semibold mb-1">
+                                        ${event.date}
+                                    </p>
+                                <h4 class="text-base font-semibold text-gray-800">
+                                        ${event.title}
+                                </h4>
+                                        ${event.description ? `
+                                <p class="text-sm text-gray-600 mt-1">
+                                        ${event.description}
+                                </p>` : ''}
+                            </div>
+
                         </div>
-                    `;
+                            `;
                         });
+
+                        // Show Full Calendar button if more events exist
+                        if (data.length > MAX_EVENTS) {
+                            eventsContainer.innerHTML += `
+                    <div class="pt-4">
+                        <a href=""
+                           class="inline-flex items-center gap-2 px-5 py-2.5
+                                  bg-blue-800 text-white text-sm font-semibold
+                                  rounded-md hover:bg-blue-900 transition">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            Full Calendar
+                        </a>
+                    </div>
+                `;
+                        }
                     });
             }
 
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 height: 'auto',
+                fixedWeekCount: false,
+                showNonCurrentDates: true,
                 selectable: false,
-                navLinks: false,
                 editable: false,
-                dayMaxEvents: true,
+                navLinks: false,
+                dayMaxEvents: 2,
 
                 headerToolbar: {
-                    left: 'prev,next',
+                    left: 'prev',
                     center: 'title',
-                    right: ''
+                    right: 'next'
                 },
 
                 events: `{{ route('homepage.calendar.events') }}`,
 
                 datesSet: function(info) {
-                    const date = info.view.currentStart; // IMPORTANT FIX
-                    const year = date.getFullYear();
-                    const month = date.getMonth() + 1;
-
+                    const date = info.view.currentStart;
                     monthText.innerText = formatMonthYear(date);
-                    loadMonthlyEvents(year, month);
+                    loadMonthlyEvents(date.getFullYear(), date.getMonth() + 1);
                 }
             });
 
@@ -675,6 +698,70 @@
         /* Pause on hover */
         .announcement-wrapper:hover .announcement-list {
             animation-play-state: paused;
+        }
+
+        /* Calendar container */
+        #public-calendar {
+            background: #ffffff;
+            border-radius: 12px;
+        }
+
+        /* Header */
+        .fc-toolbar-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        /* Buttons */
+        .fc-button {
+            background-color: #1e40af !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 6px 12px !important;
+        }
+
+        .fc-button:hover {
+            background-color: #1e3a8a !important;
+        }
+
+        /* Remove internal scrollbars */
+        .fc-scroller {
+            overflow: visible !important;
+        }
+
+        /* Day headers */
+        .fc-col-header-cell {
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #334155;
+            padding: 6px 0;
+        }
+
+        /* Day cells */
+        .fc-daygrid-day {
+            border: 1px solid #e5e7eb;
+        }
+
+        .fc-daygrid-day-number {
+            font-size: 0.85rem;
+            padding: 6px;
+        }
+
+        /* Today highlight */
+        .fc-day-today {
+            background-color: #eff6ff !important;
+        }
+
+        /* Event dots */
+        .fc-daygrid-event-dot {
+            border-color: #2563eb;
+        }
+
+        /* Remove focus outline */
+        .fc-button:focus {
+            box-shadow: none !important;
         }
     </style>
 </body>
