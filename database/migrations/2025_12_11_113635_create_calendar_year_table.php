@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();    // Details/notes
             $table->string('link')->nullable();         // Optional external link
             $table->string('image')->nullable();        // Optional image/file
+            $table->enum('event_type', ['event','restricted_holiday','general_holiday'])->default('event')->after('title');
             $table->timestamps();
 
             // Useful for fast lookup when clicking dates

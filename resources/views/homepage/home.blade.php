@@ -172,19 +172,6 @@
                 <!-- Card 1 -->
                 <div
                     class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
-                    <img src="/images/Chief Justice M Sundar.jpg" alt="Hon'ble Chief Justice M Sundar"
-                        class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                    <div class="absolute bottom-0 p-6 text-white text-center">
-                        <h3 class="text-xl font-semibold">Hon'ble Mr. Chief Justice M Sundar</h3>
-                        <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
-                        <p class="text-sm opacity-90 mt-1">Patron-in-Chief, Manipur State Legal Services Authority</p>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
                     <img src="/images/A Bimol Singh.jpg" alt="Hon'ble Mr. Justice A. Bimol Singh"
                         class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
@@ -193,6 +180,19 @@
                         <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
                         <p class="text-sm opacity-90 mt-1">Executive Chairman, Manipur State Legal Services Authority
                         </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="group relative w-[22rem] h-[30rem] rounded-3xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl bg-white/20 backdrop-blur-lg border border-gray-200">
+                    <img src="/images/Chief Justice M Sundar.jpg" alt="Hon'ble Chief Justice M Sundar"
+                        class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 p-6 text-white text-center">
+                        <h3 class="text-xl font-semibold">Hon'ble Mr. Chief Justice M Sundar</h3>
+                        <p class="text-sm opacity-90 mt-1">Judge, High Court of Manipur</p>
+                        <p class="text-sm opacity-90 mt-1">Patron-in-Chief, Manipur State Legal Services Authority</p>
                     </div>
                 </div>
 
@@ -479,60 +479,10 @@
     </section>
 
     @include('homepage.layouts.footer')
-    <script>
-        feather.replace()
-    </script>
+
     <script src="fullcalendar.js"></script>
 
     <script>
-        const scrollContainer = document.getElementById('scrollContainer');
-        const scrollLeftBtn = document.getElementById('scrollLeft');
-        const scrollRightBtn = document.getElementById('scrollRight');
-
-        if (scrollContainer && scrollLeftBtn && scrollRightBtn) {
-            scrollLeftBtn.addEventListener('click', () => {
-                scrollContainer.scrollBy({
-                    left: -250,
-                    behavior: 'smooth'
-                });
-            });
-
-            scrollRightBtn.addEventListener('click', () => {
-                scrollContainer.scrollBy({
-                    left: 250,
-                    behavior: 'smooth'
-                });
-            });
-        }
-
-        // Announcement list
-        const list = document.querySelector('.announcement-list');
-        if (list && list.children.length >= 5) {
-            list.innerHTML += list.innerHTML;
-        }
-
-        //Drop down code
-        document.addEventListener("DOMContentLoaded", function() {
-            const btn = document.getElementById("apply-btn");
-            const menu = document.getElementById("dropdown");
-
-            if (!btn || !menu) return;
-
-            btn.addEventListener("click", function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                menu.classList.toggle("hidden"); // toggle dropdown
-            });
-
-            // Close dropdown if clicked outside
-            document.addEventListener("click", function(event) {
-                if (!btn.contains(event.target) && !menu.contains(event.target)) {
-                    menu.classList.add("hidden");
-                }
-            });
-        });
-
-        // Calendar Script
         document.addEventListener('DOMContentLoaded', function() {
 
             const calendarEl = document.getElementById('public-calendar');
@@ -561,48 +511,58 @@
 
                         const MAX_EVENTS = 5;
 
-                        // Show first 5 events
                         data.slice(0, MAX_EVENTS).forEach((event, index) => {
+
+                            let colorClass = 'bg-blue-50 border-blue-700';
+                            let badgeClass = 'bg-blue-800';
+
+                            if (event.event_type === 'restricted_holiday') {
+                                colorClass = 'bg-green-50 border-green-700';
+                                badgeClass = 'bg-green-700';
+                            }
+
+                            if (event.event_type === 'general_holiday') {
+                                colorClass = 'bg-red-50 border-red-700';
+                                badgeClass = 'bg-red-700';
+                            }
+
                             eventsContainer.innerHTML += `
-                            <div class="flex gap-4 bg-blue-50 border-l-4 border-blue-700 rounded-lg p-4 shadow-sm">
+                        <div class="flex gap-4 ${colorClass} border-l-4 rounded-lg p-4 shadow-sm">
 
-                             <!-- SERIAL -->
-                                <div class="w-8 h-8 flex items-center justify-center
-                                    rounded-full bg-blue-800 text-white font-bold">
-                                        ${index + 1}
-                                </div>
+                            <div class="w-8 h-8 flex items-center justify-center
+                                rounded-full ${badgeClass} text-white font-bold">
+                                ${index + 1}
+                            </div>
 
-                            <!-- EVENT CONTENT -->
-                                <div>
-                                    <p class="text-sm text-blue-700 font-semibold mb-1">
-                                        ${event.date}
-                                    </p>
+                            <div>
+                                <p class="text-sm font-semibold mb-1">
+                                    ${event.date}
+                                </p>
                                 <h4 class="text-base font-semibold text-gray-800">
-                                        ${event.title}
+                                    ${event.title}
                                 </h4>
-                                        ${event.description ? `
-                                <p class="text-sm text-gray-600 mt-1">
-                                        ${event.description}
-                                </p>` : ''}
+                                ${event.description ? `
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            ${event.description}
+                                        </p>` : ''}
                             </div>
 
                         </div>
-                            `;
+                    `;
                         });
 
-                        // Show Full Calendar button if more events exist
                         if (data.length > MAX_EVENTS) {
                             eventsContainer.innerHTML += `
-                    <div class="pt-4">
-                        <a href=""
-                           class="inline-flex items-center gap-2 px-5 py-2.5
-                                  bg-blue-800 text-white text-sm font-semibold
-                                  rounded-md hover:bg-blue-900 transition">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            Full Calendar
-                        </a>
-                    </div>
-                `;
+                        <div class="pt-4">
+                            <a href=""
+                               class="inline-flex items-center gap-2 px-5 py-2.5
+                                      bg-blue-800 text-white text-sm font-semibold
+                                      rounded-md hover:bg-blue-900 transition">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                Full Calendar
+                            </a>
+                        </div>
+                    `;
                         }
                     });
             }
@@ -629,6 +589,41 @@
                     const date = info.view.currentStart;
                     monthText.innerText = formatMonthYear(date);
                     loadMonthlyEvents(date.getFullYear(), date.getMonth() + 1);
+                },
+
+                dayCellDidMount: function(info) {
+
+                    const dateStr = info.date.toISOString().split('T')[0];
+                    const day = info.date.getDay();
+                    const numberEl = info.el.querySelector('.fc-daygrid-day-number');
+
+                    if (!numberEl) return;
+
+                    numberEl.style.fontWeight = '700';
+                    numberEl.style.color = '#000';
+
+                    // Weekend
+                    if (day === 0 || day === 6) {
+                        numberEl.style.color = '#facc15';
+                    }
+
+                    // Event-based coloring
+                    calendar.getEvents().forEach(ev => {
+                        if (ev.startStr === dateStr) {
+
+                            if (ev.extendedProps.event_type === 'event') {
+                                numberEl.style.color = '#2563eb';
+                            }
+
+                            if (ev.extendedProps.event_type === 'restricted_holiday') {
+                                numberEl.style.color = '#16a34a';
+                            }
+
+                            if (ev.extendedProps.event_type === 'general_holiday') {
+                                numberEl.style.color = '#dc2626';
+                            }
+                        }
+                    });
                 }
             });
 
@@ -636,70 +631,7 @@
         });
     </script>
 
-    <!-- Tailwind helper to hide scrollbar -->
     <style>
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .announcement-wrapper {
-            position: relative;
-            height: 420px;
-            overflow: hidden;
-        }
-
-        .announcement-wrapper::before,
-        .announcement-wrapper::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            height: 32px;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .announcement-wrapper::before {
-            top: 0;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-        }
-
-        .announcement-wrapper::after {
-            bottom: 0;
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-        }
-
-        /* Correct bottom-to-top scroll loop */
-        @keyframes scroll-up {
-            0% {
-                transform: translateY(100%);
-            }
-
-            100% {
-                transform: translateY(-100%);
-            }
-        }
-
-        .announcement-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            will-change: transform;
-            animation: scroll-up 12s linear infinite;
-            transform: translateY(100%);
-            /* start from bottom */
-        }
-
-        /* Pause on hover */
-        .announcement-wrapper:hover .announcement-list {
-            animation-play-state: paused;
-        }
-
         /* Calendar container */
         #public-calendar {
             background: #ffffff;
@@ -744,19 +676,14 @@
             border: 1px solid #e5e7eb;
         }
 
+        /* Date number */
         .fc-daygrid-day-number {
             font-size: 0.85rem;
-            padding: 6px;
         }
 
-        /* Today highlight */
+        /* Today */
         .fc-day-today {
             background-color: #eff6ff !important;
-        }
-
-        /* Event dots */
-        .fc-daygrid-event-dot {
-            border-color: #2563eb;
         }
 
         /* Remove focus outline */
@@ -764,6 +691,3 @@
             box-shadow: none !important;
         }
     </style>
-</body>
-
-</html>

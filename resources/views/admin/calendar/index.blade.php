@@ -4,58 +4,78 @@
 @section('page-title', 'Calendar Management')
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css">
 
-    <style>
-        #calendar {
-            max-width: 100%;
-            margin: 20px auto;
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-        }
+<style>
+    #calendar {
+        max-width: 100%;
+        margin: 20px auto;
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
 
-        .fc-day-today {
-            background: #fffce8 !important;
-            border: 1px solid #fbdc67 !important;
-        }
+    .fc-day-today {
+        background: #fffce8 !important;
+        border: 1px solid #fbdc67 !important;
+    }
 
-        .fc-daygrid-day-number {
-            font-weight: 600;
-        }
+    /* DATE NUMBER */
+    .fc-daygrid-day-number {
+        font-weight: 700;
+        color: #000;
+    }
 
-        .fc-daygrid-day-frame {
-            transition: 0.25s;
-            border-radius: 6px;
-        }
+    .fc-daygrid-day-frame {
+        transition: 0.25s;
+        border-radius: 6px;
+    }
 
-        .fc-daygrid-day-frame:hover {
-            background: #eef6ff;
-            cursor: pointer;
-        }
+    .fc-daygrid-day-frame:hover {
+        background: #eef6ff;
+        cursor: pointer;
+    }
 
-        .fc-col-header-cell:nth-child(1) { background: #fdecea; color: #b91c1c; }
-        .fc-col-header-cell:nth-child(2) { background: #eff6ff; color: #1d4ed8; }
-        .fc-col-header-cell:nth-child(3) { background: #ecfeff; color: #0369a1; }
-        .fc-col-header-cell:nth-child(4) { background: #f0fdf4; color: #166534; }
-        .fc-col-header-cell:nth-child(5) { background: #fffbeb; color: #92400e; }
-        .fc-col-header-cell:nth-child(6) { background: #fdf4ff; color: #7e22ce; }
-        .fc-col-header-cell:nth-child(7) { background: #fff7ed; color: #9a3412; }
+    /* WEEKENDS */
+    .fc-day-sat,
+    .fc-day-sun {
+        background: #fef9c3 !important;
+    }
 
-        .fc-col-header-cell {
-            font-weight: 600;
-            padding: 8px 0;
-        }
+    /* EVENT COLORS */
+    .fc-event.event {
+        background-color: #2563eb !important;
+        border-color: #2563eb !important;
+    }
 
-        .event-box {
-            background: #f8f9fa;
-            border-left: 4px solid #0d6efd;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-        }
-    </style>
+    .fc-event.restricted_holiday {
+        background-color: #16a34a !important;
+        border-color: #16a34a !important;
+    }
+
+    .fc-event.general_holiday {
+        background-color: #dc2626 !important;
+        border-color: #dc2626 !important;
+    }
+
+    /* EVENT LIST BOX */
+    .event-box {
+        background: #f8f9fa;
+        border-left: 4px solid #0d6efd;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+    }
+
+    .event-box.restricted_holiday {
+        border-left-color: #16a34a;
+    }
+
+    .event-box.general_holiday {
+        border-left-color: #dc2626;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -75,7 +95,7 @@
 
 </div>
 
-{{-- ADD EVENT MODAL (FIX) --}}
+{{-- ADD EVENT MODAL --}}
 <div id="addEventModal"
      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white rounded-lg w-full max-w-md p-6">
@@ -89,6 +109,15 @@
             <div class="mb-3">
                 <label class="form-label">Title</label>
                 <input type="text" name="title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Event Type</label>
+                <select name="event_type" class="form-select" required>
+                    <option value="event">Normal Event</option>
+                    <option value="restricted_holiday">Restricted Holiday</option>
+                    <option value="general_holiday">General Holiday</option>
+                </select>
             </div>
 
             <div class="mb-3">
@@ -157,7 +186,14 @@ document.addEventListener('DOMContentLoaded', function () {
             right: 'dayGridMonth,listMonth'
         },
 
-        events: '{{ route('admin.calendar.getEvents.json') }}',
+        events: {
+            url: '{{ route('admin.calendar.getEvents.json') }}',
+            method: 'GET'
+        },
+
+        eventClassNames: function (arg) {
+            return [arg.event.extendedProps.event_type];
+        },
 
         dateClick: function (info) {
             document.getElementById('event_date').value = info.dateStr;
@@ -204,10 +240,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
-                data.forEach(event => {
+                data.forEach((event, index) => {
                     container.innerHTML += `
-                        <div class="event-box">
-                            <h5>${event.title}</h5>
+                        <div class="event-box ${event.event_type}">
+                            <h5>${index + 1}. ${event.title}</h5>
                             <p>${event.description ?? ''}</p>
                         </div>
                     `;

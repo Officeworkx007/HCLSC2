@@ -35,6 +35,7 @@ class CalendarYearController extends Controller
         $request->validate([
             'title'       => 'required|string|max:255',
             'event_date'  => 'required|date',
+            'event_type'  => 'required|in:event,restricted_holiday,general_holiday',
             'description' => 'nullable|string',
             'link'        => 'nullable|string|max:255',
             'image'       => 'nullable|image|max:2048',
@@ -48,6 +49,7 @@ class CalendarYearController extends Controller
         CalendarYear::create([
             'title'       => $request->title,
             'event_date'  => $request->event_date,
+            'event_type'  => $request->event_type,
             'description' => $request->description,
             'link'        => $request->link,
             'image'       => $image,
@@ -75,6 +77,7 @@ class CalendarYearController extends Controller
         $request->validate([
             'title'       => 'required|string|max:255',
             'event_date'  => 'required|date',
+            'event_type'  => 'required|in:event,restricted_holiday,general_holiday',
             'description' => 'nullable|string',
             'link'        => 'nullable|string|max:255',
             'image'       => 'nullable|image|max:2048',
@@ -97,6 +100,7 @@ class CalendarYearController extends Controller
         $event->update([
             'title'       => $request->title,
             'event_date'  => $request->event_date,
+            'event_type'  => $request->event_type,
             'description' => $request->description,
             'link'        => $request->link,
             'image'       => $image,

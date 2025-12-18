@@ -16,6 +16,7 @@ class CalendarYear extends Model
     protected $fillable = [
         'title',
         'event_date',
+        'event_type',
         'description',
         'link',
         'image',
