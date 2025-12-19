@@ -436,11 +436,9 @@
         </div>
     </section>
 
-    <!-- Public Events Calendar Section -->
     <section class="relative bg-gray-50 py-20 mt-20">
         <div class="max-w-7xl mx-auto px-6">
 
-            <!-- Heading -->
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-blue-900">
                     Events & Activities
@@ -451,25 +449,23 @@
                 </p>
             </div>
 
-            <!-- Calendar + Events Layout -->
-            <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 md:p-10">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
 
-                    <!-- LEFT: Calendar -->
-                    <div>
-                        <div class="rounded-xl border border-blue-200 shadow-sm p-4">
+                    <div id="calendar-column" class="lg:col-span-2 transition-all duration-300">
+                        <div class="rounded-xl border border-blue-100 shadow-sm p-2 bg-white">
                             <div id="public-calendar"></div>
                         </div>
                     </div>
 
-                    <!-- RIGHT: Events -->
-                    <div>
-                        <h3 class="text-xl font-semibold text-blue-900 mb-4">
-                            Events in <span id="current-month-text"></span>
+                    <div id="sidebar-column" class="lg:col-span-1 transition-all duration-300">
+                        <h3 class="text-xl font-bold text-blue-900 mb-8 flex items-center gap-2">
+                            <span class="w-2 h-8 bg-yellow-400 rounded-full"></span>
+                            Schedules for <span id="current-month-text" class="ml-1"></span>
                         </h3>
 
-                        <div id="monthly-events" class="space-y-4">
-                            <p class="text-gray-500 text-sm">Loading events...</p>
+                        <div id="monthly-events" class="space-y-8 overflow-y-auto max-h-[600px] pr-2">
+                            <p class="text-gray-500 text-sm italic">Loading schedules...</p>
                         </div>
                     </div>
 
@@ -484,10 +480,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
             const calendarEl = document.getElementById('public-calendar');
             const eventsContainer = document.getElementById('monthly-events');
             const monthText = document.getElementById('current-month-text');
+
+            // References for the layout toggle
+            const calendarColumn = document.getElementById('calendar-column');
+            const sidebarColumn = document.getElementById('sidebar-column');
 
             function formatMonthYear(date) {
                 return date.toLocaleString('default', {
@@ -502,68 +501,56 @@
                 fetch(`{{ route('homepage.calendar.month') }}?year=${year}&month=${month}`)
                     .then(res => res.json())
                     .then(data => {
-
                         if (!data.length) {
                             eventsContainer.innerHTML =
-                                `<p class="text-red-500 text-sm">No events scheduled for this month.</p>`;
+                                `<p class="text-gray-500 text-sm italic">No records for this month.</p>`;
                             return;
                         }
 
-                        const MAX_EVENTS = 5;
+                        const groups = {
+                            event: [],
+                            general_holiday: [],
+                            restricted_holiday: []
+                        };
 
-                        data.slice(0, MAX_EVENTS).forEach((event, index) => {
-
-                            let colorClass = 'bg-blue-50 border-blue-700';
-                            let badgeClass = 'bg-blue-800';
-
-                            if (event.event_type === 'restricted_holiday') {
-                                colorClass = 'bg-green-50 border-green-700';
-                                badgeClass = 'bg-green-700';
-                            }
-
-                            if (event.event_type === 'general_holiday') {
-                                colorClass = 'bg-red-50 border-red-700';
-                                badgeClass = 'bg-red-700';
-                            }
-
-                            eventsContainer.innerHTML += `
-                        <div class="flex gap-4 ${colorClass} border-l-4 rounded-lg p-4 shadow-sm">
-
-                            <div class="w-8 h-8 flex items-center justify-center
-                                rounded-full ${badgeClass} text-white font-bold">
-                                ${index + 1}
-                            </div>
-
-                            <div>
-                                <p class="text-sm font-semibold mb-1">
-                                    ${event.date}
-                                </p>
-                                <h4 class="text-base font-semibold text-gray-800">
-                                    ${event.title}
-                                </h4>
-                                ${event.description ? `
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            ${event.description}
-                                        </p>` : ''}
-                            </div>
-
-                        </div>
-                    `;
+                        data.forEach(item => {
+                            if (groups[item.event_type]) groups[item.event_type].push(item);
                         });
 
-                        if (data.length > MAX_EVENTS) {
-                            eventsContainer.innerHTML += `
-                        <div class="pt-4">
-                            <a href=""
-                               class="inline-flex items-center gap-2 px-5 py-2.5
-                                      bg-blue-800 text-white text-sm font-semibold
-                                      rounded-md hover:bg-blue-900 transition">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                Full Calendar
-                            </a>
+                        const renderSection = (title, items, color) => {
+                            // Limit to 5 but keep the badge showing totalCount
+                            const limitedItems = items.slice(0, 5);
+                            const totalCount = items.length;
+
+                            let itemsHtml = limitedItems.length ? limitedItems.map((event, index) => `
+                        <div class="group flex gap-4 bg-white border border-gray-100 border-l-4 border-l-${color}-600 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 mb-3">
+                            <div class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-${color}-50 text-${color}-700 font-bold border border-${color}-100 text-sm">
+                                ${index + 1}
+                            </div>
+                            <div class="flex-grow">
+                                <p class="text-[10px] uppercase font-bold text-gray-400 mb-0.5 tracking-tight">${event.date}</p>
+                                <h5 class="text-sm font-bold text-gray-800 group-hover:text-${color}-700 transition-colors leading-snug">
+                                    ${event.title}
+                                </h5>
+                            </div>
+                        </div>
+                    `).join('') : `<p class="text-gray-400 text-xs italic ml-2">No ${title.toLowerCase()} scheduled</p>`;
+
+                            return `
+                        <div class="mb-8">
+                            <h4 class="flex justify-between items-center text-xs font-black uppercase tracking-widest mb-4 text-${color}-700">
+                                <span>${title}</span>
+                                <span class="bg-${color}-100 px-2 py-0.5 rounded text-[10px]">${totalCount}</span>
+                            </h4>
+                            <div class="space-y-1">${itemsHtml}</div>
                         </div>
                     `;
-                        }
+                        };
+
+                        eventsContainer.innerHTML =
+                            renderSection('Events', groups.event, 'blue') +
+                            renderSection('General Holidays', groups.general_holiday, 'red') +
+                            renderSection('Restricted Holidays', groups.restricted_holiday, 'green');
                     });
             }
 
@@ -572,58 +559,94 @@
                 height: 'auto',
                 fixedWeekCount: false,
                 showNonCurrentDates: true,
-                selectable: false,
-                editable: false,
-                navLinks: false,
                 dayMaxEvents: 2,
+                customButtons: {
+                    fullCalendarBtn: {
+                        text: 'Full Agenda View',
+                        click: function() {
+                            if (calendar.view.type === 'dayGridMonth') {
+                                calendar.changeView('listMonth');
+                                this.innerText = 'Grid View';
+                                // Toggle Layout: Hide sidebar, stretch calendar
+                                sidebarColumn.style.display = 'none';
+                                calendarColumn.classList.replace('lg:col-span-2', 'lg:col-span-3');
+                            } else {
+                                calendar.changeView('dayGridMonth');
+                                this.innerText = 'Full Agenda View';
+                                // Toggle Layout: Show sidebar, shrink calendar
+                                sidebarColumn.style.display = 'block';
+                                calendarColumn.classList.replace('lg:col-span-3', 'lg:col-span-2');
+                            }
+                        }
+                    }
+                },
 
                 headerToolbar: {
-                    left: 'prev',
+                    left: 'prev,next',
                     center: 'title',
-                    right: 'next'
+                    right: 'fullCalendarBtn'
                 },
 
                 events: `{{ route('homepage.calendar.events') }}`,
 
-                datesSet: function(info) {
+                datesSet(info) {
                     const date = info.view.currentStart;
                     monthText.innerText = formatMonthYear(date);
                     loadMonthlyEvents(date.getFullYear(), date.getMonth() + 1);
                 },
 
-                dayCellDidMount: function(info) {
+                eventDidMount(info) {
+                    const type = info.event.extendedProps.event_type;
+                    const activeColor = type === 'general_holiday' ? '#dc2626' :
+                        (type === 'restricted_holiday' ? '#16a34a' : '#2563eb');
 
-                    const dateStr = info.date.toISOString().split('T')[0];
-                    const day = info.date.getDay();
-                    const numberEl = info.el.querySelector('.fc-daygrid-day-number');
-
-                    if (!numberEl) return;
-
-                    numberEl.style.fontWeight = '700';
-                    numberEl.style.color = '#000';
-
-                    // Weekend
-                    if (day === 0 || day === 6) {
-                        numberEl.style.color = '#facc15';
+                    // 1. Grid View Text Color
+                    const titleEl = info.el.querySelector('.fc-event-title');
+                    if (titleEl) {
+                        info.el.style.backgroundColor = 'transparent';
+                        info.el.style.border = 'none';
+                        titleEl.style.color = activeColor;
+                        titleEl.style.fontWeight = '700';
                     }
 
-                    // Event-based coloring
-                    calendar.getEvents().forEach(ev => {
-                        if (ev.startStr === dateStr) {
+                    // 2. List View Text and Dot Color
+                    const listTitle = info.el.querySelector('.fc-list-event-title');
+                    const listDot = info.el.querySelector('.fc-list-event-dot');
+                    if (listTitle) {
+                        listTitle.style.color = activeColor;
+                        listTitle.style.fontWeight = '700';
+                    }
+                    if (listDot) {
+                        listDot.style.borderColor = activeColor;
+                        listDot.style.backgroundColor = activeColor;
+                    }
 
-                            if (ev.extendedProps.event_type === 'event') {
-                                numberEl.style.color = '#2563eb';
-                            }
+                    // 3. Date Number coloring
+                    const cell = info.el.closest('.fc-daygrid-day');
+                    if (!cell) return;
+                    const numberEl = cell.querySelector('.fc-daygrid-day-number');
+                    if (!numberEl) return;
 
-                            if (ev.extendedProps.event_type === 'restricted_holiday') {
-                                numberEl.style.color = '#16a34a';
-                            }
+                    let priority = parseInt(cell.dataset.priority || '0');
+                    const priorities = {
+                        event: 1,
+                        restricted_holiday: 2,
+                        general_holiday: 3
+                    };
 
-                            if (ev.extendedProps.event_type === 'general_holiday') {
-                                numberEl.style.color = '#dc2626';
-                            }
-                        }
-                    });
+                    if (priorities[type] > priority) {
+                        cell.dataset.priority = priorities[type];
+                        numberEl.style.color = activeColor;
+                    }
+                },
+
+                dayCellDidMount(info) {
+                    const numberEl = info.el.querySelector('.fc-daygrid-day-number');
+                    if (!numberEl) return;
+                    numberEl.style.fontWeight = '700';
+                    if (info.date.getDay() === 0 || info.date.getDay() === 6) {
+                        numberEl.style.color = '#facc15';
+                    }
                 }
             });
 
@@ -632,62 +655,100 @@
     </script>
 
     <style>
-        /* Calendar container */
-        #public-calendar {
-            background: #ffffff;
-            border-radius: 12px;
+        /* Scrollbar Styling for Sidebar */
+        #monthly-events::-webkit-scrollbar {
+            width: 4px;
         }
 
-        /* Header */
+        #monthly-events::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        /* List View Scroll Limit */
+        .fc-list-month-view {
+            max-height: 600px;
+            overflow-y: auto !important;
+        }
+
+        /* Full Calendar Layout Stretch */
+        .fc .fc-daygrid-day {
+            min-height: 110px !important;
+            border: 1px solid #f1f5f9 !important;
+        }
+
         .fc-toolbar-title {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.4rem !important;
+            font-weight: 700;
             color: #1e3a8a;
         }
 
-        /* Buttons */
         .fc-button {
             background-color: #1e40af !important;
             border: none !important;
-            box-shadow: none !important;
-            padding: 6px 12px !important;
+            padding: 8px 16px !important;
+            border-radius: 8px !important;
         }
 
-        .fc-button:hover {
-            background-color: #1e3a8a !important;
+        .fc-daygrid-event {
+            background: transparent !important;
+            border: none !important;
+            margin-top: 2px !important;
         }
 
-        /* Remove internal scrollbars */
+        .fc-event-title {
+            font-size: 0.75rem !important;
+            white-space: normal !important;
+            line-height: 1.2;
+        }
+
+        .fc-col-header-cell {
+            background: #f8fafc;
+            padding: 10px 0 !important;
+            color: #64748b;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .fc-day-today {
+            background-color: #f0f7ff !important;
+        }
+
         .fc-scroller {
             overflow: visible !important;
         }
 
-        /* Day headers */
-        .fc-col-header-cell {
-            background: #f1f5f9;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #334155;
-            padding: 6px 0;
+        /* Custom Full Calendar Button Styling */
+        .fc-fullCalendarBtn-button {
+            background-color: #facc15 !important;
+            color: #1e3a8a !important;
+            border: none !important;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            font-size: 0.75rem !important;
+            letter-spacing: 0.05em;
+            padding: 10px 20px !important;
+            border-radius: 12px !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.3),
+                0 4px 6px -2px rgba(30, 58, 138, 0.2) !important;
         }
 
-        /* Day cells */
-        .fc-daygrid-day {
-            border: 1px solid #e5e7eb;
+        .fc-fullCalendarBtn-button:hover {
+            background-color: #eab308 !important;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.4) !important;
         }
 
-        /* Date number */
-        .fc-daygrid-day-number {
-            font-size: 0.85rem;
+        .fc-list-event:hover td {
+            background-color: #f8fafc !important;
         }
 
-        /* Today */
-        .fc-day-today {
-            background-color: #eff6ff !important;
-        }
-
-        /* Remove focus outline */
-        .fc-button:focus {
-            box-shadow: none !important;
+        .fc-list-day-side-text,
+        .fc-list-day-text {
+            font-weight: 700;
+            color: #1e3a8a;
         }
     </style>

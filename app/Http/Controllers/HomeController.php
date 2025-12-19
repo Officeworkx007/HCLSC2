@@ -90,6 +90,11 @@ class HomeController extends Controller
                     'id'    => $event->id,
                     'title' => $event->title,
                     'start' => $event->event_date->toDateString(),
+                    'allDay' => true,
+                    'extendedProps' => [
+                        'event_type'  => $event->event_type,
+                        'description' => $event->description,
+                    ],
                 ];
             });
 
@@ -110,6 +115,7 @@ class HomeController extends Controller
                     'id'          => $event->id,
                     'title'       => $event->title,
                     'description' => $event->description,
+                    'event_type'  => $event->event_type,
                     'date'        => $event->event_date->format('d M Y'),
                     'link'        => $event->link,
                     'image'       => $event->image,
