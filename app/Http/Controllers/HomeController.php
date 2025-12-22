@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Models\PanelLawyer;
 use App\Models\CalendarYear;
+use App\Models\GalleryAlbum;
+use App\Models\GalleryPhoto;
 use Carbon\Carbon;
 use App\Models\MediationCauseList;
 use Illuminate\Support\Facades\Response;
@@ -19,7 +21,16 @@ class HomeController extends Controller
         $notices = Notice::where('status', 1)
             ->orderBy('notice_date', 'desc')
             ->get();
-        return view('homepage.home', compact('notices')); // path to your landing page blade
+
+        $recentAlbums = GalleryAlbum::with(['photos' => function ($query) {
+            $query->where('is_cover', true);
+        }])
+            ->withCount('photos') // This adds a 'photos_count' attribute to your model
+            ->orderBy('event_date', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('homepage.home', compact('notices', 'recentAlbums'));
     }
 
     public function circular()
@@ -69,16 +80,6 @@ class HomeController extends Controller
 
         // Redirect to PDF.js viewer with ?file= parameter
         return redirect("/pdfjs/web/viewer.html?file=" . urlencode($fileUrl));
-    }
-
-    public function images()
-    {
-        // Fetch all gallery albums with number of photos in each
-        $albums = \App\Models\GalleryAlbum::withCount('photos')
-            ->orderByDesc('id')
-            ->get();
-
-        return view('homepage.gallery', compact('albums'));
     }
 
     public function publicCalendarEvents()

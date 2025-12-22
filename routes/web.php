@@ -40,8 +40,6 @@ Route::get('/homepage/mediation', [HomeController::class, 'mediations'])->name('
 // View Public Mediation Cause List PDF
 Route::get('/homepage/mediation/view/{filename}', [HomeController::class, 'viewPdf'])->name('homepage.mediation.view');
 
-Route::get('/homepage/gallery', [HomeController::class, 'images'])->name('homepage.gallery');
-
 Route::get('/calendar/events', [HomeController::class, 'publicCalendarEvents'])->name('homepage.calendar.events');
 Route::get('/calendar/month', [HomeController::class, 'publicCalendarMonth'])->name('homepage.calendar.month');
 

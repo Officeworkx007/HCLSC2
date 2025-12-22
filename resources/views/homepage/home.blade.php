@@ -436,6 +436,7 @@
         </div>
     </section>
 
+    <!-- Calendar Section-->
     <section class="relative bg-gray-50 py-20 mt-20">
         <div class="max-w-[1400px] mx-auto px-4 md:px-6">
 
@@ -471,6 +472,80 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-6">
+
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-blue-900">Gallery Highlights</h2>
+                <div class="w-28 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>
+                <p class="text-gray-600 mt-4 text-sm md:text-base">
+                    Moments captured during our recent legal awareness and outreach programs.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach ($recentAlbums as $album)
+                    @php
+                        // Get the cover photo, or fallback to the first photo if cover isn't flagged
+                        $cover = $album->photos->first() ?? $album->photos()->first();
+                    @endphp
+
+                    <a href="#"
+                        class="group relative block bg-gray-200 rounded-3xl overflow-hidden shadow-lg h-80 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+                        @if ($cover)
+                            <img src="{{ asset('storage/' . $cover->file_path) }}" alt="{{ $album->title }}"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        @else
+                            <div
+                                class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 italic">
+                                No photos available
+                            </div>
+                        @endif
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/20 to-transparent">
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span
+                                    class="px-3 py-1 bg-yellow-400 text-blue-900 text-xs font-bold rounded-full uppercase">
+                                    {{ \Carbon\Carbon::parse($album->event_date)->format('M d, Y') }}
+                                </span>
+                                <span class="text-white/80 text-xs flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    {{ $album->photos_count }} Photos
+                                </span>
+                            </div>
+                            <h3
+                                class="text-white text-xl font-bold line-clamp-2 group-hover:text-yellow-400 transition-colors">
+                                {{ $album->title }}
+                            </h3>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="#"
+                    class="inline-flex items-center gap-2 text-blue-900 font-bold hover:text-yellow-600 transition-colors group">
+                    View All Albums
+                    <span
+                        class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-yellow-100 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </span>
+                </a>
             </div>
         </div>
     </section>
@@ -530,7 +605,7 @@
                                 </h5>
                             </div>
                         </div>`).join('') :
-                            `<p class="text-gray-400 text-xs italic ml-2">No ${title.toLowerCase()} scheduled</p>`;
+                                `<p class="text-gray-400 text-xs italic ml-2">No ${title.toLowerCase()} scheduled</p>`;
 
                             return `<div class="mb-8">
                             <h4 class="flex justify-between items-center text-xs font-black uppercase tracking-widest mb-4 text-${color}-700">
