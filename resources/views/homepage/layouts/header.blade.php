@@ -87,7 +87,7 @@
         </div>
 
         <a href="{{ route('homepage.lawyers') }}" class="hover:text-amber-300 transition">Panel Lawyers</a>
-        <a href="" class="hover:text-amber-300 transition">Gallery</a>
+        <a href="{{ route('homepage.gallery') }}" class="hover:text-amber-300 transition">Gallery</a>
         <a href="#" class="hover:text-amber-300 transition">National Lok Adalat</a>
         <a href="{{ route('homepage.mediation') }}" class="hover:text-amber-300 transition">Mediation</a>
         <a href="{{ route('homepage.notice') }}" class="hover:text-amber-300 transition">Notice Board</a>

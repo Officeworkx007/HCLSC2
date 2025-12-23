@@ -125,4 +125,16 @@ class HomeController extends Controller
 
         return response()->json($events);
     }
+
+    public function gallery()
+    {
+        $albums = GalleryAlbum::with(['photos' => function ($query) {
+            $query->where('is_cover', true);
+        }])
+            ->withCount('photos')
+            ->orderBy('event_date', 'desc')
+            ->paginate(12);
+
+        return view('homepage.gallery', compact('albums'));
+    }
 }

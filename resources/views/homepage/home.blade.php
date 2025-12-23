@@ -17,7 +17,7 @@
 
 </head>
 
-<body class="font-sans bg-gray-50">
+<body class="font-sans">
 
     @include('homepage.layouts.header')
 
@@ -163,7 +163,7 @@
     </section>
 
     <!-- Judges / Testimonials -->
-    <section class="bg-gradient-to-b from-gray-50 to-white py-16 mt-[5rem] flex justify-center">
+    <section class="bg-white py-16 mt-[5rem] flex justify-center">
         <div
             class="max-w-7xl w-full mx-6 p-10 rounded-2xl border border-blue-400 shadow-[0_4px_25px_-5px_rgba(59,130,246,0.3)] bg-white">
             <!-- Cards Grid -->
@@ -437,7 +437,7 @@
     </section>
 
     <!-- Calendar Section-->
-    <section class="relative bg-gray-50 py-20 mt-20">
+    <section class="relative bg-white py-20 mt-20">
         <div class="max-w-[1400px] mx-auto px-4 md:px-6">
 
             <div class="text-center mb-12">
@@ -476,75 +476,96 @@
         </div>
     </section>
 
-    <section class="py-20 bg-white">
+    <!-- Photo Album Section-->
+    <section class="py-24 bg-white">
         <div class="max-w-[1400px] mx-auto px-4 md:px-6">
 
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-blue-900">Gallery Highlights</h2>
                 <div class="w-28 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>
                 <p class="text-gray-600 mt-4 text-sm md:text-base">
-                    Moments captured during our recent legal awareness and outreach programs.
+                    Capturing the milestones of our National Lok Adalats, mediation programs and various legal service initiatives.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @foreach ($recentAlbums as $album)
-                    @php
-                        // Get the cover photo, or fallback to the first photo if cover isn't flagged
-                        $cover = $album->photos->first() ?? $album->photos()->first();
-                    @endphp
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                @for ($i = 0; $i < 3; $i++)
+                    @php $album = $recentAlbums[$i] ?? null; @endphp
 
-                    <a href="#"
-                        class="group relative block bg-gray-200 rounded-3xl overflow-hidden shadow-lg h-80 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
-                        @if ($cover)
-                            <img src="{{ asset('storage/' . $cover->file_path) }}" alt="{{ $album->title }}"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        @else
-                            <div
-                                class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 italic">
-                                No photos available
+                    @if ($album)
+                        {{-- Active Album Card --}}
+                        @php $cover = $album->photos->first() ?? $album->photos()->first(); @endphp
+
+                        <div
+                            class="group bg-white p-4 rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100">
+                            <div class="relative h-64 overflow-hidden rounded-[1.5rem] mb-6">
+                                @if ($cover)
+                                    <img src="{{ asset('storage/' . $cover->file_path) }}" alt="{{ $album->title }}"
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                @else
+                                    <div
+                                        class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">
+                                        No Image</div>
+                                @endif
+
+                                {{-- Date Badge --}}
+                                <div class="absolute bottom-4 left-4">
+                                    <span
+                                        class="bg-yellow-400 text-blue-900 px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                                        {{ \Carbon\Carbon::parse($album->event_date)->format('M d, Y') }}
+                                    </span>
+                                </div>
                             </div>
-                        @endif
 
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/20 to-transparent">
-                        </div>
-
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span
-                                    class="px-3 py-1 bg-yellow-400 text-blue-900 text-xs font-bold rounded-full uppercase">
-                                    {{ \Carbon\Carbon::parse($album->event_date)->format('M d, Y') }}
-                                </span>
-                                <span class="text-white/80 text-xs flex items-center gap-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none"
+                            <div class="px-2 pb-4">
+                                <div class="flex items-center gap-2 text-gray-400 text-sm mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     {{ $album->photos_count }} Photos
-                                </span>
+                                </div>
+                                <h3
+                                    class="text-2xl font-bold text-blue-900 leading-tight group-hover:text-blue-700 transition-colors">
+                                    {{ $album->title }}
+                                </h3>
                             </div>
-                            <h3
-                                class="text-white text-xl font-bold line-clamp-2 group-hover:text-yellow-400 transition-colors">
-                                {{ $album->title }}
-                            </h3>
+                            <a href="#" class="absolute inset-0"></a> {{-- Link overlay --}}
                         </div>
-                    </a>
-                @endforeach
+                    @else
+                        {{-- Upcoming/Placeholder Card --}}
+                        <div
+                            class="border-2 border-dashed border-gray-200 p-4 rounded-[2rem] flex flex-col items-center justify-center h-full min-h-[400px] bg-white/50 grayscale opacity-60">
+                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-300" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-400 font-bold uppercase tracking-widest text-sm">Upcoming
+                                Album</span>
+                            <p class="text-gray-300 text-xs mt-2 text-center px-6">Stay tuned for photos from our
+                                upcoming legal activities.</p>
+                        </div>
+                    @endif
+                @endfor
             </div>
 
-            <div class="mt-16 text-center">
+            {{-- View All Button --}}
+            <div class="mt-20 flex justify-center">
                 <a href="#"
-                    class="inline-flex items-center gap-2 text-blue-900 font-bold hover:text-yellow-600 transition-colors group">
-                    View All Albums
-                    <span
-                        class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-yellow-100 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </span>
+                    class="group relative inline-flex items-center gap-3 px-10 py-4 bg-blue-900 text-white font-bold rounded-full overflow-hidden shadow-xl transition-all hover:bg-blue-800">
+                    <span>View All Albums</span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                 </a>
             </div>
         </div>
