@@ -199,4 +199,27 @@ class MediationController extends Controller
             ->header('Access-Control-Allow-Methods', 'GET, OPTIONS')
             ->header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
     }
+
+    public function __construct()
+    {
+        $this->middleware('permission:mediation.view')->only([
+            'index',
+            'viewPdf',
+            'servePdfContent',
+        ]);
+
+        $this->middleware('permission:mediation.create')->only([
+            'create',
+            'store',
+        ]);
+
+        $this->middleware('permission:mediation.edit')->only([
+            'edit',
+            'update',
+        ]);
+
+        $this->middleware('permission:mediation.delete')->only([
+            'destroy',
+        ]);
+    }
 }

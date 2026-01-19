@@ -143,4 +143,11 @@ class PanelLawyerController extends Controller
             ->with('success', 'Panel Lawyer updated successfully!');
     }
 
+    public function __construct()
+    {
+        $this->middleware('permission:panel_lawyer.view')->only(['index']);
+        $this->middleware('permission:panel_lawyer.create')->only(['create', 'store']);
+        $this->middleware('permission:panel_lawyer.edit')->only(['edit', 'update']);
+        $this->middleware('permission:panel_lawyer.delete')->only(['destroy']);
+    }
 }
