@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
-use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LegalAidController;
 use App\Http\Controllers\Admin\PanelLawyerController;
@@ -63,7 +63,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // --- ROLES & PERMISSIONS MANAGEMENT (NEW) ---
-    Route::resource('permissions', PermissionController::class)->names('admin.permissions')->except(['show']);
+   Route::get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles.index');
+   Route::get('/admin/roles/create', [RoleController::class, 'create'])->name('admin.roles.create');
+   Route::post('/admin/roles', [RoleController::class, 'store'])->name('admin.roles.store');
 
     // Legal Aid
     Route::get('/legal_aid', [LegalAidController::class, 'pageView'])->name('admin.legal_aid.index');
