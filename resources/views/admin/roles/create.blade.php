@@ -1,64 +1,103 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Create Role')
-@section('page-title', 'Role Management')
+@section('title', 'Roles')
+@section('page-title', 'Roles Management')
 
 @section('content')
-<div class="min-h-[70vh] flex items-center justify-center px-4">
-    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-8">
+<div class="max-w-6xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
 
-        {{-- Header --}}
-        <div class="text-center mb-8 border-b pb-4">
-            <h2 class="text-2xl font-bold text-gray-800">Create New Role</h2>
-            <p class="text-sm text-gray-500 mt-1">
-                Define a role to assign permissions later
-            </p>
+    {{-- Header --}}
+    <div class="flex justify-between items-center px-6 py-4 border-b">
+        <div>
+            <h2 class="text-xl font-bold text-gray-800">Roles & Permissions</h2>
+            <p class="text-sm text-gray-500">Manage system roles and access control</p>
         </div>
 
-        {{-- Form --}}
-        <form action="{{ route('admin.roles.store') }}" method="POST">
-            @csrf
-
-            {{-- Role Name --}}
-            <div class="mb-6">
-                <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Role Name
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value="{{ old('name') }}"
-                    placeholder="e.g. Admin, Editor, Clerk"
-                    class="w-full rounded-xl border-gray-300 px-4 py-3 shadow-sm
-                           focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-                           transition @error('name') border-red-500 @enderror"
-                >
-
-                @error('name')
-                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
-
-            {{-- Info Card --}}
-            <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-sm text-indigo-700 mb-6">
-                Permissions will be assigned to this role after creation.
-            </div>
-
-            {{-- Actions --}}
-            <div class="flex justify-center pt-4">
-                <button
-                    type="submit"
-                    class="px-10 py-3 bg-indigo-600 text-white font-semibold
-                           rounded-xl shadow-lg hover:bg-indigo-700
-                           transition transform hover:scale-[1.02]"
-                >
-                    Create Role
-                </button>
-            </div>
-
-        </form>
+        <a href="{{ route('admin.roles.create') }}"
+           class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700">
+            + Create Role
+        </a>
     </div>
+
+    {{-- Table --}}
+    <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-gray-700">
+            <tr>
+                <th class="text-left px-6 py-3">Role</th>
+                <th class="text-left px-6 py-3">Permissions</th>
+                <th class="text-right px-6 py-3">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody class="divide-y">
+            @foreach ($roles as $role)
+                <tr class="hover:bg-gray-50">
+
+                    {{-- Role --}}
+                    <td class="px-6 py-4 font-semibold flex items-center gap-2">
+                        {{ ucfirst($role->name) }}
+
+                        @if ($role->name === 'admin')
+                            <span class="px-2 py-0.5 text-xs bg-green-100 text-green-700 rounded-full">
+                                Super Admin
+                            </span>
+                        @endif
+                    </td>
+
+                    {{-- Permissions --}}
+                    <td class="px-6 py-4">
+                        <div class="flex flex-wrap gap-2">
+
+                            {{-- ADMIN → show ALL permissions --}}
+                            @if ($role->name === 'admin')
+                                @foreach ($allPermissions as $permission)
+                                    <span class="px-2 py-1 text-xs bg-indigo-100 text-indigo-700 rounded-full">
+                                        {{ $permission->name }}
+                                    </span>
+                                @endforeach
+
+                            {{-- OTHER ROLES --}}
+                            @elseif ($role->permissions->count())
+                                @foreach ($role->permissions as $permission)
+                                    <span class="px-2 py-1 text-xs bg-indigo-100 text-indigo-700 rounded-full">
+                                        {{ $permission->name }}
+                                    </span>
+                                @endforeach
+                            @else
+                                <span class="text-xs text-gray-400 italic">
+                                    No permissions assigned
+                                </span>
+                            @endif
+
+                        </div>
+                    </td>
+
+                    {{-- Actions --}}
+                    <td class="px-6 py-4 text-right space-x-3">
+
+                        @if ($role->name === 'admin')
+                            <span class="text-sm text-gray-400 italic">Protected</span>
+                        @else
+                            <a href=""
+                               class="text-indigo-600 hover:underline">
+                                Edit
+                            </a>
+
+                            <form action=""
+                                  method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-red-600 hover:underline"
+                                        onclick="return confirm('Are you sure?')">
+                                    Delete
+                                </button>
+                            </form>
+                        @endif
+
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection
